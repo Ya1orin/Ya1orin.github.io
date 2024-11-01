@@ -33,37 +33,6 @@
     
     
     <entry>
-      <title>HTB-Legacy</title>
-      <link href="/posts/252e0fef.html"/>
-      <url>/posts/252e0fef.html</url>
-      
-        <content type="html"><![CDATA[<span id="more"></span><blockquote><p>靶机ip：10.10.10.77</p><p>攻击机ip：10.10.16.4</p></blockquote><h1>信息收集</h1><h2 id="nmap扫描">nmap扫描</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> HackTheBox </category>
-          
-          <category> Active Directory </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> HTB </tag>
-            
-            <tag> Windows </tag>
-            
-            <tag> Active Directory 101 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>网鼎杯 青龙组 2024</title>
       <link href="/posts/f29ac13a.html"/>
       <url>/posts/f29ac13a.html</url>
