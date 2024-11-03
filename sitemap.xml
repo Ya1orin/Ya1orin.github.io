@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.fomal.cc/posts/1bc19c16.html</loc>
+    
+    <lastmod>2024-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.fomal.cc/posts/32b1aa46.html</loc>
     
     <lastmod>2024-11-03</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://www.fomal.cc/posts/76f3047a.html</loc>
-    
-    <lastmod>2024-11-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.fomal.cc/posts/1bc19c16.html</loc>
     
     <lastmod>2024-11-03</lastmod>
     
@@ -452,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://www.fomal.cc/box/animation/index.html</loc>
+    <loc>https://www.fomal.cc/box/gallery/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
@@ -461,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://www.fomal.cc/box/gallery/index.html</loc>
+    <loc>https://www.fomal.cc/box/animation/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
