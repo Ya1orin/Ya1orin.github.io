@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.fomal.cc/posts/8sdfch788.html</loc>
     
-    <lastmod>2024-11-03</lastmod>
+    <lastmod>2024-11-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -398,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://www.fomal.cc/life/movies/index.html</loc>
+    <loc>https://www.fomal.cc/life/music/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
@@ -407,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://www.fomal.cc/life/music/index.html</loc>
+    <loc>https://www.fomal.cc/life/movies/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
@@ -472,7 +472,7 @@
 
   <url>
     <loc>https://www.fomal.cc/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -480,84 +480,84 @@
   
   <url>
     <loc>https://www.fomal.cc/tags/CTF/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/Competition/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/ssrf/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/HTB/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/Windows/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/Active-Directory-101/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/THM/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/Linux/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/%E6%9D%83%E9%99%90%E6%BB%A5%E7%94%A8/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/tags/Active-Directory/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -566,35 +566,35 @@
   
   <url>
     <loc>https://www.fomal.cc/categories/Writeup/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/categories/Challenge/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/categories/HackTheBox/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/categories/TryHackMe/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.fomal.cc/categories/%E5%9F%9F%E6%B8%97%E9%80%8F%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2024-11-04</lastmod>
+    <lastmod>2024-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
