@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ya1orin.github.io/social/link/index.html</loc>
+    
+    <lastmod>2024-12-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ya1orin.github.io/posts/cbe4da55.html</loc>
     
     <lastmod>2024-12-16</lastmod>
@@ -362,24 +371,6 @@
   </url>
   
   <url>
-    <loc>https://ya1orin.github.io/posts/284698c.html</loc>
-    
-    <lastmod>2024-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ya1orin.github.io/social/link/index.html</loc>
-    
-    <lastmod>2024-06-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ya1orin.github.io/tags/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
@@ -416,15 +407,6 @@
   </url>
   
   <url>
-    <loc>https://ya1orin.github.io/personal/love/index.html</loc>
-    
-    <lastmod>2024-05-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ya1orin.github.io/personal/bb/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
@@ -434,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://ya1orin.github.io/life/movies/index.html</loc>
+    <loc>https://ya1orin.github.io/personal/love/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
@@ -444,6 +426,15 @@
   
   <url>
     <loc>https://ya1orin.github.io/life/music/index.html</loc>
+    
+    <lastmod>2024-05-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ya1orin.github.io/life/movies/index.html</loc>
     
     <lastmod>2024-05-12</lastmod>
     
@@ -529,13 +520,6 @@
   </url>
   
   <url>
-    <loc>https://ya1orin.github.io/tags/ssrf/</loc>
-    <lastmod>2024-12-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ya1orin.github.io/tags/HTB/</loc>
     <lastmod>2024-12-16</lastmod>
     <changefreq>weekly</changefreq>
@@ -609,13 +593,6 @@
   
   <url>
     <loc>https://ya1orin.github.io/categories/Writeup/</loc>
-    <lastmod>2024-12-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ya1orin.github.io/categories/Challenge/</loc>
     <lastmod>2024-12-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
