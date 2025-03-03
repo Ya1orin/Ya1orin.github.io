@@ -215,7 +215,7 @@ function showWelcome() {
     try {
         //�Զ����ı�����Ҫ�ŵ�λ��
         document.getElementById("welcome-info").innerHTML =
-            `<b><center>?? ��ӭ��Ϣ ??</center>&emsp;&emsp;��ӭ���� <span style="color:var(--theme-color)">${pos}</span> ��С��飬${timeChange}�����ھ���վ��Լ <span style="color:var(--theme-color)">${dist}</span> �����ǰ��IP��ַΪ�� <span style="color:var(--theme-color)">${ip}</span>�� ${posdesc}</b>`;
+            `<b><center>?? ��ӭ��Ϣ ??</center>&emsp;&emsp;��ӭ���� <span style="color:var(--theme-color)">${pos}</span> ��С��飬${timeChange}�����ھ��� Ya1orin Լ <span style="color:var(--theme-color)">${dist}</span> �����ǰ��IP��ַΪ�� <span style="color:var(--theme-color)">${ip}</span>�� ${posdesc}</b>`;
     } catch (err) {
         // console.log("Pjax�޷���ȡ#welcome-infoԪ��??????")
     }
