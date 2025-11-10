@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Ya1orin</title>
+    <link>http://localhost:1313/ja/categories/</link>
+    <description>Recent content from Ya1orin</description>
+    <generator>Hugo</generator>
+    <language>ja</language>
+    
+    <managingEditor>xxx@example.com (Ya1orin)</managingEditor>
+    <webMaster>xxx@example.com (Ya1orin)</webMaster>
+    
+    <copyright>本ブログのすべての文書は、特に指定されていない限り、BY-NC-SAライセンスに従っています。引用の際は出典を明記してください！</copyright>
+    
+    
+    <atom:link href="http://localhost:1313/ja/categories/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+  </channel>
+</rss>
