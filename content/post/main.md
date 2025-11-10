@@ -11,10 +11,7 @@ categories:
   - test
 math: true
 mermaid: true
-photos:
-  - https://d-sketon.top/img/backwebp/bg1.webp
-  - https://d-sketon.top/img/backwebp/bg2.webp
-  - https://d-sketon.top/img/backwebp/bg3.webp
+cover: false
 ---
 
 ## Markdown 基本元素

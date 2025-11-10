@@ -26,10 +26,10 @@ monthFormat: "2006-01"
 dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
-author: D-Sketon
+author: Ya1orin
 email: xxx@example.com
-description: "少女祈祷中..."
-subtitle: "少女祈祷中..."
+description: ""
+subtitle: "我欲穿花寻路，直入白云深处，浩气展虹霓。"
 
 banner: "images/banner.webp"
 # You can also write it in the form of the following url
@@ -94,7 +94,7 @@ copyright:
 #   All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></div>
 
 footer:
-  since: 2020 # 2020-current year
+  since: 2025 # 2020-current year
   powered: true
   count: true
   busuanzi: true
@@ -104,11 +104,11 @@ footer:
     mask: true # whether to use the images as a mask
 
 # Sidebar
-sidebar: right
+sidebar: left
 
 social:
   # email: mailto:xxx@gmail.com
-  # github: https://github.com/yourname
+  # github: https://github.com/ya1orin
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
   # facebook: https://www.facebook.com/yourname
@@ -307,10 +307,10 @@ comment:
   title:
     en: Leave a comment
     zh-CN: 说些什么吧！
-    zh-TW: 說些什麼吧！
-    ja: コメントを残す
-    pt-BR: Deixe um comentário
-  default: waline # default comment system, when you enable multiple comment systems
+    # zh-TW: 說些什麼吧！
+    # ja: コメントを残す
+    # pt-BR: Deixe um comentário
+  default: gitalk # default comment system, when you enable multiple comment systems
 
 # valine comment system. https://valine.js.org
 # version 1.5.1
@@ -361,12 +361,12 @@ twikoo:
 
 # https://github.com/gitalk/gitalk/blob/master/readme-cn.md
 gitalk:
-  enable: false
-  clientID:
-  clientSecret:
-  repo:
-  owner:
-  admin:
+  enable: true
+  clientID: Ov23li64Bz4egFDpBVAa
+  clientSecret: ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7
+  repo: Blog-comment
+  owner: Ya1orin
+  admin: Ya1orin
   md5: false
 
 # https://giscus.app/zh-CN
@@ -389,12 +389,13 @@ giscus:
 ########################################
 
 algolia_search:
-  enable: false
-  appID:
-  apiKey:
-  indexName:
+  enable: true
+  appID: G5DS5ZI3YM
+  apiKey: 90bf1b7c38d7240c582e5c8a29bff9ab
+  indexName: Blog
   hits:
     per_page: 10
+# 
 
 ########################################
 # Animation
@@ -403,11 +404,8 @@ algolia_search:
 preloader:
   enable: true
   text: 
-    zh-CN: 少女祈祷中...
-    zh-TW: 少女祈禱中...
+    zh-CN: Loading...
     en: Loading...
-    ja: 少女祈祷中...
-    pt-BR: Carregando...
   icon: # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
   rotate: true # whether to rotate the icon
 
