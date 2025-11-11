@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shadow Credentials on Ya1orin</title>
+    <link>http://localhost:1313/tags/shadow-credentials/</link>
+    <description>Recent content from Ya1orin</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>xxx@example.com (Ya1orin)</managingEditor>
+    <webMaster>xxx@example.com (Ya1orin)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Tue, 11 Nov 2025 15:14:11 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/shadow-credentials/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>HTB Hercules</title>
+      <link>http://localhost:1313/post/htb-hercules/</link>
+      <pubDate>Thu, 23 Oct 2025 15:47:11 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-hercules/</guid>
+      <description>
+        <![CDATA[<h1>HTB Hercules</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-10-23首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Rebound</title>
+      <link>http://localhost:1313/post/htb-rebound/</link>
+      <pubDate>Fri, 28 Mar 2025 12:06:05 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-rebound/</guid>
+      <description>
+        <![CDATA[<h1>HTB Rebound</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-28首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Certified</title>
+      <link>http://localhost:1313/post/htb-certified/</link>
+      <pubDate>Mon, 24 Mar 2025 15:25:55 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-certified/</guid>
+      <description>
+        <![CDATA[<h1>HTB Certified</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-24首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+  </channel>
+</rss>

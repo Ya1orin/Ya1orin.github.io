@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AS-REP Roasting on Ya1orin</title>
+    <link>http://localhost:1313/tags/as-rep-roasting/</link>
+    <description>Recent content from Ya1orin</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>xxx@example.com (Ya1orin)</managingEditor>
+    <webMaster>xxx@example.com (Ya1orin)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Tue, 11 Nov 2025 15:12:29 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/as-rep-roasting/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>HTB Rebound</title>
+      <link>http://localhost:1313/post/htb-rebound/</link>
+      <pubDate>Fri, 28 Mar 2025 12:06:05 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-rebound/</guid>
+      <description>
+        <![CDATA[<h1>HTB Rebound</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-28首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Blackfield</title>
+      <link>http://localhost:1313/post/htb-blackfield/</link>
+      <pubDate>Tue, 09 Jul 2024 19:30:53 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-blackfield/</guid>
+      <description>
+        <![CDATA[<h1>HTB Blackfield</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-07-09首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Forest</title>
+      <link>http://localhost:1313/post/htb-forest/</link>
+      <pubDate>Thu, 27 Jun 2024 20:12:35 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-forest/</guid>
+      <description>
+        <![CDATA[<h1>HTB Forest</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-06-27首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+  </channel>
+</rss>

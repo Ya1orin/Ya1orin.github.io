@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Ya1orin</title>
+    <link>http://localhost:1313/tags/windows/</link>
+    <description>Recent content from Ya1orin</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>xxx@example.com (Ya1orin)</managingEditor>
+    <webMaster>xxx@example.com (Ya1orin)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Tue, 11 Nov 2025 15:14:11 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>HTB Hercules</title>
+      <link>http://localhost:1313/post/htb-hercules/</link>
+      <pubDate>Thu, 23 Oct 2025 15:47:11 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-hercules/</guid>
+      <description>
+        <![CDATA[<h1>HTB Hercules</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-10-23首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Rebound</title>
+      <link>http://localhost:1313/post/htb-rebound/</link>
+      <pubDate>Fri, 28 Mar 2025 12:06:05 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-rebound/</guid>
+      <description>
+        <![CDATA[<h1>HTB Rebound</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-28首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Manager</title>
+      <link>http://localhost:1313/post/htb-manager/</link>
+      <pubDate>Wed, 26 Mar 2025 11:12:13 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-manager/</guid>
+      <description>
+        <![CDATA[<h1>HTB Manager</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-26首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Certified</title>
+      <link>http://localhost:1313/post/htb-certified/</link>
+      <pubDate>Mon, 24 Mar 2025 15:25:55 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-certified/</guid>
+      <description>
+        <![CDATA[<h1>HTB Certified</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-24首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Authority</title>
+      <link>http://localhost:1313/post/htb-authority/</link>
+      <pubDate>Thu, 20 Mar 2025 12:51:09 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-authority/</guid>
+      <description>
+        <![CDATA[<h1>HTB Authority</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-20首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Escape</title>
+      <link>http://localhost:1313/post/htb-escape/</link>
+      <pubDate>Wed, 19 Mar 2025 19:24:19 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-escape/</guid>
+      <description>
+        <![CDATA[<h1>HTB Escape</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-19首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>HTB Reel</title>
+      <link>http://localhost:1313/post/htb-reel/</link>
+      <pubDate>Sun, 27 Oct 2024 13:34:07 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-reel/</guid>
+      <description>
+        <![CDATA[<h1>HTB Reel</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-10-27首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>THM Enterprise</title>
+      <link>http://localhost:1313/post/thm-enterprise/</link>
+      <pubDate>Wed, 23 Oct 2024 15:42:46 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/thm-enterprise/</guid>
+      <description>
+        <![CDATA[<h1>THM Enterprise</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-10-23首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>TryHackMe</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>THM Steel Mountain</title>
+      <link>http://localhost:1313/post/thm-steel-mountain/</link>
+      <pubDate>Mon, 14 Oct 2024 16:27:58 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/thm-steel-mountain/</guid>
+      <description>
+        <![CDATA[<h1>THM Steel Mountain</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-10-14首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>TryHackMe</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>THM Retro</title>
+      <link>http://localhost:1313/post/thm-retro/</link>
+      <pubDate>Sat, 12 Oct 2024 11:46:11 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/thm-retro/</guid>
+      <description>
+        <![CDATA[<h1>THM Retro</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2024-10-12首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>TryHackMe</category>
+      
+    </item>
+    
+  </channel>
+</rss>

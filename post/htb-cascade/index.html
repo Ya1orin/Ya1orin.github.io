@@ -1,0 +1,1075 @@
+<!doctype html>
+<html
+  lang="zh-cn" 
+  data-theme-mode="auto"
+  >
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/><title>
+  HTB Cascade | Ya1orin
+</title>
+<meta name="description" content="HackTheBox篇Active Directory 101系列之Cascade"/><script>
+  window.siteConfig = JSON.parse("{\"anchor_icon\":null,\"base\":\"http://localhost:1313/\",\"clipboard\":{\"copyright\":{\"count\":50,\"enable\":false,\"license_type\":\"by-nc-sa\"},\"fail\":{\"en\":\"Copy failed (ﾟ⊿ﾟ)ﾂ\",\"ja\":\"コピー失敗 (ﾟ⊿ﾟ)ﾂ\",\"pt-br\":\"Falha ao copiar (ﾟ⊿ﾟ)ﾂ\",\"zh-cn\":\"复制失败 (ﾟ⊿ﾟ)ﾂ\",\"zh-tw\":\"複製失敗 (ﾟ⊿ﾟ)ﾂ\"},\"success\":{\"en\":\"Copy successfully (*^▽^*)\",\"ja\":\"コピー成功 (*^▽^*)\",\"pt-br\":\"Copiado com sucesso (*^▽^*)\",\"zh-cn\":\"复制成功 (*^▽^*)\",\"zh-tw\":\"複製成功 (*^▽^*)\"}},\"code_block\":{\"expand\":true},\"i18n_languages\":[{\"Lang\":\"en\",\"LanguageName\":\"English\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false},{\"Lang\":\"zh-cn\",\"LanguageName\":\"简体中文\",\"LanguageCode\":\"\",\"Title\":\"\",\"LanguageDirection\":\"\",\"Weight\":1,\"Disabled\":false}],\"icon_font\":\"4552607_4k4bc36ef96\",\"outdate\":{\"daysago\":180,\"enable\":false,\"message\":{\"en\":\"This article was last updated on {time}. Please note that the content may no longer be applicable.\",\"ja\":\"この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。\",\"pt-br\":\"Este artigo foi atualizado pela última vez em {time}. Observe que o conteúdo pode não ser mais aplicável.\",\"zh-cn\":\"本文最后更新于 {time}，请注意文中内容可能已不适用。\",\"zh-tw\":\"本文最後更新於 {time}，請注意文中內容可能已不適用。\"}}}");
+  
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7cNoto%20Serif%20SC:400,400italic,700,700italic%7c&amp;display=swap"
+  media="print"
+  onload="this.media='all'"
+/>
+<link
+    rel="preload"
+    href="//at.alicdn.com/t/c/font_4552607_4k4bc36ef96.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  /><link rel="stylesheet" href="/css/loader.css" />
+<meta property="og:type" content="website" />
+  <meta property="og:title" content="HTB Cascade | Ya1orin" />
+  <meta
+    property="og:description"
+    content="HackTheBox篇Active Directory 101系列之Cascade"
+  />
+  <meta property="og:url" content="http://localhost:1313/post/htb-cascade/" />
+  <meta
+    property="og:site_name"
+    content="Ya1orin"
+  />
+  <meta
+    property="og:image"
+    content="/"
+  />
+  <meta property="article:author" content="Ya1orin" />
+  <meta property="article:published_time" content="2024-07-22T11:04:22&#43;08:00" />
+  <meta property="article:modified_time" content="2025-11-11T10:11:28&#43;08:00" /><meta property="article:tag" content="WindowsAD Recycle Bin" /><meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="/" />
+<link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.css" />
+<link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css"
+    integrity="sha384-IfxC36XL/toUyJ939C73PcgMuRzAZuIzZxE38drsmO5p6jD7ei&#43;Zx/1oA/0l8ysE" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="preload"
+    as="style"
+    href="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.css"
+    integrity="sha384-tTgKLjMYmJr94v8qu2PE5MUGSMbyN2xiH266JUB3gpm8vnnJywd1dWSOEfrFz&#43;YI" crossorigin="anonymous"onload="this.onload=null;this.rel='stylesheet'"
+  /><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/gitalk@1.8.0/dist/gitalk.css"
+    integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io" crossorigin="anonymous"/><script
+    src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"
+    integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous"></script><link
+    rel="stylesheet"
+    href="https://npm.webcache.cn/@reimujs/aos@0.1.2/dist/aos.css"
+    integrity="sha384-GMRP93c6Hkz9JVKGAuRR3nTS7M07RwPgTFenXiosjq2VbVgvdDNcz1g6Mkj8AONa" crossorigin="anonymous"/></head>
+  <body><div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi rotate"><svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+            <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="var(--red-1, #ff5252)" />
+            <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+          M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="var(--red-1, #ff5252)" />
+          </svg></div><div class="loading-word">Loading...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var loaderEl = document.getElementById('loader');
+    var startLoading = () => {
+      time = Date.now();
+      loaderEl.classList.remove("loading");
+    }
+    var hideLoader = () => {
+      document.body.style.overflow = 'auto';
+      loader.classList.add('loading');
+    };
+
+    var endLoading = () => {
+      if (!time) {
+        hideLoader();
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          hideLoader();
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    loaderEl.addEventListener('click', endLoading);
+  </script><div id="copy-tooltip"></div>
+<div id="lang-tooltip">
+本文章没有找到对应的语言版本
+</div>
+<div id="heatmap-tooltip"></div><div id="container">
+      <div id="wrap"><div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation"><a class="main-nav-link-wrap" href="/">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">首页</span>
+      </a><a class="main-nav-link-wrap" href="/archives">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">归档</span>
+      </a><a class="main-nav-link-wrap" href="/about">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">关于</span>
+      </a><a class="main-nav-link-wrap" href="/friend">
+        <div class='main-nav-icon icon rotate'>&#xe62b;</div>
+        <span class="main-nav-link">友链</span>
+      </a><a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation"><a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索" aria-label="搜索"></a></nav><nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">简体中文</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages"><li data-value="en" role="option" arial-selected="false" >English</li><li data-value="zh-cn" role="option" class="selected" arial-selected="true" >简体中文</li></ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+            });
+            item.classList.add("selected");
+            if (item.dataset.value === 'zh-cn') {
+              return;
+            }
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => {
+                _$("#lang-tooltip").style.opacity = "0";
+              }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!event.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav></div>
+<header id="header" aria-label="Site header"><picture></picture><img  fetchpriority="high" src="/images/banner.webp" alt="HTB Cascade"><div id="header-outer">
+    <div id="header-title"><span id="logo">
+            <h1 data-aos="slide-up">HTB Cascade</h1>
+          </span><h2 id="subtitle-wrap" data-aos="slide-down"></h2></div>
+  </div>
+</header><div id="content"
+          aria-label="Page content"
+          class="sidebar-left"
+            ><aside id="sidebar" aria-label="Sidebar"><div class="sidebar-wrapper-container sticky"><div class="sidebar-wrapper">
+    <div
+      class="sidebar-wrap"
+      data-aos="fade-up"
+    ><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#rpc">rpc</a></li>
+        <li><a href="#ldap">ldap</a></li>
+        <li><a href="#rthompson-smb">r.thompson-SMB</a></li>
+      </ul>
+    </li>
+    <li><a href="#共享文件夹data分析">共享文件夹Data分析</a>
+      <ul>
+        <li><a href="#破解tightvnc密码">破解TightVNC密码</a></li>
+        <li><a href="#临时账户tempadmin">临时账户TempAdmin</a></li>
+      </ul>
+    </li>
+    <li><a href="#横向移动">横向移动</a>
+      <ul>
+        <li><a href="#登录ssmith用户">登录s.smith用户</a></li>
+        <li><a href="#ssmith-smb">s.smith-SMB</a></li>
+        <li><a href="#auditdb">Audit.db</a></li>
+        <li><a href="#cascauditexe文件分析">CascAudit.exe文件分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#ad-recycle-bin滥用权限提升">AD Recycle Bin滥用权限提升</a></li>
+  </ul>
+</nav>
+</div></div>
+          <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div><div class="sidebar-btn-wrapper" style="position:static">
+            <div class="sidebar-toc-btn current"></div>
+            <div class="sidebar-common-btn"></div>
+          </div></div>
+  </div><div class="sidebar-widget"></div></div></aside>
+<section id="main" aria-label="Main content"><article
+  class="h-entry article"
+  itemscope
+  itemtype="https://schema.org/BlogPosting"
+>
+  <div
+    class="article-inner"
+    data-aos="fade-up"
+  >
+    <div class="article-meta"><div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="zoom-in"
+  >
+    <time datetime="2024-07-22 11:04:22 &#43;0800 CST" itemprop="datePublished"
+      >2024-07-22</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >2025-11-11</time
+    >
+  </span></div>
+<div class="article-category"><a
+      class="article-category-link"
+      href="/categories/hackthebox"
+      data-aos="zoom-in"
+      >HACKTHEBOX</a
+    ></div>
+</div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><blockquote>
+<p>靶机ip：10.10.10.182</p>
+</blockquote>
+<h1 id="知识点">
+<a class="header-anchor" href="#%e7%9f%a5%e8%af%86%e7%82%b9"></a>
+知识点
+</h1><ul>
+<li>TightVNC密码破解</li>
+<li>AD Recycle Bin滥用权限提升</li>
+</ul>
+<h1 id="信息收集">
+<a class="header-anchor" href="#%e4%bf%a1%e6%81%af%e6%94%b6%e9%9b%86"></a>
+信息收集
+</h1><h2 id="nmap扫描">
+<a class="header-anchor" href="#nmap%e6%89%ab%e6%8f%8f"></a>
+nmap扫描
+</h2><p><code>nmap -sS -sV -sC -p- 10.10.10.182</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-07-22 11:27 CST
+</span></span><span class="line"><span class="cl">Nmap scan report for 10.10.10.182
+</span></span><span class="line"><span class="cl">Host is up (0.45s latency).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">PORT      STATE    SERVICE        VERSION
+</span></span><span class="line"><span class="cl">53/tcp    open     domain         Microsoft DNS 6.1.7601 (1DB15D39) (Windows Server 2008 R2 SP1)
+</span></span><span class="line"><span class="cl">| dns-nsid:
+</span></span><span class="line"><span class="cl">|_  bind.version: Microsoft DNS 6.1.7601 (1DB15D39)
+</span></span><span class="line"><span class="cl">88/tcp    open     kerberos-sec   Microsoft Windows Kerberos (server time: 2024-07-22 03:28:03Z)
+</span></span><span class="line"><span class="cl">135/tcp   open     msrpc          Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">389/tcp   open     ldap           Microsoft Windows Active Directory LDAP (Domain: cascade.local, Site: Default-First-Site-Name)
+</span></span><span class="line"><span class="cl">445/tcp   open     microsoft-ds?
+</span></span><span class="line"><span class="cl">464/tcp   filtered kpasswd5
+</span></span><span class="line"><span class="cl">593/tcp   filtered http-rpc-epmap
+</span></span><span class="line"><span class="cl">636/tcp   open     tcpwrapped
+</span></span><span class="line"><span class="cl">1337/tcp  filtered waste
+</span></span><span class="line"><span class="cl">1433/tcp  filtered ms-sql-s
+</span></span><span class="line"><span class="cl">3268/tcp  open     ldap           Microsoft Windows Active Directory LDAP (Domain: cascade.local, Site: Default-First-Site-Name)
+</span></span><span class="line"><span class="cl">3269/tcp  open     tcpwrapped
+</span></span><span class="line"><span class="cl">5722/tcp  filtered msdfsr
+</span></span><span class="line"><span class="cl">5985/tcp  open     http           Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+</span></span><span class="line"><span class="cl">|_http-server-header: Microsoft-HTTPAPI/2.0
+</span></span><span class="line"><span class="cl">|_http-title: Not Found
+</span></span><span class="line"><span class="cl">8080/tcp  filtered http-proxy
+</span></span><span class="line"><span class="cl">9389/tcp  filtered adws
+</span></span><span class="line"><span class="cl">47001/tcp filtered winrm
+</span></span><span class="line"><span class="cl">49152/tcp filtered unknown
+</span></span><span class="line"><span class="cl">49153/tcp filtered unknown
+</span></span><span class="line"><span class="cl">49154/tcp open     msrpc          Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49155/tcp open     msrpc          Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49157/tcp open     ncacn_http     Microsoft Windows RPC over HTTP 1.0
+</span></span><span class="line"><span class="cl">49158/tcp open     msrpc          Microsoft Windows RPC
+</span></span><span class="line"><span class="cl">49167/tcp filtered unknown
+</span></span><span class="line"><span class="cl">49172/tcp filtered unknown
+</span></span><span class="line"><span class="cl">49173/tcp filtered unknown
+</span></span><span class="line"><span class="cl">50255/tcp filtered unknown
+</span></span><span class="line"><span class="cl">Service Info: Host: CASC-DC1; OS: Windows; CPE: cpe:/o:microsoft:windows_server_2008:r2:sp1, cpe:/o:microsoft:windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host script results:
+</span></span><span class="line"><span class="cl">|_clock-skew: -1s
+</span></span><span class="line"><span class="cl">| smb2-security-mode:
+</span></span><span class="line"><span class="cl">|   2:1:0:
+</span></span><span class="line"><span class="cl">|_    Message signing enabled and required
+</span></span><span class="line"><span class="cl">| smb2-time:
+</span></span><span class="line"><span class="cl">|   date: 2024-07-22T03:28:58
+</span></span><span class="line"><span class="cl">|_  start_date: 2024-07-22T03:07:52
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 130.17 seconds
+</span></span></code></pre></div><p>从上述结果中可以发现，主机为<code>windows_server_2008</code>，域名是<code>cascade.local</code>，开启的服务有<code>DNS</code>服务、<code>Kerberos</code>服务、<code>rpc</code>服务、<code>ldap</code>服务、<code>SMB</code>服务、在<code>1433</code>端口上运行着<code>SQL Server</code>、在<code>8080</code>端口也有服务，但是大多数服务都被防火墙过滤了</p>
+<h2 id="smb">
+<a class="header-anchor" href="#smb"></a>
+SMB
+</h2><p>直接测试smb能不能匿名登录</p>
+<p><code>smbclient -N -L //10.10.10.182</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722141009245-1281612221.png" alt="image-20240722140947016"></p>
+<p>能成功登录但是获得不了什么重要的信息</p>
+<h2 id="rpc">
+<a class="header-anchor" href="#rpc"></a>
+rpc
+</h2><p><code>rpc</code>看看能不能获取一些信息</p>
+<p><code>rpcclient -U &quot;&quot; -N 10.10.10.182</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722141314680-1424103600.png" alt="image-20240722141252468"></p>
+<p>发现能获得一些用户名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">CascGuest
+</span></span><span class="line"><span class="cl">arksvc
+</span></span><span class="line"><span class="cl">s.smith
+</span></span><span class="line"><span class="cl">r.thompson
+</span></span><span class="line"><span class="cl">util
+</span></span><span class="line"><span class="cl">j.wakefield
+</span></span><span class="line"><span class="cl">s.hickson
+</span></span><span class="line"><span class="cl">j.goodhand
+</span></span><span class="line"><span class="cl">a.turnbull
+</span></span><span class="line"><span class="cl">e.crowe
+</span></span><span class="line"><span class="cl">b.hanson
+</span></span><span class="line"><span class="cl">d.burman
+</span></span><span class="line"><span class="cl">BackupSvc
+</span></span><span class="line"><span class="cl">j.allen
+</span></span><span class="line"><span class="cl">i.croft
+</span></span></code></pre></div><h2 id="ldap">
+<a class="header-anchor" href="#ldap"></a>
+ldap
+</h2><p>用<code>ldapsearch</code>测试一下</p>
+<p><code>ldapsearch -x -b &quot;dc=cascade,dc=local&quot; -H ldap://10.10.10.182</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722150135151-525710537.png" alt="image-20240722150112607"></p>
+<p>找到<code>Ryan Thompson</code>在<code>Cascade</code>上的用户名是<code>r.thompson</code>，这个名字之前<code>rpc</code>枚举出来过，同时发现在<code>Ryan Thompson</code>用户的最后一个数据项中有<code>cascadeLegacyPwd</code>数据，将其值<code>clk0bjVldmE=</code>进行解码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722145836886-812006840.png" alt="image-20240722145814808"></p>
+<p>得到解密后的数据<code>rY4n5eva</code>，疑似<code>r.thompson</code>的密码</p>
+<p>提交后发现这真是<code>Ryan Thompson</code>的密码</p>
+<p>测试能不能连接</p>
+<p><code>crackmapexec smb 10.10.10.182 -u r.thompson -p rY4n5eva</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722150712665-1667520013.png" alt="image-20240722150650469"></p>
+<h2 id="rthompson-smb">
+<a class="header-anchor" href="#rthompson-smb"></a>
+r.thompson-SMB
+</h2><p>发现可以进行<code>smb</code>连接，用<code>smbmap</code>连接一下</p>
+<p><code>smbmap -H 10.10.10.182 -u r.thompson -p rY4n5eva</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722153218137-609195675.png" alt="image-20240722153155560"></p>
+<p>通过 <code>smbmap</code> 可以看到，我们只对 <code>Data</code> 目录具有可读权限，尝试连接</p>
+<p><code>smbclient \\\\10.10.10.182\\Data -U r.thompson</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722153846790-786836942.png" alt="image-20240722153817069"></p>
+<p>测试后发现只对<code>IT</code>目录有访问权限，将文件下载到本地进行观察</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> mask <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> recurse ON	 <span class="c1">#默认情况下递归选项是OFF,在 smb 提示符下输入 recurse ON命令会将此选项切换为ON</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> prompt OFF	 <span class="c1">#默认情况下询问是否下载选项是ON,在 smb 提示符下输入prompt OFF命令会将此选项切换为OFF</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> mget *		<span class="c1">#此时可以在不询问的情况下递归下载data目录下的所有文件</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722162504399-800993694.png" alt="image-20240722162438200"></p>
+<h1 id="共享文件夹data分析">
+<a class="header-anchor" href="#%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6%e5%a4%b9data%e5%88%86%e6%9e%90"></a>
+共享文件夹Data分析
+</h1><h2 id="破解tightvnc密码">
+<a class="header-anchor" href="#%e7%a0%b4%e8%a7%a3tightvnc%e5%af%86%e7%a0%81"></a>
+破解TightVNC密码
+</h2><p>在查找文件时，发现在<code>IT/Temp/s.smith</code>目录的<code>Install.reg</code>文件中找到了一个vnc密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722164045214-1255540472.png" alt="image-20240722164021239"></p>
+<p><code>&quot;Password&quot;=hex:6b,cf,2a,4b,6e,5a,ca,0f</code></p>
+<p>正常的<code>hex</code>解密是解不出来的，去网上找一下<code>vnc</code>解密的工具</p>
+<p><a href="https://github.com/jeroennijhof/vncpwd">vncpwd</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722184121545-909779804.png" alt="image-20240722184058650"></p>
+<p>解密完成，发现明文密码<code>sT333ve2</code>，猜测是<code>s.smith</code>用户的</p>
+<h2 id="临时账户tempadmin">
+<a class="header-anchor" href="#%e4%b8%b4%e6%97%b6%e8%b4%a6%e6%88%b7tempadmin"></a>
+临时账户TempAdmin
+</h2><p>在<code>/Data/IT/Email Archives/</code>目录下找到个文件<code>Meeting_Notes_June_2018.html</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722185451609-2123011953.png" alt="image-20240722185428846"></p>
+<p>从邮件中，可以获取到的有效信息是，环境迁移时会使用临时账户<code>TempAdmin</code>，并且密码与常规<code>admin</code>密码相同,当环境迁移结束后会删除临时账户。</p>
+<p>在<code>/Data/IT/Logs/Ark AD Recycle Bin</code>目录下发现<code>ArkAdRecycleBin.log</code>日志文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723104039743-140522147.png" alt="image-20240723104034284"></p>
+<p>从日志中我们发现<code>TempAdmin</code>帐户已移至回收站</p>
+<h1 id="横向移动">
+<a class="header-anchor" href="#%e6%a8%aa%e5%90%91%e7%a7%bb%e5%8a%a8"></a>
+横向移动
+</h1><h2 id="登录ssmith用户">
+<a class="header-anchor" href="#%e7%99%bb%e5%bd%95ssmith%e7%94%a8%e6%88%b7"></a>
+登录s.smith用户
+</h2><p>先利用<code>crackmapexec</code>测试能否通过<code>evil-winrm</code>登录<code>s.smith</code>用户</p>
+<p><code>crackmapexec winrm 10.10.10.182 -u s.smith -p sT333ve2</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722190053646-898096504.png" alt="image-20240722190031059"></p>
+<p>测试发现的确可以使用密码：<code>sT333ve2</code>通过<code>winRM</code>用<code>s.smith</code>账号进行远程登录</p>
+<p><code>evil-winrm -u s.smith -p 'sT333ve2' -i 10.10.10.182</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722191054897-647149480.png" alt="image-20240722191053738"></p>
+<p>成功登录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722191134005-826162699.png" alt="image-20240722191133301"></p>
+<p>在<code>s.smith</code>的<code>Desktop</code>目录找到<code>user.txt</code></p>
+<p>同时发现一个可疑的软链接文件<code>WinDirStat.lnk</code></p>
+<p>查看一下该用户所在组信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722192914972-506642969.png" alt="image-20240722192913858"></p>
+<p>发现该用户并不在权限组中，但是发现该用户属于<code>Audit Share</code>组，接下来就可以访问<code>Audit</code>目录下的文件进行查看</p>
+<h2 id="ssmith-smb">
+<a class="header-anchor" href="#ssmith-smb"></a>
+s.smith-SMB
+</h2><p>访问<code>Audit</code>目录</p>
+<p><code>smbclient \\\\10.10.10.182\\Audit$ -U s.smith</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722194201797-1094652226.png" alt="image-20240722194200709"></p>
+<p>登陆成功，还是老办法，将文件下载到本地查看</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> mask <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> recurse ON	 <span class="c1">#默认情况下递归选项是OFF,在 smb 提示符下输入 recurse ON命令会将此选项切换为ON</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> prompt OFF	 <span class="c1">#默认情况下询问是否下载选项是ON,在 smb 提示符下输入prompt OFF命令会将此选项切换为OFF</span>
+</span></span><span class="line"><span class="cl">smb: <span class="se">\&gt;</span> mget *		<span class="c1">#此时可以在不询问的情况下递归下载data目录下的所有文件</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722194913997-1071312517.png" alt="image-20240722194912751"></p>
+<p>下载完成</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722195141176-321662553.png" alt="image-20240722195139213"></p>
+<h2 id="auditdb">
+<a class="header-anchor" href="#auditdb"></a>
+Audit.db
+</h2><p>首先就是在<code>DB</code>目录下找到数据库，试试能不能获取一些有用的信息</p>
+<p><code>sqlite3 Audit.db</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722200725849-1056528410.png" alt="image-20240722200724571"></p>
+<p>只能从<code>Ldap</code>表中找到<code>Arksvc</code>用户名，密码破解不了</p>
+<h2 id="cascauditexe文件分析">
+<a class="header-anchor" href="#cascauditexe%e6%96%87%e4%bb%b6%e5%88%86%e6%9e%90"></a>
+CascAudit.exe文件分析
+</h2><p>继续看<code>Audit</code>目录下的文件，先看那个<code>.bat</code>文件</p>
+<p><code>cat RunAudit.bat</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722200948420-1914062784.png" alt="image-20240722200947578"></p>
+<p>发现<code>CascAudit.exe</code>以 <code>db</code> 文件作为参数运行，查看一下<code>CascAudit.exe</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722201149933-116365236.png" alt="image-20240722201149317"></p>
+<p>发现这是一个<code>.NET</code>的文件，利用工具调试一下</p>
+<p><a href="https://github.com/dnSpy/dnSpy/releases">dnSpy</a></p>
+<p>把所属文件夹<code>dump</code>下来丢进<code>dnspy</code>动调一下，把断点打在断开数据库连接的地方想劫持一下<code>password</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722211926047-1402503370.png" alt="image-20240722211925250"></p>
+<p>但是这块儿可能是我的<code>dnspy</code>有问题，一直卡在一个报错上了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722211944190-800938387.png" alt="image-20240722211943214"></p>
+<p>索性直接逆，按照它的逻辑去找<code>password</code>加密的地方，双击跟进这个加密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722211956255-771745297.png" alt="image-20240722211955684"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722212000049-1187622322.png" alt="image-20240722211959240"></p>
+<p>明显的<code>AES</code>加密，给了秘钥和<code>iv</code>直接找个在线网站解了（注意先用<code>base64</code>解码）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722212036892-763850826.png" alt="image-20240722212036170"></p>
+<p>这样我们就拿到了<code>Arksvc</code>的密码<code>w3lc0meFr31nd</code></p>
+<p>拿到用户名密码，测试一下能不能<code>winrm</code>登录</p>
+<p><code>crackmapexec winrm 10.10.10.182 -u Arksvc -p w3lc0meFr31nd</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722212516783-401250117.png" alt="image-20240722212515703"></p>
+<p>可以登录，拿<code>evil-winrm</code>登录</p>
+<p><code>evil-winrm -i 10.10.10.182 -u Arksvc -p w3lc0meFr31nd</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240722212621095-1069117083.png" alt="image-20240722212620250"></p>
+<p>登陆成功</p>
+<h1 id="ad-recycle-bin滥用权限提升">
+<a class="header-anchor" href="#ad-recycle-bin%e6%bb%a5%e7%94%a8%e6%9d%83%e9%99%90%e6%8f%90%e5%8d%87"></a>
+AD Recycle Bin滥用权限提升
+</h1><p>先看<code>Arksvc</code>用户有没有什么可以利用的权限</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723100622343-929767262.png" alt="image-20240723100620239"></p>
+<p>发现该用户属于 <code>AD Recycle Bin</code> 组下</p>
+<blockquote>
+<p>该组是用于恢复被删除的用户，组以及OU等对象的，这些对象在 <code>AD Recycle Bin</code> 中时保持其所有属性不变，这使得它们可以在任何时候被恢复。</p>
+<p><a href="https://blog.netwrix.com/2021/11/30/active-directory-object-recovery-recycle-bin/">参考链接</a></p>
+</blockquote>
+<p>前面已经知道两个重要信息，一个是管理员用户和<code>TempAdmin</code>密码一致，另一个是TempAdmin被移到了回收站</p>
+<p>这里可以使用<code>Get-ADObject</code>枚举<code>AD</code>回收站中的对象，并过滤具有<code>isDeleted</code>属性的已删除对象即可</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ADObject</span> <span class="n">-filter</span> <span class="s1">&#39;isDeleted -eq $true -and name -ne &#34;Deleted Objects&#34;&#39;</span> <span class="n">-includeDeletedObjects</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723105119052-1568759036.png" alt="image-20240723105115495"></p>
+<p>发现最后一条数据是我们之前提到的<code>TempAdmin</code>，获取该帐户的所有详细信息</p>
+<p><code>Get-ADObject -filter { SAMAccountName -eq &quot;TempAdmin&quot; } -includeDeletedObjects -property *</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723105313412-659440464.png" alt="image-20240723105310378"></p>
+<p>注意到密码值很可能是<code>base64</code>编码，解码一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723105357920-613810809.png" alt="image-20240723105356090"></p>
+<p>获取<code>TempAdmin</code>的明文密码：<code>baCT3r1aN00dles</code></p>
+<p>因为之前提到过<code>TempAdmin</code>的密码跟正常管理员密码一样，所以我们直接测试能否使用这个密码远程登陆<code>Administrator</code></p>
+<p><code>crackmapexec winrm 10.10.10.182 -u Administrator -p baCT3r1aN00dles</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723105753291-1398855670.png" alt="image-20240723105748085"></p>
+<p>发现可以登录，我们直接登录<code>Administrator</code></p>
+<p><code>evil-winrm -i 10.10.10.182 -u Administrator -p baCT3r1aN00dles</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723105924743-1476469846.png" alt="image-20240723105922917"></p>
+<p>登陆成功！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/uploads/3051266-20240723110506025-2001758700.png" alt="image-20240723110503914"></p>
+<p>最后在<code>Desktop</code>目录找到<code>root.txt</code></p></div>
+    <footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/windows"
+        rel="tag"
+        >WINDOWS</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/ad-recycle-bin"
+        rel="tag"
+        >AD RECYCLE BIN</a
+      >
+    </li></ul>
+</footer>
+  </div><nav
+    id="article-nav"
+    aria-label="Article navigation"
+    data-aos="fade-up"
+  ><div class="article-nav-link-wrap left"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_88.webp"
+              data-sizes="auto"
+              alt="HTB Mantis"
+              class="lazyload"
+            /><a
+          href="/post/htb-mantis/"
+          aria-label="前一篇:HTB Mantis"
+          title="前一篇:HTB Mantis"
+        ></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">HTB Mantis</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://cdn.jsdelivr.net/gh/Ya1orin/Blog-images/covers/default_cover_75.webp"
+              data-sizes="auto"
+              alt="HTB Multimaster"
+              class="lazyload"
+            /><a
+          href="/post/htb-multimaster/"
+          aria-label="后一篇:HTB Multimaster"
+          title="后一篇:HTB Multimaster"
+        ></a>
+        <div class="article-nav-caption">后一篇</div>
+        <h3 class="article-nav-title">HTB Multimaster</h3>
+      </div></nav></article><section id="comments" data-aos="fade-up">
+<div class="comment-header"><h2 class="comment-title">说些什么吧！</h2>
+  <div class="comment-selector">
+    <div class="comment-selector-wrap"><div class="selector-item" data-selector="gitalk">
+          <span>gitalk</span>
+        </div></div>
+  </div>
+</div>
+
+<div class="comment-content"><div class="comment gitalk-comment" data-aos="fade-up"
+     id="gitalk-comment">
+    </div></div>
+</section></section>
+        </div><footer id="footer" aria-label="Site footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info"><div>
+      <span class="icon-copyright"></span>2025<span class="footer-info-sep rotate"></span>
+      Ya1orin
+    </div><div>
+        基于&nbsp;<a
+          href="https://gohugo.io/"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Hugo</a
+        >&nbsp; Theme.<a
+          href="https://github.com/D-Sketon/hugo-theme-reimu"
+          target="_blank"
+          rel="noopener nofollow noreferrer"
+          >Reimu</a
+        >
+      </div><div>
+        <span class="icon-brush"
+          >&nbsp;97.1k</span
+        >
+        &nbsp;|&nbsp;
+        <span class="icon-coffee">&nbsp;03:38</span>
+      </div><div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv"
+          >总访问量&nbsp;<span
+            id="busuanzi_value_site_pv"
+          ></span
+        ></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv"
+          >总访客量&nbsp;<span
+            id="busuanzi_value_site_uv"
+          ></span
+        ></span>
+      </div></div>
+</footer>
+<div class="sidebar-top">
+            <div class="sidebar-top-taichi rotate"></div>
+            <div class="arrow-up"></div>
+          </div><div id="mask" class="hide"></div>
+      </div><nav id="mobile-nav" aria-label="Mobile navigation">
+  <div class="sidebar-wrap"><div class="sidebar-toc-sidebar"><h3 class="toc-title">文章目录</h3>
+<div class="sidebar-toc-wrapper toc-div-class">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#信息收集">信息收集</a>
+      <ul>
+        <li><a href="#nmap扫描">nmap扫描</a></li>
+        <li><a href="#smb">SMB</a></li>
+        <li><a href="#rpc">rpc</a></li>
+        <li><a href="#ldap">ldap</a></li>
+        <li><a href="#rthompson-smb">r.thompson-SMB</a></li>
+      </ul>
+    </li>
+    <li><a href="#共享文件夹data分析">共享文件夹Data分析</a>
+      <ul>
+        <li><a href="#破解tightvnc密码">破解TightVNC密码</a></li>
+        <li><a href="#临时账户tempadmin">临时账户TempAdmin</a></li>
+      </ul>
+    </li>
+    <li><a href="#横向移动">横向移动</a>
+      <ul>
+        <li><a href="#登录ssmith用户">登录s.smith用户</a></li>
+        <li><a href="#ssmith-smb">s.smith-SMB</a></li>
+        <li><a href="#auditdb">Audit.db</a></li>
+        <li><a href="#cascauditexe文件分析">CascAudit.exe文件分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#ad-recycle-bin滥用权限提升">AD Recycle Bin滥用权限提升</a></li>
+  </ul>
+</nav>
+</div></div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img
+    data-src="/avatar/avatar.webp"
+    data-sizes="auto"
+    alt="Ya1orin"
+    class="lazyload"
+  />
+  <div class="sidebar-author-name">Ya1orin</div>
+  <div class="sidebar-description"></div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div><div class="sidebar-state-number">43</div>
+  </div>
+  <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
+    <div>分类</div>
+    <div class="sidebar-state-number">
+      3
+    </div>
+  </a>
+  <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
+    <div>标签</div>
+    <div class="sidebar-state-number">37</div>
+  </a>
+</div>
+<div class="sidebar-social"><div class="icon-github sidebar-social-icon">
+      <a
+        href="https://github.com/ya1orin"
+        itemprop="url"
+        target="_blank"
+        aria-label="github"
+        rel="noopener nofollow noreferrer"
+      ></a>
+    </div></div>
+<div class="sidebar-menu"><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/"
+        aria-label="首页"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">首页</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/archives"
+        aria-label="归档"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">归档</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/about"
+        aria-label="关于"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">关于</div>
+    </div><div class="sidebar-menu-link-wrap">
+      <a
+        class="sidebar-menu-link-dummy"
+        href="/friend"
+        aria-label="友链"
+      ></a>
+      <div class='sidebar-menu-icon icon rotate'>&#xe62b;</div>
+      <div class="sidebar-menu-link">友链</div>
+    </div></div>
+</div></div><div class="sidebar-btn-wrapper">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div></nav>
+</div><div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png" />
+        </div>
+      </div><script
+    src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"
+    integrity="sha384-3gT/vsepWkfz/ff7PpWNUeMzeWoH3cDhm/A8jM7ouoAK0/fP/9bcHHR5kHq2nf&#43;e" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"
+    integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script><script src="/js/main.js" ></script><script src="/js/aos.js" ></script><script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", aosInit);
+    } else {
+      aosInit();
+    }
+  </script><script src="/js/pjax_main.js" data-pjax></script><script>
+    var ALGOLIA_CONFIG = {
+      logo: '\/images\/algolia_logo.svg',
+      algolia: {
+        applicationID: "G5DS5ZI3YM",
+        apiKey: "90bf1b7c38d7240c582e5c8a29bff9ab",
+        indexName: "Blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": '搜索.....',
+          "hits_empty": '未发现与 「${query}」相关内容',
+          "hits_stats": '找到${hits}条结果（用时 ${time} ms）'
+        }
+      }
+    };
+  </script><script
+    src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"
+    deferintegrity="sha384-xvLS0jfKuoREs7pqkRI/OI8GcqohO5S&#43;jQz7ZBtQXnsXmD&#43;9jDOOY4cL6dCPzlrk" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/@reimujs/instantsearch.js@4.57.0-beta.1/dist/instantsearch.production.min.js"
+    deferintegrity="sha384-aagKMe8nkqaP2DYQc8kkYOL5l&#43;M5Q2WH/Uhr4teOh0Ybp0RZj0kUSDm45qPikMjK" crossorigin="anonymous"></script><script src="/js/algolia_search.js" ></script><script
+    src="https://npm.webcache.cn/mouse-firework@0.1.1/dist/index.umd.js"
+    integrity="sha384-8LyaidD9GPxQQgLJO/WRw/O2h3BoNq/ApI/ecpvM6RsrCz2qP2ppBXUKihP4V/2d" crossorigin="anonymous"></script><script>
+  if (! false  || !window.matchMedia('(max-width: 768px)').matches) {
+    if (window.firework) {
+      const options = JSON.parse("{\"excludeelements\":[\"a\",\"button\"],\"particles\":[{\"colors\":[\"var(--red-1)\",\"var(--red-2)\",\"var(--red-3)\",\"var(--red-4)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"emit\"],\"number\":20,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.3,0.5],\"radius\":[16,32]}},{\"colors\":[\"var(--red-0)\"],\"duration\":[1200,1800],\"easing\":\"easeOutExpo\",\"move\":[\"diffuse\"],\"number\":1,\"shape\":\"circle\",\"shapeOptions\":{\"alpha\":[0.2,0.5],\"lineWidth\":6,\"radius\":20}}]}");
+      options.excludeElements = options.excludeelements;
+      delete options.excludeelements;
+      window.firework(options);
+    }
+  }
+</script>
+
+<div id="lazy-script">
+  <div><script data-pjax>
+        window.REIMU_POST = {
+          author: "Ya1orin",
+          title: "HTB Cascade",
+          url: "http:\/\/localhost:1313\/post\/htb-cascade\/",
+          description: "HackTheBox篇Active Directory 101系列之Cascade",
+          cover: "http:\/\/localhost:1313\/images\/banner.webp",
+        };
+      </script><script src="/js/insert_highlight.js" data-pjax></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
+          if (_$$(`${gallery} ${children}`).length > 0) {
+            new PhotoSwipeLightbox({
+              gallery,
+              children,pswpModule: () => safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js", "sha384-WkkO3GCmgkC3VQWpaV8DqhKJqpzpF9JoByxDmnV8\u002boTJ7m3DfYEWX1fu1scuS4\u002bs")}).init();
+          }
+        }
+        const pswp = () => {
+          initPswp('.article-entry', 'a.article-gallery-item');
+          initPswp('.article-gallery', 'a.article-gallery-item');
+          window.lightboxStatus = 'done';
+          window.removeEventListener('lightbox:ready', pswp);
+        }
+        if(window.lightboxStatus === 'ready') {
+          pswp()
+        } else {
+          window.addEventListener('lightbox:ready', pswp);
+        }
+      </script><script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+  var commentConfigKeys = ['valine', 'waline', 'twikoo', 'gitalk', 'giscus'];
+  var commentConfig = {gitalk: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.gitalk-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https:\/\/npm.webcache.cn\/gitalk@1.8.0\/dist\/gitalk.min.js',
+          !'webcache|gitalk@1.8.0\/dist\/gitalk.min.js'.startsWith('local') ? 'sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU\/lcEH5O8eVbSDhbPwsiVUTp\/aGX\/z\/5EuMA' : undefined
+        );
+        script.onload = () => {
+          if ( false ) {
+            
+            const md5Script = loadScript(
+              'https:\/\/npm.webcache.cn\/blueimp-md5@2.19.0\/js\/md5.min.js',
+              !'webcache|blueimp-md5@2.19.0\/js\/md5.min.js'.startsWith('local') ? 'sha384-JmVtRz6RWiXnA14QbIOJzPuU3MidULOpBP66deeLLyyoF4Tr\/gZlbkHkL6vTthxH' : undefined
+            );
+            md5Script.onload = initGitalk;
+            document.head.appendChild(md5Script);
+          } else {
+            
+            initGitalk();
+          }
+        };
+        document.head.appendChild(script);
+
+        function initGitalk() {
+          let gitalk = new Gitalk({
+            clientID: 'Ov23li64Bz4egFDpBVAa',
+            clientSecret: 'ff0e7ea9d99ed40adbfcb4bf88ff2b95918d9dd7',
+            repo: 'Blog-comment',
+            owner: 'Ya1orin',
+            admin: JSON.parse("\"Ya1orin\""),
+            id: location.pathname,
+            distractionFreeMode: false,
+            language: document.documentElement.lang || 'en',
+          });
+          gitalk.render('gitalk-comment');
+        }
+      }
+    },};
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig?.[key]?.enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      var configDefault = 'gitalk';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig?.[sys]?.enable) || '';
+    }
+  }
+
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      
+      const commentType = item.getAttribute('data-selector');
+
+      
+      hideAllComments();
+
+      
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          
+          changeActiveCommentItems(item);
+        });
+      }
+
+      
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/katex.min.js"
+    data-pjaxintegrity="sha384-MWNUH0WmtsYGhn2cbH6ELRCbf9LG3QDqCC&#43;gqPB3IBNO35xjZK3Ejb6oONRpDbPg" crossorigin="anonymous"></script><script
+    src="https://npm.webcache.cn/katex@0.16.24/dist/contrib/auto-render.min.js"
+    data-pjaxintegrity="sha384-hCXGrW6PitJEwbkoStFjeJxv&#43;fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous"></script><script data-pjax>
+          var renderMath = () => {
+            if (!window.renderMathInElement) return;
+            window.renderMathInElement(_$("article"), {
+              delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "\\[", right: "\\]", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+              ],
+            });
+          };
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", renderMath, { once: true });
+          } else {
+            renderMath();
+          }
+        </script></div>
+</div><script
+    src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js"
+    asyncintegrity="sha384-0M75wtSkhjIInv4coYlaJU83&#43;OypaRCIq2SukQVQX04eGTCBXJDuWAbJet56id&#43;S" crossorigin="anonymous"></script><script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+  </script><script>
+  const reimuCopyright = String.raw`
+   ______     ______     __     __    __     __  __    
+  /\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+  \ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+   \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+    \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                    
+  `;
+  console.log(String.raw`%c ${reimuCopyright}`, "color: #ff5252;");
+  console.log(
+    "%c Theme.Reimu" + " %c https://github.com/D-Sketon/hugo-theme-reimu ",
+    "color: white; background: #ff5252; padding:5px 0;",
+    "padding:4px;border:1px solid #ff5252;",
+  );
+</script></body>
+</html>

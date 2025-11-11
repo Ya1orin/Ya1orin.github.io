@@ -1,0 +1,25 @@
+[
+  {
+    "objectID": "1e7e1aec2b36126b978f1ca41c81bdc114ce7428",
+    "permalink": "/post/test/",
+    "title": "Test","content": "hugo\n","date": "2025-11-10 11:12:01",
+    "updated": "2025-11-10 11:12:01"
+  }, 
+  {
+    "objectID": "ac36a03f59e213bb5b6784db44d357125dc2cc95",
+    "permalink": "/post/ciscn2024/",
+    "title": "CISCN2024","content": " misc 火锅链观光打卡 微信公众号获得提示\n提示装插件\n然后开始游戏，攒够7种不同的食物，兑换即可\nflag{y0u_ar3_hotpot_K1ng}\nPower Trajectory Diagram 拷打gpt写读取npz文件的脚本\nimport numpy as np # 读取 .npz 文件 file_path = \u0026amp;#39;attachment.npz\u0026amp;#39; data = np.load(file_path) # 打印文件中的数组名称 print(\u0026amp;#34;Arrays in the .npz file:\u0026amp;#34;) print(data.files) # 访问和打印每个数组 for array_name in data.files: array = data[array_name] print(f\u0026amp;#34;\\nArray name: {array_name}\u0026amp;#34;) print(array) 通过input、index、trace的内容可以分析出，它⼤概有13组数据每组数据对应⼀幅图，有点类似键盘敲击的\n分析读取的三组数据，发现对应是13组图，每组数据对应一个最低点，再拷打gpt写个读取的最小值中的最大值\nexp import numpy as np # 加载 .npz 文件中的数据 data = np.load(\u0026amp;#34;attachment.npz\u0026amp;#34;) # 从 .npz 文件中提取 \u0026amp;#39;index\u0026amp;#39;, \u0026amp;#39;trace\u0026amp;#39;, 和 \u0026amp;#39;input\u0026amp;#39; 数组 index = data[\u0026amp;#39;index\u0026amp;#39;] trace = data[\u0026amp;#39;trace\u0026amp;#39;] input_data = data[\u0026amp;#39;input\u0026amp;#39;] # 初始化一个空字符串，用于存储结果 result = \u0026amp;#34;\u0026amp;#34; # 遍历范围 12，处理 input_data 的每一个 40 行块 for i in range(12): # 获取当前块的 40 行数据 table = input_data[40 * i: 40 * (i + 1)] # 对于每一行（共 40 行），找到 trace 中每一行的最小值的索引 min_indices = [np.argmin(trace[i * 40 + j]) …","date": "2024-06-06 18:44:21",
+    "updated": "2024-06-06 18:44:21"
+  }, 
+  {
+    "objectID": "504adca92ad95fbf4c471bdb6cbcb300a8685a40",
+    "permalink": "/post/main/",
+    "title": "Markdown Basic Elements","content": " Markdown 基本元素 标题 H1 H2 H3 H4 H5 H6 强调 Emphasis, aka italics, with asterisks or underscores.\nStrong emphasis, aka bold, with asterisks or underscores.\nCombined emphasis with asterisks and underscores.\nStrikethrough uses two tildes. Scratch this.\n列表 Definition List (dl) Ordered List (ol) List Item 1 List Item 2 List Item 3 Unordered List (ul) List Item 1 List Item 2 List Item 3 段落 Lorem ipsum dolor sit amet, test link consectetur adipiscing elit. Strong text pellentesque ligula commodo viverra vehicula. Italic text at ullamcorper enim. Morbi a euismod nibh. Underline text non elit nisl. Deleted text tristique, sem id condimentum tempus, metus lectus venenatis mauris, sit amet semper lorem felis a eros. Fusce egestas nibh at sagittis auctor. Sed ultricies ac arcu quis molestie. Donec dapibus nunc in nibh egestas, vitae volutpat sem iaculis. Curabitur sem tellus, elementum nec quam id, fermentum laoreet mi. Ut mollis ullamcorper turpis, vitae facilisis velit ultricies sit amet. Etiam …","date": "2022-06-09 20:12:52",
+    "updated": "2022-06-09 20:12:52"
+  }, 
+  {
+    "objectID": "5b2d67ec48c6c5df22c2f19c6bc7d175785738cd",
+    "permalink": "/post/chinese/",
+    "title": "中文測試","content": "This is a Chinese test post.\n善我王上魚、產生資西員合兒臉趣論。畫衣生這著爸毛親可時，安程幾？合學作。觀經而作建。都非子作這！法如言子你關！手師也。\n以也座論頭室業放。要車時地變此親不老高小是統習直麼調未，行年香一？\n就竟在，是我童示讓利分和異種百路關母信過明驗有個歷洋中前合著區亮風值新底車有正結，進快保的行戰從：弟除文辦條國備當來際年每小腳識世可的的外的廣下歌洲保輪市果底天影；全氣具些回童但倒影發狀在示，數上學大法很，如要我……月品大供這起服滿老？應學傳者國：山式排只不之然清同關；細車是！停屋常間又，資畫領生，相們制在？公別的人寫教資夠。資再我我！只臉夫藝量不路政吃息緊回力之；兒足灣電空時局我怎初安。意今一子區首者微陸現際安除發連由子由而走學體區園我車當會，經時取頭，嚴了新科同？很夫營動通打，出和導一樂，查旅他。坐是收外子發物北看蘭戰坐車身做可來。道就學務。\n國新故。\n工步他始能詩的，裝進分星海演意學值例道……於財型目古香亮自和這乎？化經溫詩。只賽嚴大一主價世哥受的沒有中年即病行金拉麼河。主小路了種就小為廣不？\nFrom 亂數假文產生器 - Chinese Lorem Ipsum\n","date": "2022-06-09 20:12:52",
+    "updated": "2022-06-09 20:12:52"
+  }]
