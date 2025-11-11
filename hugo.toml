@@ -30,3 +30,14 @@ baseName = "algolia"
 isPlainText = true
 mediaType = "application/json"
 notAlternative = true
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 6
+    ordered = false
+    startLevel = 1
+
+[pagination]
+disableAliases = false
+pagerSize = 5
+path = "page"

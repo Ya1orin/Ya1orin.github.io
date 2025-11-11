@@ -108,7 +108,7 @@ sidebar: left
 
 social:
   # email: mailto:xxx@gmail.com
-  # github: https://github.com/ya1orin
+  github: https://github.com/ya1orin
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
   # facebook: https://www.facebook.com/yourname
@@ -141,9 +141,9 @@ widgets:
 
 # Widget behavior
 category_limits: 10
-tag_limits: 10
+tag_limits: 5
 recent_posts_limits: 5
-tagcloud_limits: 20
+tagcloud_limits: 10
 
 # Archive behavior
 only_show_capsule_in_index: false # If you have hugo amounts of tags and categories, you can set this to true to only show the capsule in the index page for better performance
